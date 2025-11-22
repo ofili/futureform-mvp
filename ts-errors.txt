@@ -1,0 +1,4 @@
+src/app/api/v1/admin/assessments/route.ts(49,25): error TS2353: Object literal may only specify known properties, and 'name' does not exist in type 'UserSelect<DefaultArgs>'.
+src/app/api/v1/admin/assessments/route.ts(64,25): error TS2353: Object literal may only specify known properties, and 'answer' does not exist in type 'AssessmentResponseSelect<DefaultArgs>'.
+src/app/api/v1/admin/projects/route.ts(35,17): error TS2353: Object literal may only specify known properties, and 'owner' does not exist in type 'ProjectInclude<DefaultArgs>'.
+src/app/api/v1/auth/register/route.ts(60,21): error TS2322: Type 'Date' is not assignable to type 'boolean | undefined'.

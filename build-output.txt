@@ -1,0 +1,153 @@
+
+> futureform-frontend@0.1.0 build
+> next build
+
+ ⚠ `images.domains` is deprecated in favor of `images.remotePatterns`. Please update next.config.js to protect your application from malicious users.
+ ⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of C:\Users\ofili\package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\package-lock.json
+   * C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\package-lock.json
+
+   ▲ Next.js 16.0.3 (Turbopack)
+   - Environments: .env.local, .env
+
+ ⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 28.8s
+   Running TypeScript ...
+   Collecting page data using 7 workers ...
+   Generating static pages using 7 workers (0/92) ...
+   Generating static pages using 7 workers (23/92) 
+   Generating static pages using 7 workers (46/92) 
+   Generating static pages using 7 workers (69/92) 
+ ✓ Generating static pages using 7 workers (92/92) in 6.3s
+   Finalizing page optimization ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ○ /admin
+├ ○ /admin/assessments
+├ ƒ /admin/assessments/[id]
+├ ○ /admin/billing
+├ ○ /admin/credit-pricing
+├ ○ /admin/form-options
+├ ○ /admin/organizations
+├ ○ /admin/projects
+├ ƒ /admin/projects/[id]
+├ ○ /admin/questions
+├ ƒ /admin/questions/[id]
+├ ○ /admin/support
+├ ƒ /admin/support/[id]
+├ ○ /admin/tiers
+├ ○ /admin/users
+├ ƒ /api/admin/users
+├ ƒ /api/assessments
+├ ƒ /api/assessments/[id]
+├ ƒ /api/auth/[...nextauth]
+├ ƒ /api/auth/check-email
+├ ƒ /api/auth/forgot-password
+├ ƒ /api/auth/login
+├ ƒ /api/auth/register
+├ ƒ /api/auth/reset-password
+├ ƒ /api/auth/verify-email
+├ ƒ /api/credits/purchase
+├ ƒ /api/dashboard
+├ ƒ /api/debug-auth
+├ ƒ /api/framework
+├ ƒ /api/notifications
+├ ƒ /api/organization/invitations
+├ ƒ /api/projects
+├ ƒ /api/projects/[id]
+├ ƒ /api/upload
+├ ƒ /api/users
+├ ƒ /api/users/me/credits
+├ ƒ /api/v1/admin/assessments
+├ ƒ /api/v1/admin/assessments/[id]
+├ ƒ /api/v1/admin/billing/reconcile
+├ ƒ /api/v1/admin/billing/transactions
+├ ƒ /api/v1/admin/credit-pricing
+├ ƒ /api/v1/admin/form-options
+├ ƒ /api/v1/admin/organizations
+├ ƒ /api/v1/admin/projects
+├ ƒ /api/v1/admin/projects/[id]
+├ ƒ /api/v1/admin/questions
+├ ƒ /api/v1/admin/questions/[id]
+├ ƒ /api/v1/admin/stats
+├ ƒ /api/v1/admin/support/tickets
+├ ƒ /api/v1/admin/support/tickets/[id]
+├ ƒ /api/v1/admin/support/tickets/[id]/reply
+├ ƒ /api/v1/admin/tiers
+├ ƒ /api/v1/admin/users
+├ ƒ /api/v1/analytics/realtime
+├ ƒ /api/v1/assessments
+├ ƒ /api/v1/assessments/[id]
+├ ƒ /api/v1/assessments/[id]/clarification
+├ ƒ /api/v1/assessments/[id]/export
+├ ƒ /api/v1/assessments/[id]/responses
+├ ƒ /api/v1/assessments/[id]/validate
+├ ƒ /api/v1/auth/check-email
+├ ƒ /api/v1/auth/join
+├ ƒ /api/v1/auth/register
+├ ƒ /api/v1/auth/verify-email
+├ ƒ /api/v1/billing/checkout
+├ ƒ /api/v1/billing/credits
+├ ƒ /api/v1/billing/history
+├ ƒ /api/v1/billing/request
+├ ƒ /api/v1/dashboard
+├ ƒ /api/v1/dashboard/stats
+├ ƒ /api/v1/framework
+├ ƒ /api/v1/organization/invite
+├ ƒ /api/v1/organization/members
+├ ƒ /api/v1/organization/settings
+├ ƒ /api/v1/projects
+├ ƒ /api/v1/projects/[id]
+├ ƒ /api/v1/projects/[id]/accept-invite
+├ ƒ /api/v1/projects/[id]/invite
+├ ƒ /api/v1/projects/[id]/team-members
+├ ƒ /api/v1/projects/[id]/team-members/[memberid]
+├ ƒ /api/v1/questions
+├ ƒ /api/v1/support/tickets
+├ ƒ /api/v1/user/settings
+├ ƒ /api/v1/users
+├ ƒ /api/webhooks/flutterwave
+├ ○ /assessments
+├ ƒ /assessments/[id]
+├ ○ /assessments/new
+├ ○ /auth/create-organization
+├ ○ /auth/forgot-password
+├ ○ /auth/join
+├ ○ /auth/login
+├ ○ /auth/register
+├ ○ /auth/reset-password
+├ ○ /auth/verify-email
+├ ○ /dashboard
+├ ○ /dashboard/credits
+├ ○ /dashboard/settings/organization
+├ ○ /dashboard/settings/user
+├ ○ /dashboard/support
+├ ○ /dashboard/team
+├ ○ /framework
+├ ○ /framework/download
+├ ƒ /invitation/[token]
+├ ○ /notifications
+├ ○ /privacy
+├ ○ /projects
+├ ƒ /projects/[id]
+├ ƒ /projects/[id]/premium
+├ ○ /projects/new
+├ ○ /security
+├ ○ /settings
+├ ○ /support
+├ ○ /team
+└ ○ /terms
+
+
+ƒ Proxy (Middleware)
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+

@@ -1,0 +1,996 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                String    @id @default(cuid())
+  email             String    @unique
+  password          String
+  firstName         String
+  lastName          String
+  jobTitle          String?
+  department        String?
+  role              UserRole  @default(USER)
+  verified          Boolean   @default(false)
+  emailVerified     Boolean   @default(false)
+  verificationToken String?
+  resetToken        String?
+  resetTokenExpiry  DateTime?
+  passwordChangedAt DateTime?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  organizations           OrganizationMember[]
+  projects                Project[]
+  assessments             Assessment[]
+  responses               AssessmentResponse[]
+  tickets                 SupportTicket[]
+  assignedTickets         SupportTicket[]              @relation("AssignedTickets")
+  supportMessages         SupportTicketMessage[]
+  // credits                 Credit[] // Moved to Organization
+  creditTransactions      CreditTransaction[]
+  comments                Comment[]
+  activities              Activity[]
+  documents               Document[]
+  clarificationRequests   ClarificationRequest[]
+  pdfExports              PdfExport[]
+  teamMemberships         ProjectTeamMember[]          @relation("TeamMemberUser")
+  teamInvitations         ProjectTeamMember[]          @relation("TeamMemberInviter")
+  notifications           Notification[]
+  sentInvitations         OrganizationInvitation[]     @relation("OrganizationInviter")
+  auditLogs               AssessmentAuditLog[]
+  notificationPreferences UserNotificationPreferences?
+  notificationQueue       NotificationQueue[]
+  onboardingProgress      UserOnboardingProgress?
+  adminAuditLogs          AdminAuditLog[]
+
+  // New relations for role-based assessment flow
+  assessmentInvitations     AssessmentInvitation[] @relation("AssessmentRespondent")
+  sentAssessmentInvitations AssessmentInvitation[] @relation("AssessmentInviter")
+  uploadedEvidence          Evidence[]             @relation("EvidenceUploader")
+  verifiedEvidence          Evidence[]             @relation("EvidenceVerifier")
+
+  @@map("users")
+}
+
+model Organization {
+  id                   String   @id @default(cuid())
+  name                 String
+  type                 String
+  sectorFocus          String?
+  region               String
+  country              String?
+  relationshipStage    String   @default("Discovery")
+  source               String?
+  referralSource       String?
+  pilotAgreementSigned Boolean  @default(false)
+  caseStudyApproval    Boolean  @default(false)
+  description          String?
+  website              String?
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+
+  members     OrganizationMember[]
+  projects    Project[]
+  credits     Credit[]
+  invitations OrganizationInvitation[]
+  tierId      String?
+  tier        SubscriptionTier?        @relation(fields: [tierId], references: [id])
+
+  @@map("organizations")
+}
+
+model OrganizationMember {
+  id             String           @id @default(cuid())
+  userId         String
+  organizationId String
+  role           OrganizationRole @default(MEMBER)
+  joinedAt       DateTime         @default(now())
+  deletedAt      DateTime?
+
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, organizationId])
+  @@map("organization_members")
+}
+
+model Project {
+  id          String  @id @default(cuid())
+  name        String
+  description String?
+
+  // Classification & Scope
+  type          ProjectType
+  sector        String // e.g., "Pre-investment due diligence"
+  region        String
+  country       String?
+  maturityLevel String? // e.g., "Nascent", "Developing", "Established"
+  budgetRange   String? // e.g., "$50k–$150k"
+  timeline      String? // e.g., "2025-06-30"
+
+  // Strategic Intent
+  objectives   String? // long-form field
+  stakeholders String? // JSON text or comma-separated list
+  status       ProjectStatus @default(PLANNING)
+
+  // Ownership
+  createdById    String
+  organizationId String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  // Relations
+  createdBy    User                @relation(fields: [createdById], references: [id])
+  organization Organization?       @relation(fields: [organizationId], references: [id])
+  assessments  Assessment[]
+  comments     Comment[]
+  activities   Activity[]
+  documents    Document[]
+  workflows    WorkflowRule[]
+  events       CalendarEvent[]
+  pdfExports   PdfExport[]
+  teamMembers  ProjectTeamMember[]
+
+  @@map("projects")
+}
+
+model Assessment {
+  id              String           @id @default(cuid())
+  projectId       String
+  partnerId       String
+  partnerName     String
+  partnerType     String
+  status          AssessmentStatus @default(PENDING)
+  token           String           @unique
+  invitedAt       DateTime         @default(now())
+  completedAt     DateTime?
+  overallScore    Int?
+  confidenceLevel Int?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+
+  // New fields for role-based assessment flow
+  type                 String? // "due_diligence", "procurement", etc.
+  depth                String? // "quick", "standard", "deep"
+  deadline             DateTime?
+  aiConfig             Json? // AI selection parameters
+  partnerAdminEmail    String? // Primary partner contact
+  estimatedRespondents Int?
+  estimatedDuration    Int? // in minutes
+
+  project             Project              @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  partner             User                 @relation(fields: [partnerId], references: [id])
+  responses           AssessmentResponse[]
+  drafts              AssessmentDraft[]
+  scores              DomainScore[]
+  redFlags            RedFlag[]
+  pdfExports          PdfExport[]
+  trustProfile        TrustProfile?
+  decline             AssessmentDecline?
+  auditLogs           AssessmentAuditLog[]
+  creditTransactions  CreditTransaction[]
+  declinedAssessments AssessmentDecline[]  @relation("ReinvitedAssessments")
+
+  // New relations for role-based assessment flow
+  assessmentQuestions AssessmentQuestion[]
+  invitations         AssessmentInvitation[]
+
+  @@map("assessments")
+}
+
+model Question {
+  id       String  @id @default(cuid())
+  domain   String
+  text     String
+  helpText String?
+  title    String?
+  category String
+  weight   Float   @default(1.0)
+  order    Int
+
+  // New fields for AI-driven question selection
+  subDomain     String?
+  sectorTags    String[] @default([]) // ["renewables", "finance", etc.]
+  evidenceTypes Json     @default("[]") // Suggested evidence types
+  baseScore     Float    @default(1.0)
+
+  responses           AssessmentResponse[]
+  drafts              AssessmentDraft[]
+  assessmentQuestions AssessmentQuestion[]
+
+  @@map("questions")
+}
+
+model AssessmentResponse {
+  id               String    @id @default(cuid())
+  assessmentId     String
+  questionId       String
+  userId           String
+  response         String
+  evidenceFiles    Json      @default("[]")
+  evidence         String? // Deprecated, keep for migration safety if needed, or remove
+  validated        Boolean   @default(false)
+  validatedAt      DateTime?
+  validationStatus String    @default("PENDING")
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  assessment            Assessment             @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
+  question              Question               @relation(fields: [questionId], references: [id])
+  user                  User                   @relation(fields: [userId], references: [id])
+  clarificationRequests ClarificationRequest[]
+  evidenceUploads       Evidence[] // New relation to Evidence model
+  assessmentQuestion    AssessmentQuestion?    @relation(fields: [assessmentQuestionId], references: [id])
+  assessmentQuestionId  String?
+
+  @@unique([assessmentId, questionId])
+  @@map("assessment_responses")
+}
+
+model AssessmentDraft {
+  id           String   @id @default(cuid())
+  assessmentId String
+  questionId   String
+  draftData    String
+  isSubmitted  Boolean  @default(false)
+  lastSaved    DateTime @default(now())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  assessment Assessment @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
+  question   Question   @relation(fields: [questionId], references: [id])
+
+  @@unique([assessmentId, questionId])
+  @@map("assessment_drafts")
+}
+
+model ClarificationRequest {
+  id                   String    @id @default(cuid())
+  assessmentResponseId String
+  reviewerUserId       String
+  clarificationMessage String
+  responseDeadline     DateTime
+  partnerResponse      String?
+  partnerResponseFiles String[]  @default([])
+  partnerRespondedAt   DateTime?
+  reviewerDecision     String?
+  reviewerNotes        String?
+  decisionAt           DateTime?
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+
+  assessmentResponse AssessmentResponse @relation(fields: [assessmentResponseId], references: [id], onDelete: Cascade)
+  reviewer           User               @relation(fields: [reviewerUserId], references: [id])
+
+  @@map("clarification_requests")
+}
+
+model PdfExport {
+  id           String   @id @default(cuid())
+  userId       String
+  assessmentId String?
+  projectId    String?
+  type         String
+  fileName     String
+  fileUrl      String
+  fileSize     Int
+  status       String   @default("PENDING")
+  createdAt    DateTime @default(now())
+  expiresAt    DateTime
+
+  user       User        @relation(fields: [userId], references: [id])
+  assessment Assessment? @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
+  project    Project?    @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@map("pdf_exports")
+}
+
+model ProjectTeamMember {
+  id                   String    @id @default(cuid())
+  projectId            String
+  userId               String?
+  invitedBy            String
+  role                 String
+  domainAccess         String[]  @default([])
+  invitationToken      String    @unique
+  invitationStatus     String    @default("PENDING")
+  invitationSentAt     DateTime  @default(now())
+  invitationAcceptedAt DateTime?
+  removedAt            DateTime?
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+
+  project       Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  user          User?   @relation("TeamMemberUser", fields: [userId], references: [id])
+  invitedByUser User    @relation("TeamMemberInviter", fields: [invitedBy], references: [id])
+
+  @@map("project_team_members")
+}
+
+model FrameworkDownload {
+  id           String   @id @default(cuid())
+  email        String
+  name         String
+  organization String?
+  sector       String?
+  region       String?
+  country      String?
+  downloadedAt DateTime @default(now())
+
+  @@map("framework_downloads")
+}
+
+model DomainScore {
+  id           String   @id @default(cuid())
+  assessmentId String
+  domain       String
+  score        Float
+  confidence   Float
+  createdAt    DateTime @default(now())
+
+  assessment Assessment @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
+
+  @@unique([assessmentId, domain])
+  @@map("domain_scores")
+}
+
+model RedFlag {
+  id           String   @id @default(cuid())
+  assessmentId String
+  type         String
+  severity     String
+  description  String
+  createdAt    DateTime @default(now())
+
+  assessment Assessment @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
+
+  @@map("red_flags")
+}
+
+model SupportTicket {
+  id           String         @id @default(cuid())
+  ticketNumber String         @unique @default(cuid()) // Placeholder for generated ID
+  userId       String
+  category     TicketCategory
+  subject      String
+  description  String
+  attachments  String[]       @default([])
+  status       TicketStatus   @default(OPEN)
+  priority     TicketPriority @default(MEDIUM)
+  assignedTo   String?
+  resolvedAt   DateTime?
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+
+  user         User                   @relation(fields: [userId], references: [id])
+  assignedUser User?                  @relation("AssignedTickets", fields: [assignedTo], references: [id])
+  messages     SupportTicketMessage[]
+
+  @@map("support_tickets")
+}
+
+model SupportTicketMessage {
+  id          String   @id @default(cuid())
+  ticketId    String
+  userId      String
+  message     String
+  isInternal  Boolean  @default(false)
+  attachments String[] @default([])
+  createdAt   DateTime @default(now())
+
+  ticket SupportTicket @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+  user   User          @relation(fields: [userId], references: [id])
+
+  @@map("support_ticket_messages")
+}
+
+enum TicketCategory {
+  TECHNICAL
+  BILLING
+  ASSESSMENT_HELP
+  ACCOUNT
+  FEATURE_REQUEST
+  OTHER
+}
+
+model Credit {
+  id             String     @id @default(cuid())
+  organizationId String
+  amount         Int
+  type           CreditType
+  description    String?
+  createdAt      DateTime   @default(now())
+
+  organization Organization        @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  transactions CreditTransaction[]
+
+  @@map("credits")
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  projectId String
+  userId    String
+  content   String
+  mentions  String[] @default([])
+  parentId  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  project Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  user    User      @relation(fields: [userId], references: [id])
+  parent  Comment?  @relation("CommentReplies", fields: [parentId], references: [id])
+  replies Comment[] @relation("CommentReplies")
+
+  @@map("comments")
+}
+
+model Activity {
+  id        String   @id @default(cuid())
+  projectId String
+  userId    String
+  type      String
+  data      Json
+  createdAt DateTime @default(now())
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  user    User    @relation(fields: [userId], references: [id])
+
+  @@map("activities")
+}
+
+model Document {
+  id        String   @id @default(cuid())
+  projectId String
+  userId    String
+  name      String
+  type      String
+  size      Int
+  url       String
+  version   Int      @default(1)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  user    User    @relation(fields: [userId], references: [id])
+
+  @@map("documents")
+}
+
+model WorkflowRule {
+  id        String   @id @default(cuid())
+  projectId String
+  name      String
+  trigger   Json
+  actions   Json
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@map("workflow_rules")
+}
+
+model CalendarEvent {
+  id          String   @id @default(cuid())
+  projectId   String
+  title       String
+  description String?
+  startTime   DateTime
+  endTime     DateTime
+  type        String
+  attendees   String[] @default([])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@map("calendar_events")
+}
+
+enum UserRole {
+  USER
+  ADMIN
+}
+
+enum OrganizationRole {
+  OWNER
+  ORG_ADMIN
+  ADMIN
+  MEMBER
+  REVIEWER
+  DOMAIN_EXPERT
+  OBSERVER
+  CREDIT_MANAGER
+  PROJECT_ADMIN
+}
+
+enum ProjectType {
+  PRE_INVESTMENT_DUE_DILIGENCE @map("Pre-investment due diligence")
+  VENDOR_SELECTION_PROCUREMENT @map("Vendor selection / procurement")
+  PORTFOLIO_MONITORING         @map("Portfolio monitoring (existing partners)")
+  GOVERNANCE_AUDIT             @map("Governance audit")
+  MULTI_STAKEHOLDER_ALIGNMENT  @map("Multi-stakeholder alignment")
+}
+
+enum ProjectStatus {
+  PLANNING
+  ACTIVE
+  COMPLETED
+  ARCHIVED
+}
+
+enum AssessmentStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  EXPIRED
+}
+
+enum InvitationStatus {
+  PENDING
+  ACCEPTED
+  DECLINED
+  EXPIRED
+}
+
+enum DeclineReasonCategory {
+  NOT_INTERESTED
+  TIMELINE_ISSUE
+  ALREADY_PARTNERED
+  PROCESS_COMPLEX
+  INFO_CONCERNS
+  OTHER
+}
+
+enum NotificationFrequency {
+  REALTIME
+  DAILY
+  WEEKLY
+}
+
+enum AuditAction {
+  CREATED
+  CANCELLED
+  ARCHIVED
+  RESTORED
+  DELETED
+}
+
+enum TicketStatus {
+  OPEN
+  IN_PROGRESS
+  RESOLVED
+  CLOSED
+}
+
+enum TicketPriority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+enum CreditType {
+  PURCHASE
+  USAGE
+  REFUND
+  EXPIRE
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  type      String
+  title     String
+  message   String
+  actionUrl String?
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// Organization Invitations
+model OrganizationInvitation {
+  id             String           @id @default(cuid())
+  organizationId String
+  email          String
+  role           OrganizationRole @default(MEMBER)
+  invitedBy      String
+  token          String           @unique
+  status         InvitationStatus @default(PENDING)
+  invitedAt      DateTime         @default(now())
+  acceptedAt     DateTime?
+  expiresAt      DateTime
+
+  organization  Organization @relation(fields: [organizationId], references: [id])
+  invitedByUser User         @relation("OrganizationInviter", fields: [invitedBy], references: [id])
+
+  @@map("organization_invitations")
+}
+
+// Trust Profiles
+model TrustProfile {
+  id           String   @id @default(cuid())
+  assessmentId String   @unique
+  overallScore Int
+  domainScores Json
+  generatedAt  DateTime @default(now())
+
+  assessment Assessment @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
+
+  @@map("trust_profiles")
+}
+
+// Assessment Declines
+model AssessmentDecline {
+  id                    String                @id @default(cuid())
+  assessmentId          String                @unique
+  declinedAt            DateTime              @default(now())
+  declineReasonCategory DeclineReasonCategory
+  declineReasonText     String?
+  contactAttempted      Boolean               @default(false)
+  contactAttemptedAt    DateTime?
+  reInvited             Boolean               @default(false)
+  reInvitedAt           DateTime?
+  newAssessmentId       String?
+
+  assessment    Assessment  @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
+  newAssessment Assessment? @relation("ReinvitedAssessments", fields: [newAssessmentId], references: [id])
+
+  @@map("assessment_declines")
+}
+
+// Assessment Audit Logs
+model AssessmentAuditLog {
+  id           String      @id @default(cuid())
+  assessmentId String
+  action       AuditAction
+  performedBy  String
+  reason       String?
+  metadata     Json?
+  createdAt    DateTime    @default(now())
+
+  assessment Assessment @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
+  performer  User       @relation(fields: [performedBy], references: [id])
+
+  @@map("assessment_audit_log")
+}
+
+// Credit Transactions
+model CreditTransaction {
+  id            String     @id @default(cuid())
+  creditId      String
+  userId        String
+  type          CreditType
+  creditsChange Int
+  assessmentId  String?
+  notes         String?
+  createdAt     DateTime   @default(now())
+
+  credit     Credit      @relation(fields: [creditId], references: [id])
+  user       User        @relation(fields: [userId], references: [id])
+  assessment Assessment? @relation(fields: [assessmentId], references: [id])
+
+  @@map("credit_transactions")
+}
+
+// User Notification Preferences
+model UserNotificationPreferences {
+  id     String @id @default(cuid())
+  userId String @unique
+
+  // Email preferences
+  emailAssessmentSubmitted   Boolean @default(true)
+  emailClarificationResponse Boolean @default(true)
+  emailPartnerStarted        Boolean @default(false)
+  emailTeamJoined            Boolean @default(true)
+  emailTeamMention           Boolean @default(true)
+  emailTeamActivity          Boolean @default(false)
+  emailDeadlineReminder      Boolean @default(true)
+  emailCreditLow             Boolean @default(true)
+  emailCreditExpiring        Boolean @default(true)
+  emailProfileGenerated      Boolean @default(true)
+  emailExportReady           Boolean @default(true)
+  emailPaymentSuccess        Boolean @default(true)
+  emailPaymentFailed         Boolean @default(true)
+  emailSecurityAlways        Boolean @default(true)
+
+  // Frequency
+  emailFrequency NotificationFrequency @default(REALTIME)
+  digestTime     String?               @default("09:00:00")
+
+  // In-app preferences
+  inappEnabled     Boolean @default(true)
+  inappSound       Boolean @default(true)
+  inappDesktopPush Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@map("user_notification_preferences")
+}
+
+// Notification Queue
+model NotificationQueue {
+  id               String    @id @default(cuid())
+  userId           String
+  notificationType String
+  notificationData Json
+  sent             Boolean   @default(false)
+  scheduledFor     DateTime?
+  createdAt        DateTime  @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("notification_queue")
+}
+
+// User Onboarding Progress
+model UserOnboardingProgress {
+  id     String @id @default(cuid())
+  userId String @unique
+
+  // Tour completion
+  tourStarted       Boolean @default(false)
+  tourCompleted     Boolean @default(false)
+  tourStepCompleted Int     @default(0)
+  tourDismissed     Boolean @default(false)
+
+  // Checklist items
+  checklistCreditsPurchased Boolean @default(false)
+  checklistProjectCreated   Boolean @default(false)
+  checklistPartnerInvited   Boolean @default(false)
+  checklistProfileGenerated Boolean @default(false)
+
+  // Tooltips shown
+  tooltipNewAssessmentShown Boolean @default(false)
+  tooltipTrustScoreShown    Boolean @default(false)
+  tooltipComparisonShown    Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@map("user_onboarding_progress")
+}
+
+// Admin Audit Logs
+model AdminAuditLog {
+  id         String   @id @default(cuid())
+  action     String
+  resource   String
+  resourceId String?
+  details    Json?
+  adminId    String
+  admin      User     @relation(fields: [adminId], references: [id])
+  createdAt  DateTime @default(now())
+
+  @@index([action])
+  @@index([resource])
+  @@index([createdAt])
+  @@map("admin_audit_logs")
+}
+
+// Pricing Tiers
+model PricingTier {
+  id        String   @id @default(cuid())
+  currency  String
+  credits   Int
+  price     Int
+  popular   Boolean  @default(false)
+  savings   String?
+  perCredit Int
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([currency, credits])
+  @@index([currency])
+  @@index([active])
+  @@map("pricing_tiers")
+}
+
+model SubscriptionTier {
+  id              String   @id @default(cuid())
+  name            String   @unique
+  displayName     String
+  priceUSD        Decimal? @db.Decimal(10, 2)
+  baseFeeUSD      Decimal? @db.Decimal(10, 2)
+  type            String   @default("STANDARD") // 'FREE', 'GUIDED', 'ENTERPRISE'
+  pricePeriod     String? // 'per assessment', 'annual', etc.
+  creditsIncluded Int      @default(0)
+  minRespondents  Int      @default(1)
+  bestFor         String?
+  description     String?
+  isActive        Boolean  @default(true)
+  displayOrder    Int      @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  organizations Organization[]
+  features      TierFeature[]
+  bands         CreditBand[]
+
+  @@map("subscription_tiers")
+}
+
+model TierFeature {
+  id           String  @id @default(cuid())
+  tierId       String
+  feature      String
+  description  String?
+  displayOrder Int     @default(0)
+
+  tier SubscriptionTier @relation(fields: [tierId], references: [id], onDelete: Cascade)
+
+  @@map("tier_features")
+}
+
+model CreditBand {
+  id           String  @id @default(cuid())
+  tierId       String
+  minCount     Int
+  maxCount     Int? // Null means "and above"
+  pricePerUnit Decimal @db.Decimal(10, 2)
+  currency     String  @default("USD")
+
+  tier SubscriptionTier @relation(fields: [tierId], references: [id], onDelete: Cascade)
+
+  @@map("credit_bands")
+}
+
+model PlatformConfig {
+  id          String   @id @default(cuid())
+  key         String   @unique
+  value       Json
+  category    String // 'pricing', 'features', 'limits', etc.
+  description String?
+  updatedBy   String?
+  updatedAt   DateTime @updatedAt
+  createdAt   DateTime @default(now())
+
+  @@map("platform_config")
+}
+
+model AdminQuestion {
+  id           String   @id @default(cuid())
+  category     String // 'governance', 'financial', etc.
+  question     String
+  description  String?
+  displayOrder Int
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("admin_questions")
+}
+
+model FormOption {
+  id           String  @id @default(cuid())
+  category     String // 'sector', 'region', 'department', etc.
+  value        String
+  label        String
+  displayOrder Int     @default(0)
+  isActive     Boolean @default(true)
+
+  @@unique([category, value])
+  @@map("form_options")
+}
+
+model CreditPricing {
+  id           String   @id @default(cuid())
+  packageName  String
+  type         String   @default("CREDIT_BUNDLE") // 'CREDIT_BUNDLE', 'RESPONDENT_BUNDLE'
+  creditAmount Int
+  priceUSD     Decimal  @db.Decimal(10, 2)
+  isActive     Boolean  @default(true)
+  displayOrder Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("credit_pricing")
+}
+
+// ============================================================================
+// NEW MODELS FOR ROLE-BASED ASSESSMENT FLOW
+// ============================================================================
+
+model Role {
+  id               String   @id @default(cuid())
+  name             String   @unique // "Finance Manager", "HR Director", "CTO"
+  description      String?
+  typicalSeniority String? // "Senior", "Manager", "Director", "C-Level"
+  domain           String? // Optional: link to FutureForm domain
+  active           Boolean  @default(true)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  assessmentQuestions AssessmentQuestion[]
+  invitations         AssessmentInvitation[]
+
+  @@map("roles")
+}
+
+model AssessmentQuestion {
+  id                   String   @id @default(cuid())
+  assessmentId         String
+  questionId           String
+  assignedRoleId       String?
+  assignedSeniority    String? // "Senior", "Manager", etc.
+  evidenceRequirements Json     @default("[]") // Array of required evidence types
+  order                Int
+  aiConfidence         Float? // AI confidence score for this question
+  aiRationale          String? // Why AI selected this question
+  customized           Boolean  @default(false) // Owner edited AI suggestion
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+
+  assessment Assessment           @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
+  question   Question             @relation(fields: [questionId], references: [id])
+  role       Role?                @relation(fields: [assignedRoleId], references: [id])
+  responses  AssessmentResponse[]
+
+  @@unique([assessmentId, questionId])
+  @@map("assessment_questions")
+}
+
+model AssessmentInvitation {
+  id           String           @id @default(cuid())
+  assessmentId String
+  email        String
+  name         String?
+  roleId       String?
+  seniority    String?
+  userId       String? // Set after user accepts
+  token        String           @unique
+  status       InvitationStatus @default(PENDING)
+  invitedBy    String
+  invitedAt    DateTime         @default(now())
+  acceptedAt   DateTime?
+  expiresAt    DateTime
+  notes        String?
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+
+  assessment    Assessment @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
+  role          Role?      @relation(fields: [roleId], references: [id])
+  user          User?      @relation("AssessmentRespondent", fields: [userId], references: [id])
+  invitedByUser User       @relation("AssessmentInviter", fields: [invitedBy], references: [id])
+
+  @@map("assessment_invitations")
+}
+
+model Evidence {
+  id                 String    @id @default(cuid())
+  responseId         String
+  fileName           String
+  fileUrl            String
+  fileType           String
+  fileSize           Int
+  uploadedBy         String
+  uploadedAt         DateTime  @default(now())
+  verifiedBy         String?
+  verifiedAt         DateTime?
+  verificationStatus String    @default("PENDING") // PENDING, APPROVED, REJECTED
+  verificationNotes  String?
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  response AssessmentResponse @relation(fields: [responseId], references: [id], onDelete: Cascade)
+  uploader User               @relation("EvidenceUploader", fields: [uploadedBy], references: [id])
+  verifier User?              @relation("EvidenceVerifier", fields: [verifiedBy], references: [id])
+
+  @@map("evidence")
+}

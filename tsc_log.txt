@@ -1,0 +1,13 @@
+src/app/api/v1/assessments/[id]/export/route.ts(35,17): error TS1005: '>' expected.
+src/app/api/v1/assessments/[id]/export/route.ts(35,28): error TS1005: ',' expected.
+src/app/api/v1/assessments/[id]/export/route.ts(35,30): error TS1136: Property assignment expected.
+src/app/api/v1/assessments/[id]/export/route.ts(35,94): error TS1005: ',' expected.
+src/app/api/v1/assessments/[id]/export/route.ts(36,17): error TS1472: 'catch' or 'finally' expected.
+src/app/api/v1/assessments/[id]/export/route.ts(38,28): error TS1359: Identifier expected. 'new' is a reserved word that cannot be used here.
+src/app/api/v1/assessments/[id]/export/route.ts(38,36): error TS1005: ',' expected.
+src/app/api/v1/assessments/[id]/export/route.ts(38,45): error TS1005: ';' expected.
+src/app/api/v1/assessments/[id]/export/route.ts(40,13): error TS1161: Unterminated regular expression literal.
+src/app/api/v1/assessments/[id]/export/route.ts(41,9): error TS1128: Declaration or statement expected.
+src/app/api/v1/assessments/[id]/export/route.ts(49,3): error TS1128: Declaration or statement expected.
+src/app/api/v1/assessments/[id]/export/route.ts(49,5): error TS1005: 'try' expected.
+src/app/api/v1/assessments/[id]/export/route.ts(53,1): error TS1128: Declaration or statement expected.

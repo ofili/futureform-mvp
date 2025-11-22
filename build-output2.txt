@@ -1,0 +1,38 @@
+
+> futureform-frontend@0.1.0 build
+> next build
+
+ ΓÜá `images.domains` is deprecated in favor of `images.remotePatterns`. Please update next.config.js to protect your application from malicious users.
+ ΓÜá Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of C:\Users\ofili\package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\package-lock.json
+   * C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\package-lock.json
+
+   Γû▓ Next.js 16.0.3 (Turbopack)
+   - Environments: .env.local, .env
+
+ ΓÜá The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+   Creating an optimized production build ...
+ Γ£ô Compiled successfully in 27.9s
+   Running TypeScript ...
+   Collecting page data using 7 workers ...
+   Generating static pages using 7 workers (0/85) ...
+   Generating static pages using 7 workers (21/85) 
+   Generating static pages using 7 workers (42/85) 
+ Γ¿» useSearchParams() should be wrapped in a suspense boundary at page "/framework/download". Read more: https://nextjs.org/docs/messages/missing-suspense-with-csr-bailout
+    at S (C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\.next\server\chunks\ssr\a419e_next_46c2b6d7._.js:2:2111)
+    at p (C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\.next\server\chunks\ssr\a419e_next_46c2b6d7._.js:4:4844)
+    at h (C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\.next\server\chunks\ssr\[root-of-the-server]__a2430f66._.js:1:6743)
+    at ar (C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:84366)
+    at aa (C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:86185)
+    at as (C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:107952)
+    at ao (C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:105374)
+    at an (C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:84718)
+    at aa (C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:86234)
+    at aa (C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:104714)
+Error occurred prerendering page "/framework/download". Read more: https://nextjs.org/docs/messages/prerender-error
+Export encountered an error on /framework/download/page: /framework/download, exiting the build.
+ Γ¿» Next.js build worker exited with code: 1 and signal: null

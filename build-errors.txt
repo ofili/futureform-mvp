@@ -1,0 +1,35 @@
+ ΓÜá `images.domains` is deprecated in favor of `images.remotePatterns`. Please update next.config.js to protect your application from malicious users.
+ ΓÜá Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of C:\Users\ofili\package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\package-lock.json
+   * C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\package-lock.json
+
+   Γû▓ Next.js 16.0.3 (Turbopack)
+   - Environments: .env.local, .env
+
+ ΓÜá The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+   Creating an optimized production build ...
+ Γ£ô Compiled successfully in 24.4s
+   Running TypeScript ...
+Failed to compile.
+
+.next/types/validator.ts:891:31
+Type error: Type 'typeof import("C:/Users/ofili/Documents/FutureForm/mvp-production/FutureForm-MVP/frontend/src/app/api/v1/assessments/[id]/evidence/route")' does not satisfy the constraint 'RouteHandlerConfig<"/api/v1/assessments/[id]/evidence">'.
+  Types of property 'GET' are incompatible.
+    Type '(request: NextRequest, { params }: { params: { id: string; }; }) => Promise<NextResponse<{ error: string; }> | NextResponse<{ evidence: ({ response: { question: { id: string; category: string; ... 9 more ...; baseScore: number; }; } & { ...; }; uploader: { ...; }; verifier: { ...; } | null; } & { ...; })[]; }>>' is not assignable to type '(request: NextRequest, context: { params: Promise<{ id: string; }>; }) => void | Response | Promise<void | Response>'.
+      Types of parameters '__1' and 'context' are incompatible.
+        Type '{ params: Promise<{ id: string; }>; }' is not assignable to type '{ params: { id: string; }; }'.
+          Types of property 'params' are incompatible.
+            Property 'id' is missing in type 'Promise<{ id: string; }>' but required in type '{ id: string; }'.
+
+  889 |   type __IsExpected<Specific extends RouteHandlerConfig<"/api/v1/assessments/[id]/evidence">> = Specific
+  890 |   const handler = {} as typeof import("../../src/app/api/v1/assessments/[id]/evidence/route.js")
+> 891 |   type __Check = __IsExpected<typeof handler>
+      |                               ^
+  892 |   // @ts-ignore
+  893 |   type __Unused = __Check
+  894 | }
+Next.js build worker exited with code: 1 and signal: null

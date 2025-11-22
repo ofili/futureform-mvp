@@ -1,0 +1,109 @@
+
+> futureform-frontend@0.1.0 build
+> next build
+
+ ΓÜá `images.domains` is deprecated in favor of `images.remotePatterns`. Please update next.config.js to protect your application from malicious users.
+ ΓÜá Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of C:\Users\ofili\package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\package-lock.json
+   * C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\package-lock.json
+
+   Γû▓ Next.js 16.0.3 (Turbopack)
+   - Environments: .env.local, .env
+
+ ΓÜá The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+   Creating an optimized production build ...
+
+> Build error occurred
+Error: Turbopack build failed with 4 errors:
+./Documents/FutureForm/mvp-production/FutureForm-MVP/frontend/src/app/api/v1/assessments/[id]/export/route.ts:35:17
+Parsing ecmascript source code failed
+  33 |         const stream = await renderToStream(
+  34 |             <TrustProfilePDF
+> 35 |                 partnerName={`${assessment.partner.firstName} ${assessment.partner.lastName}`}
+     |                 ^^^^^^^^^^^
+  36 |                 overallScore = { overallScore }
+  37 |     domainScores = { domainScores }
+  38 |     generatedAt = { format(new Date(), 'PPP')
+
+Expected '>', got 'partnerName'
+
+
+./Documents/FutureForm/mvp-production/FutureForm-MVP/frontend/src/components/reports/CustomReportBuilder.tsx:8:1
+Module not found: Can't resolve '../../ui/checkbox'
+   6 | import { Input } from '@/components/ui/input';
+   7 | import { Label } from '@/components/ui/label';
+>  8 | import { Checkbox } from '../../ui/checkbox';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+  10 | import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+  11 | import { FileText, Download, Eye, Settings, Plus, Trash2 } from 'lucide-react';
+
+
+
+Import traces:
+  Client Component Browser:
+    ./Documents/FutureForm/mvp-production/FutureForm-MVP/frontend/src/components/reports/CustomReportBuilder.tsx [Client Component Browser]
+    ./Documents/FutureForm/mvp-production/FutureForm-MVP/frontend/src/app/projects/[id]/premium/page.tsx [Client Component Browser]
+    ./Documents/FutureForm/mvp-production/FutureForm-MVP/frontend/src/app/projects/[id]/premium/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./Documents/FutureForm/mvp-production/FutureForm-MVP/frontend/src/components/reports/CustomReportBuilder.tsx [Client Component SSR]
+    ./Documents/FutureForm/mvp-production/FutureForm-MVP/frontend/src/app/projects/[id]/premium/page.tsx [Client Component SSR]
+    ./Documents/FutureForm/mvp-production/FutureForm-MVP/frontend/src/app/projects/[id]/premium/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./Documents/FutureForm/mvp-production/FutureForm-MVP/frontend/src/components/support/CreateTicketModal.tsx:12:1
+Module not found: Can't resolve '../../ui/form'
+  10 | import { Textarea } from '@/components/ui/textarea';
+  11 | import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+> 12 | import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../../ui/form';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  13 | import { toast } from 'sonner';
+  14 | import { Loader2 } from 'lucide-react';
+  15 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./Documents/FutureForm/mvp-production/FutureForm-MVP/frontend/src/components/support/CreateTicketModal.tsx [Client Component Browser]
+    ./Documents/FutureForm/mvp-production/FutureForm-MVP/frontend/src/app/dashboard/support/page.tsx [Client Component Browser]
+    ./Documents/FutureForm/mvp-production/FutureForm-MVP/frontend/src/app/dashboard/support/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./Documents/FutureForm/mvp-production/FutureForm-MVP/frontend/src/components/support/CreateTicketModal.tsx [Client Component SSR]
+    ./Documents/FutureForm/mvp-production/FutureForm-MVP/frontend/src/app/dashboard/support/page.tsx [Client Component SSR]
+    ./Documents/FutureForm/mvp-production/FutureForm-MVP/frontend/src/app/dashboard/support/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./Documents/FutureForm/mvp-production/FutureForm-MVP/frontend/src/app/api/v1/projects/[id]/invite/route.ts:4:1
+Module not found: Can't resolve '@/lib/session'
+  2 | import prisma from '@/lib/prisma';
+  3 | import { sendVerificationEmail } from '@/lib/email';
+> 4 | import { verifyToken } from '@/lib/session'; // or your JWT/session verification logic
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 |
+  6 | export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  7 |   if (req.method !== 'POST') return res.status(405).json({ message: 'Method not allowed' });
+
+Import map: aliased to relative './src/lib/session' inside of [project]/Documents/FutureForm/mvp-production/FutureForm-MVP/frontend
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at <unknown> (./Documents/FutureForm/mvp-production/FutureForm-MVP/frontend/src/app/api/v1/assessments/[id]/export/route.ts:35:17)
+    at <unknown> (./Documents/FutureForm/mvp-production/FutureForm-MVP/frontend/src/components/reports/CustomReportBuilder.tsx:8:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./Documents/FutureForm/mvp-production/FutureForm-MVP/frontend/src/components/support/CreateTicketModal.tsx:12:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./Documents/FutureForm/mvp-production/FutureForm-MVP/frontend/src/app/api/v1/projects/[id]/invite/route.ts:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)

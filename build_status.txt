@@ -1,0 +1,34 @@
+
+> futureform-frontend@0.1.0 build
+> next build
+
+ ⚠ `images.domains` is deprecated in favor of `images.remotePatterns`. Please update next.config.js to protect your application from malicious users.
+ ⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of C:\Users\ofili\package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\package-lock.json
+   * C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\package-lock.json
+
+   ▲ Next.js 16.0.3 (Turbopack)
+   - Environments: .env.local, .env
+
+ ⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 37.4s
+   Running TypeScript ...
+Failed to compile.
+
+./src/app/auth/create-organization/page.tsx:158:19
+Type error: Type '{ children: Element[]; value: string; onChange: (e: any) => void; required: true; }' is not assignable to type 'IntrinsicAttributes & SelectSharedProps & { value?: string | undefined; defaultValue?: string | undefined; onValueChange?(value: string): void; }'.
+  Property 'onChange' does not exist on type 'IntrinsicAttributes & SelectSharedProps & { value?: string | undefined; defaultValue?: string | undefined; onValueChange?(value: string): void; }'.
+
+  156 |                 <Select
+  157 |                   value={orgData.type}
+> 158 |                   onChange={(e) => setOrgData(prev => ({ ...prev, type: e.target.value }))}
+      |                   ^
+  159 |                   required
+  160 |                 >
+  161 |                 <option value="">Select Organization Type</option>
+Next.js build worker exited with code: 1 and signal: null

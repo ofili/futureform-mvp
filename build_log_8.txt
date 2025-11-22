@@ -1,0 +1,33 @@
+
+> futureform-frontend@0.1.0 build
+> next build
+
+ ⚠ `images.domains` is deprecated in favor of `images.remotePatterns`. Please update next.config.js to protect your application from malicious users.
+ ⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of C:\Users\ofili\package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\package-lock.json
+   * C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\package-lock.json
+
+   ▲ Next.js 16.0.3 (Turbopack)
+   - Environments: .env.local, .env
+
+ ⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 29.7s
+   Running TypeScript ...
+Failed to compile.
+
+.next/dev/types/validator.ts:657:31
+Type error: Type 'typeof import("C:/Users/ofili/Documents/FutureForm/mvp-production/FutureForm-MVP/frontend/src/app/api/v1/projects/[id]/team-members/[memberid]/route")' has no properties in common with type 'RouteHandlerConfig<"/api/v1/projects/[id]/team-members/[memberid]">'.
+
+  655 |   type __IsExpected<Specific extends RouteHandlerConfig<"/api/v1/projects/[id]/team-members/[memberid]">> = Specific
+  656 |   const handler = {} as typeof import("../../../src/app/api/v1/projects/[id]/team-members/[memberid]/route.js")
+> 657 |   type __Check = __IsExpected<typeof handler>
+      |                               ^
+  658 |   // @ts-ignore
+  659 |   type __Unused = __Check
+  660 | }
+Next.js build worker exited with code: 1 and signal: null

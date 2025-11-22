@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* FutureForm V1.0 Palette - Light Mode */
+    --background: 0 0% 100%; /* Pure White */
+    --foreground: 240 3% 6%; /* FF Black #0E0E0F */
+    
+    --card: 0 0% 100%; /* Pure White */
+    --card-foreground: 240 3% 6%; /* FF Black */
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 3% 6%;
+    
+    --primary: 220 100% 55%; /* Insight Blue #1A66FF */
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 240 9% 97%; /* FF Off-White #F7F7F9 */
+    --secondary-foreground: 240 5% 13%; /* FF Dark Gray #1F1F22 */
+    
+    --muted: 240 9% 97%; /* FF Off-White */
+    --muted-foreground: 240 5% 50%; /* FF Mid Gray #7A7A85 */
+    
+    --accent: 240 9% 97%; /* FF Off-White */
+    --accent-foreground: 240 5% 13%; /* FF Dark Gray */
+    
+    --destructive: 355 78% 56%; /* Critical Red #E63946 */
+    --destructive-foreground: 0 0% 100%;
+    
+    --warning: 36 100% 65%; /* Risk Amber #FFB84D */
+    --warning-foreground: 240 3% 6%;
+
+    --border: 240 9% 86%; /* FF Light Gray #D7D7DE */
+    --input: 240 9% 86%; /* FF Light Gray */
+    --ring: 220 100% 55%; /* Insight Blue */
+    
+    --radius: 0.5rem; /* 8px */
+  }
+
+  .dark {
+    /* FutureForm V1.0 Palette - Dark Mode (Inferred/Adapted) */
+    --background: 240 3% 6%; /* FF Black */
+    --foreground: 0 0% 100%; /* Pure White */
+    
+    --card: 240 5% 13%; /* FF Dark Gray */
+    --card-foreground: 0 0% 100%;
+    
+    --popover: 240 5% 13%;
+    --popover-foreground: 0 0% 100%;
+    
+    --primary: 220 100% 55%; /* Insight Blue */
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 240 5% 24%; /* FF Gray */
+    --secondary-foreground: 0 0% 100%;
+    
+    --muted: 240 5% 24%; /* FF Gray */
+    --muted-foreground: 240 5% 60%;
+    
+    --accent: 240 5% 24%; /* FF Gray */
+    --accent-foreground: 0 0% 100%;
+    
+    --destructive: 355 78% 56%; /* Critical Red */
+    --destructive-foreground: 0 0% 100%;
+    
+    --warning: 36 100% 65%; /* Risk Amber */
+    --warning-foreground: 240 3% 6%;
+    
+    --border: 240 5% 24%; /* FF Gray */
+    --input: 240 5% 24%; /* FF Gray */
+    --ring: 220 100% 55%; /* Insight Blue */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
