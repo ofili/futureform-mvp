@@ -5,6 +5,7 @@ import { QueryProvider } from '@/providers/query-provider';
 import { AuthProvider } from '@/providers/auth-provider';
 import { ErrorBoundary } from '@/components/error-boundary';
 import { TooltipProvider } from '@/components/ui/tooltip';
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -74,6 +75,7 @@ export default function RootLayout({
             <QueryProvider>
               <TooltipProvider>
                 {children}
+                <SpeedInsights />
               </TooltipProvider>
             </QueryProvider>
           </AuthProvider>

@@ -37,10 +37,7 @@ jest.mock('@/lib/prisma', () => ({
     default: mockPrismaClient,
 }));
 
-jest.mock('../../../../../src/lib/prisma', () => ({
-    __esModule: true,
-    default: mockPrismaClient,
-}));
+
 
 // Mock HubSpot
 jest.mock('@/lib/hubspot', () => ({

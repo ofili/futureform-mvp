@@ -163,21 +163,23 @@ describe('HubSpot Integration', () => {
 
         it('should handle network errors', async () => {
             jest.useFakeTimers();
-            (global.fetch as jest.Mock).mockRejectedValue(new Error('Network error'));
+            try {
+                (global.fetch as jest.Mock).mockRejectedValue(new Error('Network error'));
 
-            const promise = createHubSpotContact(mockLeadData);
+                const promise = createHubSpotContact(mockLeadData);
 
-            // Fast-forward time for all retries
-            // Initial (0s) -> Retry 1 (1s) -> Retry 2 (2s) -> Retry 3 (4s)
-            await jest.runAllTimersAsync();
+                // Fast-forward time for all retries
+                // Initial (0s) -> Retry 1 (1s) -> Retry 2 (2s) -> Retry 3 (4s)
+                await jest.advanceTimersByTimeAsync(10000);
 
-            const result = await promise;
+                const result = await promise;
 
-            expect(result.success).toBe(false);
-            expect(result.error).toBeDefined();
-            expect(result.error).toContain('Network error');
-
-            jest.useRealTimers();
+                expect(result.success).toBe(false);
+                expect(result.error).toBeDefined();
+                expect(result.error).toContain('Network error');
+            } finally {
+                jest.useRealTimers();
+            }
         });
     });
 });

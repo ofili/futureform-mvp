@@ -1,0 +1,25 @@
+
+> futureform-frontend@0.1.0 test
+> jest tests/integration/api/marketing/pql.test.ts
+
+FAIL tests/integration/api/marketing/pql.test.ts
+  ΓùÅ Test suite failed to run
+
+    Cannot find module '../../../../../src/lib/prisma' from 'tests/integration/api/marketing/pql.test.ts'
+
+      38 | }));
+      39 |
+    > 40 | jest.mock('../../../../../src/lib/prisma', () => ({
+         |      ^
+      41 |     __esModule: true,
+      42 |     default: mockPrismaClient,
+      43 | }));
+
+      at Resolver._throwModNotFoundError (node_modules/jest-resolve/build/resolver.js:427:11)
+      at Object.mock (tests/integration/api/marketing/pql.test.ts:40:6)
+
+Test Suites: 1 failed, 1 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        1.593 s
+Ran all test suites matching /tests\\integration\\api\\marketing\\pql.test.ts/i.
