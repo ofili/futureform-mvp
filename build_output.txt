@@ -1,0 +1,35 @@
+
+> futureform-frontend@0.1.0 build
+> next build
+
+ ΓÜá Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of C:\Users\ofili\package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\package-lock.json
+   * C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\package-lock.json
+
+   Γû▓ Next.js 16.0.3 (Turbopack)
+   - Environments: .env.local, .env
+
+   Creating an optimized production build ...
+
+> Build error occurred
+Error: Turbopack build failed with 1 errors:
+./Documents/FutureForm/mvp-production/FutureForm-MVP/frontend/src/app/admin/settings/page.tsx:1:10
+Ecmascript file had an error
+> 1 | import { useState } from 'react';
+    |          ^^^^^^^^
+  2 | import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+  3 | import { toast } from 'sonner';
+  4 | import { Save, RefreshCw, Settings } from 'lucide-react';
+
+You're importing a component that needs `useState`. This React Hook only works in a Client Component. To fix, mark the file (or its parent) with the `"use client"` directive.
+
+ Learn more: https://nextjs.org/docs/app/api-reference/directives/use-client
+
+
+
+
+    at <unknown> (./Documents/FutureForm/mvp-production/FutureForm-MVP/frontend/src/app/admin/settings/page.tsx:1:10)

@@ -1,0 +1,106 @@
+src/app/api/assessments/route.ts(44,11): error TS2322: Type 'string | null' is not assignable to type 'string | StringFilter<"PartnerAlias"> | undefined'.
+  Type 'null' is not assignable to type 'string | StringFilter<"PartnerAlias"> | undefined'.
+src/app/api/assessments/route.ts(81,13): error TS2322: Type 'string | null' is not assignable to type 'string | undefined'.
+  Type 'null' is not assignable to type 'string | undefined'.
+src/app/api/v1/assessments/[id]/evidence/route.ts(45,29): error TS18047: 'assessment.project.organization' is possibly 'null'.
+src/app/api/v1/assessments/[id]/export/route.tsx(35,33): error TS18047: 'assessment.partner' is possibly 'null'.
+src/app/api/v1/assessments/[id]/export/route.tsx(35,65): error TS18047: 'assessment.partner' is possibly 'null'.
+src/app/api/v1/assessments/[id]/export/route.tsx(46,70): error TS18047: 'assessment.partner' is possibly 'null'.
+src/app/api/v1/assessments/[id]/export/route.tsx(46,102): error TS18047: 'assessment.partner' is possibly 'null'.
+src/app/api/v1/assessments/[id]/invitations/route.ts(55,26): error TS18047: 'assessment.project.organization' is possibly 'null'.
+src/app/api/v1/assessments/[id]/invitations/route.ts(58,45): error TS2339: Property 'userId' does not exist on type '{ organization: ({ members: { id: string; role: OrganizationRole; userId: string; joinedAt: Date; deletedAt: Date | null; organizationId: string; }[]; } & { ...; }) | null; } & { ...; }'.
+src/app/api/v1/assessments/[id]/invitations/route.ts(154,26): error TS18047: 'assessment.project.organization' is possibly 'null'.
+src/app/api/v1/assessments/[id]/invitations/route.ts(157,45): error TS2339: Property 'userId' does not exist on type '{ organization: ({ members: { id: string; role: OrganizationRole; userId: string; joinedAt: Date; deletedAt: Date | null; organizationId: string; }[]; } & { ...; }) | null; } & { ...; }'.
+src/app/api/v1/contact/route.ts(26,17): error TS1117: An object literal cannot have multiple properties with the same name.
+src/app/api/v1/evidence/[id]/verify/route.ts(64,29): error TS18047: 'evidence.response.assessment.project.organization' is possibly 'null'.
+src/app/api/v1/evidence/route.ts(170,13): error TS18047: 'response.assessment.project.organization' is possibly 'null'.
+src/app/api/v1/partner/assessment/[token]/route.ts(74,37): error TS2802: Type 'Set<string>' can only be iterated through when using the '--downlevelIteration' flag or with a '--target' of 'es2015' or higher.
+src/app/api/v1/projects/[id]/assessments/route.ts(45,26): error TS18047: 'project.organization' is possibly 'null'.
+src/app/api/v1/projects/[id]/assessments/route.ts(48,34): error TS2339: Property 'userId' does not exist on type '{ organization: ({ members: { id: string; role: OrganizationRole; userId: string; joinedAt: Date; deletedAt: Date | null; organizationId: string; }[]; } & { ...; }) | null; } & { ...; }'.
+src/app/api/v1/projects/[id]/assessments/route.ts(53,43): error TS2339: Property 'firstName' does not exist on type '{ id: string; email: string; name: string; role: string; organizationId?: string | undefined; organizationRole?: string | undefined; tier?: string | undefined; }'.
+src/app/api/v1/projects/[id]/assessments/route.ts(53,69): error TS2339: Property 'lastName' does not exist on type '{ id: string; email: string; name: string; role: string; organizationId?: string | undefined; organizationRole?: string | undefined; tier?: string | undefined; }'.
+src/app/api/v1/projects/[id]/assessments/route.ts(70,31): error TS18047: 'project.organization' is possibly 'null'.
+src/app/api/v1/projects/[id]/assessments/route.ts(70,52): error TS2339: Property 'size' does not exist on type '{ members: { id: string; role: OrganizationRole; userId: string; joinedAt: Date; deletedAt: Date | null; organizationId: string; }[]; } & { id: string; createdAt: Date; ... 13 more ...; caseStudyApproval: boolean; }'.
+src/app/api/v1/responses/route.ts(56,21): error TS2353: Object literal may only specify known properties, and 'answer' does not exist in type '(Without<AssessmentResponseUpdateInput, AssessmentResponseUncheckedUpdateInput> & AssessmentResponseUncheckedUpdateInput) | (Without<...> & AssessmentResponseUpdateInput)'.
+src/app/api/v1/responses/route.ts(71,21): error TS2353: Object literal may only specify known properties, and 'answer' does not exist in type 'Without<AssessmentResponseCreateInput, AssessmentResponseUncheckedCreateInput> & AssessmentResponseUncheckedCreateInput'.
+src/app/api/webhooks/flutterwave/route.ts(55,41): error TS2353: Object literal may only specify known properties, and 'tier' does not exist in type '(Without<UserUpdateInput, UserUncheckedUpdateInput> & UserUncheckedUpdateInput) | (Without<...> & UserUpdateInput)'.
+src/app/assessments/[id]/page.tsx(59,34): error TS2322: Type '{ id: string; partnerName: string | null; status: $Enums.AssessmentStatus; project: { id: string; name: string; }; domainScores: { domain: string; score: number; confidence: number; }[]; responses: { ...; }[]; redFlags: { ...; }[]; completedAt: string | undefined; }' is not assignable to type 'Assessment'.
+  Types of property 'partnerName' are incompatible.
+    Type 'string | null' is not assignable to type 'string'.
+      Type 'null' is not assignable to type 'string'.
+src/app/auth/create-organization/page.tsx(112,7): error TS2304: Cannot find name 'toast'.
+src/app/auth/create-organization/page.tsx(117,7): error TS2304: Cannot find name 'toast'.
+src/app/contact/page.tsx(31,33): error TS7006: Parameter 'e' implicitly has an 'any' type.
+src/app/contact/page.tsx(65,25): error TS18046: 'error' is of type 'unknown'.
+src/components/assessments/wizard/invite-respondents-step.tsx(8,4): error TS2304: Cannot find name 'InviteRespondentsStepProps'.
+src/components/assessments/wizard/invite-respondents-step.tsx(28,13): error TS2304: Cannot find name 'toast'.
+src/components/assessments/wizard/invite-respondents-step.tsx(47,51): error TS7006: Parameter '_' implicitly has an 'any' type.
+src/components/assessments/wizard/invite-respondents-step.tsx(47,54): error TS7006: Parameter 'i' implicitly has an 'any' type.
+src/components/assessments/wizard/invite-respondents-step.tsx(91,14): error TS2304: Cannot find name 'Card'.
+src/components/assessments/wizard/invite-respondents-step.tsx(99,22): error TS2304: Cannot find name 'Button'.
+src/components/assessments/wizard/invite-respondents-step.tsx(101,30): error TS2304: Cannot find name 'Upload'.
+src/components/assessments/wizard/invite-respondents-step.tsx(110,23): error TS2304: Cannot find name 'Button'.
+src/components/assessments/wizard/invite-respondents-step.tsx(112,15): error TS2304: Cannot find name 'Card'.
+src/components/assessments/wizard/invite-respondents-step.tsx(115,14): error TS2304: Cannot find name 'Card'.
+src/components/assessments/wizard/invite-respondents-step.tsx(119,26): error TS2304: Cannot find name 'Label'.
+src/components/assessments/wizard/invite-respondents-step.tsx(119,57): error TS2304: Cannot find name 'Label'.
+src/components/assessments/wizard/invite-respondents-step.tsx(120,26): error TS2304: Cannot find name 'Input'.
+src/components/assessments/wizard/invite-respondents-step.tsx(125,40): error TS7006: Parameter 'e' implicitly has an 'any' type.
+src/components/assessments/wizard/invite-respondents-step.tsx(132,26): error TS2304: Cannot find name 'Label'.
+src/components/assessments/wizard/invite-respondents-step.tsx(132,60): error TS2304: Cannot find name 'Label'.
+src/components/assessments/wizard/invite-respondents-step.tsx(133,26): error TS2304: Cannot find name 'Input'.
+src/components/assessments/wizard/invite-respondents-step.tsx(137,40): error TS7006: Parameter 'e' implicitly has an 'any' type.
+src/components/assessments/wizard/invite-respondents-step.tsx(144,26): error TS2304: Cannot find name 'Label'.
+src/components/assessments/wizard/invite-respondents-step.tsx(144,55): error TS2304: Cannot find name 'Label'.
+src/components/assessments/wizard/invite-respondents-step.tsx(145,26): error TS2304: Cannot find name 'Select'.
+src/components/assessments/wizard/invite-respondents-step.tsx(147,45): error TS7006: Parameter 'value' implicitly has an 'any' type.
+src/components/assessments/wizard/invite-respondents-step.tsx(151,30): error TS2304: Cannot find name 'SelectTrigger'.
+src/components/assessments/wizard/invite-respondents-step.tsx(152,34): error TS2304: Cannot find name 'SelectValue'.
+src/components/assessments/wizard/invite-respondents-step.tsx(153,31): error TS2304: Cannot find name 'SelectTrigger'.
+src/components/assessments/wizard/invite-respondents-step.tsx(154,30): error TS2304: Cannot find name 'SelectContent'.
+src/components/assessments/wizard/invite-respondents-step.tsx(156,38): error TS2304: Cannot find name 'SelectItem'.
+src/components/assessments/wizard/invite-respondents-step.tsx(158,39): error TS2304: Cannot find name 'SelectItem'.
+src/components/assessments/wizard/invite-respondents-step.tsx(160,31): error TS2304: Cannot find name 'SelectContent'.
+src/components/assessments/wizard/invite-respondents-step.tsx(161,27): error TS2304: Cannot find name 'Select'.
+src/components/assessments/wizard/invite-respondents-step.tsx(165,26): error TS2304: Cannot find name 'Label'.
+src/components/assessments/wizard/invite-respondents-step.tsx(165,63): error TS2304: Cannot find name 'Label'.
+src/components/assessments/wizard/invite-respondents-step.tsx(166,26): error TS2304: Cannot find name 'Select'.
+src/components/assessments/wizard/invite-respondents-step.tsx(168,45): error TS7006: Parameter 'value' implicitly has an 'any' type.
+src/components/assessments/wizard/invite-respondents-step.tsx(172,30): error TS2304: Cannot find name 'SelectTrigger'.
+src/components/assessments/wizard/invite-respondents-step.tsx(173,34): error TS2304: Cannot find name 'SelectValue'.
+src/components/assessments/wizard/invite-respondents-step.tsx(174,31): error TS2304: Cannot find name 'SelectTrigger'.
+src/components/assessments/wizard/invite-respondents-step.tsx(175,30): error TS2304: Cannot find name 'SelectContent'.
+src/components/assessments/wizard/invite-respondents-step.tsx(176,34): error TS2304: Cannot find name 'SelectItem'.
+src/components/assessments/wizard/invite-respondents-step.tsx(176,68): error TS2304: Cannot find name 'SelectItem'.
+src/components/assessments/wizard/invite-respondents-step.tsx(177,34): error TS2304: Cannot find name 'SelectItem'.
+src/components/assessments/wizard/invite-respondents-step.tsx(177,68): error TS2304: Cannot find name 'SelectItem'.
+src/components/assessments/wizard/invite-respondents-step.tsx(178,34): error TS2304: Cannot find name 'SelectItem'.
+src/components/assessments/wizard/invite-respondents-step.tsx(178,70): error TS2304: Cannot find name 'SelectItem'.
+src/components/assessments/wizard/invite-respondents-step.tsx(179,34): error TS2304: Cannot find name 'SelectItem'.
+src/components/assessments/wizard/invite-respondents-step.tsx(179,72): error TS2304: Cannot find name 'SelectItem'.
+src/components/assessments/wizard/invite-respondents-step.tsx(180,34): error TS2304: Cannot find name 'SelectItem'.
+src/components/assessments/wizard/invite-respondents-step.tsx(180,70): error TS2304: Cannot find name 'SelectItem'.
+src/components/assessments/wizard/invite-respondents-step.tsx(181,31): error TS2304: Cannot find name 'SelectContent'.
+src/components/assessments/wizard/invite-respondents-step.tsx(182,27): error TS2304: Cannot find name 'Select'.
+src/components/assessments/wizard/invite-respondents-step.tsx(186,26): error TS2304: Cannot find name 'Label'.
+src/components/assessments/wizard/invite-respondents-step.tsx(186,66): error TS2304: Cannot find name 'Label'.
+src/components/assessments/wizard/invite-respondents-step.tsx(187,26): error TS2304: Cannot find name 'Textarea'.
+src/components/assessments/wizard/invite-respondents-step.tsx(191,40): error TS7006: Parameter 'e' implicitly has an 'any' type.
+src/components/assessments/wizard/invite-respondents-step.tsx(199,18): error TS2304: Cannot find name 'Button'.
+src/components/assessments/wizard/invite-respondents-step.tsx(200,22): error TS2304: Cannot find name 'Plus'.
+src/components/assessments/wizard/invite-respondents-step.tsx(202,19): error TS2304: Cannot find name 'Button'.
+src/components/assessments/wizard/invite-respondents-step.tsx(203,15): error TS2304: Cannot find name 'Card'.
+src/components/assessments/wizard/invite-respondents-step.tsx(212,48): error TS7006: Parameter 'invitation' implicitly has an 'any' type.
+src/components/assessments/wizard/invite-respondents-step.tsx(212,60): error TS7006: Parameter 'index' implicitly has an 'any' type.
+src/components/assessments/wizard/invite-respondents-step.tsx(213,30): error TS2304: Cannot find name 'Card'.
+src/components/assessments/wizard/invite-respondents-step.tsx(222,50): error TS2304: Cannot find name 'Badge'.
+src/components/assessments/wizard/invite-respondents-step.tsx(225,51): error TS2304: Cannot find name 'Badge'.
+src/components/assessments/wizard/invite-respondents-step.tsx(227,46): error TS2304: Cannot find name 'Badge'.
+src/components/assessments/wizard/invite-respondents-step.tsx(229,47): error TS2304: Cannot find name 'Badge'.
+src/components/assessments/wizard/invite-respondents-step.tsx(237,38): error TS2304: Cannot find name 'Button'.
+src/components/assessments/wizard/invite-respondents-step.tsx(242,42): error TS2304: Cannot find name 'Trash2'.
+src/components/assessments/wizard/invite-respondents-step.tsx(243,39): error TS2304: Cannot find name 'Button'.
+src/components/assessments/wizard/invite-respondents-step.tsx(245,31): error TS2304: Cannot find name 'Card'.
+src/components/landing/pricing.tsx(45,9): error TS2353: Object literal may only specify known properties, and 'displayOrder' does not exist in type 'PricingTier'.
+src/components/landing/pricing.tsx(69,9): error TS2353: Object literal may only specify known properties, and 'displayOrder' does not exist in type 'PricingTier'.
+src/components/landing/pricing.tsx(92,9): error TS2353: Object literal may only specify known properties, and 'displayOrder' does not exist in type 'PricingTier'.

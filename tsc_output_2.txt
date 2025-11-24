@@ -1,0 +1,19 @@
+src/app/api/v1/contact/route.ts(26,17): error TS1117: An object literal cannot have multiple properties with the same name.
+src/app/api/v1/evidence/route.ts(166,13): error TS5076: '||' and '??' operations cannot be mixed without parentheses.
+src/app/api/v1/partner/assessment/[token]/route.ts(74,37): error TS2802: Type 'Set<string>' can only be iterated through when using the '--downlevelIteration' flag or with a '--target' of 'es2015' or higher.
+src/app/assessments/[id]/page.tsx(59,34): error TS2322: Type '{ id: string; partnerName: string | null; status: $Enums.AssessmentStatus; project: { id: string; name: string; }; domainScores: { domain: string; score: number; confidence: number; }[]; responses: { ...; }[]; redFlags: { ...; }[]; completedAt: string | undefined; }' is not assignable to type 'Assessment'.
+  Types of property 'partnerName' are incompatible.
+    Type 'string | null' is not assignable to type 'string'.
+      Type 'null' is not assignable to type 'string'.
+src/app/contact/page.tsx(31,33): error TS7006: Parameter 'e' implicitly has an 'any' type.
+src/app/contact/page.tsx(65,25): error TS18046: 'error' is of type 'unknown'.
+src/components/assessments/wizard/assessment-wizard.tsx(182,25): error TS2322: Type 'WizardData' is not assignable to type '{ invitations: Invitation[]; }'.
+  Types of property 'invitations' are incompatible.
+    Type '{ email: string; name: string; roleId: string; seniority: string; notes?: string | undefined; }[]' is not assignable to type 'Invitation[]'.
+      Type '{ email: string; name: string; roleId: string; seniority: string; notes?: string | undefined; }' is not assignable to type 'Invitation'.
+        Types of property 'notes' are incompatible.
+          Type 'string | undefined' is not assignable to type 'string'.
+            Type 'undefined' is not assignable to type 'string'.
+src/components/landing/pricing.tsx(45,9): error TS2353: Object literal may only specify known properties, and 'displayOrder' does not exist in type 'PricingTier'.
+src/components/landing/pricing.tsx(69,9): error TS2353: Object literal may only specify known properties, and 'displayOrder' does not exist in type 'PricingTier'.
+src/components/landing/pricing.tsx(92,9): error TS2353: Object literal may only specify known properties, and 'displayOrder' does not exist in type 'PricingTier'.

@@ -23,7 +23,7 @@ export default function HomePage() {
       <SampleQuestions />
       <AudienceSection />
       <FrameworkOrigin />
-      <Pricing />
+      {/* <Pricing /> */}
       <CTASection />
       <Footer />
     </div>

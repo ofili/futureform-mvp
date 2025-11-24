@@ -7,25 +7,13 @@ export function Footer() {
             links: [
                 { label: 'Platform', href: '#framework' },
                 { label: 'Framework', href: '#framework' },
-                { label: 'Pricing', href: '#pricing' }
+                { label: 'Pricing', href: '/pricing' }
             ]
         },
         {
             title: 'Company',
             links: [
-                { label: 'About', href: '/about' },
-                { label: 'Team', href: '/team' },
-                { label: 'Research', href: '/research' },
-                { label: 'Careers', href: '/careers' }
-            ]
-        },
-        {
-            title: 'Resources',
-            links: [
-                { label: 'Blog', href: '/blog' },
-                { label: 'Case Studies', href: '/case-studies' },
-                { label: 'White Papers', href: '/white-papers' },
-                { label: 'FAQ', href: '/faq' }
+                { label: 'Team', href: '/team' }
             ]
         }
     ];
