@@ -41,9 +41,12 @@ interface PartnerAssessmentData {
     };
 }
 
-export default function PartnerAssessmentPage({ params }: { params: { token: string } }) {
+import { useParams } from 'next/navigation';
+
+export default function PartnerAssessmentPage() {
     const router = useRouter();
-    const { token } = params;
+    const params = useParams();
+    const token = params.token as string;
 
     const { data, isLoading, error } = useQuery<PartnerAssessmentData>({
         queryKey: ['partner-assessment', token],

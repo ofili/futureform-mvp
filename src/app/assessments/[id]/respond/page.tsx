@@ -1,11 +1,12 @@
 import RespondentWorkspace from '@/components/assessments/respondent-workspace';
 
 interface PageProps {
-    params: {
+    params: Promise<{
         id: string;
-    };
+    }>;
 }
 
-export default function RespondPage({ params }: PageProps) {
+export default async function RespondPage(props: PageProps) {
+    const params = await props.params;
     return <RespondentWorkspace assessmentId={params.id} />;
 }
