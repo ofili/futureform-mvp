@@ -12,17 +12,9 @@ import {
 } from "@/components/ui/tooltip";
 import { Navbar } from '@/components/landing/navbar';
 import { Footer } from '@/components/landing/footer';
-import type { Metadata } from 'next';
 
-export const metadata: Metadata = {
-    title: 'Pricing',
-    description: 'Flexible pricing plans for trust intelligence assessments. Pay-as-you-go or subscription plans for organizations of all sizes.',
-    openGraph: {
-        title: 'Pricing | FutureForm',
-        description: 'Flexible pricing plans for trust intelligence assessments',
-        url: 'https://futureform.africa/pricing',
-    },
-};
+// Note: Metadata export not supported in client components
+// SEO handled by layout.tsx template
 
 function CollapsibleFeatures({ features }: { features: string[] }) {
     const [isOpen, setIsOpen] = useState(false);

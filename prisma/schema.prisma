@@ -1,10 +1,21 @@
+// generator client {
+//   provider = "prisma-client-js"
+// }
+
+// datasource db {
+//   provider = "postgresql"
+//   url      = env("DATABASE_URL")
+// }
+
+
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model User {
@@ -75,12 +86,13 @@ model Organization {
   createdAt            DateTime @default(now())
   updatedAt            DateTime @updatedAt
 
-  members     OrganizationMember[]
-  projects    Project[]
-  credits     Credit[]
-  invitations OrganizationInvitation[]
-  tierId      String?
-  tier        SubscriptionTier?        @relation(fields: [tierId], references: [id])
+  members        OrganizationMember[]
+  projects       Project[]
+  credits        Credit[]
+  invitations    OrganizationInvitation[]
+  partnerAliases PartnerAlias[] // Partner registry for this org
+  tierId         String?
+  tier           SubscriptionTier?        @relation(fields: [tierId], references: [id])
 
   @@map("organizations")
 }
@@ -100,24 +112,152 @@ model OrganizationMember {
   @@map("organization_members")
 }
 
+// ========================================
+// PARTNER REGISTRY (Global + Org-Scoped)
+// ========================================
+
+enum PartnerVerification {
+  UNVERIFIED
+  SELF_VERIFIED
+  FUTUREFORM_VERIFIED
+}
+
+// Global canonical partner record
+model Partner {
+  id             String              @id @default(cuid())
+  legalName      String
+  tradeName      String?
+  website        String?
+  country        String?
+  headquarters   String?
+  sector         String?
+  subsector      String?
+  createdByOrgId String?
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @updatedAt
+  verification   PartnerVerification @default(UNVERIFIED)
+  metadata       Json?
+
+  // Internal intelligence (not exposed to clients)
+  aggregateScore Float? // Computed trust score across all assessments
+  usageCount     Int    @default(0) // How many orgs use this partner
+
+  // Relations
+  aliases         PartnerAlias[]
+  partnerContacts PartnerContact[]
+  assessments     Assessment[]
+
+  @@index([legalName])
+  @@index([sector, country])
+  @@map("partners")
+}
+
+// Organization-scoped view of a partner
+model PartnerAlias {
+  id                 String   @id @default(cuid())
+  partnerId          String
+  organizationId     String
+  displayName        String
+  internalNotes      String?
+  relationshipStatus String? // "Active", "Past", "Blocked"
+  visibility         Boolean  @default(true)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  // Cached fields for performance (denormalized from Partner)
+  cachedWebsite String?
+  cachedCountry String?
+  cachedSector  String?
+
+  partner      Partner      @relation(fields: [partnerId], references: [id], onDelete: Cascade)
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  assessments  Assessment[]
+
+  @@unique([partnerId, organizationId])
+  @@index([organizationId])
+  @@map("partner_aliases")
+}
+
+// Partner contacts for invitations
+model PartnerContact {
+  id        String   @id @default(cuid())
+  partnerId String
+  name      String?
+  email     String?
+  phone     String?
+  role      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  partner Partner @relation(fields: [partnerId], references: [id], onDelete: Cascade)
+
+  @@index([email])
+  @@map("partner_contacts")
+}
+
 model Project {
   id          String  @id @default(cuid())
   name        String
   description String?
 
   // Classification & Scope
-  type          ProjectType
-  sector        String // e.g., "Pre-investment due diligence"
-  region        String
-  country       String?
-  maturityLevel String? // e.g., "Nascent", "Developing", "Established"
-  budgetRange   String? // e.g., "$50k–$150k"
-  timeline      String? // e.g., "2025-06-30"
+  type      ProjectType
+  sector    String // e.g., "Pre-investment due diligence"
+  subsector String? // [NEW]
+  region    String
+  country   String?
+  orgSize   String? // [NEW]
+
+  // Deployment Context [NEW]
+  techCategory         String?
+  techMaturity         String? // Distinct from maturityLevel if needed, or replace. Keeping both for now to avoid breaking existing.
+  deploymentScope      String?
+  deploymentComplexity String?
+  successMetrics       String? // Text
+  projectStage         String?
+  maturityLevel        String? // e.g., "Nascent", "Developing", "Established" - Keep for backward compat if needed
+  budgetRange          String? // e.g., "$50k–$150k"
+  timeline             String? // e.g., "2025-06-30"
 
   // Strategic Intent
-  objectives   String? // long-form field
-  stakeholders String? // JSON text or comma-separated list
-  status       ProjectStatus @default(PLANNING)
+  objectives      String? // long-form field
+  longDescription String? // [NEW]
+  stakeholders    String? // JSON text or comma-separated list
+  status          ProjectStatus @default(PLANNING)
+
+  // Stakeholder & Governance Context [NEW]
+  leadAgency               String?
+  implementingPartners     String?
+  vendors                  String?
+  responsibleDepartments   String?
+  projectSponsor           String?
+  steeringCommittee        Boolean?
+  interAgencyCollaboration String? // Low, Medium, High
+
+  // Risk, Financial & Contractual [NEW]
+  fundingSource          String?
+  fundingPartners        String?
+  contractType           String?
+  contractDuration       String?
+  vendorTrackRecord      String?
+  knownRisks             String?
+  regulatoryRequirements String?
+  dataSensitivity        String?
+
+  // Organizational Context [NEW]
+  orgDigitalMaturity   String?
+  operationalCapacity  String?
+  workforceSize        String?
+  changeReadiness      String?
+  prevFailures         String?
+  internalTrustClimate String?
+
+  // Role & Question Mapping [NEW]
+  departmentsInvolved   String[] @default([])
+  expectedCollaborators String?
+  keyFunctionalAreas    String[] @default([])
+  seniorityMix          String[] @default([])
+  orgStructure          String?
 
   // Ownership
   createdById    String
@@ -141,11 +281,18 @@ model Project {
 }
 
 model Assessment {
-  id              String           @id @default(cuid())
-  projectId       String
-  partnerId       String
-  partnerName     String
-  partnerType     String
+  id        String @id @default(cuid())
+  projectId String
+
+  // OLD partner fields (kept for migration, will be deprecated)
+  partnerId   String? // FK to User (partner admin) - nullable during migration
+  partnerName String? // Nullable during migration
+  partnerType String? // Nullable during migration
+
+  // NEW partner fields (global + org-scoped)
+  partnerGlobalId String? // FK to Partner (global canonical)
+  partnerAliasId  String? // FK to PartnerAlias (org-scoped view)
+
   status          AssessmentStatus @default(PENDING)
   token           String           @unique
   invitedAt       DateTime         @default(now())
@@ -165,7 +312,9 @@ model Assessment {
   estimatedDuration    Int? // in minutes
 
   project             Project              @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  partner             User                 @relation(fields: [partnerId], references: [id])
+  partner             User?                @relation(fields: [partnerId], references: [id]) // OLD - nullable
+  partnerGlobal       Partner?             @relation(fields: [partnerGlobalId], references: [id]) // NEW
+  partnerAlias        PartnerAlias?        @relation(fields: [partnerAliasId], references: [id]) // NEW
   responses           AssessmentResponse[]
   drafts              AssessmentDraft[]
   scores              DomainScore[]
@@ -181,6 +330,8 @@ model Assessment {
   assessmentQuestions AssessmentQuestion[]
   invitations         AssessmentInvitation[]
 
+  @@index([partnerGlobalId])
+  @@index([partnerAliasId])
   @@map("assessments")
 }
 
@@ -325,6 +476,56 @@ model FrameworkDownload {
 
   @@map("framework_downloads")
 }
+
+// Marketing Leads (PQL - Product Qualified Leads)
+model MarketingLead {
+  id              String    @id @default(cuid())
+  
+  // Contact Information
+  firstName       String
+  lastName        String
+  email           String
+  organization    String
+  sector          String?
+  country         String?
+  
+  // Lead Source & Tracking
+  source          String    // e.g., "framework_download", "contact_form", "webinar"
+  downloadToken   String?   @unique // Token for framework download
+  tokenUsed       Boolean   @default(false)
+  tokenUsedAt     DateTime?
+  
+  // Conversion Tracking
+  converted       Boolean   @default(false) // Did they sign up?
+  convertedAt     DateTime?
+  userId          String?   // FK to User if they converted
+  
+  // Lead Status
+  status          String    @default("NEW") // NEW, CONTACTED, QUALIFIED, CONVERTED, LOST
+  leadScore       Int?      // Optional lead scoring
+  
+  // HubSpot Integration
+  hubspotSynced     Boolean   @default(false)
+  hubspotContactId  String?   // HubSpot contact ID
+  hubspotSyncedAt   DateTime?
+  hubspotSyncError  String?   // Last sync error message
+  
+  // Metadata
+  metadata        Json?     // Additional tracking data
+  notes           String?   // Internal notes
+  
+  // Timestamps
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  
+  @@index([email])
+  @@index([source])
+  @@index([status])
+  @@index([converted])
+  @@index([hubspotSynced])
+  @@map("marketing_leads")
+}
+
 
 model DomainScore {
   id           String   @id @default(cuid())
@@ -498,6 +699,7 @@ model CalendarEvent {
 enum UserRole {
   USER
   ADMIN
+  PARTNER
 }
 
 enum OrganizationRole {
@@ -752,7 +954,6 @@ model UserOnboardingProgress {
   checklistProjectCreated   Boolean @default(false)
   checklistPartnerInvited   Boolean @default(false)
   checklistProfileGenerated Boolean @default(false)
-
   // Tooltips shown
   tooltipNewAssessmentShown Boolean @default(false)
   tooltipTrustScoreShown    Boolean @default(false)
@@ -862,6 +1063,18 @@ model PlatformConfig {
   createdAt   DateTime @default(now())
 
   @@map("platform_config")
+}
+
+model ContactRequest {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  company   String?
+  message   String
+  status    String   @default("PENDING") // PENDING, CONTACTED, CLOSED
+  createdAt DateTime @default(now())
+
+  @@map("contact_requests")
 }
 
 model AdminQuestion {
