@@ -1,8 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db'
+import { rateLimit, RateLimitPresets } from '@/lib/rate-limit'
 
+/**
+ * POST /api/credits/purchase
+ * Rate Limited: 3 requests per 5 minutes to prevent payment fraud
+ */
 export async function POST(request: NextRequest) {
+    // Apply very strict rate limiting for payment operations
+    const rateLimitResult = await rateLimit(request, RateLimitPresets.sensitive);
+
+    if (!rateLimitResult.success) {
+        return rateLimitResult.response;
+    }
+
     try {
         const session = await auth()
         if (!session) {

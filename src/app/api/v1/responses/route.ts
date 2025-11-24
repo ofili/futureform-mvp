@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
         const invitation = await prisma.assessmentInvitation.findFirst({
             where: {
                 assessmentId,
-                userId: session.user.id,
+                email: session.user.email,
                 status: 'ACCEPTED',
             },
         });
@@ -53,7 +53,7 @@ export async function POST(request: NextRequest) {
             response = await prisma.assessmentResponse.update({
                 where: { id: existingResponse.id },
                 data: {
-                    answer,
+                    response: answer,
                     updatedAt: new Date(),
                 },
                 include: {
@@ -68,8 +68,7 @@ export async function POST(request: NextRequest) {
                     assessmentId,
                     questionId,
                     userId: session.user.id,
-                    answer,
-                    status: 'DRAFT',
+                    response: answer,
                 },
                 include: {
                     question: true,

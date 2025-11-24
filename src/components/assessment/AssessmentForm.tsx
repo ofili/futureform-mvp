@@ -409,7 +409,7 @@ export default function AssessmentForm({ assessmentId, token }: AssessmentFormPr
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {['RELIABILITY', 'TRANSPARENCY', 'GOVERNANCE', 'COMPETENCE', 'INTEGRITY'].map(domain => {
+                  {['SYSTEM_RELIABILITY', 'OPERATIONAL_TRANSPARENCY', 'GOVERNANCE_ACCOUNTABILITY', 'ORGANIZATIONAL_COMPETENCE', 'VENDOR_INTEGRITY', 'STAKEHOLDER_ALIGNMENT'].map(domain => {
                     const domainQuestions = questions.filter(q => q.domain === domain);
                     const domainCompleted = domainQuestions.filter(q => {
                       const r = responses[q.id];

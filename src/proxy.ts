@@ -6,7 +6,7 @@ const protectedRoutes = ['/dashboard', '/projects', '/assessments', '/settings',
 const adminRoutes = ['/admin']
 const publicRoutes = ['/auth/login', '/auth/register', '/auth/error', '/', '/api/auth']
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
     const { pathname } = request.nextUrl
 
     // Allow public routes

@@ -10,7 +10,7 @@ import prisma from '@/lib/prisma';
  */
 export async function PATCH(
     request: NextRequest,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
         const session = await getServerSession(authOptions);
@@ -18,7 +18,7 @@ export async function PATCH(
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
         }
 
-        const evidenceId = params.id;
+        const { id: evidenceId } = await params;
         const body = await request.json();
         const { status, notes } = body;
 
@@ -61,13 +61,13 @@ export async function PATCH(
 
         // Check if user is authorized to verify evidence
         // Only organization members or partner admins can verify
-        const isOrgMember = evidence.response.assessment.project.organization.members.some(
+        const isOrgMember = evidence.response.assessment.project.organization?.members.some(
             (member) => member.userId === session.user.id
-        );
+        ) ?? false;
 
         const isPartnerAdmin = evidence.response.assessment.invitations.some(
             (inv) =>
-                inv.userId === session.user.id &&
+                inv.email === session.user.email &&
                 inv.status === 'ACCEPTED' &&
                 inv.email === evidence.response.assessment.partnerAdminEmail
         );

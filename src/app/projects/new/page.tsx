@@ -25,17 +25,66 @@ function NewProjectContent() {
   const isSingleMode = mode === 'single';
 
   const [formData, setFormData] = useState({
+    // Identity
     name: '',
     description: '',
+    longDescription: '',
     type: isSingleMode ? 'VENDOR_SELECTION_PROCUREMENT' : '',
     sector: '',
+    subsector: '',
     region: '',
+    country: '',
+    orgSize: '',
     status: 'ACTIVE',
+
+    // Context
+    techCategory: '',
+    techMaturity: '',
+    deploymentScope: '',
+    deploymentComplexity: '',
+    successMetrics: '',
+    projectStage: '',
     budgetRange: isSingleMode ? 'N/A' : '',
-    maturityLevel: isSingleMode ? 'N/A' : '',
+    maturityLevel: isSingleMode ? 'N/A' : '', // Keep for compat
     timeline: '',
     objectives: isSingleMode ? 'Single partner assessment' : '',
+
+    // Stakeholders
     stakeholders: '',
+    leadAgency: '',
+    implementingPartners: '',
+    vendors: '',
+    responsibleDepartments: '',
+    projectSponsor: '',
+    steeringCommittee: false,
+    interAgencyCollaboration: '',
+
+    // Risk/Financial
+    fundingSource: '',
+    fundingPartners: '',
+    contractType: '',
+    contractDuration: '',
+    vendorTrackRecord: '',
+    knownRisks: '',
+    regulatoryRequirements: '',
+    dataSensitivity: '',
+
+    // Organizational
+    orgDigitalMaturity: '',
+    operationalCapacity: '',
+    workforceSize: '',
+    changeReadiness: '',
+    prevFailures: '',
+    internalTrustClimate: '',
+
+    // Role Mapping
+    departmentsInvolved: [] as string[],
+    expectedCollaborators: '',
+    keyFunctionalAreas: [] as string[],
+    seniorityMix: [] as string[],
+    orgStructure: '',
+
+    // Single Mode Specific
     partnerEmail: '',
     assessmentMethod: 'SELF_ASSESS'
   });
@@ -214,16 +263,16 @@ function NewProjectContent() {
             <p className="text-sm text-gray-600">
               {isSingleMode
                 ? 'Provide information about the partner you want to assess'
-                : 'Provide basic information about your trust assessment project'
+                : 'Provide comprehensive information to tailor the trust assessment.'
               }
             </p>
           </CardHeader>
           <CardContent className="space-y-8">
             <form onSubmit={handleSubmit} className="space-y-8">
 
-              {/* Basic Information */}
+              {/* 1. PROJECT IDENTITY */}
               <div className="space-y-6">
-                <h3 className="text-lg font-semibold border-b pb-2">Basic Information</h3>
+                <h3 className="text-lg font-semibold border-b pb-2">1. Project Identity</h3>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
@@ -258,23 +307,7 @@ function NewProjectContent() {
                   )}
                 </div>
 
-                {!isSingleMode && (
-                  <div className="space-y-2">
-                    <label className="block text-sm font-medium">Description</label>
-                    <Textarea
-                      value={formData.description}
-                      onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
-                      placeholder="Describe the purpose, scope, and objectives..."
-                      rows={3}
-                    />
-                  </div>
-                )}
-              </div>
-
-              {/* Classification */}
-              <div className="space-y-6">
-                <h3 className="text-lg font-semibold border-b pb-2">Project Classification</h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label className="block text-sm font-medium">
                       Sector <span className="text-red-500">*</span>
@@ -291,7 +324,17 @@ function NewProjectContent() {
                       ))}
                     </select>
                   </div>
+                  <div className="space-y-2">
+                    <label className="block text-sm font-medium">Subsector</label>
+                    <Input
+                      value={formData.subsector}
+                      onChange={e => setFormData(prev => ({ ...prev, subsector: e.target.value }))}
+                      placeholder="e.g., Metro Rail, Payments"
+                    />
+                  </div>
+                </div>
 
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label className="block text-sm font-medium">
                       Region <span className="text-red-500">*</span>
@@ -308,23 +351,280 @@ function NewProjectContent() {
                       ))}
                     </select>
                   </div>
-
                   <div className="space-y-2">
-                    <label className="block text-sm font-medium">Status</label>
-                    <select
-                      value={formData.status}
-                      onChange={e => setFormData(prev => ({ ...prev, status: e.target.value }))}
-                      className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                    >
-                      {projectStatuses.map(status => (
-                        <option key={status.id} value={status.value}>
-                          {status.label}
-                        </option>
-                      ))}
-                    </select>
+                    <label className="block text-sm font-medium">Country</label>
+                    <Input
+                      value={formData.country}
+                      onChange={e => setFormData(prev => ({ ...prev, country: e.target.value }))}
+                      placeholder="e.g., Kenya"
+                    />
                   </div>
                 </div>
+
+                <div className="space-y-2">
+                  <label className="block text-sm font-medium">Short Description</label>
+                  <Textarea
+                    value={formData.description}
+                    onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
+                    placeholder="1-3 sentences describing the project..."
+                    rows={2}
+                  />
+                </div>
+
+                {!isSingleMode && (
+                  <div className="space-y-2">
+                    <label className="block text-sm font-medium">Long Description (Full Brief)</label>
+                    <Textarea
+                      value={formData.longDescription}
+                      onChange={(e) => setFormData(prev => ({ ...prev, longDescription: e.target.value }))}
+                      placeholder="Detailed project brief..."
+                      rows={4}
+                    />
+                  </div>
+                )}
               </div>
+
+              {/* 2. DEPLOYMENT CONTEXT */}
+              {!isSingleMode && (
+                <div className="space-y-6">
+                  <h3 className="text-lg font-semibold border-b pb-2">2. Deployment Context</h3>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <label className="block text-sm font-medium">Technology Category</label>
+                      <Input
+                        value={formData.techCategory}
+                        onChange={e => setFormData(prev => ({ ...prev, techCategory: e.target.value }))}
+                        placeholder="e.g., AI, IoT, ERP"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="block text-sm font-medium">Technology Maturity</label>
+                      <Input
+                        value={formData.techMaturity}
+                        onChange={e => setFormData(prev => ({ ...prev, techMaturity: e.target.value }))}
+                        placeholder="e.g., Pilot, Proven, Legacy"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <label className="block text-sm font-medium">Deployment Scope</label>
+                      <Input
+                        value={formData.deploymentScope}
+                        onChange={e => setFormData(prev => ({ ...prev, deploymentScope: e.target.value }))}
+                        placeholder="e.g., National, Multi-region"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="block text-sm font-medium">Project Stage</label>
+                      <Input
+                        value={formData.projectStage}
+                        onChange={e => setFormData(prev => ({ ...prev, projectStage: e.target.value }))}
+                        placeholder="e.g., Vendor Selection, Implementation"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="block text-sm font-medium">Success Metrics (KPIs)</label>
+                    <Textarea
+                      value={formData.successMetrics}
+                      onChange={e => setFormData(prev => ({ ...prev, successMetrics: e.target.value }))}
+                      placeholder="Key Performance Indicators..."
+                      rows={2}
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <label className="block text-sm font-medium">Timeline / Target Date</label>
+                      <Input
+                        type="date"
+                        value={formData.timeline}
+                        onChange={e => setFormData(prev => ({ ...prev, timeline: e.target.value }))}
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="block text-sm font-medium">Budget Range</label>
+                      <select
+                        value={formData.budgetRange}
+                        onChange={e => setFormData(prev => ({ ...prev, budgetRange: e.target.value }))}
+                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                      >
+                        <option value="">Select budget range</option>
+                        {budgetRanges.map(range => (
+                          <option key={range.id} value={range.value}>{range.label}</option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* 3. STAKEHOLDER & GOVERNANCE */}
+              {!isSingleMode && (
+                <div className="space-y-6">
+                  <h3 className="text-lg font-semibold border-b pb-2">3. Stakeholder & Governance</h3>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <label className="block text-sm font-medium">Lead Agency</label>
+                      <Input
+                        value={formData.leadAgency}
+                        onChange={e => setFormData(prev => ({ ...prev, leadAgency: e.target.value }))}
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="block text-sm font-medium">Project Sponsor (Role)</label>
+                      <Input
+                        value={formData.projectSponsor}
+                        onChange={e => setFormData(prev => ({ ...prev, projectSponsor: e.target.value }))}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="block text-sm font-medium">Implementing Partners</label>
+                    <Input
+                      value={formData.implementingPartners}
+                      onChange={e => setFormData(prev => ({ ...prev, implementingPartners: e.target.value }))}
+                      placeholder="Comma separated list"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="block text-sm font-medium">Responsible Departments</label>
+                    <Input
+                      value={formData.responsibleDepartments}
+                      onChange={e => setFormData(prev => ({ ...prev, responsibleDepartments: e.target.value }))}
+                      placeholder="e.g., IT, Finance, Ops"
+                    />
+                  </div>
+
+                  <div className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      id="steeringCommittee"
+                      checked={formData.steeringCommittee}
+                      onChange={e => setFormData(prev => ({ ...prev, steeringCommittee: e.target.checked }))}
+                      className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                    />
+                    <label htmlFor="steeringCommittee" className="text-sm font-medium">
+                      Steering Committee Present?
+                    </label>
+                  </div>
+                </div>
+              )}
+
+              {/* 4. RISK & FINANCIAL */}
+              {!isSingleMode && (
+                <div className="space-y-6">
+                  <h3 className="text-lg font-semibold border-b pb-2">4. Risk, Financial & Contractual</h3>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <label className="block text-sm font-medium">Funding Source</label>
+                      <Input
+                        value={formData.fundingSource}
+                        onChange={e => setFormData(prev => ({ ...prev, fundingSource: e.target.value }))}
+                        placeholder="e.g., Internal, Donor, PPP"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="block text-sm font-medium">Contract Type</label>
+                      <Input
+                        value={formData.contractType}
+                        onChange={e => setFormData(prev => ({ ...prev, contractType: e.target.value }))}
+                        placeholder="e.g., Fixed-price, Milestone-based"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="block text-sm font-medium">Known Risks</label>
+                    <Textarea
+                      value={formData.knownRisks}
+                      onChange={e => setFormData(prev => ({ ...prev, knownRisks: e.target.value }))}
+                      rows={2}
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <label className="block text-sm font-medium">Regulatory Requirements</label>
+                      <select
+                        value={formData.regulatoryRequirements}
+                        onChange={e => setFormData(prev => ({ ...prev, regulatoryRequirements: e.target.value }))}
+                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                      >
+                        <option value="">Select level</option>
+                        <option value="High">High</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Low">Low</option>
+                      </select>
+                    </div>
+                    <div className="space-y-2">
+                      <label className="block text-sm font-medium">Data Sensitivity</label>
+                      <select
+                        value={formData.dataSensitivity}
+                        onChange={e => setFormData(prev => ({ ...prev, dataSensitivity: e.target.value }))}
+                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                      >
+                        <option value="">Select level</option>
+                        <option value="High">High</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Low">Low</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* 5. ORGANIZATIONAL CONTEXT */}
+              {!isSingleMode && (
+                <div className="space-y-6">
+                  <h3 className="text-lg font-semibold border-b pb-2">5. Organizational Context</h3>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <label className="block text-sm font-medium">Digital Maturity</label>
+                      <select
+                        value={formData.orgDigitalMaturity}
+                        onChange={e => setFormData(prev => ({ ...prev, orgDigitalMaturity: e.target.value }))}
+                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                      >
+                        <option value="">Select level</option>
+                        <option value="High">High</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Low">Low</option>
+                      </select>
+                    </div>
+                    <div className="space-y-2">
+                      <label className="block text-sm font-medium">Change Readiness</label>
+                      <select
+                        value={formData.changeReadiness}
+                        onChange={e => setFormData(prev => ({ ...prev, changeReadiness: e.target.value }))}
+                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                      >
+                        <option value="">Select level</option>
+                        <option value="High">High</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Low">Low</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="block text-sm font-medium">Workforce Size Affected</label>
+                    <Input
+                      value={formData.workforceSize}
+                      onChange={e => setFormData(prev => ({ ...prev, workforceSize: e.target.value }))}
+                    />
+                  </div>
+                </div>
+              )}
 
               {/* Partner Email and Assessment Method - Single mode only */}
               {isSingleMode && (
@@ -368,76 +668,6 @@ function NewProjectContent() {
                       </p>
                     </div>
                   )}
-                </div>
-              )}
-
-              {/* Budget & Maturity - Hidden in single mode */}
-              {!isSingleMode && (
-                <div className="space-y-6">
-                  <h3 className="text-lg font-semibold border-b pb-2">Budget & Timeline</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <label className="block text-sm font-medium">Budget Range</label>
-                      <select
-                        value={formData.budgetRange}
-                        onChange={e => setFormData(prev => ({ ...prev, budgetRange: e.target.value }))}
-                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                      >
-                        <option value="">Select budget range</option>
-                        {budgetRanges.map(range => (
-                          <option key={range.id} value={range.value}>{range.label}</option>
-                        ))}
-                      </select>
-                    </div>
-
-                    <div className="space-y-2">
-                      <label className="block text-sm font-medium">Maturity Level</label>
-                      <select
-                        value={formData.maturityLevel}
-                        onChange={e => setFormData(prev => ({ ...prev, maturityLevel: e.target.value }))}
-                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                      >
-                        <option value="">Select maturity level</option>
-                        {maturityLevels.map(level => (
-                          <option key={level.id} value={level.value}>{level.label}</option>
-                        ))}
-                      </select>
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <label className="block text-sm font-medium">Timeline / Target Date</label>
-                    <Input
-                      type="date"
-                      value={formData.timeline}
-                      onChange={e => setFormData(prev => ({ ...prev, timeline: e.target.value }))}
-                    />
-                  </div>
-                </div>
-              )}
-              {!isSingleMode && (
-                <div className="space-y-6">
-                  <h3 className="text-lg font-semibold border-b pb-2">Strategic Details</h3>
-
-                  <div className="space-y-2">
-                    <label className="block text-sm font-medium">Key Objectives</label>
-                    <Textarea
-                      rows={3}
-                      value={formData.objectives}
-                      onChange={e => setFormData(prev => ({ ...prev, objectives: e.target.value }))}
-                      placeholder="What are the main goals and objectives for this project?"
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <label className="block text-sm font-medium">Key Stakeholders</label>
-                    <Textarea
-                      rows={2}
-                      value={formData.stakeholders}
-                      onChange={e => setFormData(prev => ({ ...prev, stakeholders: e.target.value }))}
-                      placeholder="List the main stakeholders involved in this project"
-                    />
-                  </div>
                 </div>
               )}
 

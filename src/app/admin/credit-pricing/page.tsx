@@ -7,14 +7,17 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogBody, DialogFooter } from '@/components/ui/dialog';
 import { Plus, Edit, Trash2, DollarSign } from 'lucide-react';
 import { toast } from 'sonner';
 import Link from 'next/link';
 
+// Force rebuild
+
 interface CreditPackage {
     id: string;
     packageName: string;
+    type: string;
     creditAmount: number;
     priceUSD: number;
     isActive: boolean;
@@ -24,9 +27,12 @@ interface CreditPackage {
 export default function CreditPricingPage() {
     const queryClient = useQueryClient();
     const [modalOpen, setModalOpen] = useState(false);
+    const [deleteModalOpen, setDeleteModalOpen] = useState(false);
     const [editingPackage, setEditingPackage] = useState<CreditPackage | null>(null);
+    const [deletingPackage, setDeletingPackage] = useState<CreditPackage | null>(null);
     const [formData, setFormData] = useState({
         packageName: '',
+        type: 'RESPONDENT_BUNDLE',
         creditAmount: '',
         priceUSD: '',
         isActive: true,
@@ -104,6 +110,7 @@ export default function CreditPricingPage() {
     const resetForm = () => {
         setFormData({
             packageName: '',
+            type: 'RESPONDENT_BUNDLE',
             creditAmount: '',
             priceUSD: '',
             isActive: true,
@@ -121,6 +128,7 @@ export default function CreditPricingPage() {
         setEditingPackage(pkg);
         setFormData({
             packageName: pkg.packageName,
+            type: pkg.type || 'CREDIT_BUNDLE',
             creditAmount: pkg.creditAmount.toString(),
             priceUSD: pkg.priceUSD.toString(),
             isActive: pkg.isActive,
@@ -135,6 +143,7 @@ export default function CreditPricingPage() {
         const data = {
             ...(editingPackage && { id: editingPackage.id }),
             packageName: formData.packageName,
+            type: formData.type,
             creditAmount: parseInt(formData.creditAmount),
             priceUSD: parseFloat(formData.priceUSD),
             isActive: formData.isActive,
@@ -149,8 +158,15 @@ export default function CreditPricingPage() {
     };
 
     const handleDelete = (pkg: CreditPackage) => {
-        if (confirm(`Are you sure you want to delete "${pkg.packageName}"?`)) {
-            deleteMutation.mutate(pkg.id);
+        setDeletingPackage(pkg);
+        setDeleteModalOpen(true);
+    };
+
+    const confirmDelete = () => {
+        if (deletingPackage) {
+            deleteMutation.mutate(deletingPackage.id);
+            setDeleteModalOpen(false);
+            setDeletingPackage(null);
         }
     };
 
@@ -167,10 +183,12 @@ export default function CreditPricingPage() {
                         Manage credit packages and pricing
                     </p>
                 </div>
-                <Button onClick={openCreateModal}>
-                    <Plus className="mr-2 h-4 w-4" />
-                    Create Package
-                </Button>
+                <div className="flex gap-3">
+                    <Button onClick={openCreateModal}>
+                        <Plus className="mr-2 h-4 w-4" />
+                        Create Package
+                    </Button>
+                </div>
             </div>
 
             {isLoading ? (
@@ -195,10 +213,10 @@ export default function CreditPricingPage() {
                                         ${pkg.priceUSD.toLocaleString()}
                                     </div>
                                     <div className="text-sm text-muted-foreground mt-1">
-                                        {pkg.creditAmount} credits
+                                        {pkg.creditAmount} {pkg.type === 'RESPONDENT_BUNDLE' ? 'respondents' : 'credits'}
                                     </div>
                                     <div className="text-xs text-muted-foreground mt-1">
-                                        ${calculatePerCredit(pkg.priceUSD, pkg.creditAmount)} per credit
+                                        ${calculatePerCredit(pkg.priceUSD, pkg.creditAmount)} per {pkg.type === 'RESPONDENT_BUNDLE' ? 'respondent' : 'credit'}
                                     </div>
                                 </div>
 
@@ -225,8 +243,7 @@ export default function CreditPricingPage() {
                         </Card>
                     ))}
                 </div>
-            )
-            }
+            )}
 
             <Dialog open={modalOpen} onOpenChange={setModalOpen}>
                 <DialogContent>
@@ -239,78 +256,143 @@ export default function CreditPricingPage() {
                         </DialogDescription>
                     </DialogHeader>
 
-                    <form onSubmit={handleSubmit} className="space-y-4">
-                        <div className="space-y-2">
-                            <Label htmlFor="packageName">Package Name *</Label>
-                            <Input
-                                id="packageName"
-                                value={formData.packageName}
-                                onChange={(e) => setFormData({ ...formData, packageName: e.target.value })}
-                                placeholder="e.g., Single Assessment"
-                                required
-                            />
-                        </div>
-
-                        <div className="grid grid-cols-2 gap-4">
+                    <form onSubmit={handleSubmit}>
+                        <DialogBody className="space-y-4">
                             <div className="space-y-2">
-                                <Label htmlFor="creditAmount">Credits *</Label>
+                                <Label htmlFor="packageName">Package Name *</Label>
                                 <Input
-                                    id="creditAmount"
-                                    type="number"
-                                    value={formData.creditAmount}
-                                    onChange={(e) => setFormData({ ...formData, creditAmount: e.target.value })}
+                                    id="packageName"
+                                    value={formData.packageName}
+                                    onChange={(e) => setFormData({ ...formData, packageName: e.target.value })}
+                                    placeholder="e.g., Single Assessment"
                                     required
                                 />
                             </div>
+
                             <div className="space-y-2">
-                                <Label htmlFor="priceUSD">Price (USD) *</Label>
+                                <Label htmlFor="type">Type</Label>
+                                <select
+                                    id="type"
+                                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                                    value={formData.type}
+                                    onChange={(e) => setFormData({ ...formData, type: e.target.value })}
+                                >
+                                    <option value="CREDIT_BUNDLE">Credit Bundle</option>
+                                    <option value="RESPONDENT_BUNDLE">Respondent Bundle</option>
+                                </select>
+                            </div>
+
+                            <div className="grid grid-cols-2 gap-4">
+                                <div className="space-y-2">
+                                    <Label htmlFor="creditAmount">Credits *</Label>
+                                    <Input
+                                        id="creditAmount"
+                                        type="number"
+                                        value={formData.creditAmount}
+                                        onChange={(e) => setFormData({ ...formData, creditAmount: e.target.value })}
+                                        required
+                                    />
+                                </div>
+                                <div className="space-y-2">
+                                    <Label htmlFor="priceUSD">Price (USD) *</Label>
+                                    <Input
+                                        id="priceUSD"
+                                        type="number"
+                                        step="0.01"
+                                        value={formData.priceUSD}
+                                        onChange={(e) => setFormData({ ...formData, priceUSD: e.target.value })}
+                                        required
+                                    />
+                                </div>
+                            </div>
+
+                            {formData.creditAmount && formData.priceUSD && (
+                                <div className="text-sm text-muted-foreground">
+                                    Per {formData.type === 'RESPONDENT_BUNDLE' ? 'respondent' : 'credit'}: ${calculatePerCredit(parseFloat(formData.priceUSD), parseInt(formData.creditAmount))}
+                                </div>
+                            )}
+
+                            <div className="space-y-2">
+                                <Label htmlFor="displayOrder">Display Order</Label>
                                 <Input
-                                    id="priceUSD"
+                                    id="displayOrder"
                                     type="number"
-                                    step="0.01"
-                                    value={formData.priceUSD}
-                                    onChange={(e) => setFormData({ ...formData, priceUSD: e.target.value })}
-                                    required
+                                    value={formData.displayOrder}
+                                    onChange={(e) => setFormData({ ...formData, displayOrder: parseInt(e.target.value) || 0 })}
                                 />
                             </div>
-                        </div>
 
-                        {formData.creditAmount && formData.priceUSD && (
-                            <div className="text-sm text-muted-foreground">
-                                Per credit: ${calculatePerCredit(parseFloat(formData.priceUSD), parseInt(formData.creditAmount))}
+                            <div className="flex items-center gap-2">
+                                <input
+                                    type="checkbox"
+                                    id="isActive"
+                                    checked={formData.isActive}
+                                    onChange={(e) => setFormData({ ...formData, isActive: e.target.checked })}
+                                    className="rounded"
+                                />
+                                <Label htmlFor="isActive" className="cursor-pointer">Active</Label>
                             </div>
-                        )}
+                        </DialogBody>
 
-                        <div className="space-y-2">
-                            <Label htmlFor="displayOrder">Display Order</Label>
-                            <Input
-                                id="displayOrder"
-                                type="number"
-                                value={formData.displayOrder}
-                                onChange={(e) => setFormData({ ...formData, displayOrder: parseInt(e.target.value) })}
-                            />
-                        </div>
-
-                        <div className="flex items-center gap-2">
-                            <input
-                                type="checkbox"
-                                id="isActive"
-                                checked={formData.isActive}
-                                onChange={(e) => setFormData({ ...formData, isActive: e.target.checked })}
-                                className="rounded"
-                            />
-                            <Label htmlFor="isActive" className="cursor-pointer">Active</Label>
-                        </div>
-
-                        <div className="flex justify-end gap-3 pt-4">
+                        <DialogFooter>
                             <Button type="button" variant="outline" onClick={() => setModalOpen(false)}>
                                 Cancel
                             </Button>
                             <Button type="submit" disabled={createMutation.isPending || updateMutation.isPending}>
                                 {createMutation.isPending || updateMutation.isPending ? 'Saving...' : 'Save Package'}
                             </Button>
-                        </div>
+                        </DialogFooter>
                     </form>
+                </DialogContent>
+            </Dialog>
+
+            {/* Delete Confirmation Modal */}
+            <Dialog open={deleteModalOpen} onOpenChange={setDeleteModalOpen}>
+                <DialogContent>
+                    <DialogHeader>
+                        <DialogTitle>Confirm Deletion</DialogTitle>
+                        <DialogDescription>
+                            Are you sure you want to delete this package? This action cannot be undone.
+                        </DialogDescription>
+                    </DialogHeader>
+
+                    <DialogBody>
+                        {deletingPackage && (
+                            <div className="space-y-2 py-4">
+                                <div className="flex items-center gap-2 text-sm">
+                                    <span className="font-semibold text-gray-700">Package:</span>
+                                    <span className="text-gray-900">{deletingPackage.packageName}</span>
+                                </div>
+                                <div className="flex items-center gap-2 text-sm">
+                                    <span className="font-semibold text-gray-700">Price:</span>
+                                    <span className="text-gray-900">${deletingPackage.priceUSD}</span>
+                                </div>
+                                <div className="flex items-center gap-2 text-sm">
+                                    <span className="font-semibold text-gray-700">Credits:</span>
+                                    <span className="text-gray-900">{deletingPackage.creditAmount}</span>
+                                </div>
+                            </div>
+                        )}
+                    </DialogBody>
+
+                    <DialogFooter>
+                        <Button
+                            type="button"
+                            variant="outline"
+                            onClick={() => setDeleteModalOpen(false)}
+                            disabled={deleteMutation.isPending}
+                        >
+                            Cancel
+                        </Button>
+                        <Button
+                            type="button"
+                            variant="destructive"
+                            onClick={confirmDelete}
+                            disabled={deleteMutation.isPending}
+                        >
+                            {deleteMutation.isPending ? 'Deleting...' : 'Delete'}
+                        </Button>
+                    </DialogFooter>
                 </DialogContent>
             </Dialog>
         </div>

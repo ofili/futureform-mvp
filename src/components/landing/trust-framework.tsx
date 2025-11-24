@@ -4,38 +4,20 @@ import { Button } from '@/components/ui/button';
 export function TrustFramework() {
     const trustLayers = [
         {
-            name: 'Integrity',
-            question: 'Will they stay committed?',
-            color: 'red',
+            name: 'System Reliability',
+            subtitle: 'The Technical Bedrock',
+            question: 'Will this system work consistently under MY operational conditions?',
+            color: 'purple',
             icon: (
-                <svg className="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                <svg className="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
             )
         },
         {
-            name: 'Competence',
-            question: 'Do teams have capacity?',
-            color: 'blue',
-            icon: (
-                <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
-            )
-        },
-        {
-            name: 'Governance',
-            question: "Who's accountable?",
-            color: 'green',
-            icon: (
-                <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                </svg>
-            )
-        },
-        {
-            name: 'Transparency',
-            question: 'Can stakeholders see truth?',
+            name: 'Operational Transparency',
+            subtitle: 'The Black Box Problem',
+            question: 'Do I understand what this system does and how it uses my data?',
             color: 'yellow',
             icon: (
                 <svg className="w-8 h-8 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -45,12 +27,46 @@ export function TrustFramework() {
             )
         },
         {
-            name: 'Reliability',
-            question: 'Will it work under real conditions?',
-            color: 'purple',
+            name: 'Governance & Accountability',
+            subtitle: 'The Accountability Layer',
+            question: "Who's responsible when things go wrong?",
+            color: 'green',
             icon: (
-                <svg className="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                </svg>
+            )
+        },
+        {
+            name: 'Organizational Competence',
+            subtitle: 'The Human Factor',
+            question: 'Can we operate, maintain, and optimize this system?',
+            color: 'blue',
+            icon: (
+                <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+            )
+        },
+        {
+            name: 'Vendor Integrity',
+            subtitle: 'The Long-Term Assurance',
+            question: 'Will this partner be here long-term?',
+            color: 'red',
+            icon: (
+                <svg className="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            )
+        },
+        {
+            name: 'Ecosystem Trust',
+            subtitle: 'The Interdependence Layer',
+            question: 'Can we trust the broader ecosystem to support rather than undermine this deployment?',
+            color: 'indigo',
+            icon: (
+                <svg className="w-8 h-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                 </svg>
             )
         }
@@ -71,7 +87,7 @@ export function TrustFramework() {
                             We've spent 10 years analyzing why partnerships fail in complex environments — across 200+ technology deployments from Lagos to Nairobi to Kigali.
                         </p>
                         <p className="font-medium text-gray-900">
-                            What we discovered: Trust failures follow patterns across five interdependent layers.
+                            What we discovered: Trust failures follow patterns across six interdependent layers.
                         </p>
                         <p>
                             A deficit in one layer undermines everything above it. But any single layer alone isn't enough.
@@ -81,15 +97,16 @@ export function TrustFramework() {
 
                 <div className="mb-16">
                     <h3 className="text-2xl font-bold text-gray-900 text-center mb-12">
-                        The Five-Layer Trust Framework™
+                        The Six-Layer Trust Framework™
                     </h3>
-                    <div className="grid md:grid-cols-5 gap-8">
+                    <div className="grid md:grid-cols-3 gap-8">
                         {trustLayers.map((layer, index) => (
                             <div key={index} className="bg-white rounded-xl p-8 text-center shadow-lg hover:shadow-xl transition-shadow">
                                 <div className={`w-16 h-16 mx-auto mb-6 rounded-full bg-${layer.color}-100 flex items-center justify-center`}>
                                     {layer.icon}
                                 </div>
-                                <h4 className="font-semibold text-gray-900 mb-2">{layer.name}</h4>
+                                <h4 className="font-semibold text-gray-900 mb-1">{layer.name}</h4>
+                                <p className="text-xs text-gray-500 mb-3 italic">{layer.subtitle}</p>
                                 <p className="text-sm text-gray-600">{layer.question}</p>
                             </div>
                         ))}
@@ -110,14 +127,14 @@ export function TrustFramework() {
                         <div className="space-y-4 text-gray-700">
                             <p>Trust failures compound.</p>
                             <p>
-                                A technically reliable system (Layer 1) still fails if users don't understand it (Layer 2). Strong governance (Layer 3) breaks down if teams lack competence (Layer 4). Everything collapses if the partner exits the market (Layer 5).
+                                A technically reliable system (Layer 1) still fails if users don't understand it (Layer 2). Strong governance (Layer 3) breaks down if teams lack competence (Layer 4). Everything collapses if the partner exits the market (Layer 5). Even perfect execution fails without stakeholder alignment (Layer 6).
                             </p>
                             <div className="mt-6 pt-6 border-t border-blue-200">
                                 <p className="text-gray-600">
                                     Traditional due diligence checks Layer 1 compliance.
                                 </p>
                                 <p className="font-semibold text-blue-600 mt-2">
-                                    FutureForm measures all five layers — with evidence, not promises.
+                                    FutureForm measures all six layers — with evidence, not promises.
                                 </p>
                             </div>
                         </div>

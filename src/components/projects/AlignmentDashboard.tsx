@@ -17,7 +17,7 @@ interface AlignmentDashboardProps {
 }
 
 export default function AlignmentDashboard({ projectId, stakeholders }: AlignmentDashboardProps) {
-    const domains = ['RELIABILITY', 'TRANSPARENCY', 'GOVERNANCE', 'COMPETENCE', 'INTEGRITY'];
+    const domains = ['SYSTEM_RELIABILITY', 'OPERATIONAL_TRANSPARENCY', 'GOVERNANCE_ACCOUNTABILITY', 'ORGANIZATIONAL_COMPETENCE', 'VENDOR_INTEGRITY', 'STAKEHOLDER_ALIGNMENT'];
 
     // Calculate alignment metrics
     const domainAnalysis = domains.map(domain => {

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Homepage -->
+  <url>
+    <loc>https://futureform.africa/</loc>
+    <lastmod>2024-12-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <!-- Pricing Page -->
+  <url>
+    <loc>https://futureform.africa/pricing</loc>
+    <lastmod>2024-12-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Framework Page -->
+  <url>
+    <loc>https://futureform.africa/framework</loc>
+    <lastmod>2024-12-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Contact Page -->
+  <url>
+    <loc>https://futureform.africa/contact</loc>
+    <lastmod>2024-12-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Privacy Policy -->
+  <url>
+    <loc>https://futureform.africa/privacy</loc>
+    <lastmod>2024-12-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <!-- Terms of Service -->
+  <url>
+    <loc>https://futureform.africa/terms</loc>
+    <lastmod>2024-12-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <!-- Security Page -->
+  <url>
+    <loc>https://futureform.africa/security</loc>
+    <lastmod>2024-12-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+</urlset>

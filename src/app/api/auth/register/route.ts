@@ -3,8 +3,20 @@ import prisma from '@/lib/prisma';
 import bcrypt from 'bcryptjs';
 import crypto from 'crypto';
 import { sendVerificationEmail } from '@/lib/email';
+import { rateLimit, RateLimitPresets } from '@/lib/rate-limit';
 
+/**
+ * POST /api/auth/register
+ * Rate Limited: 5 requests per minute to prevent spam registrations
+ */
 export async function POST(request: NextRequest) {
+  // Apply strict rate limiting for registration
+  const rateLimitResult = await rateLimit(request, RateLimitPresets.auth);
+
+  if (!rateLimitResult.success) {
+    return rateLimitResult.response;
+  }
+
   try {
     const { email, organization, user: userData } = await request.json();
 
@@ -32,7 +44,7 @@ export async function POST(request: NextRequest) {
       });
 
       const verificationToken = crypto.randomBytes(32).toString('hex');
-      
+
       const user = await tx.user.create({
         data: {
           email,

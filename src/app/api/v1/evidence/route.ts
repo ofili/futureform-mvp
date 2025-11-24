@@ -51,7 +51,7 @@ export async function POST(request: NextRequest) {
         const hasAccess =
             response.userId === session.user.id ||
             response.assessment.invitations.some(
-                (inv) => inv.userId === session.user.id && inv.status === 'ACCEPTED'
+                (inv) => inv.email === session.user.email && inv.status === 'ACCEPTED'
             );
 
         if (!hasAccess) {
@@ -163,13 +163,13 @@ export async function GET(request: NextRequest) {
 
         // Check if user has access
         const hasAccess =
-            response.userId === session.user.id ||
-            response.assessment.invitations.some(
-                (inv) => inv.userId === session.user.id && inv.status === 'ACCEPTED'
-            ) ||
-            response.assessment.project.organization.members.some(
+            (response.userId === session.user.id ||
+                response.assessment.invitations.some(
+                    (inv) => inv.email === session.user.email && inv.status === 'ACCEPTED'
+                )) ||
+            (response.assessment.project.organization?.members.some(
                 (member) => member.userId === session.user.id
-            );
+            ) ?? false);
 
         if (!hasAccess) {
             return NextResponse.json({ error: 'Forbidden' }, { status: 403 });

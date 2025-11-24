@@ -7,6 +7,7 @@ import { PasswordSettings } from '@/components/settings/password-settings';
 import { DangerZone } from '@/components/settings/danger-zone';
 import { useAuthStore } from '@/store/auth-store';
 import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 
 export default function SettingsPage() {
   const user = useAuthStore((s) => s.user);
@@ -16,19 +17,19 @@ export default function SettingsPage() {
 
   const handleSaveProfile = (data: { firstName: string; lastName: string; email: string }) => {
     updateUser(data);
-    alert('Profile updated');
+    toast.success('Profile updated');
   };
 
   const handleChangePassword = (currentPassword: string, newPassword: string, confirmPassword: string) => {
     if (!newPassword || newPassword.length < 8) {
-      alert('New password must be at least 8 characters.');
+      toast.error('New password must be at least 8 characters.');
       return;
     }
     if (newPassword !== confirmPassword) {
-      alert('Passwords do not match.');
+      toast.error('Passwords do not match.');
       return;
     }
-    alert('Password updated');
+    toast.success('Password updated');
   };
 
   const handleLogout = () => {

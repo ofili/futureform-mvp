@@ -32,22 +32,21 @@ export async function GET(
 
         const stream = await renderToStream(
             <TrustProfilePDF
-                partnerName={`${assessment.partner.firstName} ${assessment.partner.lastName}`}
-                overallScore = { overallScore }
-    domainScores = { domainScores }
-    generatedAt = { format(new Date(), 'PPP')
-}
+                partnerName={`${assessment.partner?.firstName ?? 'Unknown'} ${assessment.partner?.lastName ?? 'Partner'}`}
+                overallScore={overallScore}
+                domainScores={domainScores}
+                generatedAt={format(new Date(), 'PPP')}
             />
         );
 
-return new NextResponse(stream as any, {
-    headers: {
-        'Content-Type': 'application/pdf',
-        'Content-Disposition': `attachment; filename="TrustProfile-${assessment.partner.firstName}-${assessment.partner.lastName}.pdf"`,
-    },
-});
+        return new NextResponse(stream as any, {
+            headers: {
+                'Content-Type': 'application/pdf',
+                'Content-Disposition': `attachment; filename="TrustProfile-${assessment.partner?.firstName ?? 'Unknown'}-${assessment.partner?.lastName ?? 'Partner'}.pdf"`,
+            },
+        });
     } catch (error) {
-    console.error('PDF Export error:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
-}
+        console.error('PDF Export error:', error);
+        return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    }
 }

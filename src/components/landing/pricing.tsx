@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Check } from 'lucide-react';
@@ -14,87 +14,90 @@ interface PricingTier {
     creditsIncluded: number;
     bestFor: string | null;
     description: string | null;
-    isActive: boolean;
-    displayOrder: number;
-    features: { id: string; feature: string; displayOrder: number }[];
+    features: { id: string; feature: string }[];
     cta: string;
     ctaVariant: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link";
     ctaClass?: string;
     popular?: boolean;
     href?: string;
+    displayOrder?: number;
+    isActive?: boolean;
 }
 
+const PRICING_TIERS: PricingTier[] = [
+    {
+        id: 'free',
+        name: 'Framework Access',
+        displayName: 'Free',
+        priceUSD: null, // Display as "Free"
+        pricePeriod: 'Forever',
+        creditsIncluded: 0,
+        bestFor: 'Single-user internal use',
+        description: 'Essential tools for internal assessment.',
+        features: [
+            { id: 'f1', feature: 'Up to 30 questions' },
+            { id: 'f2', feature: 'Single-user access' },
+            { id: 'f3', feature: 'Basic evidence uploads' },
+            { id: 'f4', feature: 'No partner invites' },
+        ],
+        cta: 'Get Started',
+        ctaVariant: 'outline',
+        ctaClass: '',
+        href: '/auth/register',
+        displayOrder: 1,
+        isActive: true,
+    },
+    {
+        id: 'guided',
+        name: 'Guided Assessment',
+        displayName: 'Guided',
+        priceUSD: 250,
+        pricePeriod: 'per respondent',
+        creditsIncluded: 0,
+        bestFor: 'SMB / Mid-market',
+        description: 'Comprehensive assessment with analyst support.',
+        features: [
+            { id: 'g1', feature: 'Full platform access' },
+            { id: 'g2', feature: 'TeamTrust profile' },
+            { id: 'g3', feature: 'Basic reporting' },
+            { id: 'g4', feature: '1 analyst review per 10 respondents' },
+            { id: 'g5', feature: 'Unlimited assessments' },
+        ],
+        cta: 'Start Assessment',
+        ctaVariant: 'default',
+        ctaClass: 'bg-blue-600 hover:bg-blue-700',
+        popular: true,
+        href: '/auth/register',
+        displayOrder: 2,
+        isActive: true,
+    },
+    {
+        id: 'enterprise',
+        name: 'Enterprise Program',
+        displayName: 'Enterprise',
+        priceUSD: 25000,
+        pricePeriod: 'per year (base)',
+        creditsIncluded: 50,
+        bestFor: 'Large Organizations',
+        description: 'Full-scale solution for complex needs.',
+        features: [
+            { id: 'e1', feature: 'SSO & White-labeling' },
+            { id: 'e2', feature: 'API Access' },
+            { id: 'e3', feature: 'Priority Support' },
+            { id: 'e4', feature: 'Unlimited assessments' },
+            { id: 'e5', feature: 'Dedicated Success Manager' },
+        ],
+        cta: 'Book Consultation',
+        ctaVariant: 'outline',
+        ctaClass: 'text-blue-600 border-blue-600 hover:bg-blue-50',
+        href: '/contact',
+        displayOrder: 3,
+        isActive: true,
+    },
+];
+
 export function Pricing() {
-    const [tiers, setTiers] = useState<PricingTier[]>([]);
-    const [isLoading, setIsLoading] = useState(true);
-
-    useEffect(() => {
-        const fetchTiers = async () => {
-            try {
-                const response = await fetch('/api/v1/admin/tiers');
-                if (response.ok) {
-                    const data = await response.json();
-                    // Filter active tiers and sort by display order
-                    const activeTiers = data
-                        .filter((t: PricingTier) => t.isActive)
-                        .sort((a: PricingTier, b: PricingTier) => a.displayOrder - b.displayOrder);
-
-                    // Enhance with UI specific properties if needed (though API should provide most)
-                    const enhancedTiers = activeTiers.map((tier: PricingTier) => {
-                        // Default styling logic based on tier name/type if not fully specified
-                        let ctaVariant = tier.ctaVariant || 'outline';
-                        let ctaClass = '';
-                        let popular = false;
-                        let href = '/auth/register'; // Default register link
-                        let ctaText = 'Get Started';
-
-                        if (tier.name === 'Framework Access') {
-                            ctaVariant = 'secondary';
-                            ctaClass = 'bg-gray-600 hover:bg-gray-700 text-white';
-                            ctaText = 'Download Framework';
-                        } else if (tier.name === 'Guided Assessment') {
-                            ctaVariant = 'default';
-                            ctaClass = 'bg-blue-600 hover:bg-blue-700';
-                            popular = true;
-                            ctaText = 'Start Assessment';
-                        } else if (tier.name === 'Enterprise Program') {
-                            ctaVariant = 'outline';
-                            ctaClass = 'text-blue-600 border-blue-600 hover:bg-blue-50';
-                            href = '/contact'; // Enterprise usually goes to contact
-                            ctaText = 'Book Consultation';
-                        }
-
-                        return {
-                            ...tier,
-                            cta: ctaText,
-                            ctaVariant,
-                            ctaClass,
-                            popular,
-                            href
-                        };
-                    });
-
-                    setTiers(enhancedTiers);
-                }
-            } catch (error) {
-                console.error('Failed to fetch pricing tiers:', error);
-            } finally {
-                setIsLoading(false);
-            }
-        };
-
-        fetchTiers();
-    }, []);
-
-    if (isLoading) {
-        return (
-            <section id="pricing" className="py-20 bg-white">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <p>Loading pricing...</p>
-                </div>
-            </section>
-        );
-    }
+    const [tiers] = useState<PricingTier[]>(PRICING_TIERS);
 
     return (
         <section id="pricing" className="py-20 bg-white">

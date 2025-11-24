@@ -4,6 +4,8 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
+import { PartnerSelector } from '@/components/partners/partner-selector';
+import { Partner } from '@/hooks/use-partners';
 import { WizardData } from './assessment-wizard';
 
 interface AssessmentBasicsStepProps {
@@ -129,9 +131,27 @@ export default function AssessmentBasicsStep({
                 </p>
             </div>
 
+            {/* Partner Selection */}
+            <div className="space-y-2">
+                <Label>Partner</Label>
+                <PartnerSelector
+                    value={data.partnerAliasId}
+                    onChange={(value: string) => onUpdate({ partnerAliasId: value })}
+                    onPartnerSelect={(partner: Partner) => {
+                        onUpdate({
+                            partnerAliasId: partner.id,
+                            partnerGlobalId: partner.partner.id,
+                        });
+                    }}
+                />
+                <p className="text-sm text-muted-foreground">
+                    Select the partner organization for this assessment
+                </p>
+            </div>
+
             {/* Partner Admin Email */}
             <div className="space-y-2">
-                <Label htmlFor="partnerAdminEmail">Partner Admin Email (Optional)</Label>
+                <Label htmlFor="partnerAdminEmail">Partner Contact Email (Optional)</Label>
                 <Input
                     id="partnerAdminEmail"
                     type="email"

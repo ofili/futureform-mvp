@@ -63,12 +63,18 @@ export async function PATCH(req: Request) {
             return NextResponse.json({ error: 'Option ID required' }, { status: 400 });
         }
 
-        const option = await prisma.formOption.update({
-            where: { id },
-            data
-        });
-
-        return NextResponse.json(option);
+        try {
+            const option = await prisma.formOption.update({
+                where: { id },
+                data
+            });
+            return NextResponse.json(option);
+        } catch (dbError: any) {
+            if (dbError.code === 'P2002') {
+                return NextResponse.json({ error: 'An option with this value already exists in this category' }, { status: 409 });
+            }
+            throw dbError;
+        }
     } catch (error) {
         console.error('Update form option error:', error);
         return NextResponse.json({ error: 'Internal server error' }, { status: 500 });

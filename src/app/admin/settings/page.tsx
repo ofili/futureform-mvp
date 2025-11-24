@@ -1,5 +1,16 @@
+'use client';
+
+import { useState } from 'react';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 import { Save, RefreshCw, Settings } from 'lucide-react';
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { HubSpotSyncStatus } from "@/components/admin/hubspot-sync-status";
 
 interface PlatformConfig {
     id: string;
@@ -146,6 +157,7 @@ export default function SettingsPage() {
                                 {category}
                             </TabsTrigger>
                         ))}
+                        <TabsTrigger value="hubspot">HubSpot Integration</TabsTrigger>
                     </TabsList>
 
                     {categories.map(category => (
@@ -179,6 +191,10 @@ export default function SettingsPage() {
                             </Card>
                         </TabsContent>
                     ))}
+
+                    <TabsContent value="hubspot">
+                        <HubSpotSyncStatus />
+                    </TabsContent>
                 </Tabs>
             )}
         </div>

@@ -32,6 +32,7 @@ export async function GET(
                 assessments: {
                     include: {
                         partner: true,
+                        partnerAlias: true,
                         responses: {
                             include: {
                                 question: true

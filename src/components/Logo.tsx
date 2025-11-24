@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useAuthStore } from '@/store/auth-store';
+import { useSession } from 'next-auth/react';
 
 interface LogoProps {
   className?: string;
@@ -9,10 +9,28 @@ interface LogoProps {
 }
 
 export default function Logo({ className = '', href }: LogoProps) {
-  const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
+  const { data: session, status } = useSession();
 
-  // If href is explicitly provided, use it. Otherwise, use /dashboard for authenticated users, / for others
-  const linkHref = href !== undefined ? href : (isAuthenticated ? '/dashboard' : '/');
+  // Determine home route based on user role
+  const getHomeRoute = () => {
+    if (href !== undefined) return href; // Explicit href takes precedence
+
+    if (status === 'authenticated' && session?.user?.role) {
+      switch (session.user.role) {
+        case 'ADMIN':
+          return '/admin';
+        case 'PARTNER':
+          return '/partner';
+        case 'USER':
+        default:
+          return '/dashboard';
+      }
+    }
+
+    return '/'; // Unauthenticated users go to landing page
+  };
+
+  const linkHref = getHomeRoute();
 
   const logoContent = (
     <div className={`flex items-center gap-2 ${className}`}>

@@ -10,7 +10,7 @@ import prisma from '@/lib/prisma';
  */
 export async function GET(
     request: NextRequest,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
         const session = await getServerSession(authOptions);
@@ -18,7 +18,7 @@ export async function GET(
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
         }
 
-        const assessmentId = params.id;
+        const { id: assessmentId } = await params;
 
         // Verify user has access to this assessment
         const assessment = await prisma.assessment.findUnique({
@@ -42,9 +42,9 @@ export async function GET(
         }
 
         // Check if user is org member or partner admin
-        const isOrgMember = assessment.project.organization.members.some(
+        const isOrgMember = assessment.project.organization?.members.some(
             (member) => member.userId === session.user.id
-        );
+        ) ?? false;
         const isPartnerAdmin = assessment.partnerAdminEmail === session.user.email;
 
         if (!isOrgMember && !isPartnerAdmin) {

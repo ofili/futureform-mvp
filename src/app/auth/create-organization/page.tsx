@@ -1,8 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -18,7 +19,7 @@ interface FormOption {
 }
 
 
-export default function CreateOrganization() {
+function CreateOrganizationContent() {
   const [step, setStep] = useState(1);
   const [email, setEmail] = useState('');
   const [orgData, setOrgData] = useState({
@@ -26,12 +27,7 @@ export default function CreateOrganization() {
     type: '',
     sectorFocus: '',
     region: '',
-    country: '',
-    relationshipStage: 'Discovery',
-    source: '',
-    referralSource: '',
-    pilotAgreementSigned: false,
-    caseStudyApproval: false
+    country: ''
   });
   const [userData, setUserData] = useState({
     firstName: '',
@@ -42,6 +38,8 @@ export default function CreateOrganization() {
     confirmPassword: ''
   });
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const plan = searchParams.get('plan');
 
   // Fetch form options from database
   const { data: sectors } = useQuery<FormOption[]>({
@@ -74,25 +72,7 @@ export default function CreateOrganization() {
     }
   });
 
-  const { data: relationshipStages } = useQuery<FormOption[]>({
-    queryKey: ['form-options', 'relationship_stage'],
-    queryFn: async () => {
-      const response = await fetch('/api/v1/admin/form-options?category=relationship_stage');
-      if (!response.ok) return [];
-      const options = await response.json();
-      return options.filter((o: any) => o.isActive);
-    }
-  });
 
-  const { data: sources } = useQuery<FormOption[]>({
-    queryKey: ['form-options', 'source'],
-    queryFn: async () => {
-      const response = await fetch('/api/v1/admin/form-options?category=source');
-      if (!response.ok) return [];
-      const options = await response.json();
-      return options.filter((o: any) => o.isActive);
-    }
-  });
 
   const validateEmailMutation = useMutation({
     mutationFn: async (email: string) => {
@@ -119,7 +99,8 @@ export default function CreateOrganization() {
         body: JSON.stringify({
           email,
           organization: orgData,
-          user: userData
+          user: userData,
+          plan: plan
         })
       });
       const result = await response.json();
@@ -129,12 +110,12 @@ export default function CreateOrganization() {
       return result;
     },
     onSuccess: (data) => {
-      alert(data.message);
+      toast.success(data.message);
       router.push('/auth/login');
     },
     onError: (error) => {
       console.error('Registration error:', error);
-      alert('Registration failed. Please try again.');
+      toast.error('Registration failed. Please try again.');
     }
   });
 
@@ -245,61 +226,7 @@ export default function CreateOrganization() {
                   required
                 />
 
-                <NativeSelect
-                  value={orgData.relationshipStage}
-                  onChange={(e) => setOrgData(prev => ({ ...prev, relationshipStage: e.target.value }))}
-                  required
-                >
-                  <option value="">Select Relationship Stage</option>
-                  {relationshipStages?.map(option => (
-                    <option key={option.id} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </NativeSelect>
 
-                <NativeSelect
-                  value={orgData.source}
-                  onChange={(e) => setOrgData(prev => ({ ...prev, source: e.target.value }))}
-                  required
-                >
-                  <option value="">Select Source</option>
-                  {sources?.map(option => (
-                    <option key={option.id} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </NativeSelect>
-
-                {orgData.source === 'Referral' && (
-                  <Input
-                    placeholder="Referral Source (Optional)"
-                    value={orgData.referralSource}
-                    onChange={(e) => setOrgData(prev => ({ ...prev, referralSource: e.target.value }))}
-                  />
-                )}
-
-                <div className="space-y-2">
-                  <label className="flex items-center gap-2 text-sm">
-                    <input
-                      type="checkbox"
-                      checked={orgData.pilotAgreementSigned}
-                      onChange={(e) => setOrgData(prev => ({ ...prev, pilotAgreementSigned: e.target.checked }))}
-                      className="rounded border-gray-300"
-                    />
-                    <span>Pilot Agreement Signed (Optional)</span>
-                  </label>
-
-                  <label className="flex items-center gap-2 text-sm">
-                    <input
-                      type="checkbox"
-                      checked={orgData.caseStudyApproval}
-                      onChange={(e) => setOrgData(prev => ({ ...prev, caseStudyApproval: e.target.checked }))}
-                      className="rounded border-gray-300"
-                    />
-                    <span>Case Study Approval (Optional)</span>
-                  </label>
-                </div>
 
                 <div className="flex gap-2">
                   <Button type="button" variant="outline" onClick={() => setStep(1)} className="flex-1">
@@ -397,5 +324,13 @@ export default function CreateOrganization() {
         </Card>
       </div>
     </div >
+  );
+}
+
+export default function CreateOrganization() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <CreateOrganizationContent />
+    </Suspense>
   );
 }

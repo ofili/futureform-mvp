@@ -148,7 +148,7 @@ export default function AssessmentFilters({ onFiltersChange, initialFilters = {}
             <div>
               <label className="text-sm font-medium mb-2 block">Trust Domain</label>
               <div className="space-y-2">
-                {['RELIABILITY', 'TRANSPARENCY', 'GOVERNANCE', 'COMPETENCE', 'INTEGRITY'].map(domain => (
+                {['SYSTEM_RELIABILITY', 'OPERATIONAL_TRANSPARENCY', 'GOVERNANCE_ACCOUNTABILITY', 'ORGANIZATIONAL_COMPETENCE', 'VENDOR_INTEGRITY', 'STAKEHOLDER_ALIGNMENT'].map(domain => (
                   <label key={domain} className="flex items-center space-x-2">
                     <input
                       type="checkbox"

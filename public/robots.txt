@@ -1,0 +1,20 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Disallow admin and API routes
+Disallow: /admin
+Disallow: /api/
+Disallow: /dashboard
+
+# Allow public pages
+Allow: /
+Allow: /pricing
+Allow: /framework
+Allow: /contact
+Allow: /privacy
+Allow: /terms
+Allow: /security
+
+# Sitemap
+Sitemap: https://futureform.africa/sitemap.xml

@@ -11,7 +11,7 @@ import { sendEmail } from '@/lib/email';
  */
 export async function POST(
     request: NextRequest,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
         const session = await getServerSession(authOptions);
@@ -19,7 +19,7 @@ export async function POST(
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
         }
 
-        const assessmentId = params.id;
+        const { id: assessmentId } = await params;
         const body = await request.json();
         const { invitations } = body;
 
@@ -52,10 +52,10 @@ export async function POST(
         }
 
         // Check if user has access
-        const isMember = assessment.project.organization.members.some(
+        const isMember = assessment.project.organization?.members.some(
             (member) => member.userId === session.user.id
-        );
-        if (!isMember && assessment.project.userId !== session.user.id) {
+        ) ?? false;
+        if (!isMember && assessment.project.createdById !== session.user.id) {
             return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
         }
 
@@ -119,7 +119,7 @@ export async function POST(
  */
 export async function GET(
     request: NextRequest,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
         const session = await getServerSession(authOptions);
@@ -127,7 +127,7 @@ export async function GET(
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
         }
 
-        const assessmentId = params.id;
+        const { id: assessmentId } = await params;
 
         // Verify assessment exists and user has access
         const assessment = await prisma.assessment.findUnique({
@@ -151,10 +151,10 @@ export async function GET(
         }
 
         // Check if user has access
-        const isMember = assessment.project.organization.members.some(
+        const isMember = assessment.project.organization?.members.some(
             (member) => member.userId === session.user.id
-        );
-        if (!isMember && assessment.project.userId !== session.user.id) {
+        ) ?? false;
+        if (!isMember && assessment.project.createdById !== session.user.id) {
             return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
         }
 

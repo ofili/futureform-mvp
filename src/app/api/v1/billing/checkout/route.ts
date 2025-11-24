@@ -18,51 +18,94 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ error: 'Insufficient permissions' }, { status: 403 });
         }
 
-        const { credits } = await request.json();
+        const { credits, tierId } = await request.json();
         const organizationId = session.user.organizationId;
 
-        // Mock Payment Processing
-        // In a real app, we would create a Stripe session here.
+        // 2. Generate Flutterwave Payment Link
+        const tx_ref = `tx-${organizationId}-${Date.now()}`;
+        
+        let amount = 0;
+        let currency = 'USD';
+        let paymentTitle = '';
+        let metaData: any = {
+            userId: session.user.id,
+            organizationId,
+        };
 
-        // 1. Get or create credit account
-        let creditAccount = await prisma.credit.findFirst({
-            where: { organizationId }
-        });
-
-        if (!creditAccount) {
-            creditAccount = await prisma.credit.create({
-                data: {
-                    organizationId,
-                    amount: 0,
-                    type: 'PURCHASE',
-                    description: 'Organization Credit Account'
-                }
+        if (tierId) {
+            // Handle Subscription Upgrade
+            const tier = await prisma.subscriptionTier.findUnique({
+                where: { id: tierId }
             });
+
+            if (!tier) {
+                return NextResponse.json({ error: 'Invalid subscription tier' }, { status: 400 });
+            }
+
+            if (!tier.priceUSD) {
+                 return NextResponse.json({ error: 'This tier requires contacting sales' }, { status: 400 });
+            }
+
+            amount = Number(tier.priceUSD);
+            paymentTitle = `Upgrade to ${tier.displayName}`;
+            metaData.tierId = tierId;
+            metaData.type = 'SUBSCRIPTION_UPGRADE';
+
+        } else if (credits) {
+            // Handle Credit Purchase
+            const packageOption = await prisma.creditPricing.findFirst({
+                where: { creditAmount: credits, type: 'RESPONDENT_BUNDLE', isActive: true }
+            });
+
+            if (!packageOption) {
+                 return NextResponse.json({ error: 'Invalid credit package' }, { status: 400 });
+            }
+
+            amount = Number(packageOption.priceUSD);
+            paymentTitle = `FutureForm Credits (${credits})`;
+            metaData.credits = credits;
+            metaData.packageId = packageOption.id;
+            metaData.type = 'CREDIT_PURCHASE';
+        } else {
+            return NextResponse.json({ error: 'Invalid request parameters' }, { status: 400 });
         }
 
-        // 2. Create transaction (simulating successful payment for MVP)
-        await prisma.creditTransaction.create({
-            data: {
-                creditId: creditAccount.id,
-                userId: session.user.id,
-                type: 'PURCHASE',
-                creditsChange: credits,
-                notes: `Purchase of ${credits} credits`
-            }
+        const flwPayload = {
+            tx_ref,
+            amount,
+            currency,
+            redirect_url: `${process.env.NEXTAUTH_URL}/dashboard/credits?success=true`,
+            customer: {
+                email: session.user.email,
+                name: session.user.name || 'FutureForm User',
+            },
+            customizations: {
+                title: paymentTitle,
+                logo: 'https://futureform.africa/logo.png' // Replace with actual logo URL
+            },
+            meta: metaData
+        };
+
+        const flwResponse = await fetch('https://api.flutterwave.com/v3/payments', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${process.env.FLW_SECRET_KEY}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(flwPayload)
         });
 
-        // 3. Update balance
-        await prisma.credit.update({
-            where: { id: creditAccount.id },
-            data: {
-                amount: { increment: credits }
-            }
-        });
+        const flwData = await flwResponse.json();
+
+        if (flwData.status !== 'success') {
+            console.error('Flutterwave error:', flwData);
+            return NextResponse.json({ error: 'Payment initialization failed' }, { status: 500 });
+        }
 
         return NextResponse.json({
             success: true,
-            url: '/dashboard/credits?success=true', // Redirect back to credits page
-            message: 'Credits purchased successfully'
+            url: flwData.data.link,
+            message: 'Redirecting to payment gateway'
         });
 
     } catch (error) {

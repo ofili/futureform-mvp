@@ -37,7 +37,7 @@ export default async function AssessmentDetail({ params }: { params: Promise<{ i
   // and convert Date objects to strings to avoid serialization issues
   const transformedAssessment = {
     id: assessment.id,
-    partnerName: assessment.partnerName,
+    partnerName: assessment.partnerName || 'Unknown Partner',
     status: assessment.status,
     project: assessment.project,
     domainScores: assessment.scores.map(s => ({

@@ -47,7 +47,7 @@ export function ProofPoints() {
                     <h3 className="text-xl font-semibold text-gray-900 mb-8 text-center">Methodology</h3>
                     <div className="bg-white rounded-lg p-8 shadow-sm max-w-4xl mx-auto">
                         <p className="text-gray-700 mb-6">
-                            <strong>30 evidence-based questions</strong> across 5 interdependent trust layers
+                            <strong>Evidence-based questions</strong> across 6 interdependent trust layers
                         </p>
                         <div className="space-y-3 text-gray-600">
                             {methodology.map((item, index) => (

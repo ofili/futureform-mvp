@@ -5,6 +5,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
 import { Plus, Edit, Trash2, ArrowUp, ArrowDown } from 'lucide-react';
 import { toast } from 'sonner';
 import Link from 'next/link';
@@ -28,6 +29,8 @@ interface Question {
 
 export default function QuestionsManagementPage() {
     const queryClient = useQueryClient();
+    const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+    const [deletingQuestionId, setDeletingQuestionId] = useState<string | null>(null);
 
     const { data: questions, isLoading } = useQuery<Question[]>({
         queryKey: ['admin-questions'],
@@ -56,8 +59,15 @@ export default function QuestionsManagementPage() {
     });
 
     const handleDelete = (id: string) => {
-        if (confirm('Are you sure you want to delete this question?')) {
-            deleteMutation.mutate(id);
+        setDeletingQuestionId(id);
+        setDeleteModalOpen(true);
+    };
+
+    const confirmDelete = () => {
+        if (deletingQuestionId) {
+            deleteMutation.mutate(deletingQuestionId);
+            setDeleteModalOpen(false);
+            setDeletingQuestionId(null);
         }
     };
 
@@ -135,6 +145,37 @@ export default function QuestionsManagementPage() {
                     )}
                 </CardContent>
             </Card>
+
+            {/* Delete Confirmation Modal */}
+            <Dialog open={deleteModalOpen} onOpenChange={setDeleteModalOpen}>
+                <DialogContent>
+                    <DialogHeader>
+                        <DialogTitle>Confirm Deletion</DialogTitle>
+                        <DialogDescription>
+                            Are you sure you want to delete this question? This action cannot be undone.
+                        </DialogDescription>
+                    </DialogHeader>
+
+                    <DialogFooter>
+                        <Button
+                            type="button"
+                            variant="outline"
+                            onClick={() => setDeleteModalOpen(false)}
+                            disabled={deleteMutation.isPending}
+                        >
+                            Cancel
+                        </Button>
+                        <Button
+                            type="button"
+                            variant="destructive"
+                            onClick={confirmDelete}
+                            disabled={deleteMutation.isPending}
+                        >
+                            {deleteMutation.isPending ? 'Deleting...' : 'Delete'}
+                        </Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
         </div>
     );
 }

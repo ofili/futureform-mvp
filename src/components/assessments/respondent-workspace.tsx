@@ -8,6 +8,7 @@ import { Label } from '@/components/ui/label';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { Loader2, Upload, FileText, CheckCircle2, AlertCircle } from 'lucide-react';
+import { toast } from 'sonner';
 
 interface RespondentWorkspaceProps {
     assessmentId: string;
@@ -70,7 +71,7 @@ export default function RespondentWorkspace({ assessmentId }: RespondentWorkspac
             }));
         } catch (error) {
             console.error('Error saving response:', error);
-            alert('Failed to save response');
+            toast.error('Failed to save response');
         } finally {
             setIsSaving(false);
         }
@@ -91,10 +92,10 @@ export default function RespondentWorkspace({ assessmentId }: RespondentWorkspac
 
             // Refresh responses to get updated evidence
             await fetchAssessmentData();
-            alert('Evidence uploaded successfully');
+            toast.success('Evidence uploaded successfully');
         } catch (error) {
             console.error('Error uploading evidence:', error);
-            alert('Failed to upload evidence');
+            toast.error('Failed to upload evidence');
         }
     };
 

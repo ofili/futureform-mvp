@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
 import { Table, THead, TBody, TR, TH, TD } from '@/components/ui/table';
 import InviteMemberModal from '@/components/projects/InviteTeamMemberModal';
 import { toast } from 'sonner';
@@ -13,6 +14,8 @@ import { Badge } from '@/components/ui/badge';
 export default function ProjectTeamMembers({ projectId }: { projectId: string }) {
     const queryClient = useQueryClient();
     const [showInvite, setShowInvite] = useState(false);
+    const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+    const [memberToRemove, setMemberToRemove] = useState<any>(null);
 
     const { data: members = [], isLoading } = useQuery({
         queryKey: ['project', projectId, 'team-members'],
@@ -86,8 +89,8 @@ export default function ProjectTeamMembers({ projectId }: { projectId: string })
                                         <TD>{m.invitationAcceptedAt ? new Date(m.invitationAcceptedAt).toLocaleString() : '-'}</TD>
                                         <TD className="text-right">
                                             <Button variant="destructive" size="sm" onClick={() => {
-                                                if (!confirm('Remove this member from the project?')) return;
-                                                removeMutation.mutate(m.id);
+                                                setMemberToRemove(m);
+                                                setDeleteModalOpen(true);
                                             }}>
                                                 <Trash2 className="w-4 h-4" />
                                             </Button>
@@ -109,6 +112,43 @@ export default function ProjectTeamMembers({ projectId }: { projectId: string })
                     }}
                 />
             )}
+
+            {/* Delete Confirmation Modal */}
+            <Dialog open={deleteModalOpen} onOpenChange={setDeleteModalOpen}>
+                <DialogContent>
+                    <DialogHeader>
+                        <DialogTitle>Remove Team Member</DialogTitle>
+                        <DialogDescription>
+                            Are you sure you want to remove this member from the project?
+                        </DialogDescription>
+                    </DialogHeader>
+
+                    <DialogFooter>
+                        <Button
+                            type="button"
+                            variant="outline"
+                            onClick={() => setDeleteModalOpen(false)}
+                            disabled={removeMutation.isPending}
+                        >
+                            Cancel
+                        </Button>
+                        <Button
+                            type="button"
+                            variant="destructive"
+                            onClick={() => {
+                                if (memberToRemove) {
+                                    removeMutation.mutate(memberToRemove.id);
+                                    setDeleteModalOpen(false);
+                                    setMemberToRemove(null);
+                                }
+                            }}
+                            disabled={removeMutation.isPending}
+                        >
+                            {removeMutation.isPending ? 'Removing...' : 'Remove'}
+                        </Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
         </Card>
     );
 }

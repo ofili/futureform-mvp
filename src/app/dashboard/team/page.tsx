@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogBody, DialogFooter } from '@/components/ui/dialog';
 import { useAuthStore } from '@/store/auth-store';
 import { InviteMembersModal } from '@/components/dashboard/invite-members-modal';
 import { MoreHorizontal, Trash2, UserCog, Mail } from 'lucide-react';
@@ -39,6 +40,8 @@ interface Member {
 export default function TeamPage() {
     const user = useAuthStore((s) => s.user);
     const [inviteModalOpen, setInviteModalOpen] = useState(false);
+    const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+    const [memberToRemove, setMemberToRemove] = useState<Member | null>(null);
     const queryClient = useQueryClient();
 
     const { data: members, isLoading } = useQuery({
@@ -97,8 +100,15 @@ export default function TeamPage() {
     const canManageTeam = user?.role === 'ADMIN' || ['ADMIN', 'OWNER'].includes(user?.organizationRole || '');
 
     const handleRemoveMember = (member: Member) => {
-        if (confirm(`Are you sure you want to remove ${member.name} from the organization?`)) {
-            removeMemberMutation.mutate(member.id);
+        setMemberToRemove(member);
+        setDeleteModalOpen(true);
+    };
+
+    const confirmRemove = () => {
+        if (memberToRemove) {
+            removeMemberMutation.mutate(memberToRemove.id);
+            setDeleteModalOpen(false);
+            setMemberToRemove(null);
         }
     };
 
@@ -235,6 +245,56 @@ export default function TeamPage() {
                     isOpen={inviteModalOpen}
                     onClose={() => setInviteModalOpen(false)}
                 />
+
+                {/* Delete Confirmation Modal */}
+                <Dialog open={deleteModalOpen} onOpenChange={setDeleteModalOpen}>
+                    <DialogContent>
+                        <DialogHeader>
+                            <DialogTitle>Remove Team Member</DialogTitle>
+                            <DialogDescription>
+                                Are you sure you want to remove this member from the organization?
+                            </DialogDescription>
+                        </DialogHeader>
+
+                        <DialogBody>
+                            {memberToRemove && (
+                                <div className="space-y-2 py-4">
+                                    <div className="flex items-center gap-2 text-sm">
+                                        <span className="font-semibold text-gray-700">Name:</span>
+                                        <span className="text-gray-900">{memberToRemove.name}</span>
+                                    </div>
+                                    <div className="flex items-center gap-2 text-sm">
+                                        <span className="font-semibold text-gray-700">Email:</span>
+                                        <span className="text-gray-900">{memberToRemove.email}</span>
+                                    </div>
+                                    <div className="flex items-center gap-2 text-sm">
+                                        <span className="font-semibold text-gray-700">Role:</span>
+                                        <span className="text-gray-900">{memberToRemove.role}</span>
+                                    </div>
+                                </div>
+                            )}
+                        </DialogBody>
+
+                        <DialogFooter>
+                            <Button
+                                type="button"
+                                variant="outline"
+                                onClick={() => setDeleteModalOpen(false)}
+                                disabled={removeMemberMutation.isPending}
+                            >
+                                Cancel
+                            </Button>
+                            <Button
+                                type="button"
+                                variant="destructive"
+                                onClick={confirmRemove}
+                                disabled={removeMemberMutation.isPending}
+                            >
+                                {removeMemberMutation.isPending ? 'Removing...' : 'Remove Member'}
+                            </Button>
+                        </DialogFooter>
+                    </DialogContent>
+                </Dialog>
             </div>
         </DashboardLayout>
     );

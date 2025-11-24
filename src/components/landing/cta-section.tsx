@@ -19,7 +19,7 @@ export function CTASection() {
             ctaClass: 'bg-gray-600 hover:bg-gray-700'
         },
         {
-            title: 'Run an Assessment ($3,500)',
+            title: 'Run an Assessment',
             description: 'Use our platform to complete a full diagnostic with AI-assisted validation and professional Trust Profile™ generation.',
             perfectFor: [
                 'Due diligence on specific partners',
@@ -67,8 +67,8 @@ export function CTASection() {
                         <div
                             key={index}
                             className={`rounded-lg p-8 flex flex-col h-full ${option.featured
-                                    ? 'bg-blue-50 border-2 border-blue-600'
-                                    : 'bg-gray-50'
+                                ? 'bg-blue-50 border-2 border-blue-600'
+                                : 'bg-gray-50'
                                 }`}
                         >
                             <div className="flex-grow">

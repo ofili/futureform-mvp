@@ -1,19 +1,27 @@
-'use client';
-
 import { useState } from 'react';
-import { WizardData } from './assessment-wizard';
-import { Card } from '@/components/ui/card';
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Textarea } from '@/components/ui/textarea';
-import { Plus, Trash2, Upload } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
+import { toast } from 'sonner';
+import { Upload, Plus, Trash2 } from 'lucide-react';
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
+
+interface Invitation {
+    email: string;
+    name: string;
+    roleId: string;
+    seniority: string;
+    notes?: string;
+}
 
 interface InviteRespondentsStepProps {
-    data: WizardData;
-    onUpdate: (data: Partial<WizardData>) => void;
+    data: {
+        invitations: Invitation[];
+    };
+    onUpdate: (data: { invitations: Invitation[] }) => void;
 }
 
 export default function InviteRespondentsStep({
@@ -39,7 +47,7 @@ export default function InviteRespondentsStep({
 
     const addInvitation = () => {
         if (!newInvitation.email || !newInvitation.name) {
-            alert('Email and name are required');
+            toast.error('Email and name are required');
             return;
         }
 

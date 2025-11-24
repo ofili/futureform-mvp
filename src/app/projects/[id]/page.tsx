@@ -1,9 +1,9 @@
 'use client';
 
-import { use } from 'react';
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { Card, CardContent } from '@/components/ui/card';
+import { useParams } from 'next/navigation';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Breadcrumb } from '@/components/ui/breadcrumb';
@@ -17,7 +17,7 @@ import CalendarIntegration from '@/components/calendar/CalendarIntegration';
 import InviteTeamMemberModal from '@/components/projects/InviteTeamMemberModal';
 import CreateAssessmentWizard from '@/components/assessments/CreateAssessmentWizard';
 import ComparePartnersModal from '@/components/projects/ComparePartnersModal';
-import { Plus, BarChart3, Users, TrendingUp, MessageCircle, FileText, Workflow, Calendar, UserPlus } from 'lucide-react';
+import { Plus, BarChart3, Users, TrendingUp, MessageCircle, FileText, Workflow, Calendar, UserPlus, Info } from 'lucide-react';
 import Link from 'next/link';
 import AlignmentDashboard from '@/components/projects/AlignmentDashboard';
 
@@ -26,6 +26,54 @@ interface Project {
   name: string;
   description: string;
   type: string;
+  sector: string;
+  subsector?: string;
+  region: string;
+  country?: string;
+  orgSize?: string;
+  status: string;
+
+  // Context
+  techCategory?: string;
+  techMaturity?: string;
+  deploymentScope?: string;
+  deploymentComplexity?: string;
+  successMetrics?: string;
+  projectStage?: string;
+  budgetRange?: string;
+  maturityLevel?: string;
+  timeline?: string;
+  objectives?: string;
+  longDescription?: string;
+
+  // Stakeholders
+  stakeholders?: string;
+  leadAgency?: string;
+  implementingPartners?: string;
+  vendors?: string;
+  responsibleDepartments?: string;
+  projectSponsor?: string;
+  steeringCommittee?: boolean;
+  interAgencyCollaboration?: string;
+
+  // Risk
+  fundingSource?: string;
+  fundingPartners?: string;
+  contractType?: string;
+  contractDuration?: string;
+  vendorTrackRecord?: string;
+  knownRisks?: string;
+  regulatoryRequirements?: string;
+  dataSensitivity?: string;
+
+  // Org
+  orgDigitalMaturity?: string;
+  operationalCapacity?: string;
+  workforceSize?: string;
+  changeReadiness?: string;
+  prevFailures?: string;
+  internalTrustClimate?: string;
+
   assessments: Array<{
     id: string;
     partnerName: string;
@@ -35,8 +83,9 @@ interface Project {
   }>;
 }
 
-export default function ProjectDetail({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = use(params);
+export default function ProjectDetail() {
+  const params = useParams();
+  const id = params.id as string;
   const [showTeamInviteModal, setShowTeamInviteModal] = useState(false);
   const [showPartnerInviteModal, setShowPartnerInviteModal] = useState(false);
   const [showCompareModal, setShowCompareModal] = useState(false);
@@ -79,6 +128,12 @@ export default function ProjectDetail({ params }: { params: Promise<{ id: string
         <div className="flex-1">
           <h1 className="text-3xl font-bold mb-3">{project.name}</h1>
           <p className="text-muted-foreground text-lg leading-relaxed max-w-2xl">{project.description}</p>
+          <div className="flex gap-2 mt-4">
+            <Badge variant="outline">{project.type.replace(/_/g, ' ')}</Badge>
+            <Badge variant="outline">{project.sector}</Badge>
+            <Badge variant="outline">{project.region}</Badge>
+            <Badge variant={project.status === 'ACTIVE' ? 'default' : 'secondary'}>{project.status}</Badge>
+          </div>
         </div>
 
         <div className="flex flex-col sm:flex-row gap-3">
@@ -170,7 +225,7 @@ export default function ProjectDetail({ params }: { params: Promise<{ id: string
           </Card>
         ) : (
           <Tabs defaultValue="assessments" className="space-y-6">
-            <TabsList className="grid w-full grid-cols-6">
+            <TabsList className="grid w-full grid-cols-7">
               <TabsTrigger value="assessments" className="flex items-center gap-2">
                 <Users className="w-4 h-4" />
                 Assessments
@@ -181,6 +236,10 @@ export default function ProjectDetail({ params }: { params: Promise<{ id: string
                   Alignment
                 </TabsTrigger>
               )}
+              <TabsTrigger value="details" className="flex items-center gap-2">
+                <Info className="w-4 h-4" />
+                Details
+              </TabsTrigger>
               <TabsTrigger value="collaboration" className="flex items-center gap-2">
                 <MessageCircle className="w-4 h-4" />
                 Collaboration
@@ -283,6 +342,151 @@ export default function ProjectDetail({ params }: { params: Promise<{ id: string
               ) : (
                 <AlignmentDashboard projectId={project.id} stakeholders={alignmentStakeholders} />
               )}
+            </TabsContent>
+
+            <TabsContent value="details">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Project Details</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-8">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="space-y-4">
+                      <h3 className="font-semibold text-lg border-b pb-2">Identity</h3>
+                      <div className="grid grid-cols-2 gap-4 text-sm">
+                        <div>
+                          <p className="text-muted-foreground">Name</p>
+                          <p className="font-medium">{project.name}</p>
+                        </div>
+                        <div>
+                          <p className="text-muted-foreground">Type</p>
+                          <p className="font-medium">{project.type.replace(/_/g, ' ')}</p>
+                        </div>
+                        <div>
+                          <p className="text-muted-foreground">Sector</p>
+                          <p className="font-medium">{project.sector}</p>
+                        </div>
+                        <div>
+                          <p className="text-muted-foreground">Subsector</p>
+                          <p className="font-medium">{project.subsector || '-'}</p>
+                        </div>
+                        <div>
+                          <p className="text-muted-foreground">Region</p>
+                          <p className="font-medium">{project.region}</p>
+                        </div>
+                        <div>
+                          <p className="text-muted-foreground">Country</p>
+                          <p className="font-medium">{project.country || '-'}</p>
+                        </div>
+                      </div>
+                      <div>
+                        <p className="text-muted-foreground text-sm">Description</p>
+                        <p className="text-sm mt-1">{project.description}</p>
+                      </div>
+                      {project.longDescription && (
+                        <div>
+                          <p className="text-muted-foreground text-sm">Full Brief</p>
+                          <p className="text-sm mt-1">{project.longDescription}</p>
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="space-y-4">
+                      <h3 className="font-semibold text-lg border-b pb-2">Deployment Context</h3>
+                      <div className="grid grid-cols-2 gap-4 text-sm">
+                        <div>
+                          <p className="text-muted-foreground">Tech Category</p>
+                          <p className="font-medium">{project.techCategory || '-'}</p>
+                        </div>
+                        <div>
+                          <p className="text-muted-foreground">Tech Maturity</p>
+                          <p className="font-medium">{project.techMaturity || '-'}</p>
+                        </div>
+                        <div>
+                          <p className="text-muted-foreground">Scope</p>
+                          <p className="font-medium">{project.deploymentScope || '-'}</p>
+                        </div>
+                        <div>
+                          <p className="text-muted-foreground">Stage</p>
+                          <p className="font-medium">{project.projectStage || '-'}</p>
+                        </div>
+                        <div>
+                          <p className="text-muted-foreground">Timeline</p>
+                          <p className="font-medium">{project.timeline || '-'}</p>
+                        </div>
+                        <div>
+                          <p className="text-muted-foreground">Budget</p>
+                          <p className="font-medium">{project.budgetRange || '-'}</p>
+                        </div>
+                      </div>
+                      {project.successMetrics && (
+                        <div>
+                          <p className="text-muted-foreground text-sm">Success Metrics</p>
+                          <p className="text-sm mt-1">{project.successMetrics}</p>
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="space-y-4">
+                      <h3 className="font-semibold text-lg border-b pb-2">Stakeholders & Governance</h3>
+                      <div className="grid grid-cols-2 gap-4 text-sm">
+                        <div>
+                          <p className="text-muted-foreground">Lead Agency</p>
+                          <p className="font-medium">{project.leadAgency || '-'}</p>
+                        </div>
+                        <div>
+                          <p className="text-muted-foreground">Sponsor</p>
+                          <p className="font-medium">{project.projectSponsor || '-'}</p>
+                        </div>
+                        <div>
+                          <p className="text-muted-foreground">Steering Committee</p>
+                          <p className="font-medium">{project.steeringCommittee ? 'Yes' : 'No'}</p>
+                        </div>
+                      </div>
+                      {project.implementingPartners && (
+                        <div>
+                          <p className="text-muted-foreground text-sm">Implementing Partners</p>
+                          <p className="text-sm mt-1">{project.implementingPartners}</p>
+                        </div>
+                      )}
+                      {project.responsibleDepartments && (
+                        <div>
+                          <p className="text-muted-foreground text-sm">Responsible Departments</p>
+                          <p className="text-sm mt-1">{project.responsibleDepartments}</p>
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="space-y-4">
+                      <h3 className="font-semibold text-lg border-b pb-2">Risk & Financial</h3>
+                      <div className="grid grid-cols-2 gap-4 text-sm">
+                        <div>
+                          <p className="text-muted-foreground">Funding Source</p>
+                          <p className="font-medium">{project.fundingSource || '-'}</p>
+                        </div>
+                        <div>
+                          <p className="text-muted-foreground">Contract Type</p>
+                          <p className="font-medium">{project.contractType || '-'}</p>
+                        </div>
+                        <div>
+                          <p className="text-muted-foreground">Regulatory Req.</p>
+                          <p className="font-medium">{project.regulatoryRequirements || '-'}</p>
+                        </div>
+                        <div>
+                          <p className="text-muted-foreground">Data Sensitivity</p>
+                          <p className="font-medium">{project.dataSensitivity || '-'}</p>
+                        </div>
+                      </div>
+                      {project.knownRisks && (
+                        <div>
+                          <p className="text-muted-foreground text-sm">Known Risks</p>
+                          <p className="text-sm mt-1">{project.knownRisks}</p>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
             </TabsContent>
 
             <TabsContent value="collaboration" className="space-y-6">

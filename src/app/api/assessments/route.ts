@@ -10,7 +10,7 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json()
-    const { projectId, partnerName, partnerType, partnerEmail } = body
+    const { projectId, partnerName, partnerType, partnerEmail, partnerAliasId, partnerGlobalId } = body
 
     // Verify user has access to the project
     const projectMember = await prisma.projectTeamMember.findFirst({
@@ -18,11 +18,80 @@ export async function POST(request: NextRequest) {
         projectId,
         userId: session.user.id,
         removedAt: null
+      },
+      include: {
+        project: {
+          select: { organizationId: true }
+        }
       }
     })
 
     if (!projectMember) {
       return NextResponse.json({ error: 'Access denied to project' }, { status: 403 })
+    }
+
+    const organizationId = projectMember.project.organizationId
+
+    if (!organizationId) {
+      return NextResponse.json({ error: 'Project must belong to an organization' }, { status: 400 })
+    }
+
+    // Resolve Partner IDs
+    let finalPartnerGlobalId = partnerGlobalId
+    let finalPartnerAliasId = partnerAliasId
+
+    // If we have a name but no IDs, try to find/create partner logic
+    if (!finalPartnerAliasId && partnerName) {
+      // 1. Check if alias exists
+      const existingAlias = await prisma.partnerAlias.findFirst({
+        where: {
+          organizationId,
+          displayName: { equals: partnerName, mode: 'insensitive' }
+        }
+      })
+
+      if (existingAlias) {
+        finalPartnerAliasId = existingAlias.id
+        finalPartnerGlobalId = existingAlias.partnerId
+      } else {
+        // 2. Check global partner (if global ID provided or by name)
+        let globalPartnerId = partnerGlobalId
+
+        if (!globalPartnerId) {
+          const existingGlobal = await prisma.partner.findFirst({
+            where: { legalName: { equals: partnerName, mode: 'insensitive' } }
+          })
+
+          if (existingGlobal) {
+            globalPartnerId = existingGlobal.id
+          } else {
+            // Create new global partner
+            const newGlobal = await prisma.partner.create({
+              data: {
+                legalName: partnerName,
+                sector: partnerType,
+                createdByOrgId: organizationId,
+                verification: 'UNVERIFIED'
+              }
+            })
+            globalPartnerId = newGlobal.id
+          }
+        }
+
+        // 3. Create Alias
+        const newAlias = await prisma.partnerAlias.create({
+          data: {
+            partnerId: globalPartnerId,
+            organizationId,
+            displayName: partnerName,
+            cachedSector: partnerType,
+            relationshipStatus: 'Active'
+          }
+        })
+
+        finalPartnerAliasId = newAlias.id
+        finalPartnerGlobalId = globalPartnerId
+      }
     }
 
     // Generate unique token for assessment
@@ -32,8 +101,10 @@ export async function POST(request: NextRequest) {
     const assessment = await prisma.assessment.create({
       data: {
         projectId,
-        partnerName,
-        partnerType,
+        partnerName, // Keep for backward compat
+        partnerType, // Keep for backward compat
+        partnerGlobalId: finalPartnerGlobalId,
+        partnerAliasId: finalPartnerAliasId,
         token,
         status: 'PENDING',
         partnerId: session.user.id // Temporary - will be updated when partner accepts
@@ -41,7 +112,8 @@ export async function POST(request: NextRequest) {
       include: {
         project: {
           select: { name: true }
-        }
+        },
+        partnerAlias: true
       }
     })
 
@@ -77,6 +149,12 @@ export async function GET(request: NextRequest) {
         },
         partner: {
           select: { firstName: true, lastName: true, email: true }
+        },
+        partnerAlias: {
+          select: { displayName: true, cachedSector: true, cachedCountry: true }
+        },
+        partnerGlobal: {
+          select: { legalName: true, website: true, verification: true }
         },
         _count: {
           select: {

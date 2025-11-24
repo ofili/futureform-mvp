@@ -10,10 +10,10 @@ import prisma from '@/lib/prisma';
  */
 export async function POST(
     request: NextRequest,
-    { params }: { params: { token: string } }
+    { params }: { params: Promise<{ token: string }> }
 ) {
     try {
-        const token = params.token;
+        const { token } = await params;
         const body = await request.json();
         const { password } = body;
 
@@ -146,10 +146,10 @@ export async function POST(
  */
 export async function GET(
     request: NextRequest,
-    { params }: { params: { token: string } }
+    { params }: { params: Promise<{ token: string }> }
 ) {
     try {
-        const token = params.token;
+        const { token } = await params;
 
         const invitation = await prisma.assessmentInvitation.findUnique({
             where: { token },

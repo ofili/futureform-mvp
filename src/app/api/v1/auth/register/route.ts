@@ -5,7 +5,7 @@ import bcrypt from 'bcryptjs';
 export async function POST(req: Request) {
     try {
         const body = await req.json();
-        const { email, organization, user } = body;
+        const { email, organization, user, plan } = body;
 
         if (!email || !organization || !user) {
             return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
@@ -23,9 +23,12 @@ export async function POST(req: Request) {
         // Hash password
         const hashedPassword = await bcrypt.hash(user.password, 12);
 
-        // Get the Framework Access tier (default free tier)
-        const defaultTier = await prisma.subscriptionTier.findFirst({
-            where: { name: 'Framework Access' }
+        // Determine tier based on plan
+        const tierName = plan === 'guided' ? 'Guided' : 'Free';
+
+        // Get the tier
+        const selectedTier = await prisma.subscriptionTier.findFirst({
+            where: { name: tierName }
         });
 
         // Create organization, user, and organization member in a transaction
@@ -43,7 +46,7 @@ export async function POST(req: Request) {
                     referralSource: organization.referralSource,
                     pilotAgreementSigned: organization.pilotAgreementSigned || false,
                     caseStudyApproval: organization.caseStudyApproval || false,
-                    tierId: defaultTier?.id
+                    tierId: selectedTier?.id
                 }
             });
 

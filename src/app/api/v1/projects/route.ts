@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import prisma from '@/lib/prisma';
 import { randomUUID } from 'crypto';
+import { rateLimit, RateLimitPresets } from '@/lib/rate-limit';
 
 async function getAuthenticatedUser() {
   // Try NextAuth session first (for server-side requests)
@@ -66,7 +67,18 @@ export async function GET(request: NextRequest) {
   }
 }
 
+/**
+ * POST /api/v1/projects
+ * Rate Limited: 30 requests per minute
+ */
 export async function POST(request: NextRequest) {
+  // Apply moderate rate limiting for project creation
+  const rateLimitResult = await rateLimit(request, RateLimitPresets.api);
+
+  if (!rateLimitResult.success) {
+    return rateLimitResult.response;
+  }
+
   try {
     const userId = await getAuthenticatedUser();
     if (!userId) {
@@ -101,14 +113,12 @@ export async function POST(request: NextRequest) {
         },
         teamMembers: {
           create: {
-            role: 'OWNER', // or whatever role field you have
-            invitationToken: randomUUID(), // required
-            invitedByUser: {
-              connect: { id: userId }
-            },
-            user: {
-              connect: { id: userId }
-            }
+            userId: userId,
+            invitedBy: userId,
+            role: 'PROJECT_ADMIN',
+            invitationToken: randomUUID(),
+            invitationStatus: 'ACCEPTED',
+            invitationAcceptedAt: new Date()
           }
         }
       },

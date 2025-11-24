@@ -11,7 +11,7 @@ import { selectQuestions } from '@/lib/services/ai-question-selector';
  */
 export async function POST(
     request: NextRequest,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
         const session = await getServerSession(authOptions);
@@ -19,9 +19,9 @@ export async function POST(
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
         }
 
-        const projectId = params.id;
+        const { id: projectId } = await params;
         const body = await request.json();
-        const { type, depth, sector, deadline, aiConfig, partnerAdminEmail } = body;
+        const { type, depth, sector, deadline, aiConfig, partnerAdminEmail, partnerAliasId, partnerGlobalId } = body;
 
         // Validate required fields
         if (!type || !depth || !sector) {
@@ -42,11 +42,23 @@ export async function POST(
         }
 
         // Check if user has access to this project
-        const isMember = project.organization.members.some(
+        const isMember = project.organization?.members.some(
             (member) => member.userId === session.user.id
-        );
-        if (!isMember && project.userId !== session.user.id) {
+        ) ?? false;
+        if (!isMember && project.createdById !== session.user.id) {
             return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+        }
+
+        // Resolve Partner Name for backward compatibility
+        let partnerName = session.user.name || 'Unknown Partner';
+        if (partnerAliasId) {
+            const alias = await prisma.partnerAlias.findUnique({
+                where: { id: partnerAliasId },
+                select: { displayName: true }
+            });
+            if (alias) {
+                partnerName = alias.displayName;
+            }
         }
 
         // Call AI service to select questions
@@ -55,7 +67,7 @@ export async function POST(
             region: project.region || 'Global',
             assessmentType: type,
             depth,
-            organizationSize: project.organization.size,
+            organizationSize: project.orgSize || 'Unknown',
             attachedDocs: aiConfig?.attachedDocs || [],
         });
 
@@ -78,8 +90,10 @@ export async function POST(
             data: {
                 projectId,
                 partnerId: session.user.id,
-                partnerName: `${session.user.firstName} ${session.user.lastName}`,
+                partnerName,
                 partnerType: 'Organization',
+                partnerAliasId,
+                partnerGlobalId,
                 status: 'PENDING',
                 token: generateToken(),
                 type,

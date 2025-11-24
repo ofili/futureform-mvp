@@ -28,7 +28,21 @@ export function LoginFormContent() {
                 setIsLoading(false);
                 return;
             }
-            const redirect = searchParams.get('redirect') || '/dashboard';
+
+            // Fetch the session to check user role
+            const response = await fetch('/api/auth/session');
+            const session = await response.json();
+
+            // Redirect based on role
+            let defaultRedirect = '/dashboard';
+            if (session?.user?.role === 'ADMIN') {
+                defaultRedirect = '/admin';
+            } else if (session?.user?.role === 'PARTNER') {
+                defaultRedirect = '/partner';
+            }
+
+            const redirect = searchParams.get('redirect') || defaultRedirect;
+
             router.push(redirect);
             router.refresh();
         } catch (error) {

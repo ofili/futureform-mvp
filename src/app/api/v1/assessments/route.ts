@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import prisma from '@/lib/prisma';
 import { CreditService } from '@/lib/services/creditService';
+import { rateLimit, RateLimitPresets } from '@/lib/rate-limit';
 
 async function getAuthenticatedUser() {
   const session = await getServerSession(authOptions);
@@ -41,7 +42,18 @@ export async function GET(request: NextRequest) {
   }
 }
 
+/**
+ * POST /api/v1/assessments
+ * Rate Limited: 30 requests per minute
+ */
 export async function POST(request: NextRequest) {
+  // Apply moderate rate limiting for assessment creation
+  const rateLimitResult = await rateLimit(request, RateLimitPresets.api);
+
+  if (!rateLimitResult.success) {
+    return rateLimitResult.response;
+  }
+
   try {
     const userId = await getAuthenticatedUser();
     if (!userId) {

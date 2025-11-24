@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { ArrowLeft, ArrowRight, Check } from 'lucide-react';
+import { toast } from 'sonner';
 import AssessmentBasicsStep from '@/components/assessments/wizard/assessment-basics-step';
 import QuestionSelectionStep from '@/components/assessments/wizard/question-selection-step';
 import RoleMappingStep from '@/components/assessments/wizard/role-mapping-step';
@@ -23,6 +24,8 @@ export interface WizardData {
     sector: string;
     deadline: Date | null;
     partnerAdminEmail: string;
+    partnerAliasId?: string;
+    partnerGlobalId?: string;
 
     // Step 2: Questions (from AI)
     selectedQuestions: any[];
@@ -58,6 +61,8 @@ export default function AssessmentWizard({ projectId }: AssessmentWizardProps) {
         sector: '',
         deadline: null,
         partnerAdminEmail: '',
+        partnerAliasId: undefined,
+        partnerGlobalId: undefined,
         selectedQuestions: [],
         questionRoleMapping: {},
         invitations: [],
@@ -96,6 +101,8 @@ export default function AssessmentWizard({ projectId }: AssessmentWizardProps) {
                     sector: wizardData.sector,
                     deadline: wizardData.deadline,
                     partnerAdminEmail: wizardData.partnerAdminEmail,
+                    partnerAliasId: wizardData.partnerAliasId,
+                    partnerGlobalId: wizardData.partnerGlobalId,
                 }),
             });
 
@@ -107,7 +114,7 @@ export default function AssessmentWizard({ projectId }: AssessmentWizardProps) {
             });
         } catch (error) {
             console.error('Error fetching AI questions:', error);
-            alert('Failed to generate questions. Please try again.');
+            toast.error('Failed to generate questions. Please try again.');
         } finally {
             setIsLoading(false);
         }
@@ -137,7 +144,7 @@ export default function AssessmentWizard({ projectId }: AssessmentWizardProps) {
             router.push(`/projects/${projectId}`);
         } catch (error) {
             console.error('Error finishing wizard:', error);
-            alert('Failed to complete assessment creation. Please try again.');
+            toast.error('Failed to complete assessment creation. Please try again.');
         } finally {
             setIsLoading(false);
         }
@@ -220,10 +227,10 @@ export default function AssessmentWizard({ projectId }: AssessmentWizardProps) {
                         <div
                             key={step.id}
                             className={`flex-1 text-center ${step.id === currentStep
-                                    ? 'text-primary font-semibold'
-                                    : step.id < currentStep
-                                        ? 'text-green-600'
-                                        : 'text-muted-foreground'
+                                ? 'text-primary font-semibold'
+                                : step.id < currentStep
+                                    ? 'text-green-600'
+                                    : 'text-muted-foreground'
                                 }`}
                         >
                             <div className="flex items-center justify-center mb-1">
@@ -234,8 +241,8 @@ export default function AssessmentWizard({ projectId }: AssessmentWizardProps) {
                                 ) : (
                                     <div
                                         className={`w-8 h-8 rounded-full flex items-center justify-center ${step.id === currentStep
-                                                ? 'bg-primary text-white'
-                                                : 'bg-muted text-muted-foreground'
+                                            ? 'bg-primary text-white'
+                                            : 'bg-muted text-muted-foreground'
                                             }`}
                                     >
                                         {step.id}

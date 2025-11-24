@@ -8,7 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { NativeSelect } from '@/components/ui/native-select';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogBody, DialogFooter } from '@/components/ui/dialog';
 import { Plus, Edit, Trash2, List } from 'lucide-react';
 import { toast } from 'sonner';
 import Link from 'next/link';
@@ -28,13 +28,23 @@ const CATEGORIES = [
     { value: 'department', label: 'Departments' },
     { value: 'relationship_stage', label: 'Relationship Stages' },
     { value: 'source', label: 'Sources' },
+    { value: 'project_type', label: 'Project Types' },
+    { value: 'assessment_type', label: 'Assessment Types' },
+    { value: 'project_status', label: 'Project Status' },
+    { value: 'budget_range', label: 'Budget Ranges' },
+    { value: 'maturity_level', label: 'Maturity Levels' },
+    { value: 'organization_type', label: 'Organization Types' },
+    { value: 'partner_type', label: 'Partner Types' },
+    { value: 'domain', label: 'Framework Domain' },
 ];
 
 export default function FormOptionsPage() {
     const queryClient = useQueryClient();
     const [selectedCategory, setSelectedCategory] = useState('sector');
     const [modalOpen, setModalOpen] = useState(false);
+    const [deleteModalOpen, setDeleteModalOpen] = useState(false);
     const [editingOption, setEditingOption] = useState<FormOption | null>(null);
+    const [deletingOption, setDeletingOption] = useState<FormOption | null>(null);
     const [formData, setFormData] = useState({
         category: 'sector',
         value: '',
@@ -159,8 +169,15 @@ export default function FormOptionsPage() {
     };
 
     const handleDelete = (option: FormOption) => {
-        if (confirm(`Are you sure you want to delete "${option.label}"?`)) {
-            deleteMutation.mutate(option.id);
+        setDeletingOption(option);
+        setDeleteModalOpen(true);
+    };
+
+    const confirmDelete = () => {
+        if (deletingOption) {
+            deleteMutation.mutate(deletingOption.id);
+            setDeleteModalOpen(false);
+            setDeletingOption(null);
         }
     };
 
@@ -267,78 +284,130 @@ export default function FormOptionsPage() {
                         </DialogDescription>
                     </DialogHeader>
 
-                    <form onSubmit={handleSubmit} className="space-y-4">
-                        <div className="space-y-2">
-                            <Label htmlFor="category">Category *</Label>
-                            <NativeSelect
-                                id="category"
-                                value={formData.category}
-                                onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                                required
-                            >
-                                {CATEGORIES.map(cat => (
-                                    <option key={cat.value} value={cat.value}>
-                                        {cat.label}
-                                    </option>
-                                ))}
-                            </NativeSelect>
-                        </div>
+                    <form onSubmit={handleSubmit}>
+                        <DialogBody className="space-y-4">
+                            <div className="space-y-2">
+                                <Label htmlFor="category">Category *</Label>
+                                <NativeSelect
+                                    id="category"
+                                    value={formData.category}
+                                    onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                                    required
+                                >
+                                    {CATEGORIES.map(cat => (
+                                        <option key={cat.value} value={cat.value}>
+                                            {cat.label}
+                                        </option>
+                                    ))}
+                                </NativeSelect>
+                            </div>
 
-                        <div className="space-y-2">
-                            <Label htmlFor="label">Label *</Label>
-                            <Input
-                                id="label"
-                                value={formData.label}
-                                onChange={(e) => setFormData({ ...formData, label: e.target.value })}
-                                placeholder="e.g., Infrastructure"
-                                required
-                            />
-                        </div>
+                            <div className="space-y-2">
+                                <Label htmlFor="label">Label *</Label>
+                                <Input
+                                    id="label"
+                                    value={formData.label}
+                                    onChange={(e) => setFormData({ ...formData, label: e.target.value })}
+                                    placeholder="e.g., Infrastructure"
+                                    required
+                                />
+                            </div>
 
-                        <div className="space-y-2">
-                            <Label htmlFor="value">Value *</Label>
-                            <Input
-                                id="value"
-                                value={formData.value}
-                                onChange={(e) => setFormData({ ...formData, value: e.target.value })}
-                                placeholder="e.g., infrastructure"
-                                required
-                            />
-                            <p className="text-xs text-muted-foreground">
-                                Internal value (lowercase, use underscores)
-                            </p>
-                        </div>
+                            <div className="space-y-2">
+                                <Label htmlFor="value">Value *</Label>
+                                <Input
+                                    id="value"
+                                    value={formData.value}
+                                    onChange={(e) => setFormData({ ...formData, value: e.target.value })}
+                                    placeholder="e.g., infrastructure"
+                                    required
+                                />
+                                <p className="text-xs text-muted-foreground">
+                                    Internal value (lowercase, use underscores)
+                                </p>
+                            </div>
 
-                        <div className="space-y-2">
-                            <Label htmlFor="displayOrder">Display Order</Label>
-                            <Input
-                                id="displayOrder"
-                                type="number"
-                                value={formData.displayOrder}
-                                onChange={(e) => setFormData({ ...formData, displayOrder: parseInt(e.target.value) })}
-                            />
-                        </div>
+                            <div className="space-y-2">
+                                <Label htmlFor="displayOrder">Display Order</Label>
+                                <Input
+                                    id="displayOrder"
+                                    type="number"
+                                    value={formData.displayOrder}
+                                    onChange={(e) => setFormData({ ...formData, displayOrder: parseInt(e.target.value) })}
+                                />
+                            </div>
 
-                        <div className="flex items-center gap-2">
-                            <input
-                                type="checkbox"
-                                id="isActive"
-                                checked={formData.isActive}
-                                onChange={(e) => setFormData({ ...formData, isActive: e.target.checked })}
-                                className="rounded"
-                            />
-                            <Label htmlFor="isActive" className="cursor-pointer">Active</Label>
-                        </div>
+                            <div className="flex items-center gap-2">
+                                <input
+                                    type="checkbox"
+                                    id="isActive"
+                                    checked={formData.isActive}
+                                    onChange={(e) => setFormData({ ...formData, isActive: e.target.checked })}
+                                    className="rounded"
+                                />
+                                <Label htmlFor="isActive" className="cursor-pointer">Active</Label>
+                            </div>
+                        </DialogBody>
 
-                        <div className="flex justify-end gap-3 pt-4">
+                        <DialogFooter>
                             <Button type="button" variant="outline" onClick={() => setModalOpen(false)}>
                                 Cancel
                             </Button>
                             <Button type="submit" disabled={createMutation.isPending || updateMutation.isPending}>
                                 {createMutation.isPending || updateMutation.isPending ? 'Saving...' : 'Save Option'}
                             </Button>
-                        </div>
+                        </DialogFooter>
                     </form>
+                </DialogContent>
+            </Dialog>
+
+            {/* Delete Confirmation Modal */}
+            <Dialog open={deleteModalOpen} onOpenChange={setDeleteModalOpen}>
+                <DialogContent>
+                    <DialogHeader>
+                        <DialogTitle>Confirm Deletion</DialogTitle>
+                        <DialogDescription>
+                            Are you sure you want to delete this option? This action cannot be undone.
+                        </DialogDescription>
+                    </DialogHeader>
+
+                    <DialogBody>
+                        {deletingOption && (
+                            <div className="space-y-2 py-4">
+                                <div className="flex items-center gap-2 text-sm">
+                                    <span className="font-semibold text-gray-700">Label:</span>
+                                    <span className="text-gray-900">{deletingOption.label}</span>
+                                </div>
+                                <div className="flex items-center gap-2 text-sm">
+                                    <span className="font-semibold text-gray-700">Value:</span>
+                                    <span className="text-gray-900">{deletingOption.value}</span>
+                                </div>
+                                <div className="flex items-center gap-2 text-sm">
+                                    <span className="font-semibold text-gray-700">Category:</span>
+                                    <span className="text-gray-900">{getCategoryLabel(deletingOption.category)}</span>
+                                </div>
+                            </div>
+                        )}
+                    </DialogBody>
+
+                    <DialogFooter>
+                        <Button
+                            type="button"
+                            variant="outline"
+                            onClick={() => setDeleteModalOpen(false)}
+                            disabled={deleteMutation.isPending}
+                        >
+                            Cancel
+                        </Button>
+                        <Button
+                            type="button"
+                            variant="destructive"
+                            onClick={confirmDelete}
+                            disabled={deleteMutation.isPending}
+                        >
+                            {deleteMutation.isPending ? 'Deleting...' : 'Delete'}
+                        </Button>
+                    </DialogFooter>
                 </DialogContent>
             </Dialog>
         </div>

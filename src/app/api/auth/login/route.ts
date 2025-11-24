@@ -2,8 +2,20 @@ import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import { rateLimit, RateLimitPresets } from '@/lib/rate-limit';
 
+/**
+ * POST /api/auth/login
+ * Rate Limited: 5 requests per minute to prevent brute force attacks
+ */
 export async function POST(request: NextRequest) {
+  // Apply strict rate limiting for authentication
+  const rateLimitResult = await rateLimit(request, RateLimitPresets.auth);
+
+  if (!rateLimitResult.success) {
+    return rateLimitResult.response;
+  }
+
   try {
     const { email, password } = await request.json();
 

@@ -15,26 +15,119 @@ export async function POST(request: NextRequest) {
 
         // Handle specific events
         if (event === 'charge.completed' && data.status === 'successful') {
-            // Find user by email (assuming customer.email is present)
-            const user = await prisma.user.findUnique({
-                where: { email: data.customer.email },
+            const transactionId = data.id;
+
+            // Verify transaction with Flutterwave
+            const verifyResponse = await fetch(`https://api.flutterwave.com/v3/transactions/${transactionId}/verify`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${process.env.FLW_SECRET_KEY}`,
+                    'Content-Type': 'application/json'
+                }
             });
 
-            if (user) {
-                // Logic to credit user account or update subscription
-                // For MVP, we'll just log it. In production, create a CreditTransaction.
-                console.log(`Payment successful for user: ${user.email}`);
+            const verifyData = await verifyResponse.json();
 
-                // Example: Add credits
-                // await prisma.credit.create({ ... })
+            if (verifyData.status === 'success' && verifyData.data.status === 'successful') {
+                const { meta, amount, currency } = verifyData.data;
+                const { userId, organizationId, credits, packageId, tierId, type } = meta;
+
+                // Check if transaction already processed (idempotency)
+                const existingTx = await prisma.creditTransaction.findFirst({
+                    where: { notes: { contains: `Ref: ${data.tx_ref}` } }
+                });
+
+                if (!existingTx) {
+                    console.log(`Processing successful payment for user: ${userId}, type: ${type}`);
+
+                    if (type === 'SUBSCRIPTION_UPGRADE' && tierId) {
+                        // Handle Subscription Upgrade
+
+                        // Update user tier
+                        // Assuming tier is stored as a string name on the User model based on page.tsx usage
+                        const tier = await prisma.subscriptionTier.findUnique({
+                            where: { id: tierId }
+                        });
+
+                        if (tier) {
+                            await prisma.organization.update({
+                                where: { id: organizationId },
+                                data: { tierId: tier.id }
+                            });
+
+                            // Get credit account for transaction history
+                            let creditAccount = await prisma.credit.findFirst({
+                                where: { organizationId }
+                            });
+
+                            if (!creditAccount) {
+                                creditAccount = await prisma.credit.create({
+                                    data: {
+                                        organizationId,
+                                        amount: 0,
+                                        type: 'PURCHASE',
+                                        description: 'Organization Credit Account'
+                                    }
+                                });
+                            }
+
+                            await prisma.creditTransaction.create({
+                                data: {
+                                    creditId: creditAccount.id,
+                                    userId: userId,
+                                    type: 'PURCHASE',
+                                    creditsChange: 0,
+                                    notes: `Subscription Upgrade: ${tier.displayName} (Ref: ${data.tx_ref})`
+                                }
+                            });
+                        }
+
+                    } else {
+                        // Handle Credit Purchase
+                        // 1. Get or create credit account
+                        let creditAccount = await prisma.credit.findFirst({
+                            where: { organizationId }
+                        });
+
+                        if (!creditAccount) {
+                            creditAccount = await prisma.credit.create({
+                                data: {
+                                    organizationId,
+                                    amount: 0,
+                                    type: 'PURCHASE',
+                                    description: 'Organization Credit Account'
+                                }
+                            });
+                        }
+
+                        // 2. Update balance
+                        await prisma.credit.update({
+                            where: { id: creditAccount.id },
+                            data: {
+                                amount: { increment: Number(credits) }
+                            }
+                        });
+
+                        // 3. Create transaction record
+                        await prisma.creditTransaction.create({
+                            data: {
+                                creditId: creditAccount.id,
+                                userId: userId,
+                                type: 'PURCHASE',
+                                creditsChange: Number(credits),
+                                notes: `Flutterwave Payment: ${amount} ${currency} (Ref: ${data.tx_ref})`
+                            }
+                        });
+                    }
+
+                    console.log(`Payment processed successfully for org ${organizationId}`);
+                } else {
+                    console.log(`Transaction ${data.tx_ref} already processed.`);
+                }
             }
         } else if (event === 'transfer.failed' || (event === 'charge.completed' && data.status === 'failed')) {
             // Handle payment failure
             console.log('Payment failed:', data);
-
-            // TODO: Send email notification using emailService
-            // const { sendEmail } = await import('@/lib/services/emailService');
-            // await sendEmail({ ... });
         }
 
         return NextResponse.json({ status: 'success' });
