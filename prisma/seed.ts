@@ -408,21 +408,23 @@ async function seedAdminUser() {
                 email,
                 firstName: 'Admin',
                 lastName: 'User',
-                password: '$2a$12$e.g.hashedpassword', // User will need to reset or we need a real hash
+                password: '$2b$12$8ZY/mcwTbf2EJJ4GsguKUNtOZ.xfoJzq', // password123
                 role: 'ADMIN',
                 emailVerified: true,
             }
         });
-        console.log('Admin user created: admin@futureform.com');
+        console.log('Admin user created: admin@futureform.com with password: password123');
     } else {
-        // Ensure role is ADMIN
-        if (existingUser.role !== 'ADMIN') {
-            await prisma.user.update({
-                where: { email },
-                data: { role: 'ADMIN' }
-            });
-            console.log('Updated existing user to ADMIN role');
-        }
+        // Update existing user with new password and ensure ADMIN role
+        await prisma.user.update({
+            where: { email },
+            data: {
+                role: 'ADMIN',
+                password: '$2b$12$8ZY/mcwTbf2EJJ4GsguKUNtOZ.xfoJzq', // password123
+                emailVerified: true
+            }
+        });
+        console.log('Updated existing admin user with new password: password123');
     }
 
     // Create Default Organization
