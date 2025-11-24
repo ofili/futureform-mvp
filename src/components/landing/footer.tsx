@@ -13,7 +13,7 @@ export function Footer() {
         {
             title: 'Company',
             links: [
-                { label: 'Team', href: '/team' }
+                { label: 'About', href: '/about' }
             ]
         }
     ];
