@@ -182,6 +182,48 @@ export function AddPartnerDialog({ onPartnerCreated }: AddPartnerDialogProps) {
                                                         <span className="text-[10px] bg-green-100 text-green-800 px-1 rounded">Verified</span>
                                                     )}
                                                 </div>
+                                            ))}
+                                        </div>
+                                    )}
+
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+
+                        {/* Partner Type */}
+                        <FormField
+                            control={form.control}
+                            name="type"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Partner Type</FormLabel>
+                                    <Select onValueChange={field.onChange} value={field.value}>
+                                        <FormControl>
+                                            <SelectTrigger>
+                                                <SelectValue placeholder="Select partner type" />
+                                            </SelectTrigger>
+                                        </FormControl>
+                                        <SelectContent>
+                                            {partnerTypes.map((type) => (
+                                                <SelectItem key={type.id} value={type.value}>
+                                                    {type.label}
+                                                </SelectItem>
+                                            ))}
+                                        </SelectContent>
+                                    </Select>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+
+                        <div className="grid grid-cols-2 gap-4">
+                            <FormField
+                                control={form.control}
+                                name="website"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Website</FormLabel>
                                         <FormControl>
                                             <Input {...field} placeholder="https://example.com" />
                                         </FormControl>
