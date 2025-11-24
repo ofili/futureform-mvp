@@ -7,19 +7,14 @@ import { Textarea } from '@/components/ui/textarea';
 import { PartnerSelector } from '@/components/partners/partner-selector';
 import { Partner } from '@/hooks/use-partners';
 import { WizardData } from './assessment-wizard';
+import { CascadingSelect } from '@/components/ui/cascading-select';
 
 interface AssessmentBasicsStepProps {
     data: WizardData;
     onUpdate: (data: Partial<WizardData>) => void;
 }
 
-const ASSESSMENT_TYPES = [
-    { value: 'due_diligence', label: 'Due Diligence' },
-    { value: 'procurement', label: 'Procurement' },
-    { value: 'partnership', label: 'Partnership Evaluation' },
-    { value: 'compliance', label: 'Compliance Check' },
-    { value: 'risk_assessment', label: 'Risk Assessment' },
-];
+
 
 const SECTORS = [
     'Agriculture',
@@ -40,27 +35,17 @@ export default function AssessmentBasicsStep({
     return (
         <div className="space-y-6">
             {/* Assessment Type */}
-            <div className="space-y-2">
-                <Label htmlFor="type">Assessment Type *</Label>
-                <Select
-                    value={data.type}
-                    onValueChange={(value) => onUpdate({ type: value })}
-                >
-                    <SelectTrigger id="type">
-                        <SelectValue placeholder="Select assessment type" />
-                    </SelectTrigger>
-                    <SelectContent>
-                        {ASSESSMENT_TYPES.map((type) => (
-                            <SelectItem key={type.value} value={type.value}>
-                                {type.label}
-                            </SelectItem>
-                        ))}
-                    </SelectContent>
-                </Select>
-                <p className="text-sm text-muted-foreground">
-                    The type of assessment determines which questions are prioritized
-                </p>
-            </div>
+            <CascadingSelect
+                category="ASSESSMENT_TYPE"
+                label="Assessment Type"
+                value={data.type || ''}
+                subValue={data.typeSubcategory || ''}
+                onChange={(value, subValue) => onUpdate({ type: value, typeSubcategory: subValue || '' })}
+                required
+            />
+            <p className="text-sm text-muted-foreground">
+                The type of assessment determines which questions are prioritized
+            </p>
 
             {/* Assessment Depth */}
             <div className="space-y-2">

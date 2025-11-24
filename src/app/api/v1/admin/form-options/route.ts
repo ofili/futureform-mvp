@@ -12,11 +12,24 @@ export async function GET(req: Request) {
 
         const { searchParams } = new URL(req.url);
         const category = searchParams.get('category');
+        const parentId = searchParams.get('parentId');
+        const includeChildren = searchParams.get('includeChildren') === 'true';
 
-        const where = category ? { category } : {};
+        const where: any = {};
+        if (category) where.category = category;
+        if (parentId === 'null') {
+            where.parentId = null; // Root level items
+        } else if (parentId) {
+            where.parentId = parentId;
+        }
 
         const options = await prisma.formOption.findMany({
             where,
+            include: includeChildren ? {
+                children: {
+                    orderBy: { displayOrder: 'asc' }
+                }
+            } : undefined,
             orderBy: [
                 { category: 'asc' },
                 { displayOrder: 'asc' }

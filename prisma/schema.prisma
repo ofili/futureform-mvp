@@ -130,6 +130,7 @@ model Partner {
   website        String?
   country        String?
   headquarters   String?
+  type           String? // Partner type from PARTNER_TYPE taxonomy
   sector         String?
   subsector      String?
   createdByOrgId String?

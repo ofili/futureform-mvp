@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { Loader2, Plus, Search } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useQuery } from '@tanstack/react-query';
 import {
     Dialog,
     DialogContent,
@@ -22,6 +23,7 @@ import {
     FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { toast } from 'react-hot-toast';
 import { useQueryClient } from '@tanstack/react-query';
 import { Partner } from '@/hooks/use-partners';
@@ -30,6 +32,7 @@ const formSchema = z.object({
     legalName: z.string().min(2, 'Name must be at least 2 characters'),
     website: z.string().url().optional().or(z.literal('')),
     sector: z.string().optional(),
+    type: z.string().optional(),
 });
 
 interface AddPartnerDialogProps {
@@ -50,6 +53,17 @@ export function AddPartnerDialog({ onPartnerCreated }: AddPartnerDialogProps) {
             legalName: '',
             website: '',
             sector: '',
+            type: '',
+        },
+    });
+
+    // Fetch partner types
+    const { data: partnerTypes = [] } = useQuery<any[]>({
+        queryKey: ['form-options', 'PARTNER_TYPE'],
+        queryFn: async () => {
+            const res = await fetch('/api/v1/admin/form-options?category=PARTNER_TYPE&parentId=null');
+            if (!res.ok) return [];
+            return res.json();
         },
     });
 
@@ -168,22 +182,6 @@ export function AddPartnerDialog({ onPartnerCreated }: AddPartnerDialogProps) {
                                                         <span className="text-[10px] bg-green-100 text-green-800 px-1 rounded">Verified</span>
                                                     )}
                                                 </div>
-                                            ))}
-                                        </div>
-                                    )}
-
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-
-                        <div className="grid grid-cols-2 gap-4">
-                            <FormField
-                                control={form.control}
-                                name="website"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Website</FormLabel>
                                         <FormControl>
                                             <Input {...field} placeholder="https://example.com" />
                                         </FormControl>

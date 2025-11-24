@@ -10,6 +10,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { FileText, ArrowLeft } from 'lucide-react';
 import DashboardLayout from '@/components/layouts/DashboardLayout';
+import { CascadingSelect } from '@/components/ui/cascading-select';
 
 interface FormOption {
   id: string;
@@ -30,6 +31,7 @@ function NewProjectContent() {
     description: '',
     longDescription: '',
     type: isSingleMode ? 'VENDOR_SELECTION_PROCUREMENT' : '',
+    typeSubcategory: '', // For cascading select
     sector: '',
     subsector: '',
     region: '',
@@ -288,22 +290,14 @@ function NewProjectContent() {
                   </div>
 
                   {!isSingleMode && (
-                    <div className="space-y-2">
-                      <label className="block text-sm font-medium">
-                        Project Type <span className="text-red-500">*</span>
-                      </label>
-                      <select
-                        value={formData.type}
-                        onChange={(e) => setFormData(prev => ({ ...prev, type: e.target.value }))}
-                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                        required
-                      >
-                        <option value="">Select project type</option>
-                        {projectTypes.map(pt => (
-                          <option key={pt.id} value={pt.value}>{pt.label}</option>
-                        ))}
-                      </select>
-                    </div>
+                    <CascadingSelect
+                      category="PROJECT_TYPE"
+                      label="Project Type"
+                      value={formData.type}
+                      subValue={formData.typeSubcategory}
+                      onChange={(value, subValue) => setFormData(prev => ({ ...prev, type: value, typeSubcategory: subValue || '' }))}
+                      required
+                    />
                   )}
                 </div>
 
