@@ -201,7 +201,7 @@ model Project {
   description String?
 
   // Classification & Scope
-  type      ProjectType
+  type      String // Dynamic classification via FormOption
   sector    String // e.g., "Pre-investment due diligence"
   subsector String? // [NEW]
   region    String
@@ -1097,8 +1097,13 @@ model FormOption {
   label        String
   displayOrder Int     @default(0)
   isActive     Boolean @default(true)
+  parentId     String? // For hierarchical options (e.g., sub-categories)
+
+  parent   FormOption?  @relation("FormOptionHierarchy", fields: [parentId], references: [id], onDelete: Cascade)
+  children FormOption[] @relation("FormOptionHierarchy")
 
   @@unique([category, value])
+  @@index([parentId])
   @@map("form_options")
 }
 
