@@ -8,7 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { Users, Building, FileText, DollarSign, AlertTriangle, TrendingUp, Activity, Calendar, ArrowUpRight, MoreVertical, HelpCircle, LifeBuoy, CreditCard } from 'lucide-react';
 import Link from 'next/link';
 import { SystemLogsDialog } from '@/components/admin/system-logs-dialog';
-import { useToast } from '@/hooks/use-toast';
+import { toast } from 'react-hot-toast';
 interface AdminStats {
   totalUsers: number;
   totalOrganizations: number;
@@ -23,7 +23,6 @@ interface AdminStats {
 export default function AdminDashboard() {
   const [logsOpen, setLogsOpen] = useState(false);
   const [generatingReport, setGeneratingReport] = useState(false);
-  const { toast } = useToast();
 
   const { data: stats, isLoading } = useQuery<AdminStats>({
     queryKey: ['admin-stats'],
@@ -56,16 +55,9 @@ export default function AdminDashboard() {
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
 
-      toast({
-        title: 'Report Generated',
-        description: 'Monthly report has been downloaded successfully.',
-      });
+      toast.success('Monthly report has been downloaded successfully.');
     } catch (error) {
-      toast({
-        title: 'Error',
-        description: 'Failed to generate report. Please try again.',
-        variant: 'destructive',
-      });
+      toast.error('Failed to generate report. Please try again.');
     } finally {
       setGeneratingReport(false);
     }
