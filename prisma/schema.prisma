@@ -1207,3 +1207,17 @@ model Evidence {
 
   @@map("evidence")
 }
+
+model SystemLog {
+  id        String   @id @default(cuid())
+  timestamp DateTime @default(now())
+  level     String
+  message   String
+  metadata  Json?
+  userId    String?
+  action    String?
+
+  @@index([timestamp])
+  @@index([level])
+  @@map("system_logs")
+}

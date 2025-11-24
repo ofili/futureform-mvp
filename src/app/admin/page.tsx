@@ -1,11 +1,14 @@
 'use client';
 
+import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Users, Building, FileText, DollarSign, AlertTriangle, TrendingUp, Activity, Calendar, ArrowUpRight, MoreVertical, HelpCircle, LifeBuoy, CreditCard } from 'lucide-react';
 import Link from 'next/link';
+import { SystemLogsDialog } from '@/components/admin/system-logs-dialog';
+import { useToast } from '@/hooks/use-toast';
 interface AdminStats {
   totalUsers: number;
   totalOrganizations: number;
@@ -18,6 +21,10 @@ interface AdminStats {
 }
 
 export default function AdminDashboard() {
+  const [logsOpen, setLogsOpen] = useState(false);
+  const [generatingReport, setGeneratingReport] = useState(false);
+  const { toast } = useToast();
+
   const { data: stats, isLoading } = useQuery<AdminStats>({
     queryKey: ['admin-stats'],
     queryFn: async () => {
@@ -28,6 +35,41 @@ export default function AdminDashboard() {
       return result.data;
     }
   });
+
+  const handleGenerateReport = async () => {
+    try {
+      setGeneratingReport(true);
+      const response = await fetch('/api/v1/admin/reports/monthly');
+
+      if (!response.ok) throw new Error('Failed to generate report');
+
+      const data = await response.json();
+
+      // Create and download JSON report (can be enhanced to PDF later)
+      const blob = new Blob([JSON.stringify(data.data, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `monthly-report-${new Date().toISOString().slice(0, 7)}.json`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+
+      toast({
+        title: 'Report Generated',
+        description: 'Monthly report has been downloaded successfully.',
+      });
+    } catch (error) {
+      toast({
+        title: 'Error',
+        description: 'Failed to generate report. Please try again.',
+        variant: 'destructive',
+      });
+    } finally {
+      setGeneratingReport(false);
+    }
+  };
 
   if (isLoading) {
     return (
@@ -49,8 +91,10 @@ export default function AdminDashboard() {
           <p className="text-muted-foreground">Platform management, revenue tracking, and system health.</p>
         </div>
         <div className="flex items-center gap-3">
-          <Button variant="outline">System Logs</Button>
-          <Button>Generate Monthly Report</Button>
+          <Button variant="outline" onClick={() => setLogsOpen(true)}>System Logs</Button>
+          <Button onClick={handleGenerateReport} disabled={generatingReport}>
+            {generatingReport ? 'Generating...' : 'Generate Monthly Report'}
+          </Button>
         </div>
       </div>
 
@@ -271,6 +315,9 @@ export default function AdminDashboard() {
           </CardContent>
         </Card>
       </div>
+
+      {/* System Logs Dialog */}
+      <SystemLogsDialog open={logsOpen} onOpenChange={setLogsOpen} />
     </div>
   );
 }
