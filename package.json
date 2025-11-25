@@ -13,7 +13,16 @@
     "test:coverage": "jest --coverage",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
-    "test:db:reset": "dotenv -e .env.test -- prisma migrate reset --force"
+    "test:db:reset": "dotenv -e .env.test -- prisma migrate reset --force",
+    "db:migrate": "prisma migrate dev",
+    "db:migrate:deploy": "prisma migrate deploy",
+    "db:seed": "prisma db seed",
+    "db:push": "prisma db push",
+    "db:studio": "prisma studio",
+    "db:reset": "prisma migrate reset",
+    "db:setup": "prisma generate && prisma db push && prisma db seed",
+    "dev:local": "npm run db:setup && npm run dev",
+    "db:migrate:prod": "dotenv -e .env.production -- prisma migrate deploy"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.2",
