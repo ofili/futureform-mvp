@@ -51,7 +51,7 @@ export async function GET(request: NextRequest) {
             }),
             prisma.organization.groupBy({
                 by: ['tierId'],
-                _count: true,
+                _count: { _all: true },
                 where: {
                     tierId: { not: null }
                 }
@@ -65,7 +65,7 @@ export async function GET(request: NextRequest) {
         const revenue = revenueByTier.reduce((sum, group) => {
             const tier = tierMap.get(group.tierId!);
             if (tier && tier.priceUSD) {
-                return sum + (tier.priceUSD * group._count);
+                return sum + (tier.priceUSD * group._count._all);
             }
             return sum;
         }, 0);
@@ -116,8 +116,8 @@ export async function GET(request: NextRequest) {
                 monthly: revenue,
                 byTier: revenueByTier.map(group => ({
                     tier: tierMap.get(group.tierId!)?.name || 'Unknown',
-                    count: group._count,
-                    revenue: (tierMap.get(group.tierId!)?.priceUSD || 0) * group._count
+                    count: group._count._all,
+                    revenue: (tierMap.get(group.tierId!)?.priceUSD || 0) * group._count._all
                 }))
             },
             topOrganizations: topOrganizations.map(org => ({
