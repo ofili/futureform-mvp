@@ -1227,23 +1227,3 @@ model SystemLog {
   @@index([level])
   @@map("system_logs")
 }
-
-// Dynamic Form Options for Classification
-// Supports hierarchical data (parent-child relationships)
-model FormOption {
-  id           String  @id @default(cuid())
-  category     String // 'PROJECT_TYPE', 'ASSESSMENT_TYPE', 'PARTNER_TYPE', etc.
-  value        String
-  label        String
-  displayOrder Int     @default(0)
-  isActive     Boolean @default(true)
-  parentId     String? // For hierarchical options (e.g., sub-categories)
-
-  parent   FormOption?  @relation("FormOptionHierarchy", fields: [parentId], references: [id], onDelete: Cascade)
-  children FormOption[] @relation("FormOptionHierarchy")
-
-  @@unique([category, value])
-  @@index([parentId])
-  @@index([category])
-  @@map("form_options")
-}
