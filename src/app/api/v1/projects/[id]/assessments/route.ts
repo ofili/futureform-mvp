@@ -21,7 +21,7 @@ export async function POST(
 
         const { id: projectId } = await params;
         const body = await request.json();
-        const { type, depth, sector, deadline, aiConfig, partnerAdminEmail, partnerAliasId, partnerGlobalId } = body;
+        const { type, depth, sector, deadline, aiConfig, partnerAdminEmail, partnerAliasId, partnerGlobalId, trustPartnerTypeId } = body;
 
         // Validate required fields
         if (!type || !depth || !sector) {
@@ -59,6 +59,64 @@ export async function POST(
             if (alias) {
                 partnerName = alias.displayName;
             }
+        }
+
+        // Check if this is a Trust Assessment
+        if (body.trustPartnerTypeId) {
+            // Fetch questions for the selected partner type
+            const trustQuestions = await trustOntologyService.getQuestionsForPartnerType(body.trustPartnerTypeId);
+
+            // Create assessment with trust fields
+            const assessment = await prisma.assessment.create({
+                data: {
+                    projectId,
+                    partnerId: session.user.id,
+                    partnerName,
+                    partnerType: 'Organization', // Default for now, or derive from trustPartnerType
+                    partnerAliasId,
+                    partnerGlobalId,
+                    trustPartnerTypeId: body.trustPartnerTypeId,
+                    status: 'PENDING',
+                    token: generateToken(),
+                    type,
+                    depth,
+                    deadline: deadline ? new Date(deadline) : null,
+                    aiConfig: aiConfig || {},
+                    partnerAdminEmail,
+                    estimatedRespondents: 0,
+                    estimatedDuration: calculateEstimatedDuration(depth),
+                },
+            });
+
+            // Map trust questions to the format expected by the frontend
+            // We do NOT create AssessmentQuestion records for Trust Assessments as they use a different schema
+            const mappedQuestions = trustQuestions.map((q, index) => ({
+                id: q.id, // Use trust question ID
+                questionId: q.id,
+                assessmentId: assessment.id,
+                question: {
+                    id: q.id,
+                    text: q.text,
+                    domain: q.subDimension?.name || 'Trust',
+                },
+                assignedRoleId: null, // To be mapped in wizard
+                assignedSeniority: 'Manager',
+                evidenceRequirements: q.evidenceRequired ? [q.evidenceRequired] : [],
+                order: index + 1,
+                aiConfidence: 1.0,
+                aiRationale: 'Selected based on partner type',
+                customized: false,
+            }));
+
+            return NextResponse.json(
+                {
+                    assessment: {
+                        ...assessment,
+                        questions: mappedQuestions,
+                    },
+                },
+                { status: 201 }
+            );
         }
 
         // Call AI service to select questions

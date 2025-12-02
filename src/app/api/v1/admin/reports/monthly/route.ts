@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/db';
+import prisma from '@/lib/prisma';
 import { auth } from '@/lib/auth';
 
 export async function GET(request: NextRequest) {
@@ -70,18 +70,18 @@ export async function GET(request: NextRequest) {
             return sum;
         }, 0);
 
-        // Get top organizations by assessment count
+        // Get top organizations by project count
         const topOrganizations = await prisma.organization.findMany({
             take: 10,
             select: {
                 id: true,
                 name: true,
                 _count: {
-                    select: { projects: true, assessments: true }
+                    select: { projects: true }
                 }
             },
             orderBy: {
-                assessments: {
+                projects: {
                     _count: 'desc'
                 }
             }
@@ -123,8 +123,7 @@ export async function GET(request: NextRequest) {
             topOrganizations: topOrganizations.map(org => ({
                 id: org.id,
                 name: org.name,
-                projects: org._count.projects,
-                assessments: org._count.assessments
+                projects: org._count.projects
             }))
         };
 

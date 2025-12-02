@@ -3,6 +3,8 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import prisma from '@/lib/prisma';
 import { sendEmail } from '@/lib/email';
+import { rcService } from '@/services';
+import { InsufficientCreditsError } from '@/lib/errors/credit-errors';
 
 /**
  * POST /api/v1/assessments/[id]/invitations
@@ -59,6 +61,32 @@ export async function POST(
             return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
         }
 
+        // Calculate required credits
+        const requiredCredits = invitations.length;
+        const organizationId = assessment.project.organizationId;
+
+        if (!organizationId) {
+            return NextResponse.json({ error: 'Organization context required for billing' }, { status: 400 });
+        }
+
+        // Consume credits
+        try {
+            await rcService.consumeCredits(organizationId, {
+                amount: requiredCredits,
+                userId: session.user.id,
+                assessmentId: assessmentId,
+                notes: `Inviting ${requiredCredits} respondents to assessment ${assessment.title}`
+            });
+        } catch (error) {
+            if (error instanceof InsufficientCreditsError) {
+                return NextResponse.json(
+                    { error: 'Insufficient respondent credits. Please purchase more credits to continue.', code: 'INSUFFICIENT_CREDITS' },
+                    { status: 402 }
+                );
+            }
+            throw error; // Re-throw other errors
+        }
+
         // Create invitations
         const createdInvitations = await Promise.all(
             invitations.map(async (inv: any) => {
@@ -95,7 +123,9 @@ export async function POST(
         await prisma.assessment.update({
             where: { id: assessmentId },
             data: {
-                estimatedRespondents: createdInvitations.length,
+                estimatedRespondents: {
+                    increment: createdInvitations.length
+                },
             },
         });
 

@@ -1,4 +1,4 @@
-import { prisma } from '@/lib/db'
+import prisma from '@/lib/prisma'
 
 /**
  * Check if notification should be sent based on user preferences

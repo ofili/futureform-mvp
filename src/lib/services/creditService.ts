@@ -1,4 +1,4 @@
-import { prisma } from '@/lib/db'
+import prisma from '@/lib/prisma'
 import { sendNotification } from '@/lib/notifications'
 
 export class CreditService {

@@ -26,6 +26,7 @@ export interface WizardData {
     partnerAdminEmail: string;
     partnerAliasId?: string;
     partnerGlobalId?: string;
+    trustPartnerTypeId?: string;
 
     // Step 2: Questions (from AI)
     selectedQuestions: any[];
@@ -63,6 +64,7 @@ export default function AssessmentWizard({ projectId }: AssessmentWizardProps) {
         partnerAdminEmail: '',
         partnerAliasId: undefined,
         partnerGlobalId: undefined,
+        trustPartnerTypeId: undefined,
         selectedQuestions: [],
         questionRoleMapping: {},
         invitations: [],
@@ -103,6 +105,7 @@ export default function AssessmentWizard({ projectId }: AssessmentWizardProps) {
                     partnerAdminEmail: wizardData.partnerAdminEmail,
                     partnerAliasId: wizardData.partnerAliasId,
                     partnerGlobalId: wizardData.partnerGlobalId,
+                    trustPartnerTypeId: wizardData.trustPartnerTypeId,
                 }),
             });
 
@@ -198,7 +201,7 @@ export default function AssessmentWizard({ projectId }: AssessmentWizardProps) {
     const canProceed = () => {
         switch (currentStep) {
             case 1:
-                return wizardData.type && wizardData.depth && wizardData.sector;
+                return wizardData.type && wizardData.depth && wizardData.sector && wizardData.trustPartnerTypeId;
             case 2:
                 return wizardData.selectedQuestions.length > 0;
             case 3:

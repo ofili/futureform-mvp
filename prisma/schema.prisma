@@ -7,7 +7,6 @@
 //   url      = env("DATABASE_URL")
 // }
 
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -66,6 +65,15 @@ model User {
   uploadedEvidence          Evidence[]             @relation("EvidenceUploader")
   verifiedEvidence          Evidence[]             @relation("EvidenceVerifier")
 
+  // Trust evidence relations
+  uploadedTrustEvidence  TrustEvidenceFile[] @relation("EvidenceUploader")
+  validatedTrustEvidence TrustEvidenceFile[] @relation("EvidenceValidator")
+
+  // RC/EC Credit System relations
+  rcTransactions           RespondentCreditTx[] @relation("RCRespondent")
+  uploadedEnhancedEvidence EnhancedEvidence[]   @relation("EnhancedEvidenceUploader")
+  verifiedEnhancedEvidence EnhancedEvidence[]   @relation("EnhancedEvidenceVerifier")
+
   @@map("users")
 }
 
@@ -93,6 +101,10 @@ model Organization {
   partnerAliases PartnerAlias[] // Partner registry for this org
   tierId         String?
   tier           SubscriptionTier?        @relation(fields: [tierId], references: [id])
+
+  // RC/EC Credit System
+  respondentCredits RespondentCredit[]
+  evidenceCredits   EvidenceCredit[]
 
   @@map("organizations")
 }
@@ -331,8 +343,24 @@ model Assessment {
   assessmentQuestions AssessmentQuestion[]
   invitations         AssessmentInvitation[]
 
+  // RC/EC Credit System relations
+  rcTransactions RespondentCreditTx[]
+  ecTransactions EvidenceCreditTx[]
+
+  // Trust Intelligence Layer relations
+  trustPartnerTypeId     String?
+  trustPartnerType       TrustPartnerType?       @relation("TrustAssessmentPartnerType", fields: [trustPartnerTypeId], references: [id])
+  trustDeploymentContext Json? // Sector, geography, stage, etc.
+  trustRespondents       TrustRespondent[]       @relation("TrustAssessmentRespondents")
+  trustResponses         TrustQuestionResponse[] @relation("TrustAssessmentResponses")
+  trustEvidenceFiles     TrustEvidenceFile[]     @relation("TrustAssessmentEvidence")
+  trustLayerScores       TrustLayerScore[]       @relation("TrustAssessmentLayerScores")
+  trustScore             TrustScore?             @relation("TrustAssessmentScore")
+  trustRedFlags          TrustRedFlag[]          @relation("TrustAssessmentRedFlags")
+
   @@index([partnerGlobalId])
   @@index([partnerAliasId])
+  @@index([trustPartnerTypeId])
   @@map("assessments")
 }
 
@@ -373,13 +401,14 @@ model AssessmentResponse {
   createdAt        DateTime  @default(now())
   updatedAt        DateTime  @updatedAt
 
-  assessment            Assessment             @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
-  question              Question               @relation(fields: [questionId], references: [id])
-  user                  User                   @relation(fields: [userId], references: [id])
-  clarificationRequests ClarificationRequest[]
-  evidenceUploads       Evidence[] // New relation to Evidence model
-  assessmentQuestion    AssessmentQuestion?    @relation(fields: [assessmentQuestionId], references: [id])
-  assessmentQuestionId  String?
+  assessment              Assessment             @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
+  question                Question               @relation(fields: [questionId], references: [id])
+  user                    User                   @relation(fields: [userId], references: [id])
+  clarificationRequests   ClarificationRequest[]
+  evidenceUploads         Evidence[] // Old evidence model
+  enhancedEvidenceUploads EnhancedEvidence[] // New enhanced evidence model
+  assessmentQuestion      AssessmentQuestion?    @relation(fields: [assessmentQuestionId], references: [id])
+  assessmentQuestionId    String?
 
   @@unique([assessmentId, questionId])
   @@map("assessment_responses")
@@ -480,45 +509,45 @@ model FrameworkDownload {
 
 // Marketing Leads (PQL - Product Qualified Leads)
 model MarketingLead {
-  id              String    @id @default(cuid())
-  
+  id String @id @default(cuid())
+
   // Contact Information
-  firstName       String
-  lastName        String
-  email           String
-  organization    String
-  sector          String?
-  country         String?
-  
+  firstName    String
+  lastName     String
+  email        String
+  organization String
+  sector       String?
+  country      String?
+
   // Lead Source & Tracking
-  source          String    // e.g., "framework_download", "contact_form", "webinar"
-  downloadToken   String?   @unique // Token for framework download
-  tokenUsed       Boolean   @default(false)
-  tokenUsedAt     DateTime?
-  
+  source        String // e.g., "framework_download", "contact_form", "webinar"
+  downloadToken String?   @unique // Token for framework download
+  tokenUsed     Boolean   @default(false)
+  tokenUsedAt   DateTime?
+
   // Conversion Tracking
-  converted       Boolean   @default(false) // Did they sign up?
-  convertedAt     DateTime?
-  userId          String?   // FK to User if they converted
-  
+  converted   Boolean   @default(false) // Did they sign up?
+  convertedAt DateTime?
+  userId      String? // FK to User if they converted
+
   // Lead Status
-  status          String    @default("NEW") // NEW, CONTACTED, QUALIFIED, CONVERTED, LOST
-  leadScore       Int?      // Optional lead scoring
-  
+  status    String @default("NEW") // NEW, CONTACTED, QUALIFIED, CONVERTED, LOST
+  leadScore Int? // Optional lead scoring
+
   // HubSpot Integration
-  hubspotSynced     Boolean   @default(false)
-  hubspotContactId  String?   // HubSpot contact ID
-  hubspotSyncedAt   DateTime?
-  hubspotSyncError  String?   // Last sync error message
-  
+  hubspotSynced    Boolean   @default(false)
+  hubspotContactId String? // HubSpot contact ID
+  hubspotSyncedAt  DateTime?
+  hubspotSyncError String? // Last sync error message
+
   // Metadata
-  metadata        Json?     // Additional tracking data
-  notes           String?   // Internal notes
-  
+  metadata Json? // Additional tracking data
+  notes    String? // Internal notes
+
   // Timestamps
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
-  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
   @@index([email])
   @@index([source])
   @@index([status])
@@ -526,7 +555,6 @@ model MarketingLead {
   @@index([hubspotSynced])
   @@map("marketing_leads")
 }
-
 
 model DomainScore {
   id           String   @id @default(cuid())
@@ -1226,4 +1254,599 @@ model SystemLog {
   @@index([timestamp])
   @@index([level])
   @@map("system_logs")
+}
+
+// ============================================================================
+// RC/EC CREDIT SYSTEM
+// ============================================================================
+
+// Respondent Credits (RC) - For human intelligence collection
+model RespondentCredit {
+  id             String @id @default(cuid())
+  organizationId String
+
+  // Credit tracking
+  totalPurchased Int @default(0)
+  totalUsed      Int @default(0)
+  totalAvailable Int @default(0)
+
+  // Metadata
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  expiresAt DateTime?
+
+  organization Organization         @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  transactions RespondentCreditTx[]
+
+  @@unique([organizationId])
+  @@map("respondent_credits")
+}
+
+model RespondentCreditTx {
+  id       String   @id @default(cuid())
+  creditId String
+  type     RCTxType
+  amount   Int
+  balance  Int // Balance after transaction
+
+  // Context
+  assessmentId String?
+  respondentId String? // User who consumed the credit
+  packageId    String? // Which package was purchased
+  notes        String?
+
+  createdAt DateTime @default(now())
+
+  credit     RespondentCredit @relation(fields: [creditId], references: [id], onDelete: Cascade)
+  assessment Assessment?      @relation(fields: [assessmentId], references: [id])
+  respondent User?            @relation("RCRespondent", fields: [respondentId], references: [id])
+  package    CreditPackage?   @relation("RCPackagePurchases", fields: [packageId], references: [id])
+
+  @@index([creditId])
+  @@index([assessmentId])
+  @@index([type])
+  @@map("respondent_credit_transactions")
+}
+
+enum RCTxType {
+  PURCHASE
+  USAGE
+  REFUND
+  EXPIRE
+  ROLLOVER
+}
+
+// Evidence Credits (EC) - For machine/digital verification
+model EvidenceCredit {
+  id             String @id @default(cuid())
+  organizationId String
+
+  // Credit tracking (using Decimal for fractional credits)
+  totalPurchased Decimal @default(0) @db.Decimal(10, 2)
+  totalUsed      Decimal @default(0) @db.Decimal(10, 2)
+  totalAvailable Decimal @default(0) @db.Decimal(10, 2)
+
+  // Auto-reload settings
+  autoReloadEnabled   Boolean  @default(false)
+  autoReloadThreshold Decimal? @db.Decimal(10, 2)
+  autoReloadAmount    Decimal? @db.Decimal(10, 2)
+
+  // Metadata
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  expiresAt DateTime?
+
+  organization Organization       @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  transactions EvidenceCreditTx[]
+
+  @@unique([organizationId])
+  @@map("evidence_credits")
+}
+
+model EvidenceCreditTx {
+  id       String   @id @default(cuid())
+  creditId String
+  type     ECTxType
+  amount   Decimal  @db.Decimal(10, 2)
+  balance  Decimal  @db.Decimal(10, 2)
+
+  // Evidence context
+  evidenceType String? // "iot_sensor", "gps_trace", "llv_basic", etc.
+  evidenceId   String? // Link to actual evidence record
+  assessmentId String?
+  packageId    String?
+  notes        String?
+
+  createdAt DateTime @default(now())
+
+  credit     EvidenceCredit    @relation(fields: [creditId], references: [id], onDelete: Cascade)
+  evidence   EnhancedEvidence? @relation("EvidenceECTransactions", fields: [evidenceId], references: [id])
+  assessment Assessment?       @relation(fields: [assessmentId], references: [id])
+  package    CreditPackage?    @relation("ECPackagePurchases", fields: [packageId], references: [id])
+
+  @@index([creditId])
+  @@index([evidenceType])
+  @@index([type])
+  @@map("evidence_credit_transactions")
+}
+
+enum ECTxType {
+  PURCHASE
+  USAGE
+  REFUND
+  EXPIRE
+  ROLLOVER
+  AUTO_RELOAD
+}
+
+// Credit Packages (RC, EC, or Combined)
+model CreditPackage {
+  id          String      @id @default(cuid())
+  name        String      @unique
+  displayName String
+  type        PackageType
+
+  // RC packages
+  rcAmount Int?
+  rcPrice  Decimal? @db.Decimal(10, 2)
+
+  // EC packages
+  ecAmount Decimal? @db.Decimal(10, 2)
+  ecPrice  Decimal? @db.Decimal(10, 2)
+
+  // Combined packages
+  rcIncluded Int?
+  ecIncluded Decimal? @db.Decimal(10, 2)
+  totalPrice Decimal? @db.Decimal(10, 2)
+
+  // Metadata
+  description  String?
+  features     String[] @default([])
+  bestFor      String?
+  popular      Boolean  @default(false)
+  isActive     Boolean  @default(true)
+  displayOrder Int      @default(0)
+
+  // Subscription details (for recurring packages)
+  billingPeriod String? // "monthly", "annual", null for one-time
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  rcPurchases RespondentCreditTx[] @relation("RCPackagePurchases")
+  ecPurchases EvidenceCreditTx[]   @relation("ECPackagePurchases")
+
+  @@map("credit_packages")
+}
+
+enum PackageType {
+  RC_ONLY // Respondent Credits only
+  EC_ONLY // Evidence Credits only
+  COMBINED // Both RC and EC
+  SUBSCRIPTION // Recurring subscription
+}
+
+// EC Pricing Table (transparent per-unit costs)
+model ECPricing {
+  id           String        @id @default(cuid())
+  evidenceType String        @unique
+  layer        EvidenceLayer
+  costPerUnit  Decimal       @db.Decimal(10, 2)
+  description  String?
+  rationale    String?
+  isActive     Boolean       @default(true)
+  displayOrder Int           @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([layer])
+  @@index([isActive])
+  @@map("ec_pricing")
+}
+
+// Enhanced Evidence Model (with layers and metadata)
+model EnhancedEvidence {
+  id         String  @id @default(cuid())
+  responseId String? // Nullable for non-assessment evidence
+
+  // Evidence classification
+  layer    EvidenceLayer
+  type     String // Specific type within layer
+  category String? // Business category
+
+  // File/Data
+  fileName    String?
+  fileUrl     String?
+  fileType    String?
+  fileSize    Int?
+  dataPayload Json? // For DSE and structured data
+
+  // Metadata (VE specific)
+  metadata   Json? // Geolocation, device info, EXIF, etc.
+  capturedAt DateTime?
+  uploadedAt DateTime  @default(now())
+
+  // Validation
+  uploadedBy         String
+  verifiedBy         String?
+  verifiedAt         DateTime?
+  verificationStatus VerificationStatus @default(PENDING)
+  verificationNotes  String?
+
+  // AI Analysis
+  aiAnalysis   Json? // Anomaly scores, extracted entities, etc.
+  aiConfidence Float?
+  tamperFlags  Json?
+
+  // Credit tracking
+  ecCost Decimal? @db.Decimal(10, 2)
+
+  // Relations
+  response       AssessmentResponse? @relation(fields: [responseId], references: [id], onDelete: Cascade)
+  uploader       User                @relation("EnhancedEvidenceUploader", fields: [uploadedBy], references: [id])
+  verifier       User?               @relation("EnhancedEvidenceVerifier", fields: [verifiedBy], references: [id])
+  ecTransactions EvidenceCreditTx[]  @relation("EvidenceECTransactions")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([layer])
+  @@index([type])
+  @@index([verificationStatus])
+  @@index([uploadedBy])
+  @@map("enhanced_evidence")
+}
+
+enum EvidenceLayer {
+  AE // Assessment Evidence
+  VE // Verification Evidence
+  DSE // Digital Signal Evidence
+}
+
+enum VerificationStatus {
+  PENDING
+  VALIDATED
+  FLAGGED
+  REJECTED
+}
+
+// ============================================================================
+// TRUST INTELLIGENCE LAYER
+// ============================================================================
+
+// Trust Layers (L1-L6: Reliability, Transparency, Governance, Competence, Integrity, Ecosystem)
+model TrustLayer {
+  id             String   @id @default(cuid())
+  layerId        String   @unique // "L1", "L2", "L3", "L4", "L5", "L6"
+  name           String // "Reliability", "Transparency", etc.
+  description    String?  @db.Text
+  baselineWeight Float    @default(0.15)
+  totalQuestions Int
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  subDimensions TrustSubDimension[]
+  layerScores   TrustLayerScore[]
+
+  @@index([layerId])
+  @@map("trust_layers")
+}
+
+// Sub-dimensions within each layer (e.g., "System Availability & Performance" within L1)
+model TrustSubDimension {
+  id          String     @id @default(cuid())
+  dimensionId String     @unique // "1.1", "1.2", "2.1", etc.
+  name        String
+  weight      Float
+  layerId     String
+  layer       TrustLayer @relation(fields: [layerId], references: [id], onDelete: Cascade)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  questions TrustQuestion[]
+
+  @@index([layerId])
+  @@map("trust_sub_dimensions")
+}
+
+// Individual trust questions from the ontology
+model TrustQuestion {
+  id               String              @id @default(cuid())
+  questionId       String              @unique // "Q1.1.1", "Q1.1.2", etc.
+  text             String              @db.Text
+  subDimensionId   String
+  subDimension     TrustSubDimension   @relation(fields: [subDimensionId], references: [id], onDelete: Cascade)
+  stakeholderTypes String[] // ["Vendor", "Technical Team"]
+  evidenceRequired String              @db.Text
+  evidenceWeight   TrustEvidenceWeight // CRITICAL, HIGH, MEDIUM, LOW
+  weightInLayer    Float
+  scoringLogic     Json // Scoring criteria for 1-5
+  redFlags         Json[] // Array of red flag conditions
+  contextModifiers Json? // Context-specific adjustments
+  createdAt        DateTime            @default(now())
+  updatedAt        DateTime            @updatedAt
+
+  partnerTypes       TrustPartnerTypeQuestion[]
+  responses          TrustQuestionResponse[]
+  trustEvidenceFiles TrustEvidenceFile[]
+
+  @@index([subDimensionId])
+  @@index([questionId])
+  @@map("trust_questions")
+}
+
+enum TrustEvidenceWeight {
+  CRITICAL
+  HIGH
+  MEDIUM
+  LOW
+}
+
+// Partner types (Technology Vendor, Implementation Partner, etc.)
+model TrustPartnerType {
+  id           String   @id @default(cuid())
+  name         String   @unique
+  description  String?  @db.Text
+  layerWeights Json // Custom layer weights for this partner type
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  requiredRoles TrustRequiredRole[]
+  questions     TrustPartnerTypeQuestion[]
+  assessments   Assessment[]               @relation("TrustAssessmentPartnerType")
+
+  @@map("trust_partner_types")
+}
+
+// Required roles for each partner type
+model TrustRequiredRole {
+  id              String               @id @default(cuid())
+  name            String
+  layerCoverage   String[] // ["L1", "L4", "L5"]
+  criticality     TrustRoleCriticality
+  assessmentFocus String               @db.Text
+  partnerTypeId   String
+  partnerType     TrustPartnerType     @relation(fields: [partnerTypeId], references: [id], onDelete: Cascade)
+  createdAt       DateTime             @default(now())
+  updatedAt       DateTime             @updatedAt
+
+  respondents TrustRespondent[]
+
+  @@index([partnerTypeId])
+  @@map("trust_required_roles")
+}
+
+enum TrustRoleCriticality {
+  CRITICAL
+  HIGH
+  MEDIUM
+  LOW
+}
+
+// Junction table: Partner types to questions mapping
+model TrustPartnerTypeQuestion {
+  id            String           @id @default(cuid())
+  partnerTypeId String
+  partnerType   TrustPartnerType @relation(fields: [partnerTypeId], references: [id], onDelete: Cascade)
+  questionId    String
+  question      TrustQuestion    @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  isRequired    Boolean          @default(true)
+  customWeight  Float? // Override default weight for this partner type
+
+  @@unique([partnerTypeId, questionId])
+  @@index([partnerTypeId])
+  @@index([questionId])
+  @@map("trust_partner_type_questions")
+}
+
+// Respondents for trust assessments
+model TrustRespondent {
+  id           String            @id @default(cuid())
+  assessmentId String
+  assessment   Assessment        @relation("TrustAssessmentRespondents", fields: [assessmentId], references: [id], onDelete: Cascade)
+  name         String
+  email        String
+  roleId       String
+  role         TrustRequiredRole @relation(fields: [roleId], references: [id])
+  invitedAt    DateTime          @default(now())
+  completedAt  DateTime?
+  accessToken  String            @unique @default(cuid())
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+
+  responses TrustQuestionResponse[]
+
+  @@index([assessmentId])
+  @@index([accessToken])
+  @@index([email])
+  @@map("trust_respondents")
+}
+
+// Responses to trust questions
+model TrustQuestionResponse {
+  id           String          @id @default(cuid())
+  assessmentId String
+  assessment   Assessment      @relation("TrustAssessmentResponses", fields: [assessmentId], references: [id], onDelete: Cascade)
+  questionId   String
+  question     TrustQuestion   @relation(fields: [questionId], references: [id])
+  respondentId String
+  respondent   TrustRespondent @relation(fields: [respondentId], references: [id], onDelete: Cascade)
+  textResponse String?         @db.Text
+  submittedAt  DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+
+  evidenceFiles TrustEvidenceFile[]
+
+  @@index([assessmentId])
+  @@index([questionId])
+  @@index([respondentId])
+  @@map("trust_question_responses")
+}
+
+// Evidence files uploaded for trust assessments
+model TrustEvidenceFile {
+  id           String                 @id @default(cuid())
+  assessmentId String
+  assessment   Assessment             @relation("TrustAssessmentEvidence", fields: [assessmentId], references: [id], onDelete: Cascade)
+  questionId   String?
+  question     TrustQuestion?         @relation(fields: [questionId], references: [id])
+  responseId   String?
+  response     TrustQuestionResponse? @relation(fields: [responseId], references: [id], onDelete: SetNull)
+
+  // File Information
+  fileName String
+  fileType String // MIME type
+  fileSize Int // bytes
+
+  // Storage (Vercel Blob)
+  storageUrl String // Public URL from Vercel Blob
+  storageKey String // Blob storage key for deletion
+
+  // Upload Metadata
+  uploadedById String
+  uploadedBy   User     @relation("EvidenceUploader", fields: [uploadedById], references: [id])
+  uploadedAt   DateTime @default(now())
+
+  // Validation
+  validationStatus TrustEvidenceValidation @default(PENDING)
+  validatedById    String?
+  validatedBy      User?                   @relation("EvidenceValidator", fields: [validatedById], references: [id])
+  validatedAt      DateTime?
+  validationNotes  String?                 @db.Text
+
+  // Processing
+  processingStatus TrustProcessingStatus @default(PENDING)
+  documentType     String? // Classified type: financial_statement, contract, etc.
+  extractedText    String?               @db.Text
+  extractedData    Json? // Structured data extracted from document
+  qualityScore     Float? // 1-5 quality score
+  processingError  String?               @db.Text
+
+  @@index([assessmentId])
+  @@index([questionId])
+  @@index([responseId])
+  @@index([uploadedById])
+  @@map("trust_evidence_files")
+}
+
+enum TrustProcessingStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+}
+
+enum TrustEvidenceValidation {
+  PENDING
+  APPROVED
+  REJECTED
+  NEEDS_REVIEW
+}
+
+// Layer scores for each assessment
+model TrustLayerScore {
+  id                 String     @id @default(cuid())
+  assessmentId       String
+  assessment         Assessment @relation("TrustAssessmentLayerScores", fields: [assessmentId], references: [id], onDelete: Cascade)
+  layerId            String
+  layer              TrustLayer @relation(fields: [layerId], references: [id])
+  score              Float // 1.0 - 5.0
+  confidence         Float // 0.0 - 1.0
+  evidenceQuality    Float // Average quality of evidence for this layer
+  subDimensionScores Json // Breakdown by sub-dimension
+  calculatedAt       DateTime   @default(now())
+
+  @@unique([assessmentId, layerId])
+  @@index([assessmentId])
+  @@index([layerId])
+  @@map("trust_layer_scores")
+}
+
+// Overall trust score for an assessment
+model TrustScore {
+  id                 String              @id @default(cuid())
+  assessmentId       String              @unique
+  assessment         Assessment          @relation("TrustAssessmentScore", fields: [assessmentId], references: [id], onDelete: Cascade)
+  overallScore       Float // 1.0 - 5.0
+  confidence         Float // 0.0 - 1.0
+  confidenceInterval Float // ± value
+  recommendation     TrustRecommendation
+  calculatedAt       DateTime            @default(now())
+  approvedAt         DateTime?
+  approvedBy         String?
+
+  // Narrative sections (generated by LLM)
+  executiveSummary    String? @db.Text
+  strengthsNarrative  String? @db.Text
+  weaknessesNarrative String? @db.Text
+  recommendationsText String? @db.Text
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("trust_scores")
+}
+
+enum TrustRecommendation {
+  PROCEED_CONFIDENTLY
+  PROCEED_WITH_CAUTION
+  REQUIRE_REMEDIATION
+  DO_NOT_PROCEED
+}
+
+// Red flags detected during assessment
+model TrustRedFlag {
+  id           String            @id @default(cuid())
+  assessmentId String
+  assessment   Assessment        @relation("TrustAssessmentRedFlags", fields: [assessmentId], references: [id], onDelete: Cascade)
+  severity     TrustFlagSeverity
+  category     String // "Financial", "Technical", "Integrity", etc.
+  condition    String // The condition that triggered the flag
+  message      String            @db.Text
+  layerId      String?
+  questionId   String?
+  detectedAt   DateTime          @default(now())
+
+  @@index([assessmentId])
+  @@index([severity])
+  @@map("trust_red_flags")
+}
+
+enum TrustFlagSeverity {
+  CRITICAL
+  HIGH
+  MEDIUM
+  LOW
+}
+
+// Sector-specific layer weights
+model TrustSectorWeight {
+  id           String   @id @default(cuid())
+  sector       String   @unique
+  layerWeights Json // Custom weights for each layer
+  rationale    String?  @db.Text
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("trust_sector_weights")
+}
+
+// Veto criteria that can override scores
+model TrustVetoCriterion {
+  id             String            @id @default(cuid())
+  name           String
+  condition      String            @db.Text // Logical condition
+  severity       TrustFlagSeverity
+  message        String            @db.Text
+  overridesScore Boolean           @default(false)
+  sector         String? // Null = applies to all sectors
+  partnerType    String? // Null = applies to all partner types
+  isActive       Boolean           @default(true)
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+
+  @@index([isActive])
+  @@index([sector])
+  @@map("trust_veto_criteria")
 }

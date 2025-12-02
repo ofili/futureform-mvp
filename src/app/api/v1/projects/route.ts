@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
-import prisma from '@/lib/prisma';
-import { randomUUID } from 'crypto';
+import { projectService } from '@/services';
 import { rateLimit, RateLimitPresets } from '@/lib/rate-limit';
 
 async function getAuthenticatedUser() {
@@ -23,44 +22,18 @@ export async function GET(request: NextRequest) {
     }
     const { searchParams } = new URL(request.url);
 
-    // Build Prisma filters
-    const filters: any = {
-      teamMembers: {
-        some: { userId }
-      }
+    const filters = {
+      search: searchParams.get('search') || undefined,
+      type: searchParams.get('type') || undefined,
+      sector: searchParams.get('sector') || undefined,
+      region: searchParams.get('region') || undefined,
+      budgetRange: searchParams.get('budget') || undefined,
     };
 
-    // Optional filters
-    if (searchParams.get('search')) {
-      const search = searchParams.get('search')!;
-      filters.OR = [
-        { name: { contains: search, mode: 'insensitive' } },
-        { description: { contains: search, mode: 'insensitive' } }
-      ];
-    }
-    if (searchParams.get('type')) {
-      filters.type = searchParams.get('type');
-    }
-    if (searchParams.get('sector')) {
-      filters.sector = searchParams.get('sector');
-    }
-    if (searchParams.get('region')) {
-      filters.region = searchParams.get('region');
-    }
-    if (searchParams.get('budget')) {
-      filters.budgetRange = searchParams.get('budget');
-    }
+    // Service handles filtering and authorization
+    const projects = await projectService.list(userId, filters);
 
-    const projects = await prisma.project.findMany({
-      where: filters,
-      include: {
-        assessments: {
-          select: { id: true, status: true }
-        }
-      }
-    });
-
-    return NextResponse.json(projects);
+    return NextResponse.json({ data: projects });
   } catch (error) {
     console.error('Get projects error:', error);
     return NextResponse.json({ error: 'Failed to get projects' }, { status: 500 });
@@ -94,44 +67,17 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Create project
-    const project = await prisma.project.create({
-      data: {
-        name: body.name,
-        description: body.description || '',
-        type: body.type,
-        sector: body.sector,
-        region: body.region,
-        status: body.status || 'PLANNING',
-        budgetRange: body.budgetRange,
-        maturityLevel: body.maturityLevel,
-        timeline: body.timeline,
-        objectives: body.objectives,
-        stakeholders: body.stakeholders,
-        createdBy: {
-          connect: { id: userId }
-        },
-        teamMembers: {
-          create: {
-            userId: userId,
-            invitedBy: userId,
-            role: 'PROJECT_ADMIN',
-            invitationToken: randomUUID(),
-            invitationStatus: 'ACCEPTED',
-            invitationAcceptedAt: new Date()
-          }
-        }
-      },
-      include: {
-        assessments: {
-          select: { id: true, status: true }
-        }
-      }
-    });
+    // Service handles creation and authorization
+    const project = await projectService.create(body, userId);
 
     return NextResponse.json({ project }, { status: 201 });
-  } catch (error) {
+  } catch (error: any) {
     console.error('Create project error:', error);
+
+    if (error.message?.includes('Unauthorized')) {
+      return NextResponse.json({ error: error.message }, { status: 403 });
+    }
+
     return NextResponse.json(
       { error: 'Failed to create project' },
       { status: 500 }

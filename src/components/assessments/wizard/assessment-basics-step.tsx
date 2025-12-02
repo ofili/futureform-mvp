@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import { PartnerSelector } from '@/components/partners/partner-selector';
+import { TrustPartnerTypeSelector } from './trust-partner-type-selector';
 import { Partner } from '@/hooks/use-partners';
 import { WizardData } from './assessment-wizard';
 import { CascadingSelect } from '@/components/ui/cascading-select';
@@ -118,7 +119,7 @@ export default function AssessmentBasicsStep({
 
             {/* Partner Selection */}
             <div className="space-y-2">
-                <Label>Partner</Label>
+                <Label>Partner Organization</Label>
                 <PartnerSelector
                     value={data.partnerAliasId}
                     onChange={(value: string) => onUpdate({ partnerAliasId: value })}
@@ -131,6 +132,19 @@ export default function AssessmentBasicsStep({
                 />
                 <p className="text-sm text-muted-foreground">
                     Select the partner organization for this assessment
+                </p>
+            </div>
+
+            {/* Trust Partner Type Selection */}
+            <div className="space-y-2">
+                <Label>Partner Type *</Label>
+                <TrustPartnerTypeSelector
+                    value={data.trustPartnerTypeId}
+                    onChange={(value) => onUpdate({ trustPartnerTypeId: value })}
+                    required
+                />
+                <p className="text-sm text-muted-foreground">
+                    This determines the required roles and question weighting
                 </p>
             </div>
 

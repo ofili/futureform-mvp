@@ -36,12 +36,24 @@ export default function RoleMappingStep({
     const [mapping, setMapping] = useState(data.questionRoleMapping);
 
     useEffect(() => {
-        // Fetch available roles
-        fetch('/api/v1/roles')
-            .then((res) => res.json())
-            .then((data) => setRoles(data.roles || []))
-            .catch((err) => console.error('Error fetching roles:', err));
-    }, []);
+        if (data.trustPartnerTypeId) {
+            // Fetch required roles for the selected partner type
+            fetch(`/api/v1/trust/partner-types/${data.trustPartnerTypeId}`)
+                .then((res) => res.json())
+                .then((response) => {
+                    if (response.success && response.data.requiredRoles) {
+                        setRoles(response.data.requiredRoles);
+                    }
+                })
+                .catch((err) => console.error('Error fetching partner roles:', err));
+        } else {
+            // Fallback to generic roles if no partner type selected (shouldn't happen in new flow)
+            fetch('/api/v1/roles')
+                .then((res) => res.json())
+                .then((data) => setRoles(data.roles || []))
+                .catch((err) => console.error('Error fetching roles:', err));
+        }
+    }, [data.trustPartnerTypeId]);
 
     useEffect(() => {
         // Initialize mapping with AI suggestions

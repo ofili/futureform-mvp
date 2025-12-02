@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Check, HelpCircle, Info, Download, ChevronDown, ChevronUp } from 'lucide-react';
+import { Check, HelpCircle, Info, Download, ChevronDown, ChevronUp, Zap, Users, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import {
@@ -12,9 +12,8 @@ import {
 } from "@/components/ui/tooltip";
 import { Navbar } from '@/components/landing/navbar';
 import { Footer } from '@/components/landing/footer';
-
-// Note: Metadata export not supported in client components
-// SEO handled by layout.tsx template
+import { ECPricingTable } from '@/components/credits/ec-pricing-table';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 function CollapsibleFeatures({ features }: { features: string[] }) {
     const [isOpen, setIsOpen] = useState(false);
@@ -63,289 +62,328 @@ export default function PricingPage() {
                         Simple, credible pricing for trust intelligence
                     </h1>
                     <p className="mt-5 text-xl text-gray-500">
-                        Clear packs and enterprise programs that align price with the people who make your deployment succeed.
-                        Pay for respondents — not mystery credits.
+                        Pay for what matters: <strong>Respondents</strong> (RC) and <strong>Evidence</strong> (EC).
+                        <br />
+                        No hidden fees. No mystery credits.
                     </p>
                 </div>
 
-                <div className="max-w-7xl mx-auto grid gap-8 lg:grid-cols-3 lg:gap-8">
-                    {/* Free Tier */}
-                    <div className="flex flex-col rounded-2xl shadow-lg bg-white overflow-hidden border border-gray-200 hover:border-blue-300 transition-all duration-200">
-                        <div className="p-8 flex-1">
-                            <h3 className="text-xl font-semibold text-gray-900">Free</h3>
-                            <p className="mt-4 text-gray-500 text-sm">Explore the toolkit and run a small internal pilot.</p>
-                            <div className="mt-8 flex items-baseline text-gray-900">
-                                <span className="text-5xl font-extrabold tracking-tight">$0</span>
-                                <span className="ml-1 text-xl font-semibold text-gray-500">/month</span>
-                            </div>
-
-                            <ul className="mt-8 space-y-4">
-                                {[
-                                    'Up to 30 questions (internal use)',
-                                    'Single-user pilot',
-                                    'Watermarked PDF export',
-                                    'Starter scoring & templates'
-                                ].map((feature) => (
-                                    <li key={feature} className="flex items-start">
-                                        <div className="flex-shrink-0">
-                                            <Check className="h-5 w-5 text-green-500" />
-                                        </div>
-                                        <p className="ml-3 text-sm text-gray-700">{feature}</p>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                        <div className="p-8 bg-gray-50 border-t border-gray-200">
-                            <Link href="/auth/register">
-                                <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white" size="lg">
-                                    Get Started for Free
-                                </Button>
-                            </Link>
-                        </div>
+                <Tabs defaultValue="rc" className="max-w-7xl mx-auto mb-16">
+                    <div className="flex justify-center mb-8">
+                        <TabsList className="grid w-full max-w-md grid-cols-2">
+                            <TabsTrigger value="rc">Respondent Packs (RC)</TabsTrigger>
+                            <TabsTrigger value="ec">Evidence Packs (EC)</TabsTrigger>
+                        </TabsList>
                     </div>
 
-                    {/* Guided Tier */}
-                    <div className="flex flex-col rounded-2xl shadow-xl bg-white overflow-hidden border-2 border-blue-600 relative transform scale-105 z-10">
-                        <div className="absolute top-0 right-0 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-bl-lg uppercase tracking-wide">
-                            Most Popular
-                        </div>
-                        <div className="p-8 flex-1">
-                            <h3 className="text-xl font-semibold text-gray-900">Guided</h3>
-                            <p className="mt-4 text-gray-500 text-sm">Validated assessments with analyst review and practical remediation plans.</p>
+                    <TabsContent value="rc">
+                        <div className="grid gap-8 lg:grid-cols-3 lg:gap-8">
+                            {/* Small Project */}
+                            <div className="flex flex-col rounded-2xl shadow-lg bg-white overflow-hidden border border-gray-200 hover:border-blue-300 transition-all duration-200">
+                                <div className="p-8 flex-1">
+                                    <h3 className="text-xl font-semibold text-gray-900">Small Project</h3>
+                                    <p className="mt-4 text-gray-500 text-sm">Perfect for pilots and small team assessments.</p>
+                                    <div className="mt-8 flex items-baseline text-gray-900">
+                                        <span className="text-4xl font-extrabold tracking-tight">$3,500</span>
+                                        <span className="ml-1 text-xl font-semibold text-gray-500">/pack</span>
+                                    </div>
+                                    <p className="mt-1 text-sm text-blue-600 font-medium">10 Respondents ($350/each)</p>
 
-                            <div className="mt-8">
-                                <div className="flex items-baseline text-gray-900">
-                                    <span className="text-3xl font-extrabold tracking-tight">Respondent packs — anchored & simple</span>
+                                    <ul className="mt-8 space-y-4">
+                                        {[
+                                            '10 Respondent Credits (RC)',
+                                            'Basic Assessment Templates',
+                                            'Standard Support',
+                                            'PDF Reports'
+                                        ].map((feature) => (
+                                            <li key={feature} className="flex items-start">
+                                                <div className="flex-shrink-0">
+                                                    <Check className="h-5 w-5 text-green-500" />
+                                                </div>
+                                                <p className="ml-3 text-sm text-gray-700">{feature}</p>
+                                            </li>
+                                        ))}
+                                    </ul>
                                 </div>
-                                <p className="mt-1 text-sm text-gray-500">Choose a pack — predictable pricing and clear outcomes.</p>
-                            </div>
-
-                            <CollapsibleFeatures features={[
-                                'Partner assessment portal',
-                                'Role-mapped questions',
-                                'Trust report and remediation plan',
-                                'Automated evidence checks',
-                                '1 analyst review per 20 respondents',
-                                'Email support'
-                            ]} />
-                        </div>
-
-                        <div className="p-8 bg-gray-50 border-t border-gray-200 space-y-3">
-                            <div className="grid gap-3 grid-cols-1 md:grid-cols-3 lg:grid-cols-1">
-                                <div className="p-3 bg-white rounded-lg border border-gray-200">
-                                    <div className="text-sm font-medium text-gray-700">Small Project Pack</div>
-                                    <div className="mt-2 text-lg font-bold text-gray-900">$3,500</div>
-                                    <div className="text-xs text-gray-500">10 respondents — $350 / each</div>
-                                </div>
-                                <div className="p-3 bg-blue-50 rounded-lg border border-blue-100">
-                                    <div className="text-sm font-medium text-blue-900">Standard Project Pack</div>
-                                    <div className="mt-2 text-lg font-bold text-blue-900">$6,250</div>
-                                    <div className="text-xs text-blue-700">25 respondents — $250 / each</div>
-                                </div>
-                                <div className="p-3 bg-white rounded-lg border border-gray-200">
-                                    <div className="text-sm font-medium text-gray-700">Organizational Pack</div>
-                                    <div className="mt-2 text-lg font-bold text-gray-900">$11,250</div>
-                                    <div className="text-xs text-gray-500">50 respondents — $225 / each</div>
-                                </div>
-                            </div>
-
-                            <Link href="/auth/register?plan=guided" className="block mt-8">
-                                <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white" size="lg">
-                                    Start Guided Assessment
-                                </Button>
-                            </Link>
-                        </div>
-                    </div>
-
-                    {/* Enterprise Tier */}
-                    <div className="flex flex-col rounded-2xl shadow-lg bg-white overflow-hidden border border-gray-200 hover:border-blue-300 transition-all duration-200">
-                        <div className="p-8 flex-1">
-                            <h3 className="text-xl font-semibold text-gray-900">Enterprise Trust Program</h3>
-                            <p className="mt-4 text-gray-500 text-sm">Organization-wide trust governance, benchmarking, and dedicated support.</p>
-
-                            <div className="mt-8">
-                                <div className="flex items-baseline text-gray-900">
-                                    <span className="text-4xl font-extrabold tracking-tight">$40k</span>
-                                    <span className="ml-1 text-xl font-semibold text-gray-500">/year</span>
-                                </div>
-                                <p className="mt-1 text-sm text-gray-500">Includes 100 respondent credits — additional seats discounted.</p>
-                            </div>
-
-                            <ul className="mt-8 space-y-4">
-                                {[
-                                    'Unlimited projects & assessments',
-                                    'SSO & White-labeling',
-                                    'API access & custom integrations',
-                                    'Priority support & SLA',
-                                    'Dedicated success manager',
-                                    'Custom question sets & weighting',
-                                    'Comparative analytics & benchmarks (Enterprise-only)'
-                                ].map((feature) => (
-                                    <li key={feature} className="flex items-start">
-                                        <div className="flex-shrink-0">
-                                            <Check className="h-5 w-5 text-green-500" />
-                                        </div>
-                                        <p className="ml-3 text-sm text-gray-700">{feature}</p>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-
-                        <div className="p-8 bg-gray-50 border-t border-gray-200">
-                            <Link href="/contact">
-                                <Button className="w-full bg-white hover:bg-gray-50 text-blue-600 border border-blue-600" size="lg">
-                                    Contact Sales
-                                </Button>
-                            </Link>
-                        </div>
-                    </div>
-                </div>
-
-                {/* TIER 4 — GOVERNMENT & MULTILATERAL PROGRAM */}
-                <div className="max-w-7xl mx-auto mt-10">
-                    <div className="flex flex-col rounded-2xl shadow-xl bg-white overflow-hidden border-2 border-indigo-600">
-                        <div className="p-8 lg:p-12">
-                            <h3 className="text-2xl font-bold text-gray-900">Government & Multilateral Program</h3>
-                            <p className="mt-4 text-gray-600 text-sm">
-                                A national or multi-agency trust intelligence program for high-stake public deployments,
-                                complex ecosystems, and multi-stakeholder governance.
-                            </p>
-
-                            <div className="mt-8 flex items-baseline text-gray-900">
-                                <span className="text-4xl font-extrabold tracking-tight">$150k+</span>
-                                <span className="ml-2 text-xl font-semibold text-gray-500">/year</span>
-                            </div>
-
-                            <ul className="mt-8 space-y-4">
-                                {[
-                                    'Unlimited respondents across agencies & partner organizations',
-                                    'National trust dashboards & policy intelligence',
-                                    'PPP & ecosystem trust scoring',
-                                    'Country-level benchmarking & trend analysis',
-                                    'Dedicated analyst team (2 FTE)',
-                                    'Custom domain models & regulatory alignment',
-                                    'Advanced integrations & data governance support',
-                                    'Quarterly executive briefings & program reviews'
-                                ].map((feature) => (
-                                    <li key={feature} className="flex items-start">
-                                        <div className="flex-shrink-0">
-                                            <Check className="h-5 w-5 text-green-500" />
-                                        </div>
-                                        <p className="ml-3 text-sm text-gray-700">{feature}</p>
-                                    </li>
-                                ))}
-                            </ul>
-
-                            <div className="mt-10">
-                                <Link href="/contact">
-                                    <Button className="w-full bg-indigo-600 hover:bg-indigo-700 text-white" size="lg">
-                                        Speak to Government Team
-                                    </Button>
-                                </Link>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                {/* Respondent Pricing Breakdown */}
-                <div className="max-w-4xl mx-auto mt-20">
-                    <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
-                        <div className="p-8 sm:p-10">
-                            <div className="flex items-start justify-between gap-6">
-                                <div>
-                                    <h3 className="text-2xl font-bold text-gray-900 mb-6">How respondent pricing works</h3>
-                                    <p className="text-gray-600 mb-6">
-                                        We price on the number of respondents because people create the signal. Packs make budgeting predictable — anchor on the Standard Project Pack for most assessments.
-                                    </p>
-                                </div>
-                                <div className="text-right">
-                                    <Link href="/mnt/data/The Trust Diagnostic Toolkit™.pdf">
-                                        <Button variant="ghost" className="flex items-center gap-2">
-                                            <Download className="h-4 w-4" /> Download Toolkit
+                                <div className="p-8 bg-gray-50 border-t border-gray-200">
+                                    <Link href="/auth/register?plan=small">
+                                        <Button className="w-full bg-white hover:bg-gray-50 text-blue-600 border border-blue-600" size="lg">
+                                            Buy Pack
                                         </Button>
                                     </Link>
                                 </div>
                             </div>
 
-                            <div className="grid md:grid-cols-2 gap-10">
-                                <div>
-                                    <h4 className="text-lg font-semibold text-blue-900 mb-4 flex items-center gap-2">
-                                        Guided Packs (Recommended)
-                                        <TooltipProvider>
-                                            <Tooltip>
-                                                <TooltipTrigger>
-                                                    <Info className="h-4 w-4 text-gray-400" />
-                                                </TooltipTrigger>
-                                                <TooltipContent>
-                                                    <p className="max-w-xs">Choose the pack that matches project complexity — most customers choose the Standard Project Pack.</p>
-                                                </TooltipContent>
-                                            </Tooltip>
-                                        </TooltipProvider>
-                                    </h4>
-                                    <div className="space-y-3">
-                                        <div className="flex justify-between items-center p-3 bg-blue-50 rounded-lg border border-blue-100">
-                                            <span className="font-medium text-blue-900">Small Project Pack — 10</span>
-                                            <span className="font-bold text-blue-700">$3,500</span>
-                                        </div>
-                                        <div className="flex justify-between items-center p-3 bg-white rounded-lg border border-gray-200">
-                                            <span className="font-medium text-gray-700">Standard Project Pack — 25</span>
-                                            <span className="font-bold text-gray-900">$6,250</span>
-                                        </div>
-                                        <div className="flex justify-between items-center p-3 bg-white rounded-lg border border-gray-200">
-                                            <span className="font-medium text-gray-700">Organizational Pack — 50</span>
-                                            <span className="font-bold text-gray-900">$11,250</span>
-                                        </div>
-                                        <div className="flex justify-between items-center p-3 bg-white rounded-lg border border-gray-200">
-                                            <span className="font-medium text-gray-700">High-Volume Pack — 100</span>
-                                            <span className="font-bold text-gray-900">$17,500</span>
-                                        </div>
-                                    </div>
+                            {/* Standard Project */}
+                            <div className="flex flex-col rounded-2xl shadow-xl bg-white overflow-hidden border-2 border-blue-600 relative transform scale-105 z-10">
+                                <div className="absolute top-0 right-0 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-bl-lg uppercase tracking-wide">
+                                    Most Popular
                                 </div>
-
-                                <div>
-                                    <h4 className="text-lg font-semibold text-indigo-900 mb-4 flex items-center gap-2">
-                                        Enterprise Bands
-                                        <TooltipProvider>
-                                            <Tooltip>
-                                                <TooltipTrigger>
-                                                    <Info className="h-4 w-4 text-gray-400" />
-                                                </TooltipTrigger>
-                                                <TooltipContent>
-                                                    <p className="max-w-xs">Enterprise includes an initial block of respondent credits and deeper analytics tools.</p>
-                                                </TooltipContent>
-                                            </Tooltip>
-                                        </TooltipProvider>
-                                    </h4>
-                                    <div className="space-y-3">
-                                        <div className="flex justify-between items-center p-3 bg-indigo-50 rounded-lg border border-indigo-100">
-                                            <span className="font-medium text-indigo-900">Included credits</span>
-                                            <span className="font-bold text-indigo-700">100</span>
-                                        </div>
-                                        <div className="flex justify-between items-center p-3 bg-white rounded-lg border border-gray-200">
-                                            <span className="font-medium text-gray-700">Additional — 1–100</span>
-                                            <span className="font-bold text-gray-900">$100 / each</span>
-                                        </div>
-                                        <div className="flex justify-between items-center p-3 bg-white rounded-lg border border-gray-200">
-                                            <span className="font-medium text-gray-700">Additional — 101–500</span>
-                                            <span className="font-bold text-gray-900">$75 / each</span>
-                                        </div>
-                                        <div className="flex justify-between items-center p-3 bg-white rounded-lg border border-gray-200">
-                                            <span className="font-medium text-gray-700">Additional — 500+</span>
-                                            <span className="font-bold text-gray-900">$50 / each</span>
-                                        </div>
+                                <div className="p-8 flex-1">
+                                    <h3 className="text-xl font-semibold text-gray-900">Standard Project</h3>
+                                    <p className="mt-4 text-gray-500 text-sm">The standard for departmental or unit assessments.</p>
+                                    <div className="mt-8 flex items-baseline text-gray-900">
+                                        <span className="text-4xl font-extrabold tracking-tight">$6,250</span>
+                                        <span className="ml-1 text-xl font-semibold text-gray-500">/pack</span>
                                     </div>
+                                    <p className="mt-1 text-sm text-blue-600 font-medium">25 Respondents ($250/each)</p>
+
+                                    <ul className="mt-8 space-y-4">
+                                        {[
+                                            '25 Respondent Credits (RC)',
+                                            'Advanced Assessment Templates',
+                                            'Priority Email Support',
+                                            'Interactive Dashboards',
+                                            '1 Analyst Review Session'
+                                        ].map((feature) => (
+                                            <li key={feature} className="flex items-start">
+                                                <div className="flex-shrink-0">
+                                                    <Check className="h-5 w-5 text-green-500" />
+                                                </div>
+                                                <p className="ml-3 text-sm text-gray-700">{feature}</p>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                                <div className="p-8 bg-gray-50 border-t border-gray-200">
+                                    <Link href="/auth/register?plan=standard">
+                                        <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white" size="lg">
+                                            Buy Pack
+                                        </Button>
+                                    </Link>
                                 </div>
                             </div>
 
-                            <div className="mt-8 p-4 bg-gray-50 rounded-lg border border-gray-200 text-sm text-gray-600">
-                                <p className="font-medium mb-1">Notes</p>
-                                <ul className="list-disc pl-5 space-y-1">
-                                    <li>Standard Project Pack (25 respondents) is the most common purchase and serves as our anchor price.</li>
-                                    <li>Enterprise includes 100 respondent credits on first-year commitment and scales with volume discounts.</li>
-                                    <li>Unused respondent credits can be rolled over subject to terms; contact sales for custom SLAs and multi-year discounts.</li>
-                                </ul>
+                            {/* Organizational */}
+                            <div className="flex flex-col rounded-2xl shadow-lg bg-white overflow-hidden border border-gray-200 hover:border-blue-300 transition-all duration-200">
+                                <div className="p-8 flex-1">
+                                    <h3 className="text-xl font-semibold text-gray-900">Organizational</h3>
+                                    <p className="mt-4 text-gray-500 text-sm">For comprehensive organizational diagnostics.</p>
+                                    <div className="mt-8 flex items-baseline text-gray-900">
+                                        <span className="text-4xl font-extrabold tracking-tight">$11,250</span>
+                                        <span className="ml-1 text-xl font-semibold text-gray-500">/pack</span>
+                                    </div>
+                                    <p className="mt-1 text-sm text-blue-600 font-medium">50 Respondents ($225/each)</p>
+
+                                    <ul className="mt-8 space-y-4">
+                                        {[
+                                            '50 Respondent Credits (RC)',
+                                            'Custom Question Sets',
+                                            'Dedicated Success Manager',
+                                            'API Access',
+                                            '3 Analyst Review Sessions'
+                                        ].map((feature) => (
+                                            <li key={feature} className="flex items-start">
+                                                <div className="flex-shrink-0">
+                                                    <Check className="h-5 w-5 text-green-500" />
+                                                </div>
+                                                <p className="ml-3 text-sm text-gray-700">{feature}</p>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                                <div className="p-8 bg-gray-50 border-t border-gray-200">
+                                    <Link href="/auth/register?plan=org">
+                                        <Button className="w-full bg-white hover:bg-gray-50 text-blue-600 border border-blue-600" size="lg">
+                                            Buy Pack
+                                        </Button>
+                                    </Link>
+                                </div>
                             </div>
+                        </div>
+                    </TabsContent>
+
+                    <TabsContent value="ec">
+                        <div className="grid gap-8 lg:grid-cols-3 lg:gap-8">
+                            {/* Starter Monitoring */}
+                            <div className="flex flex-col rounded-2xl shadow-lg bg-white overflow-hidden border border-gray-200 hover:border-purple-300 transition-all duration-200">
+                                <div className="p-8 flex-1">
+                                    <h3 className="text-xl font-semibold text-gray-900">Starter Monitoring</h3>
+                                    <p className="mt-4 text-gray-500 text-sm">Essential evidence collection and basic verification.</p>
+                                    <div className="mt-8 flex items-baseline text-gray-900">
+                                        <span className="text-4xl font-extrabold tracking-tight">$500</span>
+                                        <span className="ml-1 text-xl font-semibold text-gray-500">/pack</span>
+                                    </div>
+                                    <p className="mt-1 text-sm text-purple-600 font-medium">500 Evidence Credits (EC)</p>
+
+                                    <ul className="mt-8 space-y-4">
+                                        {[
+                                            '500 EC included',
+                                            'Access to AE & VE layers',
+                                            'Basic Document Verification',
+                                            'Email Support'
+                                        ].map((feature) => (
+                                            <li key={feature} className="flex items-start">
+                                                <div className="flex-shrink-0">
+                                                    <Check className="h-5 w-5 text-green-500" />
+                                                </div>
+                                                <p className="ml-3 text-sm text-gray-700">{feature}</p>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                                <div className="p-8 bg-gray-50 border-t border-gray-200">
+                                    <Link href="/auth/register?plan=ec-starter">
+                                        <Button className="w-full bg-white hover:bg-gray-50 text-purple-600 border border-purple-600" size="lg">
+                                            Buy Pack
+                                        </Button>
+                                    </Link>
+                                </div>
+                            </div>
+
+                            {/* Pro Verification */}
+                            <div className="flex flex-col rounded-2xl shadow-xl bg-white overflow-hidden border-2 border-purple-600 relative transform scale-105 z-10">
+                                <div className="absolute top-0 right-0 bg-purple-600 text-white text-xs font-bold px-3 py-1 rounded-bl-lg uppercase tracking-wide">
+                                    Recommended
+                                </div>
+                                <div className="p-8 flex-1">
+                                    <h3 className="text-xl font-semibold text-gray-900">Pro Verification</h3>
+                                    <p className="mt-4 text-gray-500 text-sm">Deep verification and continuous monitoring.</p>
+                                    <div className="mt-8 flex items-baseline text-gray-900">
+                                        <span className="text-4xl font-extrabold tracking-tight">$2,500</span>
+                                        <span className="ml-1 text-xl font-semibold text-gray-500">/pack</span>
+                                    </div>
+                                    <p className="mt-1 text-sm text-purple-600 font-medium">3,000 Evidence Credits (EC)</p>
+                                    <p className="text-xs text-green-600 font-medium">Save $500 vs Starter</p>
+
+                                    <ul className="mt-8 space-y-4">
+                                        {[
+                                            '3,000 EC included',
+                                            'Access to all layers (AE, VE, DSE)',
+                                            'Analyst Reviews included',
+                                            'API Access',
+                                            'Auto-reload capable'
+                                        ].map((feature) => (
+                                            <li key={feature} className="flex items-start">
+                                                <div className="flex-shrink-0">
+                                                    <Check className="h-5 w-5 text-green-500" />
+                                                </div>
+                                                <p className="ml-3 text-sm text-gray-700">{feature}</p>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                                <div className="p-8 bg-gray-50 border-t border-gray-200">
+                                    <Link href="/auth/register?plan=ec-pro">
+                                        <Button className="w-full bg-purple-600 hover:bg-purple-700 text-white" size="lg">
+                                            Buy Pack
+                                        </Button>
+                                    </Link>
+                                </div>
+                            </div>
+
+                            {/* Enterprise Intelligence */}
+                            <div className="flex flex-col rounded-2xl shadow-lg bg-white overflow-hidden border border-gray-200 hover:border-purple-300 transition-all duration-200">
+                                <div className="p-8 flex-1">
+                                    <h3 className="text-xl font-semibold text-gray-900">Enterprise Intelligence</h3>
+                                    <p className="mt-4 text-gray-500 text-sm">High-volume signal processing and custom integrations.</p>
+                                    <div className="mt-8 flex items-baseline text-gray-900">
+                                        <span className="text-4xl font-extrabold tracking-tight">$10k</span>
+                                        <span className="ml-1 text-xl font-semibold text-gray-500">/pack</span>
+                                    </div>
+                                    <p className="mt-1 text-sm text-purple-600 font-medium">15,000 Evidence Credits (EC)</p>
+                                    <p className="text-xs text-green-600 font-medium">Save $5,000 vs Starter</p>
+
+                                    <ul className="mt-8 space-y-4">
+                                        {[
+                                            '15,000 EC included',
+                                            'Custom DSE Integrations',
+                                            'Dedicated Analyst Team',
+                                            'SLA Guarantees',
+                                            'Volume Discounts'
+                                        ].map((feature) => (
+                                            <li key={feature} className="flex items-start">
+                                                <div className="flex-shrink-0">
+                                                    <Check className="h-5 w-5 text-green-500" />
+                                                </div>
+                                                <p className="ml-3 text-sm text-gray-700">{feature}</p>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                                <div className="p-8 bg-gray-50 border-t border-gray-200">
+                                    <Link href="/contact">
+                                        <Button className="w-full bg-white hover:bg-gray-50 text-purple-600 border border-purple-600" size="lg">
+                                            Contact Sales
+                                        </Button>
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>
+                    </TabsContent>
+                </Tabs>
+
+                {/* Evidence Pricing Table */}
+                <div className="max-w-4xl mx-auto mt-20">
+                    <h2 className="text-3xl font-bold text-center text-gray-900 mb-10">Transparent Evidence Pricing</h2>
+                    <ECPricingTable />
+                </div>
+
+                {/* Enterprise & Gov Sections */}
+                <div className="max-w-7xl mx-auto mt-20 grid gap-8 lg:grid-cols-2">
+                    {/* Enterprise Program */}
+                    <div className="flex flex-col rounded-2xl shadow-lg bg-white overflow-hidden border border-gray-200">
+                        <div className="p-8 flex-1">
+                            <h3 className="text-2xl font-bold text-gray-900">Enterprise Trust Program</h3>
+                            <p className="mt-4 text-gray-600">
+                                Organization-wide trust governance, benchmarking, and dedicated support.
+                            </p>
+                            <div className="mt-6 flex items-baseline text-gray-900">
+                                <span className="text-3xl font-bold tracking-tight">$40k</span>
+                                <span className="ml-1 text-lg text-gray-500">/year</span>
+                            </div>
+                            <ul className="mt-6 space-y-3">
+                                <li className="flex items-start">
+                                    <Check className="h-5 w-5 text-green-500 mr-2" />
+                                    <span className="text-sm text-gray-700">Includes 100 RC + 5,000 EC</span>
+                                </li>
+                                <li className="flex items-start">
+                                    <Check className="h-5 w-5 text-green-500 mr-2" />
+                                    <span className="text-sm text-gray-700">SSO & White-labeling</span>
+                                </li>
+                                <li className="flex items-start">
+                                    <Check className="h-5 w-5 text-green-500 mr-2" />
+                                    <span className="text-sm text-gray-700">Priority Support & SLA</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div className="p-8 bg-gray-50 border-t border-gray-200">
+                            <Link href="/contact">
+                                <Button variant="outline" className="w-full">Contact Sales</Button>
+                            </Link>
+                        </div>
+                    </div>
+
+                    {/* Government Program */}
+                    <div className="flex flex-col rounded-2xl shadow-lg bg-white overflow-hidden border border-indigo-200">
+                        <div className="p-8 flex-1">
+                            <h3 className="text-2xl font-bold text-indigo-900">Government & Multilateral</h3>
+                            <p className="mt-4 text-gray-600">
+                                National or multi-agency trust intelligence programs for high-stake deployments.
+                            </p>
+                            <div className="mt-6 flex items-baseline text-gray-900">
+                                <span className="text-3xl font-bold tracking-tight">$150k+</span>
+                                <span className="ml-1 text-lg text-gray-500">/year</span>
+                            </div>
+                            <ul className="mt-6 space-y-3">
+                                <li className="flex items-start">
+                                    <Check className="h-5 w-5 text-green-500 mr-2" />
+                                    <span className="text-sm text-gray-700">Unlimited Respondents</span>
+                                </li>
+                                <li className="flex items-start">
+                                    <Check className="h-5 w-5 text-green-500 mr-2" />
+                                    <span className="text-sm text-gray-700">National Trust Dashboards</span>
+                                </li>
+                                <li className="flex items-start">
+                                    <Check className="h-5 w-5 text-green-500 mr-2" />
+                                    <span className="text-sm text-gray-700">Dedicated Analyst Team (2 FTE)</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div className="p-8 bg-gray-50 border-t border-gray-200">
+                            <Link href="/contact">
+                                <Button className="w-full bg-indigo-600 hover:bg-indigo-700 text-white">Speak to Government Team</Button>
+                            </Link>
                         </div>
                     </div>
                 </div>
