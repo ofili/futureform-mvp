@@ -1,0 +1,207 @@
+{
+    "layer_id": "L5",
+    "layer_name": "Integrity",
+    "sector": "financial",
+    "region": "Sub-Saharan Africa",
+    "total_questions": 15,
+    "total_sub_dimensions": 4,
+    "sub_dimensions": [
+        {
+            "id": "5.1",
+            "name": "Vendor Financial Stability & Sustainability",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q5.1.1_FIN",
+                    "text": "Mobile Money Provider Financial Sustainability - SSA: Demonstrate long-term financial viability: (1) Revenue model (transaction fees, interest, data monetization - sustainable?); (2) Profitability (is mobile money business profitable? timeline?); (3) Funding sources (parent company, investors, revenue - diversified?); (4) Burn rate vs runway (how long can operate?); (5) Local entity financials (not just parent - local operations viable?); (6) Currency risk management (local currency volatility - hedging?); (7) User affordability (fees sustainable for low-income users?).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Investors",
+                        "Regulators",
+                        "Financial Analysts"
+                    ],
+                    "evidence_required": "Financial statements (local entity), Revenue model documentation, Profitability data, Funding sources, Burn rate analysis, Currency hedging, Affordability analysis",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Mobile money profitability challenging (low-value transactions, high costs). Currency volatility major risk. Local entity must be viable. User affordability critical (can't price out poor)."
+                },
+                {
+                    "q_id": "Q5.1.2_FIN",
+                    "text": "Customer Fund Safety & Protection: Ensure user funds are protected: (1) Customer fund segregation (user funds separate from company funds?); (2) Trust account management (funds held in trust at licensed bank?); (3) Deposit insurance (are user funds insured? up to what amount?); (4) Bankruptcy protection (what happens to user funds if provider fails?); (5) Regulatory safeguards (central bank requirements for fund protection); (6) Audit trail (can user funds be accounted for?); (7) Fund repatriation (can users withdraw all funds anytime?).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Regulators",
+                        "Central Banks",
+                        "Auditors"
+                    ],
+                    "evidence_required": "Fund segregation documentation, Trust account details, Insurance certificates, Bankruptcy procedures, Regulatory compliance, Audit reports, Withdrawal policies",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Customer fund safety = most critical. Mobile money provider failures have occurred. Segregation mandatory (central bank requirement). Insurance limited. Users must be able to withdraw anytime."
+                },
+                {
+                    "q_id": "Q5.1.3_FIN",
+                    "text": "Exit Risk & User Fund Protection: Plan for provider failure or exit: (1) What happens to user funds if provider shuts down (full refund? timeline?); (2) What happens to user transaction history (data portability?); (3) What happens to user credit history (can users take to other lenders?); (4) Transition plan (how are users migrated to alternative providers?); (5) Regulatory oversight of exit (central bank supervises?); (6) Communication plan (how are users notified?); (7) Historical exit cases (have other providers exited? how handled?).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Regulators",
+                        "Central Banks",
+                        "Alternative Providers"
+                    ],
+                    "evidence_required": "Exit plan documentation, Fund refund procedures, Data portability, Credit history transfer, Transition plan, Regulatory oversight, Historical exit analysis",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Provider exit risk real (some have failed). Users' life savings at risk. Exit planning mandatory. Central bank must supervise. Historical cases: some users lost funds (unacceptable)."
+                }
+            ]
+        },
+        {
+            "id": "5.2",
+            "name": "Market Commitment & Track Record",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q5.2.1_FIN",
+                    "text": "Long-Term Mobile Money Market Commitment - SSA: Demonstrate sustained commitment: (1) Years of operation in Sub-Saharan Africa (not just pilots - sustained operations); (2) Geographic expansion (growing presence or retreating?); (3) User base growth (acquiring new users or losing existing?); (4) Product roadmap (continued investment in features?); (5) Multi-year regulatory commitments (license renewals, compliance investments); (6) Agent network expansion (investing in distribution?); (7) Financial inclusion commitment (serving unbanked or just profitable segments?).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Regulators",
+                        "Investors",
+                        "Development Partners"
+                    ],
+                    "evidence_required": "Operational history (3+ years), Geographic expansion data, User growth metrics, Product roadmap, Regulatory commitments, Agent network growth, Financial inclusion metrics",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Long-term commitment critical (users' life savings). Some providers have exited. Geographic expansion = commitment signal. User growth important. Financial inclusion vs profit tension."
+                },
+                {
+                    "q_id": "Q5.2.2_FIN",
+                    "text": "Mobile Money Track Record & Reliability: Demonstrate proven track record: (1) Operational history (how many years? how many countries?); (2) User base (how many active users? transaction volume?); (3) System reliability history (uptime track record); (4) Fraud management track record (how well prevented/resolved?); (5) Regulatory compliance history (any violations? penalties?); (6) User satisfaction (NPS, retention rates); (7) Industry recognition (awards, certifications).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Regulators",
+                        "Investors",
+                        "Industry"
+                    ],
+                    "evidence_required": "Operational history documentation, User base metrics, Uptime history, Fraud management data, Regulatory compliance record, User satisfaction metrics, Industry recognition",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Track record critical for trust. Operational history important (new entrants risky). User base size = network effects. Reliability history key. Regulatory violations = red flag."
+                }
+            ]
+        },
+        {
+            "id": "5.3",
+            "name": "References & Demonstrated Outcomes",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q5.3.1_FIN",
+                    "text": "User Financial Inclusion Outcomes - SSA: Provide rigorous evidence of financial inclusion impact: (1) Financial access (% of unbanked now accessing formal financial services); (2) Savings behavior (are users saving more?); (3) Credit access (can users access credit?); (4) Resilience (can users cope with shocks better?); (5) Economic empowerment (income, business growth); (6) Gender impact (are women benefiting equally?); (7) Study quality (RCTs, quasi-experimental, or just testimonials?).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Researchers",
+                        "Development Partners",
+                        "Regulators"
+                    ],
+                    "evidence_required": "Financial inclusion studies (RCTs preferred), Savings data, Credit access data, Resilience indicators, Economic impact data, Gender-disaggregated outcomes, Study methodology",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Financial inclusion impact critical (not just adoption). Savings behavior important. Credit access key benefit. Gender impact essential (women often excluded). RCTs preferred (rigorous evidence)."
+                },
+                {
+                    "q_id": "Q5.3.2_FIN",
+                    "text": "User References & Testimonials - Mobile Money: Provide verifiable user references: (1) User testimonials (video, audio, written - in local languages); (2) User contact information (can prospective users talk to existing users?); (3) Agent testimonials (do agents recommend service?); (4) Geographic diversity (references from multiple regions, countries); (5) User demographics (references from women, youth, elderly, different income levels); (6) Negative feedback transparency (are complaints/criticisms shared?); (7) Independent user surveys (third-party satisfaction data).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Agents",
+                        "Prospective Users",
+                        "Researchers"
+                    ],
+                    "evidence_required": "User testimonial library (video, audio, local languages), Referenceable user list, Agent testimonials, Geographic diversity, Demographic diversity, Complaint transparency, Independent surveys",
+                    "evidence_weight": "High",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "Testimonials must be authentic (not paid actors). User-to-user trust critical. Agent testimonials powerful. Must include negative feedback (credibility). Independent surveys important."
+                },
+                {
+                    "q_id": "Q5.3.3_FIN",
+                    "text": "Third-Party Validation & Recognition - Mobile Money: Demonstrate external validation: (1) Central bank endorsement (regulatory approval, positive statements); (2) Development partner support (World Bank, USAID, Gates Foundation); (3) Industry awards (GSMA Mobile Money awards, fintech competitions); (4) Research institution partnerships (universities, think tanks validating impact); (5) Media coverage (credible journalism, not just press releases); (6) Peer recognition (other mobile money providers, industry associations); (7) International standards compliance (GSMA Mobile Money API, ISO).",
+                    "stakeholder_types": [
+                        "Regulators",
+                        "Development Partners",
+                        "Researchers",
+                        "Industry",
+                        "Media"
+                    ],
+                    "evidence_required": "Central bank approvals, Development partner grants/contracts, Award certifications, Research partnerships, Media coverage, Industry recognition, Standards compliance",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Central bank endorsement critical. Development partner support important (credibility). Awards less important than outcomes. Research partnerships valuable. Standards compliance emerging."
+                }
+            ]
+        },
+        {
+            "id": "5.4",
+            "name": "Ethical Practices & Social Responsibility",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q5.4.1_FIN",
+                    "text": "Fee Fairness & Anti-Exploitation - Mobile Money: Demonstrate fair, non-exploitative pricing: (1) Fee transparency (all fees disclosed, no hidden charges); (2) Fee competitiveness (vs other providers, banks); (3) Fee affordability (reasonable for low-income users?); (4) Interest rate fairness (for credit - APR vs informal lenders, not predatory); (5) Pricing audits (independent verification of fairness); (6) User pricing feedback (do users feel pricing is fair?); (7) Vulnerable user protection (special pricing for elderly, disabled?).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Consumer Protection",
+                        "Regulators",
+                        "Auditors"
+                    ],
+                    "evidence_required": "Fee disclosure documentation, Competitive pricing analysis, Affordability analysis, Interest rate comparisons, Independent pricing audits, User pricing surveys, Vulnerable user policies",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "Fee fairness critical (users very price-sensitive). Hidden fees destroy trust. Interest rates must not be predatory. Vulnerable users need protection. Pricing audits important."
+                },
+                {
+                    "q_id": "Q5.4.2_FIN",
+                    "text": "Data Ethics & User Data Sovereignty - Mobile Money: Ensure ethical data practices: (1) User data ownership (users own their data, not platform); (2) Data usage consent (informed, specific, voluntary); (3) Data benefit sharing (if data monetized, do users benefit?); (4) Data sovereignty (user data stays in Africa, not extracted?); (5) Credit scoring ethics (no discrimination, bias testing); (6) Research ethics (if data used for research, users consented? IRB approval?); (7) Data colonialism prevention (value from data shared with users).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Data Protection Authorities",
+                        "Ethics Boards",
+                        "Researchers"
+                    ],
+                    "evidence_required": "Data ownership policies, Consent mechanisms, Data benefit sharing, Data residency policies, Credit scoring bias testing, Research ethics approvals, Anti-data colonialism policies",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Data ethics critical (transaction data reveals everything). Data colonialism concern (value extracted). Users must own and benefit from data. Credit scoring bias risk (gender, geography)."
+                },
+                {
+                    "q_id": "Q5.4.3_FIN",
+                    "text": "Social Impact & Financial Inclusion Commitment: Demonstrate positive social impact: (1) Financial inclusion metrics (% unbanked served); (2) Women's financial inclusion (gender-disaggregated data); (3) Rural financial inclusion (urban vs rural access); (4) Youth financial inclusion (young people served); (5) Agent employment (how many jobs created? quality?); (6) Local economic impact (transaction volume, economic activity); (7) Financial literacy investment (supporting education).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Development Partners",
+                        "Regulators",
+                        "Civil Society"
+                    ],
+                    "evidence_required": "Financial inclusion metrics, Gender-disaggregated data, Rural access data, Youth inclusion data, Agent employment data, Economic impact studies, Financial literacy programs",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Financial inclusion = core mission (not just profit). Women's inclusion critical. Rural access essential. Youth important (future users). Agent jobs significant. Economic impact measurable."
+                },
+                {
+                    "q_id": "Q5.4.4_FIN",
+                    "text": "Ethical Debt Collection Practices: Ensure respectful and legal debt recovery: (1) Harassment prevention (no excessive calling, no threats); (2) Privacy respect (no contacting friends/family/employers without consent); (3) Data privacy in collection (no public shaming lists); (4) Agent conduct (training for collection agents); (5) Hardship policies (options for users in genuine distress); (6) Regulatory compliance (adherence to consumer protection laws on debt collection).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Debt Collectors",
+                        "Regulators"
+                    ],
+                    "evidence_required": "Debt collection policy, Agent training logs, Complaint records regarding harassment",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Digital lenders in SSA often use shaming tactics. Ethical collection is a major trust differentiator."
+                }
+            ]
+        }
+    ],
+    "scoring_notes": "Layer 5 (Integrity) for Financial Services in Sub-Saharan Africa: Customer fund safety is paramount - segregation and insurance mandatory. Provider financial sustainability critical (users' life savings at risk). Fee fairness essential (no exploitation). Data ethics and user data sovereignty non-negotiable. Financial inclusion outcomes must be measurable."
+}

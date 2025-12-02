@@ -1,0 +1,206 @@
+{
+    "layer_id": "L5",
+    "layer_name": "Integrity",
+    "sector": "agriculture",
+    "region": "Sub-Saharan Africa",
+    "total_questions": 15,
+    "total_sub_dimensions": 4,
+    "sub_dimensions": [
+        {
+            "id": "5.1",
+            "name": "Vendor Financial Stability & Sustainability",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q5.1.1_AGR",
+                    "text": "Agricultural Platform Financial Sustainability - SSA Context: Demonstrate long-term financial viability: (1) Revenue model (how does platform make money? sustainable beyond donor grants?); (2) Profitability timeline (when will platform be profitable?); (3) Funding sources (grants, equity, debt - diversified?); (4) Burn rate vs runway (how long can platform operate?); (5) Local entity financials (not just parent company - local operations sustainable?); (6) Currency risk management (volatile local currencies - hedging strategies?); (7) Farmer affordability (pricing sustainable for smallholders?).",
+                    "stakeholder_types": [
+                        "Farmers",
+                        "Investors",
+                        "Regulators",
+                        "Financial Analysts"
+                    ],
+                    "evidence_required": "Financial statements (local entity), Revenue model documentation, Profitability projections, Funding source breakdown, Burn rate analysis, Currency hedging strategies, Farmer affordability analysis",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Many agtech platforms donor-dependent - not sustainable. Local entity must be viable, not just parent company. Currency volatility major risk. Farmer affordability critical."
+                },
+                {
+                    "q_id": "Q5.1.2_AGR",
+                    "text": "Exit Risk & Farmer Data Protection: Plan for platform failure or exit: (1) What happens to farmer data if platform shuts down (data portability, deletion)?; (2) What happens to farmer credit history (can farmers take to other platforms)?; (3) What happens to farmer farm records (years of data - who owns it)?; (4) Transition plan (how are farmers migrated to alternative platforms?); (5) Refund policy (prepaid services, unused credits); (6) Communication plan (how are farmers notified of shutdown?).",
+                    "stakeholder_types": [
+                        "Farmers",
+                        "Regulators",
+                        "Data Protection Authorities",
+                        "Legal"
+                    ],
+                    "evidence_required": "Data portability procedures, Credit history transfer mechanisms, Farm records ownership documentation, Platform exit/transition plan, Refund policies, Farmer communication protocols",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "High platform failure rate in Africa. Farmers lose years of data, credit history. Exit planning mandatory. Farmer data sovereignty critical."
+                },
+                {
+                    "q_id": "Q5.1.3_AGR",
+                    "text": "Local Entity Commitment & Investment: Demonstrate genuine local presence and investment: (1) Local entity registration (not just brass plate - real operations?); (2) Local staff (how many? what roles? senior positions?); (3) Local offices (physical presence in-country?); (4) Local investment (capex in local infrastructure, not just opex?); (5) Local partnerships (with cooperatives, input suppliers, buyers); (6) Profit repatriation policy (are profits reinvested locally or extracted?).",
+                    "stakeholder_types": [
+                        "Farmers",
+                        "Local Staff",
+                        "Regulators",
+                        "Investors",
+                        "Cooperatives"
+                    ],
+                    "evidence_required": "Local entity registration documents, Local staff roster and org chart, Office lease agreements, Local investment documentation, Partnership agreements, Profit reinvestment policies",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Many platforms extractive - profit to Global North, minimal local investment. Local entity must be real, not shell company. Local hiring and reinvestment critical."
+                }
+            ]
+        },
+        {
+            "id": "5.2",
+            "name": "Market Commitment & Track Record",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q5.2.1_AGR",
+                    "text": "Long-Term Agricultural Market Commitment: Demonstrate sustained commitment to African agriculture: (1) Years of operation in Sub-Saharan Africa (not just pilots - sustained operations); (2) Geographic expansion (growing presence or retreating?); (3) Farmer base growth (acquiring new farmers or losing existing?); (4) Product roadmap (continued investment in features farmers need?); (5) Multi-year contracts (committed to farmers/partners for 3-5 years?); (6) Seasonal commitment (will platform be here for next planting season?).",
+                    "stakeholder_types": [
+                        "Farmers",
+                        "Investors",
+                        "Cooperatives",
+                        "Partners"
+                    ],
+                    "evidence_required": "Operational history in SSA (3+ years), Geographic expansion data, Farmer acquisition/retention metrics, Product roadmap, Multi-year partnership contracts, Seasonal commitment guarantees",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Many platforms pilot then exit. Farmers need multi-year commitment (crop cycles, credit history). Seasonal reliability critical - farmers plan around platform."
+                },
+                {
+                    "q_id": "Q5.2.2_AGR",
+                    "text": "Pilot-to-Scale Track Record: Demonstrate ability to scale beyond pilots: (1) Pilot history (how many pilots? outcomes?); (2) Scale-up success (how many pilots became sustained operations?); (3) Farmer retention (do farmers continue using platform after pilot ends?); (4) Geographic scale (how many countries, regions, districts?); (5) Farmer scale (how many active farmers - not just registered?); (6) Barriers to scale (what prevents scaling? how addressed?).",
+                    "stakeholder_types": [
+                        "Farmers",
+                        "Investors",
+                        "Development Partners",
+                        "Researchers"
+                    ],
+                    "evidence_required": "Pilot documentation and outcomes, Scale-up case studies, Farmer retention data, Geographic coverage maps, Active farmer metrics, Barriers to scale analysis",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Pilot-to-scale gap huge in Africa. Many pilots, few scale. Must show sustained operations, not just donor-funded pilots. Active farmers metric critical (not just registered)."
+                }
+            ]
+        },
+        {
+            "id": "5.3",
+            "name": "References & Demonstrated Outcomes",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q5.3.1_AGR",
+                    "text": "Farmer Outcome Evidence - SSA Context: Provide rigorous evidence of farmer benefits: (1) Income impact (do farmers earn more? by how much? compared to control group?); (2) Yield impact (do farmers produce more? which crops? verified data?); (3) Food security impact (do farmers have better food access?); (4) Time savings (does platform save farmer time? for what activities?); (5) Risk reduction (does platform reduce farmer risk? crop insurance, price volatility?); (6) Study quality (RCTs, quasi-experimental, or just testimonials?).",
+                    "stakeholder_types": [
+                        "Farmers",
+                        "Researchers",
+                        "Development Partners",
+                        "Investors"
+                    ],
+                    "evidence_required": "Impact evaluation studies (RCTs preferred), Income data (treatment vs control), Yield data (verified, not self-reported), Food security assessments, Time use studies, Risk reduction analysis",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Outcome evidence often weak - testimonials, not rigorous studies. Need RCTs or quasi-experimental designs. Income/yield claims must be verified, not self-reported."
+                },
+                {
+                    "q_id": "Q5.3.2_AGR",
+                    "text": "Farmer References & Testimonials: Provide verifiable farmer references: (1) Farmer testimonials (video, audio, written - in local languages); (2) Farmer contact information (can prospective farmers talk to existing users?); (3) Cooperative endorsements (do farmer organizations recommend platform?); (4) Geographic diversity (references from multiple regions, countries); (5) Farmer demographics (references from women, youth, elderly, different farm sizes); (6) Negative feedback transparency (are complaints/criticisms shared?).",
+                    "stakeholder_types": [
+                        "Farmers",
+                        "Cooperatives",
+                        "Prospective Users"
+                    ],
+                    "evidence_required": "Farmer testimonial library (video, audio, local languages), Referenceable farmer list, Cooperative endorsement letters, Geographic/demographic diversity in references, Complaint/criticism transparency",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Testimonials must be authentic (not paid actors). Farmer-to-farmer trust critical. Cooperative endorsements powerful. Must include negative feedback for credibility."
+                },
+                {
+                    "q_id": "Q5.3.3_AGR",
+                    "text": "Third-Party Validation & Awards: Demonstrate external recognition and validation: (1) Research institution partnerships (universities, CGIAR centers validating platform); (2) Government endorsements (Ministry of Agriculture, extension services); (3) Development partner support (World Bank, USAID, Gates Foundation); (4) Industry awards (agtech competitions, innovation prizes); (5) Media coverage (credible journalism, not just press releases); (6) Peer recognition (other agtech platforms, industry associations).",
+                    "stakeholder_types": [
+                        "Research Institutions",
+                        "Government",
+                        "Development Partners",
+                        "Industry"
+                    ],
+                    "evidence_required": "Research partnership documentation, Government endorsement letters, Development partner grant/contract documentation, Award certifications, Media coverage archive, Industry recognition",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "Third-party validation important for credibility. Research institutions (local universities, CGIAR) critical. Government endorsement powerful. Awards less important than farmer outcomes."
+                }
+            ]
+        },
+        {
+            "id": "5.4",
+            "name": "Ethical Practices & Social Responsibility",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q5.4.1_AGR",
+                    "text": "Farmer Pricing Fairness & Anti-Exploitation: Demonstrate fair, non-exploitative pricing: (1) Pricing transparency (all fees disclosed, no hidden charges); (2) Pricing competitiveness (vs local markets, other platforms); (3) Commission fairness (reasonable rates, not extractive); (4) Interest rate fairness (for credit - APR vs informal lenders, not predatory); (5) Pricing audits (independent verification of fairness); (6) Farmer pricing feedback (do farmers feel pricing is fair?).",
+                    "stakeholder_types": [
+                        "Farmers",
+                        "Consumer Protection",
+                        "Regulators",
+                        "Auditors"
+                    ],
+                    "evidence_required": "Pricing disclosure documentation, Competitive pricing analysis, Commission rate justification, Interest rate comparisons (vs market), Independent pricing audits, Farmer pricing satisfaction surveys",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Farmers highly vulnerable to exploitation. Pricing must be demonstrably fair. Commission rates often extractive. Credit interest rates must not be predatory."
+                },
+                {
+                    "q_id": "Q5.4.2_AGR",
+                    "text": "Data Ethics & Farmer Data Sovereignty: Ensure ethical farmer data practices: (1) Farmer data ownership (farmers own their data, not platform); (2) Data usage consent (informed, specific, voluntary - not coerced); (3) Data benefit sharing (if data monetized, do farmers benefit?); (4) Data sovereignty (farmer data stays in Africa, not extracted to Global North); (5) Research ethics (if data used for research, farmers consented? IRB approval?); (6) Data colonialism prevention (value created from data shared with farmers).",
+                    "stakeholder_types": [
+                        "Farmers",
+                        "Data Protection Authorities",
+                        "Ethics Boards",
+                        "Researchers"
+                    ],
+                    "evidence_required": "Data ownership policies, Consent mechanisms (farmer-friendly), Data benefit sharing agreements, Data residency policies, Research ethics approvals (IRB), Anti-data colonialism policies",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Data colonialism major concern - farmer data extracted, value captured elsewhere. Farmers must own and benefit from their data. Data should stay in Africa."
+                },
+                {
+                    "q_id": "Q5.4.3_AGR",
+                    "text": "Social Impact & Community Benefit: Demonstrate positive social impact beyond profit: (1) Local employment (how many jobs created? quality of jobs?); (2) Skills development (are local staff trained for advancement?); (3) Community investment (schools, health, infrastructure - beyond platform); (4) Environmental responsibility (sustainable agriculture practices promoted?); (5) Gender equity (women farmers included? women staff hired?); (6) Youth engagement (opportunities for young farmers?).",
+                    "stakeholder_types": [
+                        "Local Communities",
+                        "Employees",
+                        "Civil Society",
+                        "Development Partners"
+                    ],
+                    "evidence_required": "Local employment data, Skills development programs, Community investment documentation, Environmental impact assessments, Gender equity metrics, Youth engagement programs",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "Social impact beyond profit important for trust. Local job creation critical. Gender equity essential (women farmers often excluded). Environmental sustainability increasingly important."
+                },
+                {
+                    "q_id": "Q5.4.4_AGR",
+                    "text": "Climate Smart Agriculture & Carbon Integrity: For platforms promoting CSA or selling carbon credits: (1) Verification of farmer practices (satellite, ground truth, photos?); (2) Carbon credit methodology (Verra, Gold Standard?); (3) Benefit sharing (what % of carbon revenue goes to farmer?); (4) Greenwashing prevention (are claims audited?); (5) Adaptation vs Mitigation balance.",
+                    "stakeholder_types": [
+                        "Farmers",
+                        "Auditors",
+                        "Environmental Agencies"
+                    ],
+                    "evidence_required": "Carbon verification reports, Benefit sharing audit, Methodology documentation",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Carbon markets are growing but risky. Farmers must receive fair share of revenue. Verification must be rigorous to prevent greenwashing."
+                }
+            ]
+        }
+    ],
+    "scoring_notes": "Layer 5 (Integrity) for Agriculture in Sub-Saharan Africa: Financial sustainability beyond donor funding critical. Farmer outcome evidence must be rigorous (RCTs, not testimonials). Pricing fairness essential to prevent exploitation. Data sovereignty and anti-colonialism mandatory."
+}

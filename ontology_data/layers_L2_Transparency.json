@@ -1,0 +1,174 @@
+{
+    "layer_id": "L2",
+    "layer_name": "Transparency",
+    "total_questions": 13,
+    "total_sub_dimensions": 5,
+    "sub_dimensions": [
+        {
+            "id": "2.1",
+            "name": "System Logic & Decision Explainability",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q2.1.1",
+                    "text": "Stakeholder-Specific Explainability: Describe explainability mechanisms for different stakeholder groups: End-user explanations; Operator explanations; Technical explanations; Regulatory explanations; Testing results.",
+                    "stakeholder_types": [
+                        "Product Owner",
+                        "UX Designer"
+                    ],
+                    "evidence_required": "Explainability documentation, User testing results, Regulatory compliance reports",
+                    "evidence_weight": "High"
+                },
+                {
+                    "q_id": "Q2.1.2",
+                    "text": "Algorithmic Transparency (for AI/ML Systems): For systems using AI/ML, provide: Training data documentation; Model architecture description; Performance metrics; Explainable AI implementation; Human override mechanisms.",
+                    "stakeholder_types": [
+                        "Data Scientist",
+                        "Risk Officer"
+                    ],
+                    "evidence_required": "Model cards, Bias assessment reports, XAI implementation docs",
+                    "evidence_weight": "Critical"
+                },
+                {
+                    "q_id": "Q2.1.3",
+                    "text": "Decision Auditability: Demonstrate complete decision auditability: Logging comprehensiveness; Audit trail security; Reproducibility testing; Query capabilities; Regulatory compliance reporting.",
+                    "stakeholder_types": [
+                        "Compliance Officer",
+                        "Auditor"
+                    ],
+                    "evidence_required": "Audit logs sample, Security audit report, Reproducibility test results",
+                    "evidence_weight": "High"
+                }
+            ]
+        },
+        {
+            "id": "2.2",
+            "name": "Operational Visibility",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q2.2.1",
+                    "text": "Real-Time System Status Transparency: Describe operational visibility mechanisms: Status dashboard availability; Performance metrics transparency; Alert and notification quality; Historical trend analysis; Planned maintenance communication.",
+                    "stakeholder_types": [
+                        "Ops Team",
+                        "End Users"
+                    ],
+                    "evidence_required": "Status page URL, Dashboard screenshots, Notification examples",
+                    "evidence_weight": "Medium"
+                },
+                {
+                    "q_id": "Q2.2.2",
+                    "text": "Data Flow Transparency: Map and explain complete data flows: Data source identification; Data transformation documentation; Data storage and access; Data sharing disclosures; Data quality indicators.",
+                    "stakeholder_types": [
+                        "Data Architect",
+                        "Privacy Officer"
+                    ],
+                    "evidence_required": "Data flow diagrams, Data lineage documentation, Sharing agreements",
+                    "evidence_weight": "High"
+                }
+            ]
+        },
+        {
+            "id": "2.3",
+            "name": "Data Governance & Privacy",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q2.3.1",
+                    "text": "Comprehensive Data Inventory: Provide complete data governance documentation: Data inventory; Data classification; Data minimization justification; Retention policies; Cross-border data flow mapping.",
+                    "stakeholder_types": [
+                        "DPO",
+                        "Legal"
+                    ],
+                    "evidence_required": "Data inventory register, Retention policy, Cross-border transfer impact assessment",
+                    "evidence_weight": "Critical"
+                },
+                {
+                    "q_id": "Q2.3.2",
+                    "text": "Privacy & Security Practices: Document privacy and security implementations: Encryption standards; Access control mechanisms; Privacy impact assessments; Security certifications; Data breach incident response protocols.",
+                    "stakeholder_types": [
+                        "CISO",
+                        "Privacy Officer"
+                    ],
+                    "evidence_required": "Encryption specs, PIA reports, ISO/SOC certifications, Incident response plan",
+                    "evidence_weight": "Critical"
+                },
+                {
+                    "q_id": "Q2.3.3",
+                    "text": "User Data Rights Implementation: Demonstrate user rights operationalization: Data access mechanisms; Data correction procedures; Data portability; Data deletion capabilities; Response time metrics.",
+                    "stakeholder_types": [
+                        "Product Manager",
+                        "Support Lead"
+                    ],
+                    "evidence_required": "User rights portal demo, DSAR procedure docs, Response time metrics",
+                    "evidence_weight": "High"
+                }
+            ]
+        },
+        {
+            "id": "2.4",
+            "name": "Documentation Quality",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q2.4.1",
+                    "text": "Multi-Level Documentation Assessment: Provide documentation portfolio for evaluation: User guides; Operator manuals; Technical documentation; Training materials; Documentation currency.",
+                    "stakeholder_types": [
+                        "Technical Writer",
+                        "Training Manager"
+                    ],
+                    "evidence_required": "Documentation repository access, Sample manuals, Update logs",
+                    "evidence_weight": "Medium"
+                },
+                {
+                    "q_id": "Q2.4.2",
+                    "text": "Documentation Effectiveness Testing: Submit evidence of documentation usability: Task completion testing results; Time-on-task metrics; Error rates; User satisfaction scores; Localization quality.",
+                    "stakeholder_types": [
+                        "UX Researcher",
+                        "Training Manager"
+                    ],
+                    "evidence_required": "Usability test reports, User feedback surveys",
+                    "evidence_weight": "Medium"
+                }
+            ]
+        },
+        {
+            "id": "2.5",
+            "name": "Communication Protocols",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q2.5.1",
+                    "text": "Proactive Communication Assessment: Describe communication practices: Planned maintenance notification; System upgrade communication; Performance degradation alerts; Security issue notifications; Policy/pricing change notifications.",
+                    "stakeholder_types": [
+                        "Comms Manager",
+                        "Account Manager"
+                    ],
+                    "evidence_required": "Communication policy, Sample notifications, Incident comms logs",
+                    "evidence_weight": "Medium"
+                },
+                {
+                    "q_id": "Q2.5.2",
+                    "text": "Two-Way Communication Mechanisms: Detail stakeholder engagement channels: Support responsiveness; Feedback mechanisms; Community engagement; Escalation pathways; Stakeholder influence on roadmap.",
+                    "stakeholder_types": [
+                        "Support Lead",
+                        "Community Manager"
+                    ],
+                    "evidence_required": "Support SLA reports, Feedback portal access, Roadmap contribution logs",
+                    "evidence_weight": "Medium"
+                },
+                {
+                    "q_id": "Q2.5.3",
+                    "text": "Crisis Communication Capability: Provide crisis communication track record: Past incidents; Communication frequency during crises; Post-incident reporting; Stakeholder satisfaction with crisis communication.",
+                    "stakeholder_types": [
+                        "PR Manager",
+                        "Crisis Response Team"
+                    ],
+                    "evidence_required": "Crisis comms plan, Post-mortem reports, Stakeholder feedback",
+                    "evidence_weight": "High"
+                }
+            ]
+        }
+    ],
+    "scoring_notes": "Layer 2 composite formula: Weighted average of sub-dimensions."
+}

@@ -1,0 +1,57 @@
+{
+    "sector_id": "financial",
+    "sector_name": "Financial Services & Mobile Money",
+    "region": "Sub-Saharan Africa",
+    "languages": [
+        "en",
+        "fr"
+    ],
+    "description": "Mobile money services, digital financial services, and fintech platforms serving the unbanked and underbanked populations across Sub-Saharan Africa.",
+    "key_stakeholders": [
+        "Mobile Money Users",
+        "Agents (Cash-in/Cash-out)",
+        "Mobile Network Operators",
+        "Central Banks",
+        "Financial Regulators",
+        "Microfinance Institutions",
+        "Remittance Recipients",
+        "Merchants"
+    ],
+    "critical_certifications": [
+        "Central bank e-money licenses",
+        "Mobile money operator licenses",
+        "PCI-DSS compliance",
+        "AML/KYC compliance",
+        "Data protection compliance (national DPA laws)",
+        "Cross-border remittance licenses"
+    ],
+    "infrastructure_context": {
+        "power": "Agent POS devices need charging, unreliable grid power",
+        "connectivity": "USSD works on 2G (most transactions), SMS confirmations",
+        "devices": "Feature phones dominant, USSD primary interface",
+        "payment": "Mobile money IS the payment system (M-Pesa, Airtel Money, MTN MoMo, Orange Money)",
+        "agents": "Agent network density critical for cash-in/cash-out",
+        "language": "Local languages essential for financial literacy"
+    },
+    "regulatory_environment": {
+        "financial": [
+            "Central bank regulations",
+            "E-money regulations",
+            "AML/KYC requirements",
+            "Consumer protection"
+        ],
+        "data_protection": [
+            "National DPA laws",
+            "ECOWAS Data Protection Regulation"
+        ],
+        "telecommunications": [
+            "Mobile network operator regulations",
+            "USSD pricing regulations"
+        ],
+        "cross_border": [
+            "Remittance regulations",
+            "Foreign exchange controls",
+            "Regional integration (EAC, ECOWAS)"
+        ]
+    }
+}

@@ -1264,6 +1264,7 @@ model SystemLog {
 model RespondentCredit {
   id             String @id @default(cuid())
   organizationId String
+  amount          Int       @default(0)
 
   // Credit tracking
   totalPurchased Int @default(0)
@@ -1320,6 +1321,7 @@ enum RCTxType {
 model EvidenceCredit {
   id             String @id @default(cuid())
   organizationId String
+  amount          Int       @default(0)
 
   // Credit tracking (using Decimal for fractional credits)
   totalPurchased Decimal @default(0) @db.Decimal(10, 2)

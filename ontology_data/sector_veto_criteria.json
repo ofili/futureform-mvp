@@ -1,0 +1,149 @@
+{
+  "schema_version": "1.0.0",
+  "veto_criteria_list": [
+    {
+      "veto_id": "AGR_L1_Offline",
+      "layer_id": "L1",
+      "sub_dimension_id": "1.1",
+      "description": "Offline capability failure (<2.0). System must function in remote areas without constant connectivity.",
+      "threshold": 2.0,
+      "severity": "Critical",
+      "sector": "agriculture"
+    },
+    {
+      "veto_id": "AGR_L6_SupplyChain",
+      "layer_id": "L6",
+      "sub_dimension_id": "6.1",
+      "description": "Input supply chain dependency failure (<2.0). Critical dependence on unavailable inputs (seeds, fertilizer).",
+      "threshold": 2.0,
+      "severity": "Critical",
+      "sector": "agriculture"
+    },
+    {
+      "veto_id": "EDU_L4_Training",
+      "layer_id": "L4",
+      "sub_dimension_id": "4.1",
+      "description": "Teacher/Facilitator training failure (<2.5). Solution unusable without adequately trained human facilitators.",
+      "threshold": 2.5,
+      "severity": "High",
+      "sector": "education"
+    },
+    {
+      "veto_id": "EDU_L3_Cert",
+      "layer_id": "L3",
+      "sub_dimension_id": "3.1",
+      "description": "Certification validity failure (<2.5). Degrees/certificates not recognized by relevant authorities.",
+      "threshold": 2.5,
+      "severity": "Critical",
+      "sector": "education"
+    },
+    {
+      "veto_id": "NRG_L5_Safety",
+      "layer_id": "L5",
+      "sub_dimension_id": "5.2",
+      "description": "Safety standards violation (<2.5). Risk of physical harm, fire, or environmental damage.",
+      "threshold": 2.5,
+      "severity": "Critical",
+      "sector": "energy"
+    },
+    {
+      "veto_id": "NRG_L1_Reliability",
+      "layer_id": "L1",
+      "sub_dimension_id": "1.1",
+      "description": "Power delivery reliability failure (<2.0). System uptime below minimum viable threshold for productive use.",
+      "threshold": 2.0,
+      "severity": "Critical",
+      "sector": "energy"
+    },
+    {
+      "veto_id": "FIN_L5_Fraud",
+      "layer_id": "L5",
+      "sub_dimension_id": "5.3",
+      "description": "Fraud prevention failure (<2.0). Inadequate controls against internal or external fraud.",
+      "threshold": 2.0,
+      "severity": "Critical",
+      "sector": "financial"
+    },
+    {
+      "veto_id": "FIN_L3_Compliance",
+      "layer_id": "L3",
+      "sub_dimension_id": "3.1",
+      "description": "Regulatory non-compliance (<2.5). Violation of core banking/financial regulations (KYC/AML).",
+      "threshold": 2.5,
+      "severity": "Critical",
+      "sector": "financial"
+    },
+    {
+      "veto_id": "GOV_L2_Privacy",
+      "layer_id": "L2",
+      "sub_dimension_id": "2.3",
+      "description": "Data privacy/sovereignty violation (<2.5). Failure to protect citizen data or adhere to data sovereignty laws.",
+      "threshold": 2.5,
+      "severity": "Critical",
+      "sector": "government"
+    },
+    {
+      "veto_id": "GOV_L5_Corruption",
+      "layer_id": "L5",
+      "sub_dimension_id": "5.3",
+      "description": "Corruption/Bribery risk (<2.0). Evidence of corrupt practices or lack of anti-corruption controls.",
+      "threshold": 2.0,
+      "severity": "Critical",
+      "sector": "government"
+    },
+    {
+      "veto_id": "HLT_L5_PatientSafety",
+      "layer_id": "L5",
+      "sub_dimension_id": "5.2",
+      "description": "Patient safety risk (<2.0). Direct risk of harm to patients due to system failure or error.",
+      "threshold": 2.0,
+      "severity": "Critical",
+      "sector": "healthcare"
+    },
+    {
+      "veto_id": "HLT_L1_Accuracy",
+      "layer_id": "L1",
+      "sub_dimension_id": "1.2",
+      "description": "Clinical accuracy failure (<2.5). Diagnostic or treatment recommendations fall below medical standards.",
+      "threshold": 2.5,
+      "severity": "Critical",
+      "sector": "healthcare"
+    },
+    {
+      "veto_id": "TEL_L1_Uptime",
+      "layer_id": "L1",
+      "sub_dimension_id": "1.1",
+      "description": "Network uptime failure (<2.0). Service availability below minimum contractual or regulatory standards.",
+      "threshold": 2.0,
+      "severity": "Critical",
+      "sector": "telecom"
+    },
+    {
+      "veto_id": "TEL_L6_Power",
+      "layer_id": "L6",
+      "sub_dimension_id": "6.1",
+      "description": "Power infrastructure dependency failure (<2.0). Critical dependence on unreliable grid without backup.",
+      "threshold": 2.0,
+      "severity": "High",
+      "sector": "telecom"
+    },
+    {
+      "veto_id": "TRN_L5_Safety",
+      "layer_id": "L5",
+      "sub_dimension_id": "5.2",
+      "description": "Passenger safety standards violation (<2.0). Vehicle or operational practices pose direct safety risks.",
+      "threshold": 2.0,
+      "severity": "Critical",
+      "sector": "transport"
+    },
+    {
+      "veto_id": "TRN_L3_Compliance",
+      "layer_id": "L3",
+      "sub_dimension_id": "3.1",
+      "description": "Insurance/Licensing compliance failure (<2.5). Lack of required operating licenses or insurance coverage.",
+      "threshold": 2.5,
+      "severity": "Critical",
+      "sector": "transport"
+    }
+  ]
+}

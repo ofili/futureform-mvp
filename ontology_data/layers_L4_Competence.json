@@ -1,0 +1,198 @@
+{
+    "layer_id": "L4",
+    "layer_name": "Competence",
+    "total_questions": 16,
+    "total_sub_dimensions": 5,
+    "sub_dimensions": [
+        {
+            "id": "4.1",
+            "name": "User Skill Match Analysis",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q4.1.1",
+                    "text": "System Complexity Characterization: Provide detailed complexity assessment: Function-by-function complexity mapping; Frequency and criticality weighting; Complexity scoring methodology; User interface complexity.",
+                    "stakeholder_types": [
+                        "UX Researcher",
+                        "Product Manager"
+                    ],
+                    "evidence_required": "Complexity analysis report, UI/UX audit",
+                    "evidence_weight": "High"
+                },
+                {
+                    "q_id": "Q4.1.2",
+                    "text": "User Capability Assessment: Document user capability evaluation: Current user credentials; Practical skills testing results; Cognitive capability assessment; Experience relevance; Capability distribution.",
+                    "stakeholder_types": [
+                        "HR",
+                        "Training Manager"
+                    ],
+                    "evidence_required": "Skills assessment results, User profiles",
+                    "evidence_weight": "Critical"
+                },
+                {
+                    "q_id": "Q4.1.3",
+                    "text": "Gap Analysis & Bridgeability: Quantify and assess skill gaps: Function-by-function gap calculation; Gap bridgeability assessment; Training investment required; Alternative strategies; Risk assessment.",
+                    "stakeholder_types": [
+                        "Training Manager",
+                        "Project Manager"
+                    ],
+                    "evidence_required": "Gap analysis report, Training budget/plan",
+                    "evidence_weight": "Critical"
+                }
+            ]
+        },
+        {
+            "id": "4.2",
+            "name": "Training Quality & Effectiveness",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q4.2.1",
+                    "text": "Training Needs Analysis: Demonstrate systematic training design: Job task analysis; Learning objectives; Entry-level assessment; Training design specifications.",
+                    "stakeholder_types": [
+                        "Instructional Designer"
+                    ],
+                    "evidence_required": "Training needs assessment doc, Learning objectives",
+                    "evidence_weight": "High"
+                },
+                {
+                    "q_id": "Q4.2.2",
+                    "text": "Training Design & Delivery Quality: Provide training program details: Instructional design quality; Trainer qualifications; Class size; Duration adequacy; Materials quality; Learning environment.",
+                    "stakeholder_types": [
+                        "Training Manager"
+                    ],
+                    "evidence_required": "Training curriculum, Trainer CVs, Sample materials",
+                    "evidence_weight": "High"
+                },
+                {
+                    "q_id": "Q4.2.3",
+                    "text": "Training Effectiveness Measurement (Kirkpatrick Model): Submit comprehensive effectiveness evaluation: Level 1 (Reaction); Level 2 (Learning); Level 3 (Behavior); Level 4 (Results).",
+                    "stakeholder_types": [
+                        "Training Manager",
+                        "Business Analyst"
+                    ],
+                    "evidence_required": "Evaluation reports (L1-L4), Pre/post test results",
+                    "evidence_weight": "Critical"
+                }
+            ]
+        },
+        {
+            "id": "4.3",
+            "name": "Ongoing Support & Knowledge Transfer",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q4.3.1",
+                    "text": "Technical Support Quality: Document support infrastructure: Support tier structure; Response time commitments; Support availability; Multi-channel accessibility; Language capabilities; Support effectiveness metrics.",
+                    "stakeholder_types": [
+                        "Support Lead"
+                    ],
+                    "evidence_required": "Support SLA, Performance reports, Support portal demo",
+                    "evidence_weight": "High"
+                },
+                {
+                    "q_id": "Q4.3.2",
+                    "text": "Knowledge Resources Quality: Evaluate knowledge management systems: Knowledge base completeness; Documentation currency; Self-service effectiveness; Multimedia availability; Localization; Accessibility.",
+                    "stakeholder_types": [
+                        "Knowledge Manager"
+                    ],
+                    "evidence_required": "KB access, Content audit, Usage analytics",
+                    "evidence_weight": "Medium"
+                },
+                {
+                    "q_id": "Q4.3.3",
+                    "text": "Knowledge Transfer Strategy: Assess vendor-to-client knowledge transfer: Progressive autonomy pathway; Train-the-trainer programs; Documentation transfer; Shadow training; Escalation reduction plan; Local expert development.",
+                    "stakeholder_types": [
+                        "Vendor Project Manager",
+                        "Client Lead"
+                    ],
+                    "evidence_required": "Knowledge transfer plan, Transition milestones",
+                    "evidence_weight": "Critical"
+                }
+            ]
+        },
+        {
+            "id": "4.4",
+            "name": "Institutional Learning Capacity",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q4.4.1",
+                    "text": "Knowledge Distribution & Redundancy: Assess organizational knowledge resilience: Knowledge distribution mapping; Single points of failure; Redundancy adequacy; Knowledge concentration risk; Succession planning.",
+                    "stakeholder_types": [
+                        "HR",
+                        "Ops Manager"
+                    ],
+                    "evidence_required": "Skills matrix, Succession plan",
+                    "evidence_weight": "High"
+                },
+                {
+                    "q_id": "Q4.4.2",
+                    "text": "Knowledge Documentation: Evaluate institutional memory systems: SOPs completeness; Troubleshooting guides; Configuration baselines; Lessons learned processes; Customization documentation; Training materials.",
+                    "stakeholder_types": [
+                        "Ops Manager",
+                        "Quality Manager"
+                    ],
+                    "evidence_required": "SOP library, Lessons learned log",
+                    "evidence_weight": "Medium"
+                },
+                {
+                    "q_id": "Q4.4.3",
+                    "text": "Learning Culture & Continuous Improvement: Assess organizational learning maturity: Repeat incident rate; Knowledge contribution rate; Training investment; Innovation rate; Retention of top performers; Knowledge loss events.",
+                    "stakeholder_types": [
+                        "HR",
+                        "Leadership"
+                    ],
+                    "evidence_required": "HR metrics, Innovation log, Incident trend analysis",
+                    "evidence_weight": "Medium"
+                }
+            ]
+        },
+        {
+            "id": "4.5",
+            "name": "Local Technical Ecosystem",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q4.5.1",
+                    "text": "Local Talent Availability: Analyze technical labor market: Required skills and roles; Local talent pool assessment; Hiring feasibility; Education infrastructure; Contractor availability.",
+                    "stakeholder_types": [
+                        "HR",
+                        "Recruiter"
+                    ],
+                    "evidence_required": "Labor market analysis, Recruitment reports",
+                    "evidence_weight": "High"
+                },
+                {
+                    "q_id": "Q4.5.2",
+                    "text": "Spare Parts & Supply Chain: Assess supply chain resilience: Component inventory; Local availability; Recommended stock levels; Supply chain risk assessment; Total inventory investment.",
+                    "stakeholder_types": [
+                        "Procurement",
+                        "Logistics"
+                    ],
+                    "evidence_required": "Inventory list, Supply chain map, Risk assessment",
+                    "evidence_weight": "Critical"
+                },
+                {
+                    "q_id": "Q4.5.3",
+                    "text": "Service Provider Ecosystem: Evaluate local service capacity: Service provider landscape; Capabilities and quality; Capacity; Vendor relationships; Development strategy.",
+                    "stakeholder_types": [
+                        "Vendor Partner Manager"
+                    ],
+                    "evidence_required": "Partner list, Capability assessment",
+                    "evidence_weight": "Medium"
+                },
+                {
+                    "q_id": "Q4.5.4",
+                    "text": "Technical Community & Networks: Assess knowledge ecosystem: Professional associations; Industry user groups; Online communities; Academic institutions; Peer networks; Community development plans.",
+                    "stakeholder_types": [
+                        "Community Manager"
+                    ],
+                    "evidence_required": "Community map, Engagement plan",
+                    "evidence_weight": "Low"
+                }
+            ]
+        }
+    ],
+    "scoring_notes": "Layer 4 composite formula: Weighted average of sub-dimensions."
+}

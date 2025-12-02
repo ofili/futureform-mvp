@@ -1,0 +1,188 @@
+{
+    "layer_id": "L1",
+    "layer_name": "Reliability",
+    "sector": "healthcare",
+    "region": "Sub-Saharan Africa",
+    "total_questions": 15,
+    "total_sub_dimensions": 5,
+    "sub_dimensions": [
+        {
+            "id": "1.1",
+            "name": "System Availability & Clinical Uptime",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q1.1.1_HLT",
+                    "text": "Telemedicine Platform Uptime - Clinical Criticality: Assess uptime guarantees relative to clinical risk: (1) 24/7 availability for emergency services; (2) Scheduled downtime management (never during peak clinic hours); (3) Redundancy for critical components (video server, patient database); (4) Failover mechanisms; (5) Uptime monitoring (independent verification); (6) SLA penalties for downtime.",
+                    "stakeholder_types": [
+                        "Patients",
+                        "Doctors",
+                        "Ministry of Health"
+                    ],
+                    "evidence_required": "Uptime logs (12 months), SLA documentation, Disaster recovery plan",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "If a doctor is unreachable during an emergency consult, patients lose trust or die. 99.9% uptime required for acute care."
+                },
+                {
+                    "q_id": "Q1.1.2_HLT",
+                    "text": "Offline Functionality for CHWs: Assess offline capabilities for Community Health Workers: (1) Full patient record access offline; (2) Offline diagnostic algorithms (symptom checkers); (3) Offline data collection (forms); (4) Local storage encryption (security of offline data); (5) Offline media access (training videos); (6) Duration of offline operation (can it work for days?).",
+                    "stakeholder_types": [
+                        "CHWs",
+                        "Nurses",
+                        "Program Managers"
+                    ],
+                    "evidence_required": "Offline mode demo, Technical architecture docs, Field test reports",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "CHWs work in deep rural areas with zero connectivity. App MUST work offline for days. 'Online-only' apps are useless."
+                },
+                {
+                    "q_id": "Q1.1.3_HLT",
+                    "text": "Data Synchronization & Conflict Resolution: Handling data sync after offline usage: (1) Auto-sync when connectivity returns; (2) Conflict resolution logic (if two CHWs edit same record); (3) Data integrity checks (checksums); (4) Sync status visibility (user knows if data sent); (5) Bandwidth optimization (delta syncs only); (6) Retry mechanisms for unstable networks.",
+                    "stakeholder_types": [
+                        "Developers",
+                        "Data Managers",
+                        "CHWs"
+                    ],
+                    "evidence_required": "Sync logic documentation, Conflict resolution policy, Bandwidth usage logs",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Sync conflicts common. Losing patient data (e.g., vaccination record) is a clinical risk. Sync must be robust on 2G."
+                }
+            ]
+        },
+        {
+            "id": "1.2",
+            "name": "Device & Infrastructure Compatibility",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q1.2.1_HLT",
+                    "text": "Low-End Device Performance (Healthcare): Performance on basic smartphones: (1) App size (under 20MB?); (2) RAM usage (runs on 1GB RAM?); (3) Processor requirements; (4) Storage footprint (patient data database size); (5) Battery consumption (optimization for long shifts); (6) Screen size compatibility (small screens); (7) Android version support (legacy versions).",
+                    "stakeholder_types": [
+                        "CHWs",
+                        "Users",
+                        "Developers"
+                    ],
+                    "evidence_required": "Device compatibility matrix, Performance test results on low-end devices, Battery usage stats",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "CHWs often use $40 smartphones (Tecno, Infinix). Heavy apps crash. Battery must last all day (no charging in field)."
+                },
+                {
+                    "q_id": "Q1.2.2_HLT",
+                    "text": "Medical Device Integration Reliability: Reliability of connected devices (if any): (1) Bluetooth connectivity stability (BP machines, glucometers); (2) Data accuracy transfer; (3) Pairing simplicity (for non-tech users); (4) Battery life of peripherals; (5) Durability of peripherals (drop tests); (6) Calibration requirements.",
+                    "stakeholder_types": [
+                        "Patients",
+                        "Doctors",
+                        "Device Manufacturers"
+                    ],
+                    "evidence_required": "Integration test reports, Device certification, Field failure rates",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Bluetooth pairing often fails. Devices must be rugged. Manual data entry fallback essential if connection fails."
+                }
+            ]
+        },
+        {
+            "id": "1.3",
+            "name": "Clinical Data Integrity",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q1.3.1_HLT",
+                    "text": "Patient Record Integrity: Ensuring data accuracy: (1) Prevention of duplicate records; (2) Audit trails for all edits; (3) Data validation (range checks for vitals - e.g., no temp > 45°C); (4) Backup frequency; (5) Restoration testing; (6) Record locking during edits.",
+                    "stakeholder_types": [
+                        "Doctors",
+                        "Data Managers",
+                        "Regulators"
+                    ],
+                    "evidence_required": "Database schema (audit logs), Validation rules, Backup logs, Restoration test reports",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Bad data = bad diagnosis. Range checks prevent typos (e.g., weight 500kg). Duplicates confuse treatment history."
+                },
+                {
+                    "q_id": "Q1.3.2_HLT",
+                    "text": "Image & Media Quality (Tele-dermatology/Radiology): Quality of transmitted media: (1) Compression standards (diagnostic quality maintained?); (2) Resolution requirements; (3) Color accuracy (skin tones); (4) Upload reliability (resumable uploads); (5) Metadata preservation (date, location); (6) DICOM support (if radiology).",
+                    "stakeholder_types": [
+                        "Specialists",
+                        "Radiologists",
+                        "Dermatologists"
+                    ],
+                    "evidence_required": "Image quality benchmarks, Compression algorithm details, Specialist validation sign-off",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Aggressive compression on 2G ruins diagnostic value. Skin tone accuracy critical for dermatology. Resumable uploads needed."
+                }
+            ]
+        },
+        {
+            "id": "1.4",
+            "name": "Emergency & Failover Protocols",
+            "weight": 0.15,
+            "questions": [
+                {
+                    "q_id": "Q1.4.1_HLT",
+                    "text": "Emergency Fallback Protocols: What happens when tech fails: (1) Manual fallback procedures (paper forms?); (2) Phone hotline backup; (3) SMS fallback for critical alerts; (4) User notification of outage; (5) Emergency routing (auto-dial ambulance); (6) Offline first-aid guides.",
+                    "stakeholder_types": [
+                        "Patients",
+                        "CHWs",
+                        "Operations"
+                    ],
+                    "evidence_required": "Business Continuity Plan (BCP), Fallback procedure manuals, SMS backup logs",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "Tech fails. People can't die because app crashed. Paper backup or SMS channel mandatory for emergencies."
+                },
+                {
+                    "q_id": "Q1.4.2_HLT",
+                    "text": "Alert Delivery Reliability: Reliability of critical notifications: (1) SMS delivery rates (for appointment reminders, lab results); (2) Push notification reliability; (3) Escalation logic (if unread, call user); (4) Latency of alerts; (5) Confirmation of receipt.",
+                    "stakeholder_types": [
+                        "Patients",
+                        "Doctors",
+                        "Lab Techs"
+                    ],
+                    "evidence_required": "SMS gateway logs, Alert latency metrics, Escalation logic documentation",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Lab result alerts (e.g., HIV viral load) must be delivered. SMS more reliable than push. Escalation needed for critical values."
+                }
+            ]
+        },
+        {
+            "id": "1.5",
+            "name": "Supply Chain Reliability (Pharmacy)",
+            "weight": 0.15,
+            "questions": [
+                {
+                    "q_id": "Q1.5.1_HLT",
+                    "text": "Inventory Accuracy (e-Pharmacy): Reliability of stock data: (1) Real-time stock levels; (2) Expiry date tracking; (3) Batch number tracking (for recalls); (4) Stock-out prediction; (5) Cold chain monitoring integration; (6) Physical vs digital stock reconciliation.",
+                    "stakeholder_types": [
+                        "Pharmacists",
+                        "Patients",
+                        "Regulators"
+                    ],
+                    "evidence_required": "Inventory system logs, Stock reconciliation reports, Expiry tracking features",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Stock-outs kill. Expiry tracking essential (dumping expired drugs common). Batch tracking needed for recalls."
+                },
+                {
+                    "q_id": "Q1.5.2_HLT",
+                    "text": "Delivery Logistics Reliability: Reliability of drug delivery: (1) Delivery time accuracy; (2) Cold chain maintenance during transport; (3) Proof of delivery (secure handoff); (4) Rider tracking; (5) Exception handling (patient not home).",
+                    "stakeholder_types": [
+                        "Patients",
+                        "Logistics Partners"
+                    ],
+                    "evidence_required": "Delivery logs, Cold chain temp logs, Proof of delivery records",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Cold chain (vaccines/insulin) hard on motorbikes. Secure handoff needed (controlled substances)."
+                }
+            ]
+        }
+    ],
+    "scoring_notes": "Layer 1 (Reliability) for Healthcare in SSA: Offline capability for CHWs is the single most critical technical factor. Clinical uptime and data integrity are life-safety issues. Low-end device performance determines usability."
+}

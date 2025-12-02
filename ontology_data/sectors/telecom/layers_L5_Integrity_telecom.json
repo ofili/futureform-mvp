@@ -1,0 +1,142 @@
+{
+    "layer_id": "L5",
+    "layer_name": "Integrity",
+    "sector": "telecom",
+    "region": "Sub-Saharan Africa",
+    "total_questions": 12,
+    "total_sub_dimensions": 4,
+    "sub_dimensions": [
+        {
+            "id": "5.1",
+            "name": "Financial Integrity & Revenue Assurance",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q5.1.1_TEL",
+                    "text": "Revenue Assurance & Tax Compliance: Paying fair share: (1) Accurate declaration of revenues; (2) Tax compliance (Corporate, VAT, Excise); (3) Prevention of leakage; (4) Mobile Money tax compliance; (5) Transfer pricing transparency (multinationals); (6) Audit status (Big 4?); (7) Relationship with tax authority.",
+                    "stakeholder_types": [
+                        "Tax Authority",
+                        "Investors",
+                        "CFO"
+                    ],
+                    "evidence_required": "Tax clearance certificates, Audited financial statements, Transparency reports",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Telcos are often the largest taxpayers. Disputes over tax (e.g., MTN Nigeria) are common and high-stakes."
+                },
+                {
+                    "q_id": "Q5.1.2_TEL",
+                    "text": "Anti-Bribery & Corruption (ABC): Ethical business: (1) ABC policy enforcement; (2) Gift & Hospitality register; (3) Due diligence on partners/agents; (4) Whistleblower channel effectiveness; (5) Interaction with government officials; (6) Lobbying transparency; (7) ISO 37001 certification.",
+                    "stakeholder_types": [
+                        "Compliance",
+                        "Government",
+                        "Investors"
+                    ],
+                    "evidence_required": "ABC policy, Training records, Whistleblower logs",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "License renewals and spectrum allocation are high-risk moments for bribery."
+                }
+            ]
+        },
+        {
+            "id": "5.2",
+            "name": "Ethical Marketing & Sales",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q5.2.1_TEL",
+                    "text": "Truth in Advertising (Telecom): Honest offers: (1) 'Unlimited' definition clarity; (2) Network speed claims (4G vs 4G-ish); (3) Free data promotion terms; (4) Lottery/Competition fairness; (5) No hidden charges in ads; (6) Comparison advertising ethics; (7) Clarity on device financing.",
+                    "stakeholder_types": [
+                        "Marketing",
+                        "Consumers",
+                        "Regulators"
+                    ],
+                    "evidence_required": "Marketing approval process, Ad samples, Consumer complaints",
+                    "evidence_weight": "High",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "Misleading 'Unlimited' offers are a major grievance. Lotteries ('Win a Car') often seen as scams."
+                },
+                {
+                    "q_id": "Q5.2.2_TEL",
+                    "text": "Sales Agent Ethics: Preventing mis-selling: (1) No forced SIM registration; (2) No unauthorized VAS activation; (3) Honest explanation of tariffs; (4) Protection of vulnerable customers (elderly); (5) Agent code of conduct; (6) Mystery shopper audits; (7) Sanctions for unethical agents.",
+                    "stakeholder_types": [
+                        "Sales Agents",
+                        "Consumers"
+                    ],
+                    "evidence_required": "Agent code of conduct, Disciplinary records, Mystery shopper reports",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Agents under pressure to hit targets often register SIMs without consent or activate services secretly."
+                }
+            ]
+        },
+        {
+            "id": "5.3",
+            "name": "Social Responsibility & Inclusion",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q5.3.1_TEL",
+                    "text": "Digital Inclusion Strategy: Connecting the unconnected: (1) Rural coverage expansion (beyond license obligations); (2) Affordable device financing; (3) Digital literacy programs; (4) Gender gap reduction initiatives; (5) Services for disabled (USSD accessibility); (6) Refugee connectivity support; (7) Low-cost tariffs for poor.",
+                    "stakeholder_types": [
+                        "CSR",
+                        "Communities",
+                        "NGOs"
+                    ],
+                    "evidence_required": "Inclusion strategy, Rural rollout data, Device financing terms",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "The 'usage gap' (people covered but not using) is the new challenge. Cost of devices is the main barrier."
+                },
+                {
+                    "q_id": "Q5.3.2_TEL",
+                    "text": "Environmental Stewardship (E-Waste & Carbon): Green telecom: (1) E-waste management (phones/batteries); (2) Carbon footprint reduction (solar towers); (3) Recycling programs for users; (4) Sustainable packaging; (5) Energy efficiency; (6) Compliance with environmental laws; (7) Net-zero targets.",
+                    "stakeholder_types": [
+                        "Environmental Agencies",
+                        "Investors",
+                        "Community"
+                    ],
+                    "evidence_required": "Sustainability report, E-waste certificates, Carbon data",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Diesel generators at towers are massive polluters. E-waste from cheap phones is a growing crisis."
+                }
+            ]
+        },
+        {
+            "id": "5.4",
+            "name": "Data Ethics & Human Rights",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q5.4.1_TEL",
+                    "text": "Human Rights & Surveillance: Protecting dissent: (1) Policy on government shutdown requests; (2) Transparency on interception requests; (3) Freedom of expression support; (4) Impact assessment of technology; (5) Protection of journalists/activists data; (6) UN Guiding Principles alignment; (7) Global Network Initiative membership.",
+                    "stakeholder_types": [
+                        "Civil Society",
+                        "Legal",
+                        "Regulators"
+                    ],
+                    "evidence_required": "Human rights policy, Transparency reports, Shutdown protocols",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Internet shutdowns during elections are common. Telcos are often ordered to block social media. How they respond matters."
+                },
+                {
+                    "q_id": "Q5.4.2_TEL",
+                    "text": "Algorithmic Ethics (Credit Scoring): Fair lending: (1) Transparency of credit scoring (for mobile loans); (2) Bias testing (gender/location); (3) Explanation of rejection; (4) Data sources used (ethical?); (5) Interest rate caps; (6) Debt collection ethics; (7) Right to appeal score.",
+                    "stakeholder_types": [
+                        "Borrowers",
+                        "Data Scientists",
+                        "Regulators"
+                    ],
+                    "evidence_required": "Credit scoring methodology (summary), Bias audit, Loan terms",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Mobile loans (Fuliza, M-Shwari) use telco data. Algorithmic bias can exclude whole regions or groups."
+                }
+            ]
+        }
+    ],
+    "scoring_notes": "Layer 5 (Integrity) for Telecom in SSA: Tax compliance and anti-bribery are corporate baselines. Human rights (shutdowns) and ethical lending are the frontier issues."
+}

@@ -1,0 +1,68 @@
+{
+  "veto_criteria_list": [
+    {
+      "veto_id": "L1_Veto_Availability",
+      "layer": "L1: Reliability",
+      "sub_dimension": "Effective Availability",
+      "threshold": "<2.0 (<85% effective availability)",
+      "rationale": "System unusable too frequently [9].",
+      "action": "CRITICAL: DO NOT PROCEED"
+    },
+    {
+      "veto_id": "L1_Veto_Catastrophic",
+      "layer": "L1: Reliability",
+      "sub_dimension": "Critical Stress Scenario",
+      "threshold": "0.0 (Catastrophic failure)",
+      "rationale": "Any catastrophic failure in realistic stress test is unacceptable [9].",
+      "action": "CRITICAL: DO NOT PROCEED"
+    },
+    {
+      "veto_id": "L2_Veto_AIExplain",
+      "layer": "L2: Transparency",
+      "sub_dimension": "System Logic Explainability",
+      "threshold": "<2.5 (if AI/ML used)",
+      "rationale": "Black box AI in high-stakes decisions is unethical and often illegal [14].",
+      "action": "CRITICAL: DO NOT PROCEED"
+    },
+    {
+      "veto_id": "L3_Veto_Compliance",
+      "layer": "L3: Governance",
+      "sub_dimension": "Regulatory Compliance (Critical)",
+      "threshold": "<2.5",
+      "rationale": "Non-compliance creates legal liability and potential shutdown risk [15].",
+      "action": "CRITICAL: DO NOT PROCEED"
+    },
+    {
+      "veto_id": "L5_Veto_Financial",
+      "layer": "L5: Integrity",
+      "sub_dimension": "Financial Stability",
+      "threshold": "<2.5",
+      "rationale": "Vendor survival uncertain over deployment horizon [13].",
+      "action": "CRITICAL: DO NOT PROCEED"
+    },
+    {
+      "veto_id": "L5_Veto_Ethics",
+      "layer": "L5: Integrity",
+      "sub_dimension": "Ethical Practices (Critical Violations)",
+      "threshold": "Any critical violation (e.g., child labor, criminal fraud conviction, FCPA violation)",
+      "rationale": "Ethical failures destroy trust and reputation—irreversible [13], [16].",
+      "action": "CRITICAL: DO NOT PROCEED IMMEDIATELY"
+    },
+    {
+      "veto_id": "L6_Veto_Dependency",
+      "layer": "L6: Ecosystem Trust",
+      "sub_dimension": "Upstream Technical Dependencies",
+      "threshold": "<2.0",
+      "rationale": "System cannot function without reliable infrastructure inputs (e.g., <85% grid reliability) [10], [17].",
+      "action": "CRITICAL: DO NOT PROCEED"
+    },
+    {
+      "veto_id": "L6_Veto_SocialLicense",
+      "layer": "L6: Ecosystem Trust",
+      "sub_dimension": "Downstream Stakeholder Trust & Social License",
+      "threshold": "<2.5",
+      "rationale": "Active organized resistance from High Power stakeholders will disrupt operations [10], [17].",
+      "action": "CRITICAL: DO NOT PROCEED"
+    }
+  ]
+}

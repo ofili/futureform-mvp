@@ -1,0 +1,130 @@
+🌱 Seeding Trust Intelligence Layer (JS Version)...
+
+Looking for ontology data at: C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\ontology_data
+
+📊 Loading trust layers...
+  ✓ Processing Reliability...
+    - Layer L1 upserted (Internal ID: cmin8jf3w0000bgjwqh4ew7u3)
+    - Found 4 sub-dimensions
+      - Processing sub-dimension 1.1 (System Availability & Performance)
+      - Processing sub-dimension 1.2 (Environmental & Operational Stress Resilience)
+      - Processing sub-dimension 1.3 (Interoperability & Integration)
+      - Processing sub-dimension 1.4 (Failure Modes & Recovery Capabilities)
+  ✓ Processing Transparency...
+    - Layer L2 upserted (Internal ID: cmin99s4q0005bg34zuoj1uc8)
+    - Found 5 sub-dimensions
+      - Processing sub-dimension 2.1 (System Logic & Decision Explainability)
+      - Processing sub-dimension 2.2 (Operational Visibility)
+      - Processing sub-dimension 2.3 (Data Governance & Privacy)
+      - Processing sub-dimension 2.4 (Documentation Quality)
+      - Processing sub-dimension 2.5 (Communication Protocols)
+  ✓ Processing Governance...
+    - Layer L3 upserted (Internal ID: cmin99thc000abg343q0dh2vq)
+    - Found 4 sub-dimensions
+      - Processing sub-dimension 3.1 (Contractual Clarity & Service Level Agreements)
+      - Processing sub-dimension 3.2 (Regulatory Compliance Verification)
+      - Processing sub-dimension 3.3 (Dispute Resolution Mechanisms)
+      - Processing sub-dimension 3.4 (Performance Monitoring & Accountability)
+  ✓ Processing Competence...
+    - Layer L4 upserted (Internal ID: cmin99uu4000fbg34580q9vf7)
+    - Found 5 sub-dimensions
+      - Processing sub-dimension 4.1 (User Skill Match Analysis)
+      - Processing sub-dimension 4.2 (Training Quality & Effectiveness)
+      - Processing sub-dimension 4.3 (Ongoing Support & Knowledge Transfer)
+      - Processing sub-dimension 4.4 (Institutional Learning Capacity)
+      - Processing sub-dimension 4.5 (Local Technical Ecosystem)
+  ✓ Processing Integrity...
+    - Layer L5 upserted (Internal ID: cmin99w7k000kbg346xwpy23u)
+    - Found 4 sub-dimensions
+      - Processing sub-dimension 5.1 (Vendor Financial Stability)
+      - Processing sub-dimension 5.2 (Market Commitment)
+      - Processing sub-dimension 5.3 (Track Record & References)
+      - Processing sub-dimension 5.4 (Ethical Practices)
+  ✓ Processing Ecosystem...
+    - Layer L6 upserted (Internal ID: cmin99xjq000pbg34ddzezhsq)
+    - Found 6 sub-dimensions
+      - Processing sub-dimension 6.1.1 (Infrastructure Dependencies)
+      - Processing sub-dimension 6.1.2 (Regulatory & Policy Environment)
+      - Processing sub-dimension 6.2.1 (Stakeholder Identification & Mapping)
+      - Processing sub-dimension 6.2.2 (Stakeholder Trust Assessment)
+      - Processing sub-dimension 6.2.3 (Fairness & Distributional Impact)
+      - Processing sub-dimension 6.2.4 (Social License to Operate)
+
+✅ Trust layers loaded successfully!
+
+📊 Seeding Partner Types...
+  ✓ Processing Partner Type: Technology Vendor...
+❌ Error seeding trust ontology: PrismaClientValidationError: 
+Invalid `prisma.trustRequiredRole.upsert()` invocation in
+C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\prisma\seed-trust-ontology.js:176:44
+
+  173 
+  174 // Create Roles
+  175 for (const role of pt.roles) {
+→ 176     await prisma.trustRequiredRole.upsert({
+            where: {
+              id: "role_cto"
+            },
+            update: {
+              name: "CTO",
+              criticality: "CRITICAL",
+              description: "Chief Technology Officer",
+              partnerTypeId: "pt_tech_vendor"
+            },
+            create: {
+              id: "role_cto",
+              name: "CTO",
+              criticality: "CRITICAL",
+              description: "Chief Technology Officer",
+              partnerTypeId: "pt_tech_vendor",
+          +   assessmentFocus: String
+            }
+          })
+
+Argument `assessmentFocus` is missing.
+    at Nn (C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\node_modules\@prisma\client\runtime\library.js:29:1363)
+    at ei.handleRequestError (C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\node_modules\@prisma\client\runtime\library.js:121:6911)
+    at ei.handleAndLogRequestError (C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\node_modules\@prisma\client\runtime\library.js:121:6593)
+    at ei.request (C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\node_modules\@prisma\client\runtime\library.js:121:6300)
+    at async a (C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\node_modules\@prisma\client\runtime\library.js:130:9551)
+    at async loadTrustOntology (C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\prisma\seed-trust-ontology.js:176:13)
+    at async main (C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\prisma\seed-trust-ontology.js:229:9) {
+  clientVersion: '6.19.0'
+}
+FATAL ERROR: PrismaClientValidationError: 
+Invalid `prisma.trustRequiredRole.upsert()` invocation in
+C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\prisma\seed-trust-ontology.js:176:44
+
+  173 
+  174 // Create Roles
+  175 for (const role of pt.roles) {
+→ 176     await prisma.trustRequiredRole.upsert({
+            where: {
+              id: "role_cto"
+            },
+            update: {
+              name: "CTO",
+              criticality: "CRITICAL",
+              description: "Chief Technology Officer",
+              partnerTypeId: "pt_tech_vendor"
+            },
+            create: {
+              id: "role_cto",
+              name: "CTO",
+              criticality: "CRITICAL",
+              description: "Chief Technology Officer",
+              partnerTypeId: "pt_tech_vendor",
+          +   assessmentFocus: String
+            }
+          })
+
+Argument `assessmentFocus` is missing.
+    at Nn (C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\node_modules\@prisma\client\runtime\library.js:29:1363)
+    at ei.handleRequestError (C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\node_modules\@prisma\client\runtime\library.js:121:6911)
+    at ei.handleAndLogRequestError (C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\node_modules\@prisma\client\runtime\library.js:121:6593)
+    at ei.request (C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\node_modules\@prisma\client\runtime\library.js:121:6300)
+    at async a (C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\node_modules\@prisma\client\runtime\library.js:130:9551)
+    at async loadTrustOntology (C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\prisma\seed-trust-ontology.js:176:13)
+    at async main (C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\prisma\seed-trust-ontology.js:229:9) {
+  clientVersion: '6.19.0'
+}

@@ -1,0 +1,151 @@
+{
+    "layer_id": "L5",
+    "layer_name": "Integrity",
+    "sector": "healthcare",
+    "region": "Sub-Saharan Africa",
+    "total_questions": 15,
+    "total_sub_dimensions": 4,
+    "sub_dimensions": [
+        {
+            "id": "5.1",
+            "name": "Clinical Safety & Efficacy",
+            "weight": 0.30,
+            "questions": [
+                {
+                    "q_id": "Q5.1.1_HLT",
+                    "text": "Clinical Validation Evidence: Proof it works: (1) Clinical trials or pilot studies; (2) Peer-reviewed publications; (3) Comparison with standard of care; (4) Validation on local population (not just Western data); (5) Sensitivity/Specificity metrics (for diagnostics); (6) Regulatory approval for clinical use.",
+                    "stakeholder_types": [
+                        "Regulators",
+                        "Doctors",
+                        "Researchers"
+                    ],
+                    "evidence_required": "Clinical study reports, Publications, Regulatory approval letters",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Western algorithms often fail on African diseases (e.g., Malaria vs Flu). Local validation is mandatory."
+                },
+                {
+                    "q_id": "Q5.1.2_HLT",
+                    "text": "Patient Safety Monitoring: Tracking harm: (1) Active pharmacovigilance (drug side effects); (2) Device vigilance (app errors); (3) Mortality/Morbidity tracking; (4) Readmission rates; (5) Missed diagnosis tracking.",
+                    "stakeholder_types": [
+                        "Quality Assurance",
+                        "Regulators"
+                    ],
+                    "evidence_required": "Safety logs, Pharmacovigilance reports",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Safety monitoring often weak. Digital platforms have a unique opportunity to track outcomes."
+                },
+                {
+                    "q_id": "Q5.1.3_HLT",
+                    "text": "Infection Prevention & Control (IPC): For physical touchpoints: (1) PPE availability for CHWs; (2) Sterilization protocols; (3) Waste disposal (sharps); (4) Hygiene training; (5) IPC audit results.",
+                    "stakeholder_types": [
+                        "CHWs",
+                        "Patients",
+                        "Ministry of Health"
+                    ],
+                    "evidence_required": "IPC protocols, Audit reports, Supply logs",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "CHWs visiting homes can spread disease (e.g., Ebola/COVID) if IPC fails."
+                }
+            ]
+        },
+        {
+            "id": "5.2",
+            "name": "Supply Chain Integrity (Counterfeit Prevention)",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q5.2.1_HLT",
+                    "text": "Anti-Counterfeit Measures: Preventing fake drugs: (1) Sourcing from authorized distributors only; (2) Batch tracking/serialization; (3) Scratch-off verification codes (e.g., mPedigree, Sproxil); (4) Visual inspection protocols; (5) Supplier audits; (6) Quarantine procedures for suspect stock.",
+                    "stakeholder_types": [
+                        "Pharmacists",
+                        "Regulators",
+                        "Patients"
+                    ],
+                    "evidence_required": "Sourcing policy, Verification logs, Supplier audit reports",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "10-30% of drugs in SSA are fake/substandard. Verification tech (SMS codes) is standard best practice."
+                },
+                {
+                    "q_id": "Q5.2.2_HLT",
+                    "text": "Cold Chain Integrity: Vaccine/Insulin safety: (1) Temperature monitoring (data loggers); (2) Alert system for excursions; (3) Backup power for fridges; (4) Transport validation; (5) Disposal of spoiled stock.",
+                    "stakeholder_types": [
+                        "Logistics",
+                        "Pharmacists"
+                    ],
+                    "evidence_required": "Temp logs, Excursion reports, Disposal records",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Power outages kill vaccines. Solar fridges and remote temp monitoring are essential."
+                }
+            ]
+        },
+        {
+            "id": "5.3",
+            "name": "Algorithmic Integrity & Bias",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q5.3.1_HLT",
+                    "text": "Bias Mitigation in AI: Fairness of algorithms: (1) Training data diversity (African representation); (2) Testing for skin tone bias (dermatology); (3) Testing for gender bias; (4) Performance parity across groups; (5) Bias audit reports.",
+                    "stakeholder_types": [
+                        "Data Scientists",
+                        "Ethicists"
+                    ],
+                    "evidence_required": "Dataset demographics, Bias audit reports, Performance metrics by group",
+                    "evidence_weight": "Advanced",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Dermatology AI trained on white skin fails on black skin. This is a safety issue, not just fairness."
+                },
+                {
+                    "q_id": "Q5.3.2_HLT",
+                    "text": "Clinical Appropriateness: Relevance to local context: (1) Alignment with National Treatment Guidelines; (2) Local disease prevalence consideration (Malaria vs Flu); (3) Drug availability alignment (don't prescribe what's not there); (4) Cultural appropriateness.",
+                    "stakeholder_types": [
+                        "Doctors",
+                        "Ministry of Health"
+                    ],
+                    "evidence_required": "Protocol alignment docs, Local formulary checks",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "US/UK guidelines don't apply. Malaria is #1 killer. Guidelines must be local."
+                }
+            ]
+        },
+        {
+            "id": "5.4",
+            "name": "Ethical Business Practices",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q5.4.1_HLT",
+                    "text": "Ethical Marketing & Claims: Truth in advertising: (1) No false cure claims; (2) Clear distinction between wellness and medical advice; (3) No predatory targeting of vulnerable; (4) Compliance with advertising regulations; (5) Influencer disclosure.",
+                    "stakeholder_types": [
+                        "Marketing",
+                        "Regulators"
+                    ],
+                    "evidence_required": "Marketing materials, Legal review sign-off",
+                    "evidence_weight": "High",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "Herbal 'cures' for HIV/Diabetes common. Tech platforms must not amplify quackery."
+                },
+                {
+                    "q_id": "Q5.4.2_HLT",
+                    "text": "Conflict of Interest Management: Doctor incentives: (1) Disclosure of referral fees; (2) Disclosure of pharma ties; (3) Ban on prescribing for profit; (4) Transparency on ownership (if doctor owns pharmacy).",
+                    "stakeholder_types": [
+                        "Doctors",
+                        "Patients",
+                        "Regulators"
+                    ],
+                    "evidence_required": "COI policy, Disclosure forms",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Doctors over-prescribing or referring to their own labs is a common issue."
+                }
+            ]
+        }
+    ],
+    "scoring_notes": "Layer 5 (Integrity) for Healthcare in SSA: Clinical safety is the bottom line. Counterfeit drug prevention is a unique SSA challenge. Algorithmic bias (skin tone) is a critical safety factor for AI."
+}

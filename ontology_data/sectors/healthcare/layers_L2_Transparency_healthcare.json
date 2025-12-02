@@ -1,0 +1,153 @@
+{
+    "layer_id": "L2",
+    "layer_name": "Transparency",
+    "sector": "healthcare",
+    "region": "Sub-Saharan Africa",
+    "total_questions": 12,
+    "total_sub_dimensions": 4,
+    "sub_dimensions": [
+        {
+            "id": "2.1",
+            "name": "Clinical Logic & Algorithm Transparency",
+            "weight": 0.30,
+            "questions": [
+                {
+                    "q_id": "Q2.1.1_HLT",
+                    "text": "Symptom Checker / AI Transparency: Disclose nature of automated advice: (1) Clear disclaimer (Not a doctor?); (2) Source of clinical protocols (WHO, National Guidelines?); (3) Accuracy rates / limitations; (4) Explanation of triage logic (Why go to hospital?); (5) Last update date of clinical content; (6) AI vs Rule-based distinction.",
+                    "stakeholder_types": [
+                        "Patients",
+                        "Regulators",
+                        "Doctors"
+                    ],
+                    "evidence_required": "User interface screenshots (disclaimers), Clinical protocol references, Algorithm validation reports",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Users may confuse AI with a real doctor. Must be explicit. Protocols must match local guidelines (e.g., Malaria treatment)."
+                },
+                {
+                    "q_id": "Q2.1.2_HLT",
+                    "text": "Triage & Referral Logic: Explain referral decisions: (1) Criteria for referral (danger signs); (2) Facility selection logic (nearest vs best?); (3) Cost implications of referral; (4) Transparency on referral fees (kickbacks?); (5) Emergency vs non-emergency distinction.",
+                    "stakeholder_types": [
+                        "Patients",
+                        "CHWs",
+                        "Referral Facilities"
+                    ],
+                    "evidence_required": "Triage protocols, Referral logic documentation, Conflict of interest policy (referral fees)",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Referral kickbacks common. Users need to trust the referral is for their health, not profit. Danger signs must be clear."
+                },
+                {
+                    "q_id": "Q2.1.3_HLT",
+                    "text": "Prescription Logic Transparency: Explain drug recommendations: (1) Generic vs Brand name preference; (2) Contraindication warnings; (3) Side effect disclosure; (4) Dosage instructions clarity; (5) Source of drug information; (6) Interaction warnings.",
+                    "stakeholder_types": [
+                        "Patients",
+                        "Pharmacists",
+                        "Doctors"
+                    ],
+                    "evidence_required": "Prescription module logic, Drug database source, User information leaflets",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Over-prescription of antibiotics is a crisis. Logic should favor national standard treatment guidelines."
+                }
+            ]
+        },
+        {
+            "id": "2.2",
+            "name": "Pricing & Financial Transparency",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q2.2.1_HLT",
+                    "text": "Consultation & Service Fees: Clear cost disclosure: (1) Upfront consultation fee; (2) Follow-up costs (included or extra?); (3) Hidden fees (platform fee, data fee); (4) Insurance coverage clarity (co-pay?); (5) Refund policy for missed appointments; (6) Payment methods accepted.",
+                    "stakeholder_types": [
+                        "Patients",
+                        "Insurers",
+                        "Regulators"
+                    ],
+                    "evidence_required": "Pricing page/screen, Refund policy, Insurance integration docs",
+                    "evidence_weight": "High",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "Patients fear hidden costs. Upfront clarity essential. Insurance co-pays often confusing."
+                },
+                {
+                    "q_id": "Q2.2.2_HLT",
+                    "text": "Medication Pricing Transparency: Clear drug costs: (1) Itemized drug prices; (2) Delivery fees; (3) Comparison with reference prices (if available); (4) Generic substitution options (cheaper alternatives); (5) Total cost before checkout.",
+                    "stakeholder_types": [
+                        "Patients",
+                        "Pharmacists"
+                    ],
+                    "evidence_required": "Cart/Checkout screens, Generic substitution features",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Drugs are a major expense. Generic options must be shown to improve affordability."
+                }
+            ]
+        },
+        {
+            "id": "2.3",
+            "name": "Data Privacy & Usage",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q2.3.1_HLT",
+                    "text": "Patient Data Usage & Sharing: Who sees the data: (1) Doctor access scope; (2) Sharing with insurers (diagnosis codes?); (3) Sharing with employers (never?); (4) Sharing with government (mandatory reporting?); (5) Anonymization for research; (6) User consent granularity.",
+                    "stakeholder_types": [
+                        "Patients",
+                        "Regulators",
+                        "Ethics Committees"
+                    ],
+                    "evidence_required": "Privacy policy (simplified), Consent forms, Data sharing agreements",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Stigma (HIV, TB, Mental Health) is a major barrier. Fear of employer/community finding out. Explicit consent needed."
+                },
+                {
+                    "q_id": "Q2.3.2_HLT",
+                    "text": "Data Ownership & Portability: User rights: (1) Can user download their record?; (2) Can user transfer to another doctor?; (3) Can user delete their account (right to be forgotten)?; (4) Data retention period; (5) Access by family members (proxy access).",
+                    "stakeholder_types": [
+                        "Patients",
+                        "Regulators"
+                    ],
+                    "evidence_required": "Data export feature, Account deletion process, Proxy access policy",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Patients often locked in. Portability allows continuity of care. Family access needed for elderly/children."
+                }
+            ]
+        },
+        {
+            "id": "2.4",
+            "name": "Provider Identity & Credentials",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q2.4.1_HLT",
+                    "text": "Provider Credential Verification: Is the doctor real: (1) Display of license number; (2) Display of qualifications/specialty; (3) Verification status (verified by platform?); (4) Photo ID; (5) Years of experience; (6) Current physical practice location.",
+                    "stakeholder_types": [
+                        "Patients",
+                        "Medical Boards",
+                        "Regulators"
+                    ],
+                    "evidence_required": "Provider profile screens, Verification badge logic, License display",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "Quackery (fake doctors) is rampant. Platform must verify and display credentials clearly."
+                },
+                {
+                    "q_id": "Q2.4.2_HLT",
+                    "text": "Pharmacy/Facility Legitimacy: Is the pharmacy real: (1) Pharmacy Board license display; (2) Physical address verification; (3) Pharmacist-in-charge name; (4) Operating hours; (5) Contact details.",
+                    "stakeholder_types": [
+                        "Patients",
+                        "Pharmacy Board"
+                    ],
+                    "evidence_required": "Pharmacy profile, License upload",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Illegal pharmacies sell fake/expired drugs. License display builds trust."
+                }
+            ]
+        }
+    ],
+    "scoring_notes": "Layer 2 (Transparency) for Healthcare in SSA: Clinical logic transparency prevents confusion between AI and doctors. Pricing transparency builds trust. Provider credential verification is a safety requirement against quacks."
+}

@@ -1,0 +1,139 @@
+{
+    "layer_id": "L1",
+    "layer_name": "Reliability",
+    "sector": "telecom",
+    "region": "Sub-Saharan Africa",
+    "total_questions": 12,
+    "total_sub_dimensions": 4,
+    "sub_dimensions": [
+        {
+            "id": "1.1",
+            "name": "Network Availability & Uptime",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q1.1.1_TEL",
+                    "text": "Network Availability (Uptime): Assess network stability: (1) Average uptime % (2G/3G/4G); (2) Frequency of outages; (3) Mean Time to Recover (MTTR); (4) Impact of load shedding (power outages); (5) Redundancy (ring topology vs linear); (6) Disaster recovery capability; (7) SLA adherence for enterprise.",
+                    "stakeholder_types": [
+                        "Subscribers",
+                        "Regulators",
+                        "Enterprise Clients"
+                    ],
+                    "evidence_required": "Network Operations Center (NOC) reports, Power backup logs, Outage incident reports",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Power is the main cause of downtime. Battery backup theft is common. Fiber cuts from road construction frequent."
+                },
+                {
+                    "q_id": "Q1.1.2_TEL",
+                    "text": "Coverage Quality & Depth: Assess reach: (1) Population coverage %; (2) Geographic coverage %; (3) Indoor coverage quality; (4) Rural vs Urban disparity; (5) 'Not-spot' identification; (6) Signal strength monitoring; (7) Handover success rate (moving between towers).",
+                    "stakeholder_types": [
+                        "Subscribers",
+                        "Regulators",
+                        "Universal Service Fund"
+                    ],
+                    "evidence_required": "Coverage maps (RF plans), Drive test reports, Regulator QoS audits",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Rural coverage often depends on USF (Universal Service Fund). Indoor coverage poor in dense concrete slums."
+                }
+            ]
+        },
+        {
+            "id": "1.2",
+            "name": "Data Performance & Quality",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q1.2.1_TEL",
+                    "text": "Data Throughput & Latency: Assess internet speed: (1) Average download/upload speeds; (2) Latency (ping) consistency; (3) Packet loss rates; (4) Jitter (for VoIP); (5) Throttling policies (Fair Usage Policy); (6) Peak hour performance degradation; (7) International gateway capacity.",
+                    "stakeholder_types": [
+                        "Data Users",
+                        "Gamers/Streamers",
+                        "Businesses"
+                    ],
+                    "evidence_required": "Speed test data (Ookla/internal), Latency logs, Bandwidth utilization reports",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Latency high due to distance from content servers (CDNs). 'Unlimited' bundles often heavily throttled."
+                },
+                {
+                    "q_id": "Q1.2.2_TEL",
+                    "text": "Voice Quality of Service (QoS): Assess call quality: (1) Call Setup Success Rate (CSSR); (2) Call Drop Rate (CDR); (3) MOS (Mean Opinion Score) for voice clarity; (4) Interconnect success (calls to other networks); (5) VoLTE availability; (6) Echo/Noise levels; (7) SMS delivery reliability.",
+                    "stakeholder_types": [
+                        "Voice Users",
+                        "Regulators"
+                    ],
+                    "evidence_required": "QoS audit reports, Interconnect logs, CDR analysis",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "Dropped calls are a major consumer complaint. Regulators often fine for high CDR."
+                }
+            ]
+        },
+        {
+            "id": "1.3",
+            "name": "Billing & Charging Integrity",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q1.3.1_TEL",
+                    "text": "Prepaid Billing Accuracy: Ensure correct deductions: (1) Real-time balance updates; (2) Accuracy of bundle deduction; (3) Prevention of 'disappearing airtime'; (4) Notification of usage (50%, 90% alerts); (5) OOB (Out of Bundle) browsing protection; (6) VAS subscription consent (no auto-subscribe); (7) Refund process for billing errors.",
+                    "stakeholder_types": [
+                        "Subscribers",
+                        "Consumer Protection"
+                    ],
+                    "evidence_required": "Billing system audit, IN (Intelligent Network) logs, Consumer complaint logs",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "'Disappearing airtime' is #1 trust killer. OOB browsing eats credit instantly. VAS auto-subscriptions are predatory."
+                },
+                {
+                    "q_id": "Q1.3.2_TEL",
+                    "text": "Mobile Money Platform Reliability: For Telco-led fintech: (1) Platform uptime (99.99%?); (2) Transaction speed; (3) SMS receipt delivery time; (4) USSD session stability; (5) App availability; (6) Liquidity management (agent float monitoring); (7) Reconciliation accuracy.",
+                    "stakeholder_types": [
+                        "Mobile Money Users",
+                        "Agents",
+                        "Merchants"
+                    ],
+                    "evidence_required": "Platform uptime logs, Transaction latency stats, USSD success rates",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Mobile Money is life-critical. Downtime stops the economy. USSD timeouts cause double payments/confusion."
+                }
+            ]
+        },
+        {
+            "id": "1.4",
+            "name": "Infrastructure Resilience",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q1.4.1_TEL",
+                    "text": "Power Resilience & Backup: Keeping sites alive: (1) Battery backup autonomy (hours); (2) Generator fuel management (theft prevention); (3) Solar hybrid deployment; (4) Grid availability monitoring; (5) Remote monitoring of power systems; (6) Battery replacement cycle; (7) Resilience to extreme weather.",
+                    "stakeholder_types": [
+                        "TowerCos",
+                        "Operations"
+                    ],
+                    "evidence_required": "Power availability logs, Fuel consumption reports, Battery health data",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Grid is unreliable. Diesel theft is massive. Solar hybrid is standard for off-grid towers."
+                },
+                {
+                    "q_id": "Q1.4.2_TEL",
+                    "text": "Physical Security & Vandalism: Protecting assets: (1) Site fencing/security guards; (2) Anti-vandalism sensors; (3) Fiber cut prevention (patrols/marking); (4) Community engagement (to protect sites); (5) Theft recovery rate; (6) Impact of vandalism on uptime; (7) Cyber-physical security.",
+                    "stakeholder_types": [
+                        "Security Teams",
+                        "Community"
+                    ],
+                    "evidence_required": "Security incident logs, Vandalism cost reports, Site access logs",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "Vandalism (batteries, fuel, copper) is a major cost. Fiber cuts by road contractors are frequent."
+                }
+            ]
+        }
+    ],
+    "scoring_notes": "Layer 1 (Reliability) for Telecom in SSA: Power is the biggest enemy of uptime. Billing accuracy (airtime) is the biggest enemy of trust. Mobile money reliability is non-negotiable."
+}

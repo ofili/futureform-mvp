@@ -1,0 +1,204 @@
+{
+    "layer_id": "L1",
+    "layer_name": "Reliability",
+    "sector": "agriculture",
+    "region": "Sub-Saharan Africa",
+    "total_questions": 12,
+    "total_sub_dimensions": 4,
+    "sub_dimensions": [
+        {
+            "id": "1.1",
+            "name": "System Availability & Performance",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q1.1.1_AGR",
+                    "text": "Agricultural System Availability - Sub-Saharan Africa Context: Provide comprehensive analysis of system availability for agricultural deployment, including: (1) Performance on 2G/3G networks (not just 4G/5G) with actual uptime data from rural areas; (2) Offline functionality duration - can farmers access critical features (weather, prices, advice) without connectivity for 24-72 hours?; (3) SMS/USSD fallback capabilities for feature phone users; (4) Performance during peak agricultural seasons (planting, harvest) when network congestion is high; (5) Battery consumption on low-end Android devices; (6) Historical performance data from comparable rural deployments in Sub-Saharan Africa (minimum 12 months).",
+                    "stakeholder_types": [
+                        "Smallholder Farmers",
+                        "Extension Officers",
+                        "Agro-dealers",
+                        "Mobile Network Operators"
+                    ],
+                    "evidence_required": "Rural network performance logs (2G/3G/4G breakdown), Offline mode testing documentation, SMS/USSD functionality demos, Battery life test results, Field deployment reports from SSA countries",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Must demonstrate functionality in areas with 40-60% grid uptime, intermittent 2G/3G connectivity, and during rainy season network degradation"
+                },
+                {
+                    "q_id": "Q1.1.2_AGR",
+                    "text": "End-to-End Agricultural Service Reliability: Describe complete reliability chain from farmer's perspective: (1) Mobile app/USSD performance on low-end devices (Android Go, KaiOS, feature phones); (2) Agricultural advisory delivery success rate (weather alerts, pest warnings reaching farmers); (3) Marketplace transaction completion rates (order placement to payment confirmation); (4) Input delivery tracking reliability (seed, fertilizer orders); (5) Payment processing success via mobile money (M-Pesa, Airtel Money, MTN MoMo, Orange Money); (6) Geographic reliability variations (urban vs rural, different regions); (7) Real farmer monitoring data demonstrating actual vs theoretical performance.",
+                    "stakeholder_types": [
+                        "Farmers",
+                        "Agro-dealers",
+                        "Logistics Providers",
+                        "Mobile Money Agents"
+                    ],
+                    "evidence_required": "Device compatibility matrix, Advisory delivery success metrics, Transaction completion logs, Mobile money integration test results, Geographic performance heatmaps",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Must account for shared devices (multiple farmers per phone), village agent intermediaries, and multi-step transactions involving mobile money"
+                },
+                {
+                    "q_id": "Q1.1.3_AGR",
+                    "text": "Agricultural Performance Quality Metrics: Provide detailed performance indicators beyond binary uptime: (1) Advisory timeliness - weather/pest alerts delivered before critical farming decisions (planting window, spraying); (2) Market price data freshness and accuracy (real-time vs delayed); (3) Transaction processing time (order to confirmation) during peak periods; (4) Data synchronization success rate for offline-to-online transitions; (5) Voice/IVR call quality for illiterate farmers; (6) Image upload success for crop disease diagnosis (low bandwidth); (7) Farmer satisfaction scores with service responsiveness.",
+                    "stakeholder_types": [
+                        "Farmers",
+                        "Agronomists",
+                        "Extension Officers",
+                        "Platform Operators"
+                    ],
+                    "evidence_required": "Advisory delivery time logs, Price data accuracy audits, Transaction time analytics, Sync success metrics, Voice quality reports, Image upload success rates, Farmer satisfaction surveys",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Critical timing: missed planting window = lost season. Must work during rainy season when connectivity is worst but farming decisions are most critical"
+                }
+            ]
+        },
+        {
+            "id": "1.2",
+            "name": "Environmental & Operational Stress Resilience",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q1.2.1_AGR",
+                    "text": "Sub-Saharan Africa Agricultural Environment Characterization: Provide comprehensive environmental profile for rural agricultural deployment: (1) Temperature extremes (25-45°C common in Sahel, 15-35°C in highlands) with device operating range; (2) Humidity and condensation (tropical climates, rainy seasons); (3) Dust and particulate exposure (harmattan winds, dry season dust); (4) Solar radiation intensity (equatorial sun, UV degradation); (5) Physical stress (vibration during motorcycle transport, drops, water exposure); (6) Pest intrusion (insects, rodents in storage); (7) 10-year climate data for deployment regions.",
+                    "stakeholder_types": [
+                        "Device Manufacturers",
+                        "Field Technicians",
+                        "Farmers"
+                    ],
+                    "evidence_required": "Environmental monitoring data, Device operating specifications, Durability test reports (IP ratings), Field failure analysis, Climate data for target regions",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Devices must survive: motorcycle transport on rough roads, outdoor use in 40°C+ heat, dust storms, heavy rain, and storage in non-climate-controlled village shops"
+                },
+                {
+                    "q_id": "Q1.2.2_AGR",
+                    "text": "Agricultural Technology Stress Testing - Africa Context: Document comprehensive stress testing under realistic Sub-Saharan Africa conditions: (1) Multi-factor stress scenarios (40°C heat + dust + low battery + 2G network); (2) Duration testing (continuous operation through 3-6 month growing season); (3) Population-representative testing (not just best-performing units - test batch of 100+ devices); (4) Pass/fail criteria including performance maintenance under stress (not just survival); (5) Independent verification by African testing labs or field pilots; (6) Rainy season performance (humidity, power surges, network degradation).",
+                    "stakeholder_types": [
+                        "Quality Assurance",
+                        "Field Pilots",
+                        "Independent Testing Labs"
+                    ],
+                    "evidence_required": "Multi-factor stress test protocols and results, Long-duration field test data, Batch testing reports, Independent lab certifications, Rainy season performance logs",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Lab tests insufficient - must have 6-12 month field pilots in actual farming conditions across multiple countries/climates"
+                },
+                {
+                    "q_id": "Q1.2.3_AGR",
+                    "text": "Agricultural Infrastructure Dependency Resilience: Analyze system resilience to Sub-Saharan Africa infrastructure variability: (1) Power resilience: grid outages 40-60% common, solar charging capability, battery life 3-7 days; (2) Connectivity tolerance: 2G fallback, offline operation 24-72 hours, SMS/USSD when data unavailable; (3) Payment infrastructure: mobile money integration with all major providers (M-Pesa, Airtel, MTN, Orange), agent network backup; (4) Supply chain resilience: agricultural input availability, last-mile delivery to remote farms, spare parts for equipment; (5) Seasonal resilience: performance during rainy season (roads impassable, network degraded).",
+                    "stakeholder_types": [
+                        "Infrastructure Planners",
+                        "Mobile Network Operators",
+                        "Logistics Providers",
+                        "Solar Companies"
+                    ],
+                    "evidence_required": "Power backup specifications, Offline capability documentation, Mobile money integration certifications, Supply chain mapping, Seasonal performance data",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Infrastructure is the primary constraint. System must be designed for infrastructure failure, not infrastructure availability"
+                }
+            ]
+        },
+        {
+            "id": "1.3",
+            "name": "Interoperability & Integration",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q1.3.1_AGR",
+                    "text": "Agricultural Data Standards & Interoperability - Africa Context: Provide evidence of standards compliance and interoperability: (1) Agricultural data standards (AGROVOC, GACS for crop/pest terminology); (2) Mobile money API integration (M-Pesa, Airtel Money, MTN MoMo, Orange Money APIs); (3) Weather data API compatibility (national meteorological services, IBM Weather, etc.); (4) Government agricultural systems integration (extension services, subsidy programs, certification); (5) SMS/USSD gateway standards; (6) Offline data sync protocols; (7) Multi-language support (English, French, Swahili, Hausa, local languages).",
+                    "stakeholder_types": [
+                        "Platform Developers",
+                        "Government IT",
+                        "Mobile Money Providers",
+                        "Meteorological Services"
+                    ],
+                    "evidence_required": "Standards compliance documentation, API integration test results, Government system integration demos, Language support matrix, Offline sync protocol specs",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Must integrate with fragmented ecosystem: multiple mobile money providers, various government systems, diverse weather data sources, 2000+ local languages"
+                },
+                {
+                    "q_id": "Q1.3.2_AGR",
+                    "text": "Agricultural Platform Integration Complexity: Evaluate practical complexity of integrating with farmer-facing agricultural platform: (1) Time to integrate mobile money payment (developer hours for each provider); (2) Effort to add new crop/market data (data entry, validation, translation); (3) API documentation quality (clear examples, error handling, local language support); (4) Support during integration (response time, local timezone availability); (5) Testing in low-connectivity environments; (6) Farmer data portability (can farmers export their data?).",
+                    "stakeholder_types": [
+                        "Third-party Developers",
+                        "Agribusiness IT Teams",
+                        "Farmers"
+                    ],
+                    "evidence_required": "Integration time logs, API documentation samples, Support ticket analytics, Data export functionality demos, Farmer data portability tests",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "Integration must be simple enough for local developers with limited resources, intermittent internet, and diverse technical stacks"
+                },
+                {
+                    "q_id": "Q1.3.3_AGR",
+                    "text": "Farmer Lock-In Risk Analysis: Assess risk and cost of farmer dependency on agricultural platform: (1) Data portability: can farmers export their farm records, transaction history, credit history?; (2) Multi-homing: can farmers use multiple platforms simultaneously?; (3) Switching costs: what does farmer lose if they switch platforms (data, credit history, network effects)?; (4) Alternative platform availability: are there viable competitors in the region?; (5) Farmer data ownership: who owns the agricultural data generated?; (6) Exit strategy: what happens to farmer data if platform shuts down?",
+                    "stakeholder_types": [
+                        "Farmers",
+                        "Farmer Cooperatives",
+                        "Consumer Protection Agencies",
+                        "Competition Authorities"
+                    ],
+                    "evidence_required": "Data export functionality, Multi-platform compatibility demos, Switching cost analysis, Data ownership policies, Platform exit contingency plans",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "High risk: farmers may lose years of farm records, credit history, and market access if locked into failing platform. Data sovereignty critical."
+                }
+            ]
+        },
+        {
+            "id": "1.4",
+            "name": "Failure Modes & Recovery Capabilities",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q1.4.1_AGR",
+                    "text": "Agricultural System Failure Mode Analysis - Africa Context: Provide detailed FMEA for agricultural technology deployment: (1) Mobile money payment failure (farmer paid but not credited, or vice versa); (2) Advisory delivery failure during critical period (missed planting window, pest outbreak); (3) Market linkage failure (farmer delivers produce but buyer doesn't pay); (4) Input delivery failure (seeds/fertilizer don't arrive for planting); (5) Device failure in remote area (no local repair capacity); (6) Network outage during harvest (can't coordinate buyers/transport); (7) Data loss (farmer records, transaction history); (8) For each: severity, probability, detectability, mitigation.",
+                    "stakeholder_types": [
+                        "Risk Managers",
+                        "Farmers",
+                        "Agro-dealers",
+                        "Platform Operators"
+                    ],
+                    "evidence_required": "Comprehensive FMEA documentation, Historical failure data from SSA deployments, Mitigation strategies, Farmer impact assessments",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Agricultural failures have cascading effects: missed planting = no harvest = food insecurity. Must have offline fallbacks and manual recovery procedures"
+                },
+                {
+                    "q_id": "Q1.4.2_AGR",
+                    "text": "Graceful Degradation for Agricultural Services: Demonstrate system behavior under partial failure: (1) Full operation: all features available (advisory, marketplace, payment, tracking); (2) Degraded mode 1: offline operation (cached advisories, queued transactions); (3) Degraded mode 2: SMS/USSD only (basic price queries, simple transactions); (4) Degraded mode 3: voice/IVR fallback (for illiterate farmers); (5) Survival mode: manual procedures (paper records, agent-assisted transactions); (6) Automatic vs manual transitions between modes; (7) Farmer communication during degraded operation.",
+                    "stakeholder_types": [
+                        "Platform Operators",
+                        "Farmers",
+                        "Village Agents",
+                        "Extension Officers"
+                    ],
+                    "evidence_required": "Degradation level documentation, Offline mode demos, SMS/USSD fallback tests, Voice/IVR functionality, Manual procedure guides, Farmer communication templates",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Farmers cannot wait for system recovery - must have immediate fallback to SMS, voice, or manual processes to continue farming operations"
+                },
+                {
+                    "q_id": "Q1.4.3_AGR",
+                    "text": "Agricultural System Recovery Metrics: Provide quantified recovery performance for farming operations: (1) Mean Time to Detect (MTTD) failures affecting farmers (automated monitoring + farmer reports); (2) Mean Time to Repair (MTTR) by failure type (payment issues <4 hours, advisory delivery <24 hours, device repair <7 days); (3) Mean Time Between Failures (MTBF) for critical components; (4) Recovery documentation quality (can village agent recover using manual procedures?); (5) Disaster recovery for farmer data (daily backups, 24-hour recovery); (6) Seasonal recovery priorities (planting/harvest failures = highest priority).",
+                    "stakeholder_types": [
+                        "Platform Operators",
+                        "Support Teams",
+                        "Village Agents",
+                        "Farmers"
+                    ],
+                    "evidence_required": "Failure detection system specs, MTTR data by failure type, Recovery procedure documentation, Backup/disaster recovery tests, Seasonal priority protocols",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Recovery must account for: limited local technical capacity, remote locations (hours from nearest technician), and time-critical agricultural operations"
+                }
+            ]
+        }
+    ],
+    "scoring_notes": "Layer 1 (Reliability) for Agriculture in Sub-Saharan Africa: Infrastructure resilience (L1.2.3) and failure recovery (L1.4) are weighted more heavily due to unreliable power/connectivity. Offline capability and SMS/USSD fallbacks are mandatory, not optional."
+}

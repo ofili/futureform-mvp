@@ -1,0 +1,141 @@
+{
+    "layer_id": "L1",
+    "layer_name": "Reliability",
+    "sector": "transport",
+    "region": "Sub-Saharan Africa",
+    "total_questions": 12,
+    "total_sub_dimensions": 4,
+    "sub_dimensions": [
+        {
+            "id": "1.1",
+            "name": "Service Availability & Matching",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q1.1.1_TRN",
+                    "text": "Driver/Rider Availability: Reliable access to transport: (1) Average wait time (peak vs off-peak); (2) Coverage area (urban vs peri-urban); (3) Driver supply management (surge pricing transparency); (4) Cancellation rates (by driver); (5) Acceptance rates; (6) Backup options if no match; (7) Service during bad weather/night.",
+                    "stakeholder_types": [
+                        "Passengers",
+                        "Drivers",
+                        "Operations"
+                    ],
+                    "evidence_required": "Wait time analytics, Coverage maps, Cancellation logs",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Peri-urban areas often underserved. Drivers refuse trips to 'unsafe' areas at night. Surge pricing during rain can be 5x."
+                },
+                {
+                    "q_id": "Q1.1.2_TRN",
+                    "text": "Matching Algorithm Accuracy: Getting the right driver: (1) Proximity accuracy (GPS drift); (2) ETA accuracy; (3) Route optimization (avoiding traffic/bad roads); (4) Driver-passenger matching logic (ratings); (5) Handling of offline drivers; (6) Multi-stop optimization (delivery).",
+                    "stakeholder_types": [
+                        "Developers",
+                        "Users"
+                    ],
+                    "evidence_required": "Algorithm documentation, ETA accuracy stats, GPS accuracy tests",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "GPS often inaccurate (poor satellite coverage, fake GPS). Roads not on maps. Traffic data unreliable."
+                }
+            ]
+        },
+        {
+            "id": "1.2",
+            "name": "Vehicle & Driver Safety",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q1.2.1_TRN",
+                    "text": "Vehicle Roadworthiness: Safe vehicles: (1) Inspection certificate verification; (2) Age limits (vehicle year); (3) Maintenance records; (4) Tire condition checks; (5) Brake functionality; (6) Seatbelt availability; (7) Fire extinguisher/first aid kit.",
+                    "stakeholder_types": [
+                        "Passengers",
+                        "Regulators",
+                        "Fleet Managers"
+                    ],
+                    "evidence_required": "Inspection certs, Vehicle age distribution, Maintenance logs",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Many vehicles are 15+ years old. Inspection certs often forged. Boda-bodas (motorcycles) rarely have helmets for passengers."
+                },
+                {
+                    "q_id": "Q1.2.2_TRN",
+                    "text": "Driver Licensing & Vetting: Qualified drivers: (1) Driving license verification; (2) Criminal background check; (3) Driving record check (accidents/violations); (4) Age requirements; (5) Medical fitness (eyesight); (6) Periodic re-verification; (7) Suspension mechanism for violations.",
+                    "stakeholder_types": [
+                        "Passengers",
+                        "Police",
+                        "Platform"
+                    ],
+                    "evidence_required": "Vetting SOPs, License verification logs, Background check reports",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Fake licenses common. Background checks often manual (no digital databases). Re-verification rare."
+                }
+            ]
+        },
+        {
+            "id": "1.3",
+            "name": "Delivery & Fulfillment Accuracy",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q1.3.1_TRN",
+                    "text": "On-Time Delivery Performance: Reliability of delivery: (1) On-time delivery rate; (2) ETA accuracy; (3) Delay notification; (4) Reasons for delays (traffic, weather, rider issues); (5) Compensation for late delivery; (6) Peak hour performance; (7) Rural vs urban performance.",
+                    "stakeholder_types": [
+                        "Customers",
+                        "Merchants",
+                        "Riders"
+                    ],
+                    "evidence_required": "Delivery performance reports, Delay analysis, Compensation logs",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Traffic jams are unpredictable. Address systems often poor (no street names). Riders call for directions."
+                },
+                {
+                    "q_id": "Q1.3.2_TRN",
+                    "text": "Order Accuracy & Condition: Correct delivery: (1) Order accuracy (right items); (2) Condition on arrival (food temperature, package integrity); (3) Tamper-evident packaging; (4) Photo proof of delivery; (5) Handling of fragile items; (6) Cold chain for perishables.",
+                    "stakeholder_types": [
+                        "Customers",
+                        "Merchants"
+                    ],
+                    "evidence_required": "Order accuracy stats, Customer complaints, Photo delivery logs",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Riders sometimes eat food (hunger). Packaging often poor. Photo proof helps disputes."
+                }
+            ]
+        },
+        {
+            "id": "1.4",
+            "name": "Platform & Payment Reliability",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q1.4.1_TRN",
+                    "text": "App Stability & Offline Capability: Platform uptime: (1) App crash rate; (2) Booking success rate; (3) Offline mode (can driver see trip details offline?); (4) Payment processing reliability; (5) GPS tracking continuity; (6) Low-bandwidth performance; (7) Support for USSD fallback.",
+                    "stakeholder_types": [
+                        "Users",
+                        "Drivers",
+                        "Developers"
+                    ],
+                    "evidence_required": "App crash logs, Booking failure rates, Offline mode specs",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Network drops mid-trip. Drivers need offline access to trip details. USSD backup for feature phone users."
+                },
+                {
+                    "q_id": "Q1.4.2_TRN",
+                    "text": "Payment Settlement Reliability: Drivers get paid: (1) Settlement frequency (daily/weekly); (2) Settlement accuracy (no missing trips); (3) Transparency of deductions (commission, penalties); (4) Dispute resolution time; (5) Mobile money integration reliability; (6) Cash handling protocols; (7) Float management (for cash trips).",
+                    "stakeholder_types": [
+                        "Drivers",
+                        "Finance",
+                        "Mobile Money Providers"
+                    ],
+                    "evidence_required": "Settlement logs, Dispute resolution stats, Mobile money transaction success rates",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Drivers depend on daily earnings. Missing trips in settlement causes huge distrust. Cash still dominant in many markets."
+                }
+            ]
+        }
+    ],
+    "scoring_notes": "Layer 1 (Reliability) for Transport in SSA: Vehicle safety and driver vetting are life-safety issues. Payment settlement reliability determines driver retention. GPS/mapping accuracy is a major technical challenge."
+}

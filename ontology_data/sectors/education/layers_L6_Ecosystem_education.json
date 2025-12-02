@@ -1,0 +1,143 @@
+{
+    "layer_id": "L6",
+    "layer_name": "Ecosystem",
+    "sector": "education",
+    "region": "Sub-Saharan Africa",
+    "total_questions": 12,
+    "total_sub_dimensions": 4,
+    "sub_dimensions": [
+        {
+            "id": "6.1",
+            "name": "Infrastructure Dependencies",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q6.1.1_EDU",
+                    "text": "School Power & Connectivity Infrastructure: Assess basic utilities: (1) Grid connection reliability; (2) Solar/Backup power availability; (3) Internet connectivity type (Fiber vs Satellite vs Mobile); (4) Bandwidth per student; (5) WASH infrastructure (Water, Sanitation, Hygiene); (6) Transport access (safe roads to school); (7) Building safety (structural integrity).",
+                    "stakeholder_types": [
+                        "Ministry of Infrastructure",
+                        "School Administrators",
+                        "Donors"
+                    ],
+                    "evidence_required": "Infrastructure audit, Utility bills, WASH assessment",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "No power = no digital learning. WASH essential for girl retention. Safe transport prevents accidents/abductions."
+                },
+                {
+                    "q_id": "Q6.1.2_EDU",
+                    "text": "Device Ecosystem & Ownership: Access to hardware: (1) Household device ownership (smartphone penetration); (2) BYOD policy feasibility; (3) School computer lab ratio (students per device); (4) Device financing availability; (5) Repair ecosystem (can broken tablets be fixed?); (6) Theft market (risk of carrying devices); (7) E-waste management.",
+                    "stakeholder_types": [
+                        "Parents",
+                        "Hardware Vendors",
+                        "Recyclers"
+                    ],
+                    "evidence_required": "Device ownership survey, Lab inventory, Financing terms",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "1:1 device ratio rare. Shared devices common. 'Bring Your Own Device' assumes parents have phones."
+                }
+            ]
+        },
+        {
+            "id": "6.2",
+            "name": "Policy & Regulatory Environment",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q6.2.1_EDU",
+                    "text": "National Education Policy Alignment: Alignment with government goals: (1) Curriculum reform alignment (e.g., CBC); (2) Digital literacy policy support; (3) Teacher training policy; (4) Private school regulations; (5) Exam policy stability; (6) Language policy (Mother tongue vs English); (7) Funding model (Capitation grants).",
+                    "stakeholder_types": [
+                        "Policy Makers",
+                        "School Owners",
+                        "Unions"
+                    ],
+                    "evidence_required": "Policy alignment documents, Government circulars",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Policy shifts (e.g., banning private tuition, changing curriculum) disrupt sector. Alignment essential for survival."
+                },
+                {
+                    "q_id": "Q6.2.2_EDU",
+                    "text": "EdTech & Data Policy: Digital governance: (1) National ICT in Education policy; (2) Data sovereignty laws (hosting data locally); (3) Zero-rating of educational content (telco partnerships); (4) E-waste regulations; (5) Cybercrime laws; (6) Intellectual Property protection; (7) Digital tax impact.",
+                    "stakeholder_types": [
+                        "ICT Ministry",
+                        "Telcos",
+                        "EdTechs"
+                    ],
+                    "evidence_required": "ICT policy, Data hosting contracts, Zero-rating agreements",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Zero-rating (free data for education) is a game changer. Data sovereignty laws growing (e.g., Kenya, Nigeria)."
+                }
+            ]
+        },
+        {
+            "id": "6.3",
+            "name": "Labor Market & Economic Alignment",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q6.3.1_EDU",
+                    "text": "Skills Mismatch & Employability: Relevance to economy: (1) Employer satisfaction with graduates; (2) Curriculum input from industry; (3) Internship/Apprenticeship programs; (4) TVET alignment with informal sector; (5) Entrepreneurship training; (6) Soft skills focus; (7) Graduate employment rate.",
+                    "stakeholder_types": [
+                        "Employers",
+                        "Graduates",
+                        "Industry Associations"
+                    ],
+                    "evidence_required": "Employer surveys, Tracer studies, Industry partnership MOUs",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Massive youth unemployment. 'Diploma disease' (degrees without skills). Informal sector is the main employer - TVET must align."
+                },
+                {
+                    "q_id": "Q6.3.2_EDU",
+                    "text": "Economic Accessibility & Funding: Affordability context: (1) Household income vs School fees; (2) Availability of scholarships/bursaries; (3) Student loan system efficiency (HELB etc.); (4) Impact of inflation on fees; (5) School feeding programs (economic support); (6) Opportunity cost of schooling (child labor); (7) Donor funding stability.",
+                    "stakeholder_types": [
+                        "Parents",
+                        "Donors",
+                        "Financial Aid Bodies"
+                    ],
+                    "evidence_required": "Fee vs Income analysis, Scholarship data, Loan repayment rates",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Poverty is the main barrier. School feeding keeps kids in school. Inflation forces dropouts."
+                }
+            ]
+        },
+        {
+            "id": "6.4",
+            "name": "Community & Cultural Context",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q6.4.1_EDU",
+                    "text": "Community Engagement & Support: Role of parents/community: (1) PTA/Board of Management activity; (2) Parental attitude to education; (3) Community ownership of school safety; (4) Volunteer support; (5) Cultural barriers (e.g., FGM, early marriage); (6) Religious alignment; (7) Conflict resolution role.",
+                    "stakeholder_types": [
+                        "Community Leaders",
+                        "Parents",
+                        "Religious Leaders"
+                    ],
+                    "evidence_required": "PTA minutes, Community meeting logs, Cultural impact assessment",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Community support essential for safety and funding. Cultural practices can hinder girl child education. Religious leaders influential."
+                },
+                {
+                    "q_id": "Q6.4.2_EDU",
+                    "text": "Language & Cultural Relevance: Local context in learning: (1) Mother tongue instruction (early years); (2) Culturally relevant content (local names/stories); (3) Decolonization of curriculum; (4) Local teacher recruitment; (5) Respect for local traditions; (6) Language of exams vs instruction; (7) Parental language barrier.",
+                    "stakeholder_types": [
+                        "Curriculum Developers",
+                        "Community",
+                        "Teachers"
+                    ],
+                    "evidence_required": "Curriculum review, Content samples, Language policy",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Learning in English when child speaks Swahili/Hausa hinders literacy. Content must look and sound African."
+                }
+            ]
+        }
+    ],
+    "scoring_notes": "Layer 6 (Ecosystem) for Education in SSA: Infrastructure (WASH/Power) is the foundation. Labor market alignment determines the ROI of education. Community support is the safety net."
+}

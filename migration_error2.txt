@@ -1,0 +1,36 @@
+warn The configuration property `package.json#prisma` is deprecated and will be removed in Prisma 7. Please migrate to a Prisma config file (e.g., `prisma.config.ts`).
+For more information, see: https://pris.ly/prisma-config
+
+Environment variables loaded from .env
+Prisma schema loaded from prisma\schema.prisma
+Datasource "db": PostgreSQL database "postgres", schema "public" at "aws-1-eu-west-1.pooler.supabase.com:5432"
+
+
+Error: Prisma schema validation - (validate wasm)
+Error code: P1012
+error: Error validating field `question` in model `TrustEvidenceFile`: The relation field `question` on model `TrustEvidenceFile` is missing an opposite relation field on the model `TrustQuestion`. Either run `prisma format` or add it manually.
+  -->  prisma\schema.prisma:1688
+   | 
+1687 |   questionId   String?
+1688 |   question     TrustQuestion?         @relation(fields: [questionId], references: [id])
+1689 |   responseId   String?
+   | 
+error: Error validating field `uploadedBy` in model `TrustEvidenceFile`: The relation field `uploadedBy` on model `TrustEvidenceFile` is missing an opposite relation field on the model `User`. Either run `prisma format` or add it manually.
+  -->  prisma\schema.prisma:1703
+   | 
+1702 |   uploadedById String
+1703 |   uploadedBy   User     @relation("EvidenceUploader", fields: [uploadedById], references: [id])
+1704 |   uploadedAt   DateTime @default(now())
+   | 
+error: Error validating field `validatedBy` in model `TrustEvidenceFile`: The relation field `validatedBy` on model `TrustEvidenceFile` is missing an opposite relation field on the model `User`. Either run `prisma format` or add it manually.
+  -->  prisma\schema.prisma:1709
+   | 
+1708 |   validatedById    String?
+1709 |   validatedBy      User?                   @relation("EvidenceValidator", fields: [validatedById], references: [id])
+1710 |   validatedAt      DateTime?
+   | 
+
+Validation Error Count: 3
+[Context: validate]
+
+Prisma CLI Version : 6.19.0

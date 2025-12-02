@@ -1,0 +1,212 @@
+{
+    "layer_id": "L2",
+    "layer_name": "Transparency",
+    "sector": "agriculture",
+    "region": "Sub-Saharan Africa",
+    "total_questions": 12,
+    "total_sub_dimensions": 5,
+    "sub_dimensions": [
+        {
+            "id": "2.1",
+            "name": "System Logic & Decision-Making Transparency",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q2.1.1_AGR",
+                    "text": "Agricultural Advisory Algorithm Transparency: For AI-powered agricultural advisory systems (crop recommendations, pest management, planting dates), provide: (1) How recommendations are generated (weather data + soil data + crop models + market prices); (2) Training data sources and quality (local vs imported data, how recent?); (3) Model validation in Sub-Saharan Africa contexts (accuracy for local crops, pests, climates); (4) Explanation delivery for illiterate farmers (voice explanations in local languages, visual aids); (5) Override mechanisms (can extension officers or farmers reject AI advice?); (6) Bias testing (does it disadvantage smallholders, women farmers, certain regions?).",
+                    "stakeholder_types": [
+                        "Farmers",
+                        "Agronomists",
+                        "Extension Officers",
+                        "Data Scientists"
+                    ],
+                    "evidence_required": "Algorithm documentation (accessible to non-technical), Training data provenance, Validation studies in SSA, Farmer-friendly explanation samples (voice/visual), Override procedures, Bias audit reports",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Explanations must work for illiterate farmers - voice in local languages, visual diagrams. AI trained on Global North data often fails for African crops/pests."
+                },
+                {
+                    "q_id": "Q2.1.2_AGR",
+                    "text": "Market Pricing Algorithm Transparency: For digital agricultural marketplaces, explain: (1) How market prices are determined (supply-demand algorithms, reference markets, commission structures); (2) Price update frequency and data sources (real-time vs daily, which markets?); (3) Quality grading impact on pricing (how is produce quality assessed?); (4) Geographic price variations (urban vs rural, cross-border); (5) Farmer price vs consumer price breakdown (who captures value?); (6) Commission and fee transparency (all costs disclosed upfront to farmers).",
+                    "stakeholder_types": [
+                        "Farmers",
+                        "Buyers",
+                        "Market Operators",
+                        "Consumer Protection"
+                    ],
+                    "evidence_required": "Pricing algorithm documentation, Data source verification, Quality grading criteria, Geographic price analysis, Value chain breakdown, Fee disclosure documentation",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Farmers highly vulnerable to price exploitation. Must show pricing is fair, not extractive. Commission structures must be clear to illiterate farmers."
+                },
+                {
+                    "q_id": "Q2.1.3_AGR",
+                    "text": "Credit Scoring Transparency for Agricultural Financing: For digital agricultural credit (input financing, crop loans), document: (1) Credit scoring algorithm - what factors determine loan eligibility and amount?; (2) Alternative data usage (mobile money history, farm records, social networks); (3) Bias prevention (gender, farm size, region, crop type); (4) Rejection explanations (why was farmer denied? in simple language); (5) Interest rate determination (how is APR calculated?); (6) Farmer data usage (is credit history shared with third parties?).",
+                    "stakeholder_types": [
+                        "Farmers",
+                        "Lenders",
+                        "Regulators",
+                        "Consumer Protection"
+                    ],
+                    "evidence_required": "Credit scoring documentation, Alternative data sources and weights, Bias testing reports (gender, region, etc.), Rejection explanation samples, Interest rate calculation methodology, Data sharing policies",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Women farmers often discriminated against. Must prove scoring is fair. Rejection reasons must be understandable to illiterate farmers."
+                }
+            ]
+        },
+        {
+            "id": "2.2",
+            "name": "Operational Visibility & Monitoring",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q2.2.1_AGR",
+                    "text": "Farmer Transaction Visibility: Provide farmers with complete visibility into their agricultural transactions: (1) Transaction history (produce sales, input purchases, payments) accessible via USSD/SMS/app; (2) Real-time status tracking (order placed → confirmed → delivered → paid); (3) Payment confirmations (mobile money receipts, bank transfers); (4) Dispute tracking (can farmers see status of complaints?); (5) Farm records access (planting dates, inputs used, yields) - farmer owns this data; (6) Multi-language support (English, French, Swahili, Hausa, local languages).",
+                    "stakeholder_types": [
+                        "Farmers",
+                        "Platform Operators",
+                        "Mobile Money Providers"
+                    ],
+                    "evidence_required": "USSD/SMS transaction query demos, Real-time tracking interface, Payment confirmation system, Dispute tracking portal, Farm records export functionality, Language support matrix",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "USSD access critical - many farmers don't have smartphones. SMS confirmations for every transaction (audit trail for illiterate farmers)."
+                },
+                {
+                    "q_id": "Q2.2.2_AGR",
+                    "text": "Agricultural Supply Chain Visibility: For farm-to-market platforms, provide visibility into: (1) Produce tracking (farm → collection → processing → buyer); (2) Quality assessment transparency (who grades produce? criteria? can farmer contest?); (3) Payment flow visibility (buyer paid → platform → farmer, with timelines); (4) Logistics tracking (transport arranged, location, ETA); (5) Wastage/rejection transparency (why was produce rejected? compensation?); (6) Buyer identity and reputation (can farmers see buyer ratings?).",
+                    "stakeholder_types": [
+                        "Farmers",
+                        "Buyers",
+                        "Logistics Providers",
+                        "Quality Inspectors"
+                    ],
+                    "evidence_required": "Supply chain tracking system, Quality grading documentation, Payment flow diagrams, Logistics tracking demos, Rejection/wastage policies, Buyer rating system",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Farmers often cheated on quality grading and payment timing. Transparency critical for trust. Must work on basic phones (SMS updates)."
+                }
+            ]
+        },
+        {
+            "id": "2.3",
+            "name": "Data Governance & Privacy",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q2.3.1_AGR",
+                    "text": "Farmer Data Collection & Usage Transparency: Document all farmer data practices: (1) What data is collected (farm location, crop types, yields, financial transactions, mobile money history)?; (2) Why each data type is needed (specific use cases); (3) How data is used (advisory algorithms, credit scoring, market matching, research); (4) Data sharing with third parties (who? for what purpose? with consent?); (5) Data retention (how long is data kept?); (6) Farmer data rights (access, correction, deletion, portability); (7) Consent mechanisms (simple, visual, in local languages).",
+                    "stakeholder_types": [
+                        "Farmers",
+                        "Data Protection Officers",
+                        "Platform Operators",
+                        "Regulators"
+                    ],
+                    "evidence_required": "Data collection inventory, Purpose limitation documentation, Data usage policies, Third-party sharing agreements, Data retention schedules, Farmer data rights procedures, Consent interface (visual, local language)",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Farmers often don't understand data implications. Consent must be truly informed (visual, voice, local language). Compliance: ECOWAS Data Protection, national DPA laws."
+                },
+                {
+                    "q_id": "Q2.3.2_AGR",
+                    "text": "Agricultural Data Security & Protection: Demonstrate farmer data protection measures: (1) Data encryption (in transit and at rest); (2) Access controls (who can see farmer data? role-based access); (3) Breach notification (how quickly are farmers notified?); (4) Data sovereignty (is farmer data stored in Africa or extracted to Global North?); (5) Anonymization for research (can farmers opt out of data sharing for research?); (6) Mobile money data protection (transaction history highly sensitive).",
+                    "stakeholder_types": [
+                        "Farmers",
+                        "Security Officers",
+                        "Data Protection Authorities"
+                    ],
+                    "evidence_required": "Security certifications (ISO 27001), Access control documentation, Breach notification procedures, Data residency policies, Anonymization protocols, Mobile money data protection measures",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Data colonialism concern - farmer data extracted, value captured elsewhere. Data should stay in Africa. Mobile money history extremely sensitive."
+                },
+                {
+                    "q_id": "Q2.3.3_AGR",
+                    "text": "Farmer Data Portability & Ownership: Ensure farmers own and control their agricultural data: (1) Can farmers export their data (farm records, transaction history, credit history)?; (2) Data format (machine-readable? can be imported to other platforms?); (3) Data portability timeline (how quickly can farmer get their data?); (4) No lock-in (can farmers take data to competitors?); (5) Data deletion (can farmers request complete deletion?); (6) Posthumous data rights (what happens to farmer data after death?).",
+                    "stakeholder_types": [
+                        "Farmers",
+                        "Platform Operators",
+                        "Competition Authorities",
+                        "Legal"
+                    ],
+                    "evidence_required": "Data export functionality demos, Data format specifications (CSV, JSON, etc.), Portability SLAs, Data deletion procedures, Posthumous data policies",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Farmers must be able to leave platform without losing years of farm records. Data portability prevents vendor lock-in and enables competition."
+                }
+            ]
+        },
+        {
+            "id": "2.4",
+            "name": "Documentation Quality & Accessibility",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q2.4.1_AGR",
+                    "text": "Farmer-Accessible Documentation: Provide documentation accessible to Sub-Saharan Africa farmers: (1) User guides in local languages (English, French, Swahili, Hausa, etc.); (2) Visual/video tutorials (for illiterate farmers); (3) Voice/IVR instructions (phone-based, no internet needed); (4) Offline-accessible (PDF, printed materials, radio broadcasts); (5) Simple language (no technical jargon, 5th-grade reading level); (6) Farmer testimonials and case studies (relatable examples).",
+                    "stakeholder_types": [
+                        "Farmers",
+                        "Extension Officers",
+                        "Training Providers",
+                        "Communications"
+                    ],
+                    "evidence_required": "Multi-language documentation samples, Video tutorial library, IVR system demos, Offline materials (PDFs, printed guides), Readability testing results, Farmer testimonial videos",
+                    "evidence_weight": "High",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "Literacy rates low - visual/voice essential. Internet access limited - offline materials critical. Local languages non-negotiable."
+                },
+                {
+                    "q_id": "Q2.4.2_AGR",
+                    "text": "Agricultural Service Terms & Conditions Transparency: Ensure farmers understand all terms: (1) Terms of service in simple language (no legal jargon); (2) Visual summaries of key terms (pricing, payment, disputes); (3) Voice explanations available (IVR, extension officer training); (4) Farmer rights clearly stated (refunds, complaints, data rights); (5) Changes communicated proactively (SMS, voice calls, not just app updates); (6) Dispute resolution process explained (accessible, fair, fast).",
+                    "stakeholder_types": [
+                        "Farmers",
+                        "Legal",
+                        "Consumer Protection",
+                        "Extension Officers"
+                    ],
+                    "evidence_required": "Simplified terms of service, Visual term summaries, Voice explanation scripts, Farmer rights documentation, Change notification procedures, Dispute resolution guide",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Farmers often sign up without understanding terms. Must be truly accessible (visual, voice, local language). Consumer protection critical."
+                }
+            ]
+        },
+        {
+            "id": "2.5",
+            "name": "Communication Protocols & Responsiveness",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q2.5.1_AGR",
+                    "text": "Farmer Communication Channels & Responsiveness: Provide accessible, responsive farmer support: (1) Multi-channel support (phone, SMS, USSD, WhatsApp, in-person via village agents); (2) Local language support (English, French, major African languages); (3) Response time SLAs (critical issues <4 hours, general queries <24 hours); (4) Agricultural season prioritization (planting/harvest issues = highest priority); (5) Escalation procedures (when is issue escalated? to whom?); (6) Farmer satisfaction tracking (NPS, complaint resolution rates).",
+                    "stakeholder_types": [
+                        "Farmers",
+                        "Customer Support",
+                        "Village Agents",
+                        "Extension Officers"
+                    ],
+                    "evidence_required": "Support channel documentation, Language support matrix, Response time SLA data, Seasonal prioritization protocols, Escalation procedures, Farmer satisfaction metrics",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Phone/SMS critical - many farmers no internet. Local language essential. Village agents key for in-person support. Timing critical during planting/harvest."
+                },
+                {
+                    "q_id": "Q2.5.2_AGR",
+                    "text": "Agricultural Advisory Communication Transparency: For weather, pest, market advisories: (1) Advisory delivery channels (SMS, voice calls, app push, radio); (2) Timeliness guarantees (weather alerts 24-48 hours before event); (3) Advisory accuracy tracking (were forecasts correct? pest alerts timely?); (4) Source transparency (where does weather data come from? who provides pest advice?); (5) Farmer feedback mechanisms (can farmers report inaccurate advisories?); (6) Advisory personalization (relevant to farmer's location, crops, season).",
+                    "stakeholder_types": [
+                        "Farmers",
+                        "Agronomists",
+                        "Meteorological Services",
+                        "Platform Operators"
+                    ],
+                    "evidence_required": "Advisory delivery system documentation, Timeliness SLA data, Accuracy tracking metrics, Data source disclosure, Farmer feedback mechanisms, Personalization algorithms",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Timing critical - late weather alert = crop loss. SMS essential (works on 2G). Accuracy vital for farmer trust. Local weather data better than global models."
+                }
+            ]
+        }
+    ],
+    "scoring_notes": "Layer 2 (Transparency) for Agriculture in Sub-Saharan Africa: Farmer-accessible explanations (voice, visual, local language) are mandatory. Data governance critical given data colonialism risks. Pricing and credit scoring transparency essential to prevent exploitation."
+}

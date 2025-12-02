@@ -1,0 +1,137 @@
+{
+    "layer_id": "L4",
+    "layer_name": "Competence",
+    "sector": "government",
+    "region": "Sub-Saharan Africa",
+    "total_questions": 12,
+    "total_sub_dimensions": 4,
+    "sub_dimensions": [
+        {
+            "id": "4.1",
+            "name": "Civil Service Digital Capability",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q4.1.1_GOV",
+                    "text": "Staff Digital Skills & Training: Ability to operate systems: (1) Computer literacy of frontline staff; (2) Training on specific ID software; (3) Troubleshooting basic issues; (4) Data privacy training (handling personal data); (5) Customer service skills (digital assistance); (6) Change management support; (7) Certification requirements.",
+                    "stakeholder_types": [
+                        "Civil Servants",
+                        "HR",
+                        "Citizens"
+                    ],
+                    "evidence_required": "Training logs, Skill assessment results, User feedback",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Frontline staff often resist digital tools due to lack of training or fear of job loss. 'System is down' is often code for 'I don't know how to use it'."
+                },
+                {
+                    "q_id": "Q4.1.2_GOV",
+                    "text": "Technical Leadership (CIO/CTO): Strategic capacity: (1) Presence of CIOs in ministries; (2) Technical understanding of leadership; (3) Ability to manage vendors; (4) Strategic planning for IT; (5) Innovation culture; (6) Data-driven decision making; (7) Retention of tech talent.",
+                    "stakeholder_types": [
+                        "Ministers",
+                        "PS/Directors"
+                    ],
+                    "evidence_required": "Org chart (CIO role), IT strategy docs, Vendor performance reviews",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Government struggles to retain tech talent against private sector salaries. Leadership often non-technical."
+                }
+            ]
+        },
+        {
+            "id": "4.2",
+            "name": "Project Management & Implementation",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q4.2.1_GOV",
+                    "text": "Large-Scale Project Management: Delivering on time: (1) Project management methodology (Prince2/Agile?); (2) Track record of delivery; (3) Risk management capacity; (4) Stakeholder engagement skills; (5) Budget management; (6) Pilot testing rigor; (7) Post-implementation review.",
+                    "stakeholder_types": [
+                        "Project Teams",
+                        "Donors"
+                    ],
+                    "evidence_required": "Project plans, Risk registers, Progress reports",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "GovTech projects notorious for delays and failure. 'Big Bang' launches often fail; iterative approach needed."
+                },
+                {
+                    "q_id": "Q4.2.2_GOV",
+                    "text": "Vendor Management & Negotiation: Getting value: (1) Contract negotiation skills; (2) SLA monitoring capacity; (3) Avoiding vendor capture; (4) Technical audit of deliverables; (5) Dispute resolution skills; (6) Knowledge transfer enforcement; (7) Cost benchmarking.",
+                    "stakeholder_types": [
+                        "Procurement",
+                        "Legal",
+                        "IT"
+                    ],
+                    "evidence_required": "Contract review minutes, SLA reports, Vendor audits",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": " Governments often out-negotiated by global tech giants. Capacity to enforce contracts is weak."
+                }
+            ]
+        },
+        {
+            "id": "4.3",
+            "name": "Citizen Support & Digital Literacy",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q4.3.1_GOV",
+                    "text": "Assisted Digital Services: Helping the offline: (1) Availability of 'Huduma Centers' (one-stop shops); (2) Agent network for government services; (3) Staff ability to assist low-literacy users; (4) Proxy transaction protocols (can I do it for my grandma?); (5) Paper alternatives availability; (6) Outreach to remote areas; (7) Cost of assistance.",
+                    "stakeholder_types": [
+                        "Citizens",
+                        "Field Staff"
+                    ],
+                    "evidence_required": "Center locations map, Agent training manuals, Transaction logs",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Digital-only services exclude millions. 'Intermediaries' (agents/cyber cafes) are the bridge."
+                },
+                {
+                    "q_id": "Q4.3.2_GOV",
+                    "text": "User Experience (UX) Design: Usability for all: (1) Mobile-first design; (2) Low-bandwidth optimization; (3) Local language interfaces; (4) Accessibility features (voice/text); (5) User testing with diverse groups; (6) Feedback loops; (7) Simplicity of forms.",
+                    "stakeholder_types": [
+                        "Designers",
+                        "Citizens"
+                    ],
+                    "evidence_required": "UX audit, User testing reports, Interface screenshots",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Gov portals often complex and desktop-only. Must work on a $30 smartphone on 2G."
+                }
+            ]
+        },
+        {
+            "id": "4.4",
+            "name": "Cybersecurity & Data Competence",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q4.4.1_GOV",
+                    "text": "Cyber Defense Capabilities: Protecting the realm: (1) CERT/CIRT (Computer Emergency Response Team) capacity; (2) Threat intelligence sharing; (3) Incident response drills; (4) Forensic capabilities; (5) Ethical hacking program; (6) Staff awareness training; (7) Partnership with private sector security.",
+                    "stakeholder_types": [
+                        "National CERT",
+                        "Security Agencies"
+                    ],
+                    "evidence_required": "Drill reports, Threat intel feeds, Staff certifications",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "State-sponsored attacks increasing. National CERTs need resources and authority."
+                },
+                {
+                    "q_id": "Q4.4.2_GOV",
+                    "text": "Data Analytics & Policy Making: Evidence-based policy: (1) Ability to analyze ID data for planning; (2) Privacy-preserving analytics (differential privacy); (3) Data visualization skills; (4) Sharing insights across ministries; (5) Data quality management; (6) Ethics of data use; (7) Open data publication skills.",
+                    "stakeholder_types": [
+                        "Statisticians",
+                        "Policy Makers"
+                    ],
+                    "evidence_required": "Policy papers using data, Dashboards, Data sharing protocols",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Data often sits in silos. Using ID data to plan schools/hospitals is the ultimate dividend."
+                }
+            ]
+        }
+    ],
+    "scoring_notes": "Layer 4 (Competence) for Government in SSA: It's not just about buying software; it's about the people. Civil service capacity and citizen support are the bottlenecks."
+}

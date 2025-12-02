@@ -1,0 +1,184 @@
+{
+    "layer_id": "L3",
+    "layer_name": "Governance",
+    "sector": "energy",
+    "region": "Sub-Saharan Africa",
+    "total_questions": 12,
+    "total_sub_dimensions": 4,
+    "sub_dimensions": [
+        {
+            "id": "3.1",
+            "name": "Contractual Clarity & Enforceability",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q3.1.1_ENR",
+                    "text": "PAYG Contract Governance: Ensure PAYG contracts are fair and enforceable: (1) Lease-to-own vs perpetual lease clarity; (2) Repossession rights and process (ethical repossession); (3) Ownership transfer documentation (certificate of ownership); (4) Early payoff terms (no penalty?); (5) Default definitions; (6) Dispute resolution clause; (7) Compliance with consumer credit laws.",
+                    "stakeholder_types": [
+                        "Users",
+                        "Legal",
+                        "Regulators",
+                        "Consumer Protection"
+                    ],
+                    "evidence_required": "Contract templates, Repossession policy, Ownership certificates, Legal compliance opinions",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Ethical repossession is a major issue. Ownership transfer must be documented (users value ownership). Consumer credit laws often apply."
+                },
+                {
+                    "q_id": "Q3.1.2_ENR",
+                    "text": "Mini-Grid Connection Agreements: Governance of grid connections: (1) Service level agreement (uptime guarantee); (2) Connection fee policy; (3) Disconnection policy (non-payment); (4) Theft/tampering penalties; (5) Dispute resolution mechanism; (6) Community agreement (MOU with village); (7) Compensation for damages (surges).",
+                    "stakeholder_types": [
+                        "Community Users",
+                        "Mini-grid Operators",
+                        "Village Leaders"
+                    ],
+                    "evidence_required": "Connection agreement templates, SLA documents, Disconnection policy, Community MOUs",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Community relationship critical. Theft/tampering common. Disconnection must be fair. SLAs often missing."
+                },
+                {
+                    "q_id": "Q3.1.3_ENR",
+                    "text": "Warranty Enforcement Governance: Ensure warranties are honored: (1) Warranty claim process (clear steps); (2) Turnaround time commitment; (3) Replacement vs repair policy; (4) Shipping cost responsibility (who pays?); (5) Dispute resolution for denied claims; (6) Tracking system for claims; (7) Regulatory reporting on warranty performance.",
+                    "stakeholder_types": [
+                        "Users",
+                        "Regulators",
+                        "Consumer Protection"
+                    ],
+                    "evidence_required": "Warranty policy, Claim tracking logs, Turnaround time data, Consumer complaint logs",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Warranty often empty promise if logistics fail. Shipping costs can exceed product value. Clear process essential."
+                }
+            ]
+        },
+        {
+            "id": "3.2",
+            "name": "Regulatory Compliance & Standards",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q3.2.1_ENR",
+                    "text": "Energy Sector Regulatory Compliance - SSA: Demonstrate compliance with energy regulations: (1) Import licenses/standards (PVOC, SONCAP, PVoC); (2) Energy regulator licenses (ERC, NERC, etc.); (3) Mini-grid permits/concessions; (4) Tariff approvals; (5) Grid code compliance (for interconnectivity); (6) Environmental compliance (EIA); (7) Local content requirements.",
+                    "stakeholder_types": [
+                        "Energy Companies",
+                        "Regulators",
+                        "Ministry of Energy"
+                    ],
+                    "evidence_required": "Licenses, Permits, Tariff approval letters, EIA reports, Standards certificates",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Regulation complex and evolving. Import standards (PVOC) strict to stop counterfeits. Mini-grid licensing often slow. Local content rules increasing."
+                },
+                {
+                    "q_id": "Q3.2.2_ENR",
+                    "text": "Product Quality Standards Compliance: Compliance with technical standards: (1) Lighting Global / VeraSol quality standards; (2) IEC standards (batteries, panels); (3) National standards (KEBS, SON, UNBS); (4) Warranty standards (minimum duration); (5) Truth-in-advertising compliance; (6) Safety standards; (7) Lab testing reports.",
+                    "stakeholder_types": [
+                        "Manufacturers",
+                        "Quality Assurance",
+                        "Regulators"
+                    ],
+                    "evidence_required": "Lighting Global/VeraSol certificates, IEC test reports, National standards certificates, Lab test results",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Lighting Global/VeraSol is the gold standard for off-grid solar. National standards often mirror these. Counterfeits are a major governance challenge."
+                },
+                {
+                    "q_id": "Q3.2.3_ENR",
+                    "text": "Financial & Data Regulation Compliance: Compliance beyond energy: (1) Mobile money/payment regulations; (2) Consumer credit/lending regulations (for PAYG); (3) Data protection laws (DPA, GDPR-like); (4) Tax compliance (VAT, import duties); (5) E-waste regulations; (6) AML/KYC (for high value systems); (7) Corporate governance.",
+                    "stakeholder_types": [
+                        "Finance Teams",
+                        "Legal",
+                        "Regulators"
+                    ],
+                    "evidence_required": "Tax clearance certificates, Data protection registration, Credit license, E-waste management plan",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "PAYG companies are also fintechs/lenders. Data protection laws emerging. E-waste regulation growing. VAT exemptions often contentious."
+                }
+            ]
+        },
+        {
+            "id": "3.3",
+            "name": "Dispute Resolution & Accountability",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q3.3.1_ENR",
+                    "text": "Consumer Dispute Resolution - Energy: Accessible dispute resolution: (1) Internal complaint handling process; (2) Escalation channels; (3) External recourse (regulator, ombudsman); (4) Village leader mediation (for mini-grids); (5) Response time commitments; (6) No-retaliation policy; (7) Record keeping of disputes.",
+                    "stakeholder_types": [
+                        "Users",
+                        "Customer Support",
+                        "Regulators"
+                    ],
+                    "evidence_required": "Complaint procedure, Escalation matrix, Ombudsman contact info, Dispute logs",
+                    "evidence_weight": "High",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "Formal legal recourse inaccessible. Village leaders/chiefs often mediate mini-grid disputes. Regulator complaints channels exist but slow."
+                },
+                {
+                    "q_id": "Q3.3.2_ENR",
+                    "text": "Accountability for Service Failures: Compensation and accountability: (1) Compensation for extended downtime; (2) Refund policy for faulty products; (3) Liability for damage (e.g., surge damaging TV); (4) SLA breach penalties; (5) Root cause analysis reporting; (6) Public reporting on reliability; (7) Executive accountability.",
+                    "stakeholder_types": [
+                        "Users",
+                        "Regulators",
+                        "Management"
+                    ],
+                    "evidence_required": "Compensation policy, Refund records, Liability insurance, Reliability reports",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Users lose income when power fails. Compensation builds trust. Refunds difficult with mobile money/agents but necessary."
+                }
+            ]
+        },
+        {
+            "id": "3.4",
+            "name": "Performance Accountability & Auditing",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q3.4.1_ENR",
+                    "text": "Technical & Financial Audits: Independent verification: (1) Technical performance audits (mini-grid uptime, voltage); (2) Financial audits (for investors/regulators); (3) Grant/subsidy compliance audits (RBF verification); (4) E-waste audits; (5) Safety audits; (6) Customer satisfaction audits; (7) Data privacy audits.",
+                    "stakeholder_types": [
+                        "Auditors",
+                        "Investors",
+                        "Donors",
+                        "Regulators"
+                    ],
+                    "evidence_required": "Audit reports, RBF verification reports, Safety inspection records, Customer survey results",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "RBF (Results Based Financing) common - requires strict auditing. Technical audits verify quality. Safety audits critical."
+                },
+                {
+                    "q_id": "Q3.4.2_ENR",
+                    "text": "Community Accountability (Mini-Grids): Accountability to local community: (1) Community energy committees; (2) Regular town hall meetings; (3) Transparent reporting to community; (4) Local hiring commitments; (5) CSR initiatives; (6) Grievance mechanism effectiveness; (7) Social license to operate.",
+                    "stakeholder_types": [
+                        "Community",
+                        "Operators",
+                        "Local Leaders"
+                    ],
+                    "evidence_required": "Committee meeting minutes, Town hall records, CSR reports, Local hiring records",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Mini-grids need 'social license'. Community committees bridge gap. Local hiring reduces theft/vandalism."
+                },
+                {
+                    "q_id": "Q3.4.3_ENR",
+                    "text": "Land Rights & Asset Ownership Governance: Ensure ethical land use and asset ownership: (1) Land acquisition process (lease, purchase, donation?); (2) Customary land rights respect (consultation with chiefs/families); (3) Compensation for land use (fair market value?); (4) Asset ownership structure (developer-owned vs community-owned); (5) Transfer of assets (what happens at end of concession?); (6) Dispute resolution for land issues; (7) Documentation of land rights.",
+                    "stakeholder_types": [
+                        "Community",
+                        "Land Owners",
+                        "Regulators"
+                    ],
+                    "evidence_required": "Land lease agreements, Community consultation minutes, Title deeds",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Land disputes can shut down mini-grids. Customary rights must be respected."
+                }
+            ]
+        }
+    ],
+    "scoring_notes": "Layer 3 (Governance) for Energy in SSA: Regulatory compliance (licenses, standards) is baseline. Consumer protection (warranties, fair contracts) is critical for trust in a market with many low-quality counterfeits. Community governance essential for mini-grids."
+}

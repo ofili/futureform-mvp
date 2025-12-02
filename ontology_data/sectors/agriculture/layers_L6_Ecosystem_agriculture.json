@@ -1,0 +1,309 @@
+{
+    "layer_id": "L6",
+    "layer_name": "Ecosystem",
+    "sector": "agriculture",
+    "region": "Sub-Saharan Africa",
+    "total_questions": 18,
+    "total_sub_dimensions": 6,
+    "sub_dimensions": [
+        {
+            "id": "6.1",
+            "name": "Infrastructure Dependencies & Constraints",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q6.1.1.1_AGR",
+                    "text": "Power Infrastructure for Agricultural Technology - SSA: Assess power infrastructure in target agricultural regions: (1) Grid electricity availability (what % of farmers have grid access?); (2) Grid reliability (uptime % - typically 40-60% in rural SSA); (3) Power outage patterns (frequency, duration, seasonal - worse during rainy season?); (4) Solar charging infrastructure (solar home systems, charging stations, mobile solar); (5) Device battery life requirements (must last 3-7 days without charging); (6) Backup power for critical infrastructure (cold storage, processing facilities); (7) Cost of electricity/charging (affordable for farmers?).",
+                    "stakeholder_types": [
+                        "Farmers",
+                        "Infrastructure Providers",
+                        "Solar Companies",
+                        "Platform Operators"
+                    ],
+                    "evidence_required": "Grid access data by region, Grid reliability metrics (uptime %), Outage pattern analysis, Solar infrastructure mapping, Device battery specifications, Backup power documentation, Electricity cost analysis",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Power is PRIMARY constraint. Grid unreliable (40-60% uptime rural areas). Solar charging essential. Devices must operate 3-7 days without charging. Rainy season = worst power."
+                },
+                {
+                    "q_id": "Q6.1.1.2_AGR",
+                    "text": "Mobile Network Infrastructure for Agriculture: Assess mobile network coverage and quality in agricultural areas: (1) 2G/3G/4G coverage maps (rural agricultural areas, not just urban); (2) Network reliability (uptime %, call drop rates, data speeds); (3) Network congestion (performance during peak hours, market days); (4) Seasonal variations (rainy season network degradation); (5) Multiple operator coverage (M-Pesa on Safaricom, Airtel Money on Airtel - farmer choice?); (6) SMS/USSD reliability (works when data doesn't); (7) Cost of data/airtime (affordable for farmers?).",
+                    "stakeholder_types": [
+                        "Farmers",
+                        "Mobile Network Operators",
+                        "Regulators",
+                        "Platform Operators"
+                    ],
+                    "evidence_required": "Network coverage maps (2G/3G/4G by region), Network quality metrics (uptime, speeds, drop rates), Congestion analysis, Seasonal performance data, Multi-operator coverage, SMS/USSD reliability data, Data cost analysis",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "2G/3G still dominant in rural areas. 4G urban-only. Network degrades during rainy season. SMS/USSD critical fallback. Data costs high for farmers. Multi-operator coverage important."
+                },
+                {
+                    "q_id": "Q6.1.1.3_AGR",
+                    "text": "Road & Transport Infrastructure for Agricultural Logistics: Assess road access for agricultural input delivery and produce collection: (1) Road quality (paved, gravel, dirt - by season); (2) All-season accessibility (which roads impassable during rainy season?); (3) Transport availability (trucks, motorcycles, bicycles - what reaches farms?); (4) Transport cost (affordable for input delivery, produce collection?); (5) Travel time (how long to reach farmers from nearest town?); (6) Bridge/river crossings (seasonal barriers); (7) Security (road safety, theft risk).",
+                    "stakeholder_types": [
+                        "Farmers",
+                        "Logistics Providers",
+                        "Input Suppliers",
+                        "Buyers"
+                    ],
+                    "evidence_required": "Road quality mapping (by season), Accessibility analysis (rainy vs dry season), Transport availability and costs, Travel time data, Infrastructure barrier documentation, Security assessments",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Roads often impassable during rainy season - affects input delivery, produce collection, maintenance. Last-mile logistics extremely challenging. Motorcycle transport common."
+                }
+            ]
+        },
+        {
+            "id": "6.1.2",
+            "name": "Regulatory & Policy Environment",
+            "weight": 0.15,
+            "questions": [
+                {
+                    "q_id": "Q6.1.2.1_AGR",
+                    "text": "Agricultural Regulatory Environment - SSA: Assess regulatory environment for agricultural technology: (1) Ministry of Agriculture policies (supportive of agtech? barriers?); (2) Seed regulations (certification requirements, variety approval); (3) Pesticide regulations (registration, distribution, use); (4) Food safety regulations (handling, processing, export); (5) Land tenure policies (affect farmer investment decisions); (6) Agricultural subsidies (input subsidies, credit programs - platform integration?); (7) Cross-border trade regulations (if operating in multiple countries).",
+                    "stakeholder_types": [
+                        "Platform Operators",
+                        "Ministry of Agriculture",
+                        "Regulators",
+                        "Farmers"
+                    ],
+                    "evidence_required": "Regulatory compliance documentation, Seed certification procedures, Pesticide licenses, Food safety compliance, Land tenure analysis, Subsidy program integration, Cross-border trade permits",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Regulatory capacity varies widely. Some countries strict, others lax. Cross-border operations complex (EAC, ECOWAS). Land tenure insecurity affects farmer investment. Subsidies important but often poorly implemented."
+                },
+                {
+                    "q_id": "Q6.1.2.2_AGR",
+                    "text": "Data Protection & Digital Policy Environment: Assess data protection and digital policy landscape: (1) National data protection laws (Nigeria NDPR, Kenya DPA, South Africa POPIA, etc.); (2) ECOWAS/regional data protection frameworks; (3) Digital agriculture policies (government digital ag strategies); (4) Mobile money regulations (affect payment integration); (5) Telecommunications regulations (affect connectivity, pricing); (6) E-commerce regulations (affect digital marketplaces); (7) Regulatory enforcement capacity (are laws actually enforced?).",
+                    "stakeholder_types": [
+                        "Platform Operators",
+                        "Data Protection Authorities",
+                        "Telecom Regulators",
+                        "Legal"
+                    ],
+                    "evidence_required": "Data protection compliance certificates, Regional framework compliance, Digital ag policy alignment, Mobile money regulatory compliance, Telecom regulatory compliance, E-commerce compliance, Enforcement capacity analysis",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Data protection laws emerging but enforcement weak. Regional harmonization (ECOWAS) progressing. Mobile money heavily regulated. Telecom regulations affect connectivity costs."
+                },
+                {
+                    "q_id": "Q6.1.2.3_AGR",
+                    "text": "Political Stability & Policy Continuity Risk: Assess political risk to agricultural platform operations: (1) Political stability (risk of regime change, conflict); (2) Policy continuity (will agricultural policies survive elections?); (3) Expropriation risk (could government seize platform assets?); (4) Currency controls (can platform repatriate profits?); (5) Trade policy changes (tariffs, import/export restrictions); (6) Corruption risk (bribes required for licenses, operations?); (7) Political risk mitigation (insurance, diversification).",
+                    "stakeholder_types": [
+                        "Platform Operators",
+                        "Investors",
+                        "Insurers",
+                        "Political Risk Analysts"
+                    ],
+                    "evidence_required": "Political risk assessments, Policy continuity analysis, Expropriation risk insurance, Currency control documentation, Trade policy monitoring, Corruption risk mitigation, Political risk insurance",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "Political risk significant in some SSA countries. Policy changes after elections common. Currency controls affect profit repatriation. Corruption varies by country. Political risk insurance recommended."
+                }
+            ]
+        },
+        {
+            "id": "6.2",
+            "name": "Stakeholder Ecosystem & Relationships",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q6.2.1.1_AGR",
+                    "text": "Farmer Organization Ecosystem: Assess farmer cooperative and association landscape: (1) Cooperative density (how many farmers organized?); (2) Cooperative capacity (governance, financial management, technical knowledge); (3) Cooperative-platform relationships (partnerships, integration); (4) Farmer group dynamics (trust, collective action); (5) Women farmer groups (separate organizations, inclusion in mixed groups); (6) Youth farmer groups (young farmer engagement); (7) Cooperative services (input supply, marketing, credit - complement or compete with platform?).",
+                    "stakeholder_types": [
+                        "Farmers",
+                        "Cooperatives",
+                        "Farmer Associations",
+                        "Platform Operators"
+                    ],
+                    "evidence_required": "Cooperative mapping and density data, Cooperative capacity assessments, Partnership agreements, Group dynamics studies, Women/youth group documentation, Cooperative service analysis",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Cooperatives critical for smallholder aggregation. Capacity varies widely. Platform-cooperative relationships can be complementary or competitive. Women often excluded from mixed cooperatives."
+                },
+                {
+                    "q_id": "Q6.2.1.2_AGR",
+                    "text": "Agricultural Extension Services Ecosystem: Assess extension service capacity and integration: (1) Extension officer coverage (farmer-to-extension officer ratio); (2) Extension officer capacity (training, resources, motivation); (3) Extension service delivery (frequency of farmer contact, quality of advice); (4) Platform-extension integration (do extension officers support platform? trained on it?); (5) Private extension services (agro-dealers, input companies - complement public extension); (6) Digital extension (radio, SMS, apps - platform role); (7) Extension funding (government budget, donor support - sustainability).",
+                    "stakeholder_types": [
+                        "Extension Officers",
+                        "Ministry of Agriculture",
+                        "Platform Operators",
+                        "Farmers"
+                    ],
+                    "evidence_required": "Extension officer coverage data, Capacity assessments, Service delivery metrics, Platform-extension integration documentation, Private extension mapping, Digital extension analysis, Funding sustainability analysis",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Public extension services under-resourced. Farmer-to-extension officer ratios very high (1:1000+). Platform can complement but not replace extension. Private extension growing."
+                },
+                {
+                    "q_id": "Q6.2.1.3_AGR",
+                    "text": "Agricultural Value Chain Stakeholder Mapping: Map complete agricultural value chain and platform integration: (1) Input suppliers (seeds, fertilizer, pesticides - relationships, integration); (2) Financial service providers (banks, MFIs, mobile money - credit integration); (3) Buyers (processors, exporters, retailers - market linkages); (4) Logistics providers (transport, storage, cold chain); (5) Quality inspectors (grading, certification); (6) Research institutions (agricultural research, validation); (7) Development partners (donors, NGOs - funding, technical support).",
+                    "stakeholder_types": [
+                        "Input Suppliers",
+                        "Financial Providers",
+                        "Buyers",
+                        "Logistics",
+                        "Quality Inspectors",
+                        "Researchers",
+                        "Development Partners"
+                    ],
+                    "evidence_required": "Value chain stakeholder mapping, Integration/partnership documentation, Market linkage agreements, Logistics partnerships, Quality assurance procedures, Research collaborations, Development partner relationships",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Agricultural value chains fragmented. Platform must integrate multiple stakeholders. Buyer relationships critical for farmer market access. Logistics often weakest link. Development partner support common."
+                }
+            ]
+        },
+        {
+            "id": "6.2.2",
+            "name": "Community & Cultural Context",
+            "weight": 0.15,
+            "questions": [
+                {
+                    "q_id": "Q6.2.2.1_AGR",
+                    "text": "Community Leadership & Acceptance: Assess community leadership engagement and platform acceptance: (1) Traditional leader engagement (chiefs, elders - do they support platform?); (2) Community entry process (how was platform introduced? consultative?); (3) Community benefit perception (does community see value?); (4) Trust building (how is trust established and maintained?); (5) Conflict resolution (community-level dispute resolution mechanisms); (6) Cultural sensitivity (platform respects local customs, practices); (7) Community ownership (do farmers feel ownership of platform?).",
+                    "stakeholder_types": [
+                        "Farmers",
+                        "Traditional Leaders",
+                        "Community Leaders",
+                        "Platform Operators"
+                    ],
+                    "evidence_required": "Traditional leader engagement documentation, Community entry process records, Community perception surveys, Trust-building activities, Conflict resolution procedures, Cultural sensitivity assessments, Community ownership indicators",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Traditional leaders (chiefs, elders) critical gatekeepers in many rural areas. Community acceptance essential for adoption. Trust takes time to build. Cultural sensitivity non-negotiable."
+                },
+                {
+                    "q_id": "Q6.2.2.2_AGR",
+                    "text": "Language & Communication Ecosystem: Assess language diversity and communication infrastructure: (1) Language diversity (how many languages in target area? which dominant?); (2) Platform language support (English, French, major local languages); (3) Literacy levels (what % can read? need voice/visual?); (4) Communication channels (radio, SMS, voice, in-person - which work?); (5) Information sources (where do farmers get agricultural information? radio, extension, peers?); (6) Trusted messengers (who do farmers trust for information?); (7) Translation quality (are translations accurate, culturally appropriate?).",
+                    "stakeholder_types": [
+                        "Farmers",
+                        "Communications Teams",
+                        "Translators",
+                        "Radio Stations"
+                    ],
+                    "evidence_required": "Language mapping, Platform language support documentation, Literacy assessments, Communication channel effectiveness data, Information source analysis, Trusted messenger identification, Translation quality assurance",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Language diversity extreme (2000+ languages in Africa). English/French insufficient - local languages mandatory. Literacy low - voice/visual essential. Radio still dominant information source."
+                },
+                {
+                    "q_id": "Q6.2.2.3_AGR",
+                    "text": "Social Norms & Gender Dynamics: Assess social norms affecting technology adoption: (1) Gender norms (women's access to phones, land, credit, decision-making); (2) Age norms (youth vs elderly - technology adoption patterns); (3) Wealth stratification (do benefits reach poorest farmers or only better-off?); (4) Ethnic/religious dynamics (affect trust, adoption); (5) Social networks (how do farmers share information, make decisions?); (6) Gender-based violence risk (does platform increase women's vulnerability?); (7) Inclusion strategies (how are marginalized groups included?).",
+                    "stakeholder_types": [
+                        "Farmers",
+                        "Women Farmers",
+                        "Youth",
+                        "Social Scientists",
+                        "Gender Specialists"
+                    ],
+                    "evidence_required": "Gender analysis, Age-disaggregated data, Wealth stratification analysis, Ethnic/religious dynamics assessment, Social network analysis, GBV risk assessment, Inclusion strategy documentation",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Gender norms major barrier - women often lack phone access, land rights, credit access. Youth more tech-savvy but lack land. Wealth stratification - benefits may not reach poorest. GBV risk must be assessed."
+                }
+            ]
+        },
+        {
+            "id": "6.2.3",
+            "name": "Equity, Access & Inclusion",
+            "weight": 0.15,
+            "questions": [
+                {
+                    "q_id": "Q6.2.3.1_AGR",
+                    "text": "Urban-Rural Digital Divide in Agriculture: Assess and address urban-rural disparities: (1) Connectivity gap (urban 4G vs rural 2G/3G); (2) Device access gap (urban smartphones vs rural feature phones); (3) Digital literacy gap (urban youth vs rural elderly); (4) Service availability gap (platform features available in rural areas?); (5) Pricing equity (do rural farmers pay more for connectivity, services?); (6) Support access gap (urban call centers vs rural village agents); (7) Outcome equity (do rural farmers benefit equally?).",
+                    "stakeholder_types": [
+                        "Rural Farmers",
+                        "Urban Farmers",
+                        "Platform Operators",
+                        "Regulators"
+                    ],
+                    "evidence_required": "Urban-rural connectivity comparison, Device access data, Digital literacy assessments, Service availability mapping, Pricing equity analysis, Support access comparison, Outcome equity studies",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Urban-rural divide extreme in Africa. Rural areas: worse connectivity, older devices, lower literacy, higher costs. Platform must be designed for rural, not just urban."
+                },
+                {
+                    "q_id": "Q6.2.3.2_AGR",
+                    "text": "Gender Equity in Agricultural Technology Access: Ensure women farmers have equal access and benefit: (1) Women's phone access (do women own phones or share with husbands?); (2) Women's land rights (affect credit access, investment decisions); (3) Women's time constraints (household duties limit technology use); (4) Women's mobility restrictions (can women travel to training, markets?); (5) Women's decision-making power (can women decide to adopt technology?); (6) Women-specific features (address women's needs, constraints); (7) Women's outcome equity (do women benefit equally from platform?).",
+                    "stakeholder_types": [
+                        "Women Farmers",
+                        "Gender Specialists",
+                        "Platform Operators",
+                        "Women's Organizations"
+                    ],
+                    "evidence_required": "Women's phone access data, Land rights analysis, Time use studies, Mobility assessments, Decision-making power analysis, Women-specific feature documentation, Gender-disaggregated outcome data",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Women farmers face multiple barriers: limited phone access, weak land rights, time poverty, mobility restrictions, limited decision-making power. Gender-intentional design essential."
+                },
+                {
+                    "q_id": "Q6.2.3.3_AGR",
+                    "text": "Smallholder vs Commercial Farmer Equity: Ensure platform serves smallholders, not just commercial farmers: (1) Farm size distribution (what % smallholders vs commercial?); (2) Platform adoption by farm size (do smallholders adopt or just commercial?); (3) Feature accessibility (are features useful for smallholders or only commercial?); (4) Pricing equity (can smallholders afford platform? or only commercial?); (5) Benefit distribution (do smallholders benefit or only commercial?); (6) Smallholder-specific features (address smallholder constraints); (7) Cooperative aggregation (help smallholders achieve scale).",
+                    "stakeholder_types": [
+                        "Smallholder Farmers",
+                        "Commercial Farmers",
+                        "Cooperatives",
+                        "Platform Operators"
+                    ],
+                    "evidence_required": "Farm size distribution data, Adoption data by farm size, Feature accessibility analysis, Pricing equity analysis, Benefit distribution by farm size, Smallholder feature documentation, Cooperative aggregation models",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Smallholders (60-70% of farmers) often excluded - platforms focus on commercial farmers. Must intentionally serve smallholders. Cooperative aggregation can help smallholders achieve scale."
+                }
+            ]
+        },
+        {
+            "id": "6.3",
+            "name": "Environmental & Sustainability Context",
+            "weight": 0.15,
+            "questions": [
+                {
+                    "q_id": "Q6.3.1_AGR",
+                    "text": "Climate & Weather Variability in SSA Agriculture: Assess climate context and platform climate resilience: (1) Climate zones (arid, semi-arid, tropical, highland - different challenges); (2) Rainfall patterns (rainy seasons, dry seasons, variability); (3) Temperature extremes (heat stress, cold stress); (4) Climate change impacts (changing rainfall, temperature, extreme events); (5) Weather data availability (local weather stations, satellite data, forecasts); (6) Climate-smart agriculture (does platform promote climate adaptation?); (7) Drought/flood resilience (how does platform help farmers cope?).",
+                    "stakeholder_types": [
+                        "Farmers",
+                        "Meteorological Services",
+                        "Climate Scientists",
+                        "Platform Operators"
+                    ],
+                    "evidence_required": "Climate zone mapping, Rainfall/temperature data, Climate change projections, Weather data source documentation, Climate-smart agriculture features, Drought/flood resilience strategies",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Climate variability extreme in Africa. Rainfall highly variable - droughts and floods common. Climate change accelerating. Weather data critical for advisories. Climate-smart agriculture essential."
+                },
+                {
+                    "q_id": "Q6.3.2_AGR",
+                    "text": "Soil Health & Land Degradation Context: Assess soil health and platform role in sustainable land management: (1) Soil types and fertility (baseline soil health); (2) Soil degradation (erosion, nutrient depletion, salinization); (3) Soil testing availability (local labs, cost, turnaround time); (4) Fertilizer use (rates, types, efficiency); (5) Organic matter management (crop residues, manure, compost); (6) Soil conservation practices (terracing, cover crops, agroforestry); (7) Platform soil health features (soil testing, fertilizer recommendations, conservation advice).",
+                    "stakeholder_types": [
+                        "Farmers",
+                        "Soil Scientists",
+                        "Agronomists",
+                        "Platform Operators"
+                    ],
+                    "evidence_required": "Soil mapping and fertility data, Soil degradation assessments, Soil testing facility documentation, Fertilizer use analysis, Organic matter management practices, Soil conservation adoption data, Platform soil health features",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "Soil degradation major challenge - nutrient depletion, erosion. Soil testing limited - expensive, slow. Fertilizer use low but often inefficient. Organic matter management critical. Platform can promote soil health."
+                },
+                {
+                    "q_id": "Q6.3.3_AGR",
+                    "text": "Biodiversity & Ecosystem Services in Agricultural Landscapes: Assess biodiversity context and platform environmental impact: (1) Crop diversity (monoculture vs diversified systems); (2) Livestock integration (mixed crop-livestock systems); (3) Agroforestry (trees on farms - ecosystem services); (4) Pollinator health (bees, other pollinators - critical for yields); (5) Pest natural enemies (beneficial insects, birds); (6) Water resources (irrigation, water quality, conservation); (7) Platform environmental features (promote biodiversity, ecosystem services, sustainable practices).",
+                    "stakeholder_types": [
+                        "Farmers",
+                        "Ecologists",
+                        "Agronomists",
+                        "Environmental Organizations"
+                    ],
+                    "evidence_required": "Crop diversity data, Livestock integration analysis, Agroforestry adoption data, Pollinator health assessments, Natural enemy surveys, Water resource analysis, Platform environmental features documentation",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "Biodiversity critical for resilience. Crop diversity declining - monoculture increasing. Agroforestry traditional but declining. Pollinators threatened. Platform can promote sustainable, biodiverse agriculture."
+                }
+            ]
+        }
+    ],
+    "scoring_notes": "Layer 6 (Ecosystem) for Agriculture in Sub-Saharan Africa: MOST CRITICAL LAYER. Infrastructure (power, connectivity, roads) is the primary constraint, not the technology itself. Regulatory environment complex (54 countries). Stakeholder ecosystem fragmented. Gender equity and smallholder inclusion non-negotiable. Climate variability extreme."
+}

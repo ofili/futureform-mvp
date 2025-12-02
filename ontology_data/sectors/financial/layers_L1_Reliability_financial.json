@@ -1,0 +1,223 @@
+{
+    "layer_id": "L1",
+    "layer_name": "Reliability",
+    "sector": "financial",
+    "region": "Sub-Saharan Africa",
+    "total_questions": 13,
+    "total_sub_dimensions": 4,
+    "sub_dimensions": [
+        {
+            "id": "1.1",
+            "name": "System Availability & Performance",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q1.1.1_FIN",
+                    "text": "Mobile Money System Availability - SSA Context: Provide comprehensive USSD and mobile money platform availability analysis: (1) USSD session success rates (*123# dial-to-completion, typical 85-95%); (2) Transaction completion rates (initiate to confirmation); (3) Agent network uptime (cash-in/cash-out availability by region); (4) Cross-border transaction reliability (M-Pesa Kenya ↔ Tanzania, Airtel Money cross-border); (5) Peak load performance (month-end, holidays when transaction volume spikes); (6) Low-value transaction performance ($1-$10 transactions); (7) Historical uptime data from SSA operations (minimum 12 months).",
+                    "stakeholder_types": [
+                        "Mobile Money Users",
+                        "Agents",
+                        "Mobile Network Operators",
+                        "Regulators"
+                    ],
+                    "evidence_required": "USSD session success metrics, Transaction completion logs, Agent network availability data, Cross-border transaction performance, Peak load testing results, Low-value transaction analytics, Historical uptime reports",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "USSD works on 2G (critical for rural). Agent liquidity affects availability (agent has cash?). SMS confirmations mandatory for audit trail. Peak loads during salary days."
+                },
+                {
+                    "q_id": "Q1.1.2_FIN",
+                    "text": "End-to-End Mobile Money Transaction Reliability: Describe complete transaction reliability from user perspective: (1) USSD menu navigation (timeout issues, session drops); (2) Transaction authorization (PIN entry, biometric on smartphones); (3) Mobile money provider processing (M-Pesa, Airtel, MTN, Orange); (4) Agent transaction processing (POS device reliability, network connectivity); (5) SMS confirmation delivery (success/failure notifications); (6) Transaction reversal success rate (failed transactions refunded how quickly?); (7) Account balance query reliability (USSD balance check accuracy).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Agents",
+                        "Mobile Money Providers",
+                        "Mobile Network Operators"
+                    ],
+                    "evidence_required": "USSD session analytics, Transaction authorization success rates, Provider processing metrics, Agent POS reliability data, SMS delivery success rates, Reversal processing times, Balance query accuracy audits",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "USSD timeouts common (network congestion). PIN entry on feature phones slow. Agent POS devices often offline (power, connectivity). SMS confirmations critical - users don't trust without SMS."
+                },
+                {
+                    "q_id": "Q1.1.3_FIN",
+                    "text": "Mobile Money Performance Quality Metrics: Provide detailed performance beyond binary uptime: (1) Transaction processing time (send money, withdraw, deposit - seconds to completion); (2) USSD response time (menu load time, query response); (3) Agent transaction time (queue time + processing time); (4) Cross-border transaction time (Kenya to Tanzania - hours? days?); (5) Failed transaction rate and root causes; (6) User satisfaction with service speed; (7) Performance by transaction type (P2P, bill payment, merchant, airtime).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Agents",
+                        "Platform Operators",
+                        "Regulators"
+                    ],
+                    "evidence_required": "Transaction time analytics, USSD response time data, Agent queue/processing time studies, Cross-border transaction timelines, Failure rate analysis, User satisfaction surveys, Transaction type performance breakdown",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Speed critical for user trust. Agent queues long during peak times (month-end). Cross-border can take hours due to compliance checks. Bill payment timing affects utility disconnection."
+                },
+                {
+                    "q_id": "Q1.1.4_FIN",
+                    "text": "Offline Transaction Capabilities: Assess capability to handle network interruptions: (1) Store-and-forward (can app queue transaction when offline?); (2) SMS fallback (does app switch to SMS if data fails?); (3) Transaction state recovery (if network drops mid-transaction, does it resume or fail safe?); (4) Offline balance check (cached balance?); (5) Agent offline mode (can agents transact offline?).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Agents",
+                        "Platform Operators"
+                    ],
+                    "evidence_required": "Offline capability documentation, Store-and-forward testing, SMS fallback testing, Transaction state recovery logs",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Network connectivity intermittent. Users need offline capabilities to trust system. SMS fallback essential for smartphone apps."
+                }
+            ]
+        },
+        {
+            "id": "1.2",
+            "name": "Environmental & Operational Stress Resilience",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q1.2.1_FIN",
+                    "text": "Mobile Money Infrastructure Stress Testing - SSA: Document stress testing under African operational conditions: (1) Network congestion scenarios (peak hours, events, holidays); (2) Agent POS device stress (power outages, heat, dust); (3) Multi-factor stress (network congestion + agent offline + high transaction volume); (4) Geographic stress (rural areas with poor connectivity); (5) Seasonal stress (month-end salary days, holiday remittances); (6) Security stress (fraud attempts, SIM swap attacks); (7) Regulatory stress (sudden policy changes, new compliance requirements).",
+                    "stakeholder_types": [
+                        "Platform Operators",
+                        "Mobile Network Operators",
+                        "Agents",
+                        "Regulators"
+                    ],
+                    "evidence_required": "Stress test protocols and results, Network congestion performance data, Agent POS durability testing, Multi-factor stress scenarios, Geographic performance analysis, Seasonal load testing, Security stress testing, Regulatory compliance stress tests",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Month-end = extreme stress (everyone withdrawing salary). Rural agents often offline (power, network). SIM swap fraud major threat. Regulatory changes sudden (must adapt quickly)."
+                },
+                {
+                    "q_id": "Q1.2.2_FIN",
+                    "text": "Agent Network Resilience: Analyze agent network resilience to operational challenges: (1) Agent liquidity management (do agents have enough cash? e-float?); (2) Agent POS device reliability (battery life, network connectivity, durability); (3) Agent location accessibility (distance from users, operating hours); (4) Agent fraud resilience (controls to prevent agent theft, fake agents); (5) Agent churn rate (how many agents quit? sustainability?); (6) Backup agent availability (if primary agent offline, alternatives nearby?); (7) Agent support infrastructure (can agents get help quickly?).",
+                    "stakeholder_types": [
+                        "Agents",
+                        "Users",
+                        "Platform Operators",
+                        "Agent Network Managers"
+                    ],
+                    "evidence_required": "Agent liquidity data, POS device reliability metrics, Agent location mapping, Fraud prevention controls, Agent churn analysis, Backup agent coverage, Agent support SLAs",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Agent liquidity = biggest issue (agents run out of cash/e-float). Agent fraud common (must have controls). Agent churn high (need constant recruitment). Rural areas = few agents."
+                },
+                {
+                    "q_id": "Q1.2.3_FIN",
+                    "text": "Mobile Money Infrastructure Dependency Resilience: Assess resilience to SSA infrastructure constraints: (1) USSD gateway resilience (if gateway down, alternative channels?); (2) SMS delivery resilience (if SMS fails, alternative confirmations?); (3) Agent POS power resilience (battery backup, solar charging); (4) Mobile network resilience (works on 2G when 3G/4G down?); (5) Banking system integration resilience (if bank link down, mobile money still works?); (6) Electricity resilience for agents (POS charging solutions); (7) Internet resilience (USSD works without internet, but backend needs connectivity).",
+                    "stakeholder_types": [
+                        "Platform Operators",
+                        "Mobile Network Operators",
+                        "Agents",
+                        "Banks"
+                    ],
+                    "evidence_required": "USSD gateway redundancy documentation, SMS delivery backup systems, Agent POS power solutions, Network fallback mechanisms, Banking integration resilience testing, Agent electricity access data, Backend connectivity resilience",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "USSD gateway = single point of failure. SMS delivery critical (users need confirmation). Agent POS batteries die (need charging solutions). 2G fallback essential. Banking integration often breaks."
+                }
+            ]
+        },
+        {
+            "id": "1.3",
+            "name": "Interoperability & Integration",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q1.3.1_FIN",
+                    "text": "Mobile Money Interoperability - SSA Context: Provide evidence of interoperability across mobile money ecosystem: (1) Cross-network transfers (M-Pesa to Airtel Money, MTN to Orange Money); (2) Bank-to-mobile money integration (deposit, withdraw from bank account); (3) Merchant payment integration (pay merchants via mobile money); (4) Bill payment integration (utilities, schools, government); (5) International remittance integration (WorldRemit, Western Union, MoneyGram); (6) Microfinance integration (loan disbursement, repayment via mobile money); (7) API standards compliance (GSMA Mobile Money API, local standards).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Mobile Money Providers",
+                        "Banks",
+                        "Merchants",
+                        "Billers",
+                        "Remittance Companies"
+                    ],
+                    "evidence_required": "Cross-network transfer documentation, Bank integration specs, Merchant payment systems, Bill payment integrations, Remittance partnerships, Microfinance integration, API compliance documentation",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Interoperability limited (M-Pesa doesn't talk to Airtel in most countries). Bank integration weak. Merchant payments growing. Bill payment critical (utilities). Remittances huge use case."
+                },
+                {
+                    "q_id": "Q1.3.2_FIN",
+                    "text": "Third-Party Integration Complexity: Evaluate ease of integrating with mobile money platform: (1) API documentation quality (clear, complete, with examples); (2) Sandbox environment availability (test before production); (3) Integration timeline (how long to integrate? developer hours?); (4) Technical support during integration (response time, quality); (5) Certification/approval process (how long? requirements?); (6) Ongoing API stability (breaking changes? versioning?); (7) Integration costs (fees, revenue sharing).",
+                    "stakeholder_types": [
+                        "Third-party Developers",
+                        "Merchants",
+                        "Billers",
+                        "Fintech Companies"
+                    ],
+                    "evidence_required": "API documentation samples, Sandbox access procedures, Integration timeline data, Support SLAs, Certification process documentation, API versioning policy, Integration fee structures",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "API documentation often poor. Sandbox environments limited. Certification slow (months). Breaking API changes common. Integration fees high. Local developer capacity limited."
+                },
+                {
+                    "q_id": "Q1.3.3_FIN",
+                    "text": "User Lock-In Risk Analysis - Mobile Money: Assess user dependency and switching costs: (1) Can users export transaction history? (2) Can users switch to competing mobile money provider easily? (3) What do users lose if they switch (transaction history, credit score, merchant relationships)?; (4) Are phone numbers portable across mobile money providers? (5) Can users use multiple mobile money services simultaneously?; (6) Exit costs (fees to close account, withdraw all funds?); (7) Alternative provider availability (competition in the market?).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Consumer Protection",
+                        "Competition Authorities",
+                        "Regulators"
+                    ],
+                    "evidence_required": "Transaction history export functionality, Provider switching procedures, Switching cost analysis, Number portability documentation, Multi-homing capability, Account closure procedures, Market competition analysis",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "High lock-in: phone number = mobile money account (can't easily switch). Transaction history not portable. Credit scores locked to provider. Competition limited in some markets (M-Pesa dominance)."
+                }
+            ]
+        },
+        {
+            "id": "1.4",
+            "name": "Failure Modes & Recovery Capabilities",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q1.4.1_FIN",
+                    "text": "Mobile Money Failure Mode Analysis - SSA: Provide detailed FMEA for mobile money operations: (1) Transaction failure (money deducted but not credited - reversal process?); (2) USSD gateway failure (users can't access service - backup channels?); (3) Agent fraud (fake agent, agent theft - user recourse?); (4) SIM swap fraud (attacker gets SIM, accesses account - detection, prevention, recovery?); (5) System downtime (scheduled maintenance, unplanned outages - user communication?); (6) Cross-border failure (money stuck in transit - resolution time?); (7) For each: severity, probability, detection, mitigation.",
+                    "stakeholder_types": [
+                        "Users",
+                        "Platform Operators",
+                        "Agents",
+                        "Regulators",
+                        "Risk Managers"
+                    ],
+                    "evidence_required": "Comprehensive FMEA documentation, Transaction reversal procedures, USSD backup systems, Agent fraud controls, SIM swap fraud prevention, Downtime communication protocols, Cross-border failure resolution",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Transaction failures common (network issues). Agent fraud major risk. SIM swap fraud epidemic in some countries. Users panic during downtime (life savings at risk). Cross-border failures = angry diaspora."
+                },
+                {
+                    "q_id": "Q1.4.2_FIN",
+                    "text": "Graceful Degradation for Mobile Money Services: Demonstrate service behavior under partial failure: (1) Full operation (USSD, SMS, app, agents all working); (2) Degraded mode 1 (USSD only, no app); (3) Degraded mode 2 (SMS confirmations delayed); (4) Degraded mode 3 (some agents offline, users directed to alternatives); (5) Survival mode (system down, manual agent transactions with paper records); (6) User communication during degradation (SMS alerts, USSD messages); (7) Automatic vs manual transitions between modes.",
+                    "stakeholder_types": [
+                        "Users",
+                        "Agents",
+                        "Platform Operators",
+                        "Customer Support"
+                    ],
+                    "evidence_required": "Degradation mode documentation, USSD-only operation procedures, SMS delay handling, Agent offline protocols, Manual transaction procedures, User communication templates, Mode transition automation",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Users need money NOW (can't wait for system recovery). Agent manual transactions critical backup. SMS delays cause panic. Must communicate proactively (users assume money lost)."
+                },
+                {
+                    "q_id": "Q1.4.3_FIN",
+                    "text": "Mobile Money Recovery Metrics: Provide quantified recovery performance: (1) Mean Time to Detect (MTTD) failures (automated monitoring + user reports); (2) Mean Time to Repair (MTTR) by failure type (transaction reversal <4 hours, USSD gateway <1 hour, agent fraud investigation <24 hours); (3) Mean Time Between Failures (MTBF) for critical components; (4) Transaction reversal success rate (% of failed transactions successfully reversed); (5) User notification time (how quickly are affected users notified?); (6) Disaster recovery (full system failure - recovery time objective?).",
+                    "stakeholder_types": [
+                        "Platform Operators",
+                        "Users",
+                        "Regulators",
+                        "Risk Managers"
+                    ],
+                    "evidence_required": "Failure detection system specs, MTTR data by failure type, MTBF metrics, Reversal success rate data, User notification procedures, Disaster recovery testing results",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Fast recovery critical (users' life savings). Transaction reversals must be automatic (not manual). User notification essential (SMS). Disaster recovery tested regularly (system failures happen)."
+                }
+            ]
+        }
+    ],
+    "scoring_notes": "Layer 1 (Reliability) for Financial Services in Sub-Saharan Africa: USSD session reliability and agent network uptime are most critical. Transaction reversals must be fast and automatic. SIM swap fraud prevention mandatory. Users cannot tolerate downtime (life savings at risk)."
+}

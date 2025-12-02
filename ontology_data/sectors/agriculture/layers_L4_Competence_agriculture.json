@@ -1,0 +1,231 @@
+{
+    "layer_id": "L4",
+    "layer_name": "Competence",
+    "sector": "agriculture",
+    "region": "Sub-Saharan Africa",
+    "total_questions": 13,
+    "total_sub_dimensions": 5,
+    "sub_dimensions": [
+        {
+            "id": "4.1",
+            "name": "User Skill Match & Capability Assessment",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q4.1.1_AGR",
+                    "text": "Farmer Digital Literacy Assessment - SSA Context: Document baseline digital literacy of target farmers: (1) Smartphone vs feature phone usage rates; (2) Prior mobile money experience (M-Pesa, Airtel Money, etc.); (3) Literacy levels (can farmers read SMS? need voice/visual?); (4) Language proficiency (English, French, local languages); (5) Age demographics (youth vs elderly - different digital skills); (6) Gender digital divide (women's phone access, usage patterns); (7) Skills gap analysis (what training is needed?).",
+                    "stakeholder_types": [
+                        "Farmers",
+                        "Extension Officers",
+                        "Training Providers",
+                        "UX Researchers"
+                    ],
+                    "evidence_required": "Farmer digital literacy surveys, Phone usage data, Literacy assessments, Language proficiency data, Age/gender demographics, Skills gap analysis reports",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Assume low baseline: many first-time smartphone users, limited literacy, shared devices. Women often have less phone access than men."
+                },
+                {
+                    "q_id": "Q4.1.2_AGR",
+                    "text": "Farmer-Technology Fit Analysis: Assess match between farmer capabilities and technology requirements: (1) Is technology appropriate for farmer skill level (too complex? too simple?); (2) Can illiterate farmers use it (voice, visual, symbols)?; (3) Can elderly farmers use it (large buttons, simple navigation)?; (4) Works on devices farmers actually have (feature phones, low-end smartphones)?; (5) Offline usability (farmers may be offline for days); (6) Shared device scenarios (multiple family members using same phone).",
+                    "stakeholder_types": [
+                        "Farmers",
+                        "Product Managers",
+                        "UX Designers",
+                        "Accessibility Experts"
+                    ],
+                    "evidence_required": "User testing with target farmers, Accessibility testing, Device compatibility testing, Offline usability testing, Shared device scenario testing",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Technology must meet farmers where they are - don't assume smartphone literacy. Voice/visual critical for illiterate farmers."
+                },
+                {
+                    "q_id": "Q4.1.3_AGR",
+                    "text": "Agronomic Knowledge Requirements: Assess farmer agronomic knowledge needed to use technology effectively: (1) Baseline crop knowledge (do farmers understand recommendations?); (2) Pest/disease identification skills (can farmers use diagnostic tools?); (3) Input application knowledge (fertilizer rates, pesticide safety); (4) Market literacy (understanding prices, quality grades); (5) Financial literacy (understanding credit terms, interest rates); (6) Knowledge gaps and training needs.",
+                    "stakeholder_types": [
+                        "Farmers",
+                        "Agronomists",
+                        "Extension Officers",
+                        "Training Providers"
+                    ],
+                    "evidence_required": "Farmer knowledge assessments, Agronomic literacy surveys, Input application competency tests, Market/financial literacy assessments, Training needs analysis",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Can't assume agronomic knowledge - many smallholders have limited formal training. Extension services weak in many areas."
+                }
+            ]
+        },
+        {
+            "id": "4.2",
+            "name": "Training Quality & Effectiveness",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q4.2.1_AGR",
+                    "text": "Farmer Training Delivery - SSA Context: Describe comprehensive farmer training program: (1) Training mode (in-person essential - connectivity constraints); (2) Language (local languages, not just English/French); (3) Training materials (visual, video, printed - not just online); (4) Trainer qualifications (agronomic knowledge + local context); (5) Training location (accessible to rural farmers?); (6) Training duration (realistic for farmers' time constraints); (7) Hands-on practice (not just lectures).",
+                    "stakeholder_types": [
+                        "Farmers",
+                        "Trainers",
+                        "Extension Officers",
+                        "Training Providers"
+                    ],
+                    "evidence_required": "Training curriculum, Trainer qualifications, Training materials (visual, local language), Training location accessibility, Hands-on practice documentation",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "In-person training essential - internet unreliable. Local language mandatory. Visual/video for illiterate. Trainers must understand local farming context."
+                },
+                {
+                    "q_id": "Q4.2.2_AGR",
+                    "text": "Training Effectiveness Measurement: Demonstrate training actually works: (1) Pre/post training assessments (knowledge gained?); (2) Technology adoption rates (are farmers using it after training?); (3) Correct usage rates (are farmers using it correctly?); (4) Farmer confidence levels (do farmers feel competent?); (5) Retention over time (do farmers remember 3-6 months later?); (6) Farmer outcomes (does training lead to better yields, income?).",
+                    "stakeholder_types": [
+                        "Farmers",
+                        "Training Providers",
+                        "M&E Teams",
+                        "Agronomists"
+                    ],
+                    "evidence_required": "Pre/post assessments, Adoption tracking data, Usage correctness audits, Farmer confidence surveys, Retention studies, Outcome measurements (yield, income)",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Training effectiveness critical - resources scarce. Must show training leads to actual farmer outcomes, not just knowledge gain."
+                },
+                {
+                    "q_id": "Q4.2.3_AGR",
+                    "text": "Ongoing Training & Refresher Support: Provide continuous learning support: (1) Refresher training availability (farmers forget - need reminders); (2) Just-in-time training (seasonal reminders for planting, spraying, harvest); (3) Peer learning (farmer-to-farmer knowledge sharing); (4) Extension officer support (ongoing technical assistance); (5) Help resources (FAQs, video library, phone support in local language); (6) Training updates (when technology changes, farmers retrained).",
+                    "stakeholder_types": [
+                        "Farmers",
+                        "Extension Officers",
+                        "Training Providers",
+                        "Support Teams"
+                    ],
+                    "evidence_required": "Refresher training schedules, Seasonal training calendars, Peer learning programs, Extension officer support documentation, Help resource library, Update training procedures",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "One-time training insufficient - farmers need ongoing support. Seasonal reminders critical (planting, spraying windows). Extension officers key for continuous support."
+                }
+            ]
+        },
+        {
+            "id": "4.3",
+            "name": "Ongoing Support & Assistance",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q4.3.1_AGR",
+                    "text": "Farmer Support Channels - SSA Context: Provide accessible, multi-channel farmer support: (1) Phone support (toll-free, local language, agricultural season hours); (2) SMS support (for simple queries, works on 2G); (3) WhatsApp support (for farmers with smartphones); (4) Village agent support (in-person, local, trusted); (5) Extension officer support (technical agricultural advice); (6) Peer support (farmer groups, cooperatives); (7) Support response times (critical issues <4 hours, general <24 hours).",
+                    "stakeholder_types": [
+                        "Farmers",
+                        "Support Teams",
+                        "Village Agents",
+                        "Extension Officers",
+                        "Cooperatives"
+                    ],
+                    "evidence_required": "Support channel documentation, Language support matrix, Response time SLA data, Village agent network map, Extension officer integration, Peer support programs",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Phone/SMS critical - many farmers no internet. Village agents essential for in-person support. Local language mandatory. Agricultural season timing critical."
+                },
+                {
+                    "q_id": "Q4.3.2_AGR",
+                    "text": "Technical Troubleshooting Capacity: Ensure farmers can resolve technical issues: (1) Self-service troubleshooting (IVR, SMS guides, visual aids); (2) Remote troubleshooting (phone support can diagnose issues); (3) Village agent troubleshooting (basic device issues, account problems); (4) Technician dispatch (for hardware issues - how quickly? how far?); (5) Escalation procedures (when is issue escalated to specialists?); (6) Issue resolution tracking (are problems actually solved?).",
+                    "stakeholder_types": [
+                        "Farmers",
+                        "Support Teams",
+                        "Village Agents",
+                        "Technicians"
+                    ],
+                    "evidence_required": "Self-service troubleshooting guides, Remote support procedures, Village agent troubleshooting training, Technician dispatch SLAs, Escalation protocols, Resolution tracking metrics",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Remote locations - technician dispatch slow/expensive. Village agents must handle basic issues. Self-service guides must work offline (visual, voice)."
+                }
+            ]
+        },
+        {
+            "id": "4.4",
+            "name": "Institutional Learning & Adaptation",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q4.4.1_AGR",
+                    "text": "Platform Learning from Farmer Feedback: Demonstrate continuous improvement based on farmer input: (1) Farmer feedback collection (surveys, focus groups, support ticket analysis); (2) Feedback analysis (what are common pain points?); (3) Product improvements (what changes were made based on farmer feedback?); (4) Farmer communication (are farmers told about improvements?); (5) Farmer advisory boards (do farmers have voice in product decisions?); (6) Cooperative engagement (farmer organizations consulted on major changes).",
+                    "stakeholder_types": [
+                        "Farmers",
+                        "Product Managers",
+                        "Cooperatives",
+                        "UX Researchers"
+                    ],
+                    "evidence_required": "Feedback collection mechanisms, Feedback analysis reports, Product improvement logs (farmer-driven), Farmer communication records, Advisory board documentation, Cooperative engagement records",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "Farmers must have voice in platform evolution. Cooperative representation important (collective bargaining). Changes must be communicated (SMS, village agents)."
+                },
+                {
+                    "q_id": "Q4.4.2_AGR",
+                    "text": "Knowledge Transfer & Local Capacity Building: Build long-term local capacity: (1) Local hiring (how many local staff vs expats?); (2) Skills transfer (are local staff trained for senior roles?); (3) Extension officer capacity building (training extension officers to support farmers); (4) Village agent training (building local support network); (5) Farmer champion development (training lead farmers to support peers); (6) Sustainability plan (can local team run platform if vendor exits?).",
+                    "stakeholder_types": [
+                        "Local Staff",
+                        "Extension Officers",
+                        "Village Agents",
+                        "Farmer Champions",
+                        "HR"
+                    ],
+                    "evidence_required": "Local hiring data, Skills transfer programs, Extension officer training curriculum, Village agent training programs, Farmer champion development, Sustainability/exit plan",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Local capacity building critical for sustainability. Can't rely on expats long-term. Extension officers, village agents, farmer champions key for scale."
+                }
+            ]
+        },
+        {
+            "id": "4.5",
+            "name": "Local Technical Ecosystem & Supply Chain",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q4.5.1_AGR",
+                    "text": "Local Repair & Maintenance Capacity: Ensure devices/equipment can be repaired locally: (1) Village technician training (can local technicians diagnose and fix common issues?); (2) Repair documentation (visual guides, local language); (3) Spare parts availability (local inventory, lead times); (4) Repair cost transparency (affordable for farmers?); (5) Warranty claim process (accessible, fast); (6) Device replacement program (if repair not possible).",
+                    "stakeholder_types": [
+                        "Farmers",
+                        "Village Technicians",
+                        "Device Manufacturers",
+                        "Support Teams"
+                    ],
+                    "evidence_required": "Technician training programs, Repair documentation (visual, local language), Spare parts inventory and lead times, Repair pricing, Warranty claim procedures, Replacement program documentation",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Remote locations - must have local repair capacity. Spare parts often stuck in customs. Village technicians critical. Repair must be affordable."
+                },
+                {
+                    "q_id": "Q4.5.2_AGR",
+                    "text": "Agricultural Input Supply Chain Capacity: Assess input supply chain reliability: (1) Input supplier network (seeds, fertilizer, pesticides - local availability?); (2) Last-mile delivery (can inputs reach remote farms?); (3) Quality assurance (are inputs genuine, not counterfeit?); (4) Seasonal availability (inputs available when farmers need them - planting season?); (5) Pricing competitiveness (fair prices vs local markets?); (6) Payment integration (mobile money, credit options).",
+                    "stakeholder_types": [
+                        "Farmers",
+                        "Input Suppliers",
+                        "Logistics Providers",
+                        "Quality Inspectors"
+                    ],
+                    "evidence_required": "Supplier network mapping, Last-mile delivery documentation, Quality assurance procedures, Seasonal availability data, Pricing competitiveness analysis, Payment integration documentation",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Input supply chain often weak - counterfeit inputs common. Last-mile delivery challenging (poor roads). Timing critical (planting window). Credit essential for smallholders."
+                },
+                {
+                    "q_id": "Q4.5.3_AGR",
+                    "text": "Local Agronomic Expertise Availability: Assess local agricultural knowledge capacity: (1) Agronomist qualifications (formal training, local crop/pest knowledge); (2) Extension officer network (coverage, capacity, training); (3) Research institution partnerships (local agricultural research support); (4) Farmer organization capacity (cooperatives, associations - technical knowledge); (5) Veterinary services (for livestock-related advice); (6) Soil testing facilities (local labs, turnaround time, cost).",
+                    "stakeholder_types": [
+                        "Agronomists",
+                        "Extension Officers",
+                        "Research Institutions",
+                        "Farmer Organizations",
+                        "Veterinarians"
+                    ],
+                    "evidence_required": "Agronomist credentials, Extension officer network mapping, Research partnerships, Farmer organization capacity assessments, Veterinary service availability, Soil testing facility documentation",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Extension services often under-resourced. Local agronomic knowledge critical (crops, pests vary by region). Research institutions key for validation. Farmer organizations important knowledge hubs."
+                }
+            ]
+        }
+    ],
+    "scoring_notes": "Layer 4 (Competence) for Agriculture in Sub-Saharan Africa: Farmer digital literacy cannot be assumed - training must be accessible (in-person, local language, visual). Local capacity building critical for sustainability. Extension officers and village agents essential support infrastructure."
+}

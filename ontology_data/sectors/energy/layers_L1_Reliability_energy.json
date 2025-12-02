@@ -1,0 +1,220 @@
+{
+    "layer_id": "L1",
+    "layer_name": "Reliability",
+    "sector": "energy",
+    "region": "Sub-Saharan Africa",
+    "total_questions": 13,
+    "total_sub_dimensions": 4,
+    "sub_dimensions": [
+        {
+            "id": "1.1",
+            "name": "System Availability & Performance",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q1.1.1_ENR",
+                    "text": "Solar Home System Reliability - SSA Context: Provide comprehensive solar system performance analysis: (1) System uptime (% of time system provides power as designed); (2) Battery performance (charge/discharge cycles, degradation over time); (3) Solar panel performance (actual vs rated output in African conditions - dust, heat); (4) Component failure rates (inverter, charge controller, lights, phone charging); (5) Weather resilience (performance during rainy season, harmattan dust); (6) Load management (does system handle user demand?); (7) Historical performance data (minimum 12 months in SSA).",
+                    "stakeholder_types": [
+                        "Off-grid Users",
+                        "Energy Companies",
+                        "Equipment Manufacturers",
+                        "Quality Assurance"
+                    ],
+                    "evidence_required": "System uptime data, Battery performance metrics, Solar panel output data (actual vs rated), Component failure analysis, Weather impact studies, Load management data, Historical performance reports",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Dust reduces solar output 20-30%. Heat degrades batteries faster. Rainy season = low solar generation. Users often overload systems. Component quality varies widely."
+                },
+                {
+                    "q_id": "Q1.1.2_ENR",
+                    "text": "Pay-As-You-Go (PAYG) System Reliability: Describe PAYG payment and remote monitoring reliability: (1) Mobile money payment success rates (M-Pesa, Airtel Money integration); (2) Remote lock/unlock reliability (can system be controlled remotely?); (3) SMS/USSD payment confirmation (user gets confirmation?); (4) System monitoring accuracy (does company know system status?); (5) Grace period management (what happens if payment late?); (6) Offline payment queuing (payments processed when network returns?); (7) Customer support responsiveness (payment issues resolved quickly?).",
+                    "stakeholder_types": [
+                        "Users",
+                        "PAYG Providers",
+                        "Mobile Money Operators",
+                        "Customer Support"
+                    ],
+                    "evidence_required": "Payment success metrics, Lock/unlock reliability logs, SMS confirmation samples, Monitoring system accuracy, Grace period policies, Offline payment testing, Support response times",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "PAYG relies on mobile network (often unreliable). Remote lock/unlock must work or users get free power/no power. Payment integration failures common. Grace periods essential for irregular income."
+                },
+                {
+                    "q_id": "Q1.1.3_ENR",
+                    "text": "Mini-Grid Reliability & Power Quality: For mini-grid operators, demonstrate grid reliability: (1) SAIDI/SAIFI metrics (outage frequency and duration); (2) Voltage stability (fluctuations damage appliances?); (3) Frequency stability (50Hz/60Hz consistency); (4) Peak load management (does grid collapse during evening peak?); (5) Generation mix reliability (solar + battery + diesel backup); (6) Distribution network reliability (poles, wires, meters); (7) Smart meter reliability (accurate billing?).",
+                    "stakeholder_types": [
+                        "Mini-grid Users",
+                        "Grid Operators",
+                        "Regulators",
+                        "Investors"
+                    ],
+                    "evidence_required": "SAIDI/SAIFI data, Voltage/frequency logs, Peak load analysis, Generation mix performance, Distribution network audits, Smart meter accuracy reports",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Mini-grids must be reliable enough for productive use (mills, welding). Voltage fluctuations damage user appliances (major trust killer). Diesel backup often needed for reliability."
+                },
+                {
+                    "q_id": "Q1.1.4_ENR",
+                    "text": "Component Lifecycle & Replacement Logistics: Ensure long-term system reliability: (1) Battery replacement policy (warranty vs out-of-pocket); (2) Spare parts availability (local inventory of lights, cables, fuses); (3) Replacement timeline (how long to get a new battery?); (4) End-of-life disposal (take-back program?); (5) Component standardization (can user buy generic parts?); (6) Upgrade pathways (can user add more panels/batteries?).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Distributors",
+                        "Technicians"
+                    ],
+                    "evidence_required": "Warranty policy, Spare parts inventory list, Replacement timeline SLA, E-waste policy",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Batteries are the weak link. If they die and can't be replaced, the system is junk."
+                }
+            ]
+        },
+        {
+            "id": "1.2",
+            "name": "Environmental & Operational Stress Resilience",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q1.2.1_ENR",
+                    "text": "Energy Infrastructure Stress Testing - SSA: Document stress testing under African conditions: (1) Temperature stress (batteries/inverters in 40°C+ heat); (2) Dust/sand resilience (Sahara/Kalahari dust impact); (3) Humidity/rain resilience (tropical conditions); (4) Physical durability (transport on rough roads, user handling); (5) Theft/vandalism resilience (tamper-proof mounting?); (6) Rodent/insect damage prevention (cables protected?); (7) Lightning protection (grounding systems).",
+                    "stakeholder_types": [
+                        "Equipment Manufacturers",
+                        "Installers",
+                        "Users",
+                        "Insurers"
+                    ],
+                    "evidence_required": "Temperature stress test results, IP rating certification (dust/water), Vibration/drop testing, Tamper-proof design specs, Pest protection features, Lightning protection verification",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Heat kills batteries. Dust reduces efficiency. Rough roads damage equipment during transport. Theft of panels/batteries common. Rodents chew cables."
+                },
+                {
+                    "q_id": "Q1.2.2_ENR",
+                    "text": "Supply Chain Resilience for Energy Parts: Assess supply chain robustness: (1) Spare parts inventory (local vs imported); (2) Import logistics (customs delays, port congestion); (3) Last-mile distribution (getting parts to rural villages); (4) Technician availability (local repair capacity); (5) Supplier diversity (reliance on single manufacturer?); (6) Warranty fulfillment speed (how long to replace failed unit?); (7) Local manufacturing/assembly (reducing import dependence).",
+                    "stakeholder_types": [
+                        "Distributors",
+                        "Logistics Providers",
+                        "Users",
+                        "Manufacturers"
+                    ],
+                    "evidence_required": "Inventory logs, Import timeline data, Distribution network map, Technician roster, Supplier list, Warranty SLA performance, Local content analysis",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Supply chain often breaks. Parts stuck in customs for months. Last-mile distribution expensive/slow. Local technicians essential for quick repairs."
+                },
+                {
+                    "q_id": "Q1.2.3_ENR",
+                    "text": "Grid Interconnection Resilience: For mini-grids, assess interconnection readiness: (1) Grid arrival plan (what happens if national grid arrives?); (2) Interconnection technical standards (compatible with national grid?); (3) Islanding capability (can operate independently if grid fails?); (4) Asset compensation (if grid takes over, is developer paid?); (5) Tariff integration (how do mini-grid tariffs align with national grid?); (6) User transition plan (seamless switch for users?); (7) Regulatory framework for interconnection.",
+                    "stakeholder_types": [
+                        "Mini-grid Developers",
+                        "National Utilities",
+                        "Regulators",
+                        "Investors"
+                    ],
+                    "evidence_required": "Grid arrival strategy, Technical interconnection specs, Islanding test results, Compensation agreements, Tariff integration models, Transition plans, Regulatory compliance",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Grid arrival major risk for mini-grids. Technical compatibility essential. Islanding allows backup when main grid fails (common). Compensation rules often unclear."
+                }
+            ]
+        },
+        {
+            "id": "1.3",
+            "name": "Interoperability & Integration",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q1.3.1_ENR",
+                    "text": "Energy System Interoperability - SSA: Assess interoperability of energy systems: (1) Plug-and-play appliances (can users use standard appliances?); (2) DC vs AC compatibility (inverters included?); (3) PAYG platform interoperability (can hardware work with different software?); (4) Mobile money integration (works with all mobile money providers?); (5) SHS kit expandability (can users add panels/batteries from other brands?); (6) Smart meter standards (STS compliance?); (7) Data interoperability (sharing usage data with regulators/investors).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Manufacturers",
+                        "Software Providers",
+                        "Regulators"
+                    ],
+                    "evidence_required": "Appliance compatibility list, Inverter specs, PAYG software compatibility, Mobile money integration list, Expansion capability documentation, STS compliance certificate, Data API docs",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Users want standard appliances (TVs, fridges). DC systems limit appliance choice. PAYG lock-in (hardware tied to software) is a risk. STS standard critical for meters."
+                },
+                {
+                    "q_id": "Q1.3.2_ENR",
+                    "text": "Appliance Efficiency & Compatibility: Ensure appliances match energy supply: (1) Energy efficiency ratings (super-efficient appliances for solar?); (2) Voltage tolerance (can appliances handle fluctuations?); (3) Connector standardization (USB, 12V barrel, AC plug?); (4) Appliance financing (bundled with energy system?); (5) Appliance warranty (matched to system warranty?); (6) Repairability (local spare parts for appliances?); (7) User education on efficient usage.",
+                    "stakeholder_types": [
+                        "Users",
+                        "Appliance Manufacturers",
+                        "Distributors",
+                        "Energy Efficiency Agencies"
+                    ],
+                    "evidence_required": "Efficiency test results, Voltage tolerance specs, Connector standards, Financing terms, Warranty docs, Repair manuals, User guides",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Inefficient appliances drain batteries quickly. Voltage fluctuations kill cheap appliances. Connectors often proprietary (bad for users). Financing essential for productive use appliances (mills, fridges)."
+                },
+                {
+                    "q_id": "Q1.3.3_ENR",
+                    "text": "Vendor Lock-In Risk Analysis - Energy: Assess user dependency on specific vendor: (1) Proprietary connectors (can't use other panels/batteries?); (2) Software lock-in (PAYG system locked to one provider?); (3) Data portability (can user take payment history to new provider?); (4) Unlock codes (what if company goes bankrupt?); (5) Switching costs (cost to switch to new system?); (6) Interoperable payments (can user pay via any channel?); (7) Regulatory protection against lock-in.",
+                    "stakeholder_types": [
+                        "Users",
+                        "Regulators",
+                        "Competition Authorities",
+                        "Consumer Protection"
+                    ],
+                    "evidence_required": "Connector specs, Software lock-in analysis, Data portability policies, Unlock code escrow, Switching cost analysis, Payment channel list, Regulatory compliance",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "High lock-in risk in PAYG solar. Proprietary connectors common. If provider fails, users left with bricked systems. Unlock codes must be escrowed."
+                }
+            ]
+        },
+        {
+            "id": "1.4",
+            "name": "Failure Modes & Recovery Capabilities",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q1.4.1_ENR",
+                    "text": "Energy System Failure Mode Analysis - SSA: Provide FMEA for energy operations: (1) Battery failure (degradation, BMS failure); (2) Inverter failure (overload, surge); (3) Panel damage (theft, breakage); (4) Payment system failure (network down, SMS delay); (5) Remote monitoring failure (loss of visibility); (6) Distribution line failure (mini-grids - storms, accidents); (7) Fuel supply failure (diesel shortage for hybrids).",
+                    "stakeholder_types": [
+                        "Operators",
+                        "Technicians",
+                        "Users",
+                        "Risk Managers"
+                    ],
+                    "evidence_required": "FMEA documentation, Battery failure protocols, Inverter protection specs, Theft prevention, Payment backup systems, Monitoring redundancy, Fuel supply contracts",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Battery failure = most common issue. Inverters fail due to overload. Payment failures leave users in dark. Diesel shortages common in rural areas."
+                },
+                {
+                    "q_id": "Q1.4.2_ENR",
+                    "text": "Service Recovery & Repair Logistics: Demonstrate ability to restore service: (1) Remote troubleshooting (can call center fix issues?); (2) Field technician network (coverage, response time); (3) Spare parts logistics (time to get parts to site); (4) Temporary power solutions (backup units while repairing?); (5) Warranty claim processing speed; (6) User communication during outages; (7) Compensation for extended outages.",
+                    "stakeholder_types": [
+                        "Users",
+                        "Customer Support",
+                        "Logistics Teams",
+                        "Technicians"
+                    ],
+                    "evidence_required": "Troubleshooting guides, Technician coverage maps, Logistics SLAs, Backup power policies, Warranty processing data, Outage communication templates, Compensation policies",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Remote troubleshooting saves money. Field techs often far away (days to arrive). Logistics nightmare in rainy season. Users need power (lights, phone charging)."
+                },
+                {
+                    "q_id": "Q1.4.3_ENR",
+                    "text": "Disaster Recovery & Business Continuity - Energy: Plan for major disruptions: (1) Extreme weather events (floods, cyclones); (2) Civil unrest (protection of assets, staff); (3) Pandemic/Health crisis (maintaining service during lockdowns); (4) Major supply chain disruption (global shortages); (5) Financial crisis (currency devaluation, inflation); (6) Cyberattack on PAYG platform; (7) Regulatory shutdown.",
+                    "stakeholder_types": [
+                        "Operators",
+                        "Investors",
+                        "Regulators",
+                        "Staff"
+                    ],
+                    "evidence_required": "Disaster recovery plan, Civil unrest protocols, Pandemic continuity plan, Supply chain diversification, Financial risk management, Cybersecurity response plan, Regulatory engagement strategy",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Climate change increasing extreme weather. Civil unrest risk in some regions. Supply chains fragile. Currency devaluation destroys business model. Cyber risk growing."
+                }
+            ]
+        }
+    ],
+    "scoring_notes": "Layer 1 (Reliability) for Energy in Sub-Saharan Africa: Battery performance and replacement are the biggest reliability challenges. Dust/heat resilience essential. PAYG reliability depends on mobile networks. Supply chain for spare parts is the bottleneck for service recovery."
+}

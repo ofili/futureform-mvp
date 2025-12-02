@@ -1,0 +1,302 @@
+≡ƒî▒ Seeding Trust Intelligence Layer (JS Version)...
+
+Looking for ontology data at: C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\ontology_data
+
+≡ƒôè Loading trust layers...
+  Γ£ô Processing Reliability...
+    - Layer L1 upserted (Internal ID: cmin8jf3w0000bgjwqh4ew7u3)
+    - Found 4 sub-dimensions
+      - Processing sub-dimension 1.1 (System Availability & Performance)
+  Γ¥î Failed to process layer Reliability: 
+Invalid `prisma.trustQuestion.upsert()` invocation in
+C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\prisma\seed-trust-ontology.js:87:48
+
+  84 
+  85 // Create questions
+  86 for (const question of subDim.questions) {
+ΓåÆ 87     await prisma.trustQuestion.upsert({
+           where: {
+             questionId: "Q1.1.1"
+           },
+           update: {
+             text: "Availability Commitments & Verification: Please provide a comprehensive analysis of system availability commitments, including: Contractually guaranteed availability levels; Measurement methodologies; Exclusions; Historical performance data; Penalties and remedies.",
+             stakeholderTypes: [
+               "Vendor",
+               "Technical Team"
+             ],
+             evidenceRequired: "SLA documentation, Independent verification reports, Historical performance logs",
+             evidenceWeight: "Critical",
+             weightInLayer: 0.08333333333333333,
+             scoringLogic: {},
+             redFlags: []
+           },
+           create: {
+             questionId: "Q1.1.1",
+             text: "Availability Commitments & Verification: Please provide a comprehensive analysis of system availability commitments, including: Contractually guaranteed availability levels; Measurement methodologies; Exclusions; Historical performance data; Penalties and remedies.",
+             subDimensionId: "cmin8jfrq0002bgjwuy2ijrbd",
+             stakeholderTypes: [
+               "Vendor",
+               "Technical Team"
+             ],
+             evidenceRequired: "SLA documentation, Independent verification reports, Historical performance logs",
+             evidenceWeight: "Critical",
+                             ~~~~~~~~~~
+             weightInLayer: 0.08333333333333333,
+             scoringLogic: {},
+             redFlags: []
+           }
+         })
+
+Invalid value for argument `evidenceWeight`. Expected TrustEvidenceWeight.
+{
+  "name": "PrismaClientValidationError",
+  "clientVersion": "6.19.0"
+}
+  Γ£ô Processing Transparency...
+    - Layer L2 upserted (Internal ID: cmin99s4q0005bg34zuoj1uc8)
+    - Found 5 sub-dimensions
+      - Processing sub-dimension 2.1 (System Logic & Decision Explainability)
+  Γ¥î Failed to process layer Transparency: 
+Invalid `prisma.trustQuestion.upsert()` invocation in
+C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\prisma\seed-trust-ontology.js:87:48
+
+  84 
+  85 // Create questions
+  86 for (const question of subDim.questions) {
+ΓåÆ 87     await prisma.trustQuestion.upsert({
+           where: {
+             questionId: "Q2.1.1"
+           },
+           update: {
+             text: "Stakeholder-Specific Explainability: Describe explainability mechanisms for different stakeholder groups: End-user explanations; Operator explanations; Technical explanations; Regulatory explanations; Testing results.",
+             stakeholderTypes: [
+               "Product Owner",
+               "UX Designer"
+             ],
+             evidenceRequired: "Explainability documentation, User testing results, Regulatory compliance reports",
+             evidenceWeight: "High",
+             weightInLayer: 0.07692307692307693,
+             scoringLogic: {},
+             redFlags: []
+           },
+           create: {
+             questionId: "Q2.1.1",
+             text: "Stakeholder-Specific Explainability: Describe explainability mechanisms for different stakeholder groups: End-user explanations; Operator explanations; Technical explanations; Regulatory explanations; Testing results.",
+             subDimensionId: "cmin99st00007bg34nfmyj76q",
+             stakeholderTypes: [
+               "Product Owner",
+               "UX Designer"
+             ],
+             evidenceRequired: "Explainability documentation, User testing results, Regulatory compliance reports",
+             evidenceWeight: "High",
+                             ~~~~~~
+             weightInLayer: 0.07692307692307693,
+             scoringLogic: {},
+             redFlags: []
+           }
+         })
+
+Invalid value for argument `evidenceWeight`. Expected TrustEvidenceWeight.
+{
+  "name": "PrismaClientValidationError",
+  "clientVersion": "6.19.0"
+}
+  Γ£ô Processing Governance...
+    - Layer L3 upserted (Internal ID: cmin99thc000abg343q0dh2vq)
+    - Found 4 sub-dimensions
+      - Processing sub-dimension 3.1 (Contractual Clarity & Service Level Agreements)
+  Γ¥î Failed to process layer Governance: 
+Invalid `prisma.trustQuestion.upsert()` invocation in
+C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\prisma\seed-trust-ontology.js:87:48
+
+  84 
+  85 // Create questions
+  86 for (const question of subDim.questions) {
+ΓåÆ 87     await prisma.trustQuestion.upsert({
+           where: {
+             questionId: "Q3.1.1"
+           },
+           update: {
+             text: "SLA Depth & Enforceability: Provide comprehensive SLA documentation with analysis: Performance metrics specificity; Measurement independence; Exclusion narrowness; Financial penalty adequacy; Service credit usability.",
+             stakeholderTypes: [
+               "Legal",
+               "Procurement"
+             ],
+             evidenceRequired: "SLA contract, Penalty/credit policy",
+             evidenceWeight: "Critical",
+             weightInLayer: 0.09090909090909091,
+             scoringLogic: {},
+             redFlags: []
+           },
+           create: {
+             questionId: "Q3.1.1",
+             text: "SLA Depth & Enforceability: Provide comprehensive SLA documentation with analysis: Performance metrics specificity; Measurement independence; Exclusion narrowness; Financial penalty adequacy; Service credit usability.",
+             subDimensionId: "cmin99u6e000cbg34ay6scg83",
+             stakeholderTypes: [
+               "Legal",
+               "Procurement"
+             ],
+             evidenceRequired: "SLA contract, Penalty/credit policy",
+             evidenceWeight: "Critical",
+                             ~~~~~~~~~~
+             weightInLayer: 0.09090909090909091,
+             scoringLogic: {},
+             redFlags: []
+           }
+         })
+
+Invalid value for argument `evidenceWeight`. Expected TrustEvidenceWeight.
+{
+  "name": "PrismaClientValidationError",
+  "clientVersion": "6.19.0"
+}
+  Γ£ô Processing Competence...
+    - Layer L4 upserted (Internal ID: cmin99uu4000fbg34580q9vf7)
+    - Found 5 sub-dimensions
+      - Processing sub-dimension 4.1 (User Skill Match Analysis)
+  Γ¥î Failed to process layer Competence: 
+Invalid `prisma.trustQuestion.upsert()` invocation in
+C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\prisma\seed-trust-ontology.js:87:48
+
+  84 
+  85 // Create questions
+  86 for (const question of subDim.questions) {
+ΓåÆ 87     await prisma.trustQuestion.upsert({
+           where: {
+             questionId: "Q4.1.1"
+           },
+           update: {
+             text: "System Complexity Characterization: Provide detailed complexity assessment: Function-by-function complexity mapping; Frequency and criticality weighting; Complexity scoring methodology; User interface complexity.",
+             stakeholderTypes: [
+               "UX Researcher",
+               "Product Manager"
+             ],
+             evidenceRequired: "Complexity analysis report, UI/UX audit",
+             evidenceWeight: "High",
+             weightInLayer: 0.0625,
+             scoringLogic: {},
+             redFlags: []
+           },
+           create: {
+             questionId: "Q4.1.1",
+             text: "System Complexity Characterization: Provide detailed complexity assessment: Function-by-function complexity mapping; Frequency and criticality weighting; Complexity scoring methodology; User interface complexity.",
+             subDimensionId: "cmin99vj0000hbg340klttsbk",
+             stakeholderTypes: [
+               "UX Researcher",
+               "Product Manager"
+             ],
+             evidenceRequired: "Complexity analysis report, UI/UX audit",
+             evidenceWeight: "High",
+                             ~~~~~~
+             weightInLayer: 0.0625,
+             scoringLogic: {},
+             redFlags: []
+           }
+         })
+
+Invalid value for argument `evidenceWeight`. Expected TrustEvidenceWeight.
+{
+  "name": "PrismaClientValidationError",
+  "clientVersion": "6.19.0"
+}
+  Γ£ô Processing Integrity...
+    - Layer L5 upserted (Internal ID: cmin99w7k000kbg346xwpy23u)
+    - Found 4 sub-dimensions
+      - Processing sub-dimension 5.1 (Vendor Financial Stability)
+  Γ¥î Failed to process layer Integrity: 
+Invalid `prisma.trustQuestion.upsert()` invocation in
+C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\prisma\seed-trust-ontology.js:87:48
+
+  84 
+  85 // Create questions
+  86 for (const question of subDim.questions) {
+ΓåÆ 87     await prisma.trustQuestion.upsert({
+           where: {
+             questionId: "Q5.1.1"
+           },
+           update: {
+             text: "Financial Health Documentation: Submit comprehensive financial information: Audited financial statements; Auditor information; Management accounts; Cash flow statement; Customer concentration; Backlog; Debt agreements; Cap table.",
+             stakeholderTypes: [
+               "CFO",
+               "Finance Team"
+             ],
+             evidenceRequired: "Audited financials (3 years), Management accounts, Cap table",
+             evidenceWeight: "Critical",
+             weightInLayer: 0.07142857142857142,
+             scoringLogic: {},
+             redFlags: []
+           },
+           create: {
+             questionId: "Q5.1.1",
+             text: "Financial Health Documentation: Submit comprehensive financial information: Audited financial statements; Auditor information; Management accounts; Cash flow statement; Customer concentration; Backlog; Debt agreements; Cap table.",
+             subDimensionId: "cmin99wwh000mbg34kayw8i2s",
+             stakeholderTypes: [
+               "CFO",
+               "Finance Team"
+             ],
+             evidenceRequired: "Audited financials (3 years), Management accounts, Cap table",
+             evidenceWeight: "Critical",
+                             ~~~~~~~~~~
+             weightInLayer: 0.07142857142857142,
+             scoringLogic: {},
+             redFlags: []
+           }
+         })
+
+Invalid value for argument `evidenceWeight`. Expected TrustEvidenceWeight.
+{
+  "name": "PrismaClientValidationError",
+  "clientVersion": "6.19.0"
+}
+  Γ£ô Processing Ecosystem...
+    - Layer L6 upserted (Internal ID: cmin99xjq000pbg34ddzezhsq)
+    - Found 6 sub-dimensions
+      - Processing sub-dimension 6.1.1 (Infrastructure Dependencies)
+  Γ¥î Failed to process layer Ecosystem: 
+Invalid `prisma.trustQuestion.upsert()` invocation in
+C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\prisma\seed-trust-ontology.js:87:48
+
+  84 
+  85 // Create questions
+  86 for (const question of subDim.questions) {
+ΓåÆ 87     await prisma.trustQuestion.upsert({
+           where: {
+             questionId: "Q6.1.1.1"
+           },
+           update: {
+             text: "Electrical Power Reliability: What is the actual grid reliability in the deployment area? Provide uptime data for the past 12 months.",
+             stakeholderTypes: [
+               "Ops Team",
+               "Infrastructure Provider"
+             ],
+             evidenceRequired: "Utility reports, Independent monitoring logs",
+             evidenceWeight: "Critical",
+             weightInLayer: 0.05,
+             scoringLogic: {},
+
+Γ£à Trust layers loaded successfully!
+
+             redFlags: []
+           },
+           create: {
+             questionId: "Q6.1.1.1",
+             text: "Electrical Power Reliability: What is the actual grid reliability in the deployment area? Provide uptime data for the past 12 months.",
+             subDimensionId: "cmin99y7s000rbg341tz77om3",
+             stakeholderTypes: [
+               "Ops Team",
+               "Infrastructure Provider"
+             ],
+             evidenceRequired: "Utility reports, Independent monitoring logs",
+             evidenceWeight: "Critical",
+                             ~~~~~~~~~~
+             weightInLayer: 0.05,
+             scoringLogic: {},
+             redFlags: []
+           }
+         })
+
+Invalid value for argument `evidenceWeight`. Expected TrustEvidenceWeight.
+{
+  "name": "PrismaClientValidationError",
+  "clientVersion": "6.19.0"
+}

@@ -1,0 +1,142 @@
+{
+    "layer_id": "L3",
+    "layer_name": "Governance",
+    "sector": "transport",
+    "region": "Sub-Saharan Africa",
+    "total_questions": 12,
+    "total_sub_dimensions": 4,
+    "sub_dimensions": [
+        {
+            "id": "3.1",
+            "name": "Regulatory Compliance & Licensing",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q3.1.1_TRN",
+                    "text": "Platform Operating License: Legal right to operate: (1) Transport platform license (if required); (2) Compliance with local transport regulations; (3) Route permits (for specific areas); (4) Cooperation with transport authority; (5) Reporting obligations (trip data, safety incidents); (6) Tax compliance (VAT, withholding); (7) Renewal and audit processes.",
+                    "stakeholder_types": [
+                        "Transport Regulators",
+                        "Tax Authority",
+                        "Platform"
+                    ],
+                    "evidence_required": "Operating license, Regulatory filings, Tax compliance certificates",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Many platforms operate in regulatory grey zones. Governments scrambling to regulate (e.g., Kenya's Uber regulations)."
+                },
+                {
+                    "q_id": "Q3.1.2_TRN",
+                    "text": "Driver & Vehicle Licensing Compliance: Individual compliance: (1) Driver license verification (PSV/commercial); (2) Vehicle registration verification; (3) Insurance verification (comprehensive, third-party); (4) Roadworthiness certificate; (5) Route permit (for commercial vehicles); (6) Periodic re-verification; (7) Suspension for non-compliance.",
+                    "stakeholder_types": [
+                        "Drivers",
+                        "Traffic Police",
+                        "Platform"
+                    ],
+                    "evidence_required": "Verification logs, Compliance dashboard, Suspension records",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "PSV (Public Service Vehicle) license required for commercial transport. Many drivers use private car insurance (illegal)."
+                }
+            ]
+        },
+        {
+            "id": "3.2",
+            "name": "Insurance & Liability",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q3.2.1_TRN",
+                    "text": "Passenger Insurance Coverage: Protection for riders: (1) Mandatory passenger insurance; (2) Coverage limits (death, injury); (3) Claims process clarity; (4) Response time for claims; (5) Transparency on coverage gaps; (6) Third-party liability; (7) Coverage during 'offline' trips (cash).",
+                    "stakeholder_types": [
+                        "Passengers",
+                        "Insurance Companies",
+                        "Regulators"
+                    ],
+                    "evidence_required": "Insurance policy, Claims process documentation, Settlement stats",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Insurance penetration low. Platforms often provide blanket cover. Claims process slow and opaque."
+                },
+                {
+                    "q_id": "Q3.2.2_TRN",
+                    "text": "Driver & Goods Insurance: Protection for drivers/cargo: (1) Driver injury/death cover; (2) Vehicle damage cover; (3) Goods-in-transit insurance (delivery); (4) Liability for lost/damaged goods; (5) Coverage during platform vs offline work; (6) Premium subsidy (if any); (7) Claims support.",
+                    "stakeholder_types": [
+                        "Drivers",
+                        "Merchants",
+                        "Insurance Companies"
+                    ],
+                    "evidence_required": "Driver insurance policy, Goods insurance policy, Claims logs",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Drivers often uninsured (can't afford). Goods insurance rare. Disputes over lost packages common."
+                }
+            ]
+        },
+        {
+            "id": "3.3",
+            "name": "Driver Welfare & Labor Rights",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q3.3.1_TRN",
+                    "text": "Driver Classification & Rights: Employee vs contractor: (1) Legal classification (employee, contractor, partner); (2) Right to organize (unions); (3) Minimum earnings guarantee; (4) Working hours limits (fatigue management); (5) Rest period enforcement; (6) Grievance mechanism; (7) Protection from arbitrary deactivation.",
+                    "stakeholder_types": [
+                        "Drivers",
+                        "Labor Unions",
+                        "Labor Ministry"
+                    ],
+                    "evidence_required": "Employment contracts, Union recognition agreements, Grievance logs",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Gig economy classification is contested. Drivers often work 12+ hour days. Deactivation without appeal is common."
+                },
+                {
+                    "q_id": "Q3.3.2_TRN",
+                    "text": "Health & Safety Protections: Protecting drivers: (1) PPE provision (helmets for boda-boda); (2) Safety training (defensive driving); (3) Accident support (medical, legal); (4) Mental health support (stress, trauma); (5) COVID-19 protocols (sanitizer, masks); (6) Harassment reporting (by passengers); (7) Security features (panic button).",
+                    "stakeholder_types": [
+                        "Drivers",
+                        "Safety Advocates"
+                    ],
+                    "evidence_required": "Safety training logs, PPE distribution records, Incident support cases",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Boda-boda riders face high accident risk. Harassment of drivers (especially women) is common. Mental health support rare."
+                }
+            ]
+        },
+        {
+            "id": "3.4",
+            "name": "Fraud & Security Governance",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q3.4.1_TRN",
+                    "text": "Anti-Fraud Measures: Preventing scams: (1) Fake driver detection (account sharing); (2) Fake trip detection (GPS spoofing); (3) Payment fraud prevention (stolen cards); (4) Promo code abuse prevention; (5) Collusion detection (driver-passenger); (6) Merchant fraud (fake orders); (7) Whistleblower protection.",
+                    "stakeholder_types": [
+                        "Fraud Team",
+                        "Finance",
+                        "Users"
+                    ],
+                    "evidence_required": "Fraud detection algorithms, Investigation logs, Deactivation stats",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "GPS spoofing (fake trips) is rampant. Account sharing common (drivers rent accounts). Promo code abuse is a major loss."
+                },
+                {
+                    "q_id": "Q3.4.2_TRN",
+                    "text": "Passenger & Driver Safety Governance: Preventing harm: (1) Background check policy (criminal, driving); (2) Real-time monitoring (SOS alerts); (3) Incident response team (24/7); (4) Collaboration with police; (5) Driver suspension for safety violations; (6) Passenger blacklist (for harassment); (7) Safety audit frequency.",
+                    "stakeholder_types": [
+                        "Safety Team",
+                        "Police",
+                        "Users"
+                    ],
+                    "evidence_required": "Safety policy, Incident response logs, Police collaboration MOUs",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "High-profile assaults/kidnappings damage trust. Real-time monitoring and police collaboration are essential."
+                }
+            ]
+        }
+    ],
+    "scoring_notes": "Layer 3 (Governance) for Transport in SSA: Regulatory compliance (licensing, insurance) is often weak. Driver welfare (gig economy rights) is a growing issue. Safety governance is the top public concern."
+}

@@ -1,0 +1,192 @@
+{
+    "layer_id": "L3",
+    "layer_name": "Governance",
+    "sector": "financial",
+    "region": "Sub-Saharan Africa",
+    "total_questions": 12,
+    "total_sub_dimensions": 4,
+    "sub_dimensions": [
+        {
+            "id": "3.1",
+            "name": "Contractual Clarity & Enforceability",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q3.1.1_FIN",
+                    "text": "Mobile Money Terms of Service - SSA Context: Provide clear, enforceable terms for mobile money users: (1) Terms in simple language (no legal jargon, accessible to low-literacy users); (2) Visual terms summary (key points in pictograms); (3) User rights clearly stated (refunds, disputes, data rights); (4) Provider obligations (service levels, security, support); (5) Liability limits (what happens if money lost? provider responsibility?); (6) Dispute resolution process (accessible, fair, fast); (7) Legal enforceability (binding under local law? can users enforce in court?).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Legal",
+                        "Regulators",
+                        "Consumer Protection"
+                    ],
+                    "evidence_required": "Simplified terms documentation, Visual summaries, User rights documentation, Provider obligations, Liability policies, Dispute resolution procedures, Legal enforceability opinions",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Users often don't read/understand terms. Must be truly accessible (visual, simple language). Dispute resolution must be accessible (not just courts). Liability limits critical (who pays if fraud?)."
+                },
+                {
+                    "q_id": "Q3.1.2_FIN",
+                    "text": "Agent Contract Governance: For agent networks, provide clear contractual framework: (1) Agent agreements (rights, obligations, commission structure); (2) Liquidity management terms (who provides e-float? cash?); (3) Fraud liability (who pays if agent defrauds users?); (4) Performance standards (transaction limits, uptime requirements); (5) Termination terms (how can agent or provider end relationship?); (6) Dispute resolution (agent-provider disputes); (7) Agent protection (fair treatment, no arbitrary termination).",
+                    "stakeholder_types": [
+                        "Agents",
+                        "Platform Operators",
+                        "Legal",
+                        "Agent Associations"
+                    ],
+                    "evidence_required": "Agent agreement templates, Liquidity terms, Fraud liability policies, Performance standards, Termination procedures, Dispute resolution, Agent protection policies",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Agent relationships critical for mobile money. Liquidity management complex. Fraud liability must be clear. Agent protection important (prevent exploitation). Agent associations emerging."
+                },
+                {
+                    "q_id": "Q3.1.3_FIN",
+                    "text": "Service Level Agreements for Mobile Money: Define SLAs for critical services: (1) USSD availability SLA (99%+ uptime); (2) Transaction processing SLA (completion within 30 seconds); (3) SMS confirmation SLA (delivery within 1 minute); (4) Agent network SLA (cash-in/out availability by region); (5) Customer support SLA (response times by issue severity); (6) Transaction reversal SLA (failed transactions reversed within 4 hours); (7) Penalties for SLA breaches (refunds, compensation, service credits).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Platform Operators",
+                        "Regulators"
+                    ],
+                    "evidence_required": "SLA documentation (all services), SLA performance data, Penalty/compensation policies, User recourse procedures",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "SLAs critical for user trust. USSD availability most important. Transaction reversals must be fast (users panic). Compensation must be accessible (not just promises)."
+                }
+            ]
+        },
+        {
+            "id": "3.2",
+            "name": "Regulatory Compliance & Standards",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q3.2.1_FIN",
+                    "text": "Central Bank & Financial Regulatory Compliance - SSA: Demonstrate compliance with financial regulations: (1) Central bank e-money licenses (all operating countries); (2) Mobile money operator licenses (telecom + financial); (3) AML/CFT compliance (anti-money laundering, counter-terrorism financing); (4) KYC compliance (know your customer - for undocumented, illiterate users); (5) Consumer protection compliance (fair fees, transparent terms); (6) Cross-border remittance licenses (if offering international transfers); (7) Regulatory reporting (transaction monitoring, suspicious activity reports).",
+                    "stakeholder_types": [
+                        "Platform Operators",
+                        "Central Banks",
+                        "Financial Regulators",
+                        "AML Authorities"
+                    ],
+                    "evidence_required": "Central bank licenses, Mobile money operator licenses, AML/CFT compliance documentation, KYC procedures, Consumer protection compliance, Remittance licenses, Regulatory reporting procedures",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Financial services heavily regulated. Must have proper licenses (all countries). KYC challenging (many lack formal ID). AML compliance critical. Regulatory reporting mandatory."
+                },
+                {
+                    "q_id": "Q3.2.2_FIN",
+                    "text": "KYC/AML Compliance for Unbanked Populations: Ensure KYC/AML works for African context: (1) Alternative ID acceptance (voter cards, community leader attestation, biometrics); (2) Tiered KYC (lower limits for unverified, higher for verified); (3) Agent-assisted KYC (agents help users register); (4) Biometric KYC (fingerprint, facial recognition for illiterate); (5) Transaction monitoring (detect suspicious patterns); (6) Sanctions screening (check against terrorist lists); (7) Regulatory approval of KYC approach (central bank accepts alternative ID).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Agents",
+                        "Regulators",
+                        "AML Officers"
+                    ],
+                    "evidence_required": "Alternative ID policies, Tiered KYC documentation, Agent KYC procedures, Biometric KYC systems, Transaction monitoring systems, Sanctions screening, Regulatory approvals",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Many users lack formal ID (passport, national ID). Tiered KYC enables financial inclusion. Agent-assisted KYC critical. Biometrics help illiterate users. Must balance inclusion and compliance."
+                },
+                {
+                    "q_id": "Q3.2.3_FIN",
+                    "text": "Data Protection & Privacy Compliance - Financial Services: Ensure financial data protection compliance: (1) National data protection law compliance (NDPR, DPA, POPIA, etc.); (2) ECOWAS/regional data protection compliance; (3) Financial data specific protections (transaction data, credit data); (4) Cross-border data transfer compliance (if data leaves country); (5) Data breach notification (to users and regulators); (6) User consent for data processing (informed, specific); (7) Data protection impact assessments.",
+                    "stakeholder_types": [
+                        "Users",
+                        "Data Protection Officers",
+                        "Regulators",
+                        "Privacy Advocates"
+                    ],
+                    "evidence_required": "Data protection compliance certificates, Regional compliance documentation, Financial data protection policies, Cross-border transfer safeguards, Breach notification procedures, Consent mechanisms, DPIAs",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Financial data extremely sensitive. Data protection laws emerging. Cross-border data transfer restricted in some countries. Consent must be informed (low literacy). Breach notification critical."
+                }
+            ]
+        },
+        {
+            "id": "3.3",
+            "name": "Dispute Resolution & Accountability",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q3.3.1_FIN",
+                    "text": "User Dispute Resolution for Mobile Money: Provide accessible dispute resolution: (1) Internal complaint process (how do users file complaints? via SMS, USSD, phone, agent?); (2) Response timelines (acknowledgment within 24 hours, resolution within 7 days); (3) Escalation procedures (when is dispute escalated? to whom?); (4) Alternative dispute resolution (mediation, ombudsman accessible to users); (5) Legal recourse (can users go to court? legal aid available?); (6) User protection (no retaliation for complaints); (7) Dispute resolution track record (resolution rate, user satisfaction).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Customer Support",
+                        "Mediators",
+                        "Regulators",
+                        "Consumer Protection"
+                    ],
+                    "evidence_required": "Complaint filing procedures, Response time SLAs, Escalation protocols, ADR procedures, Legal recourse documentation, Anti-retaliation policies, Dispute metrics",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "Complaint filing must be simple (SMS, USSD, phone). Fast resolution critical (money issues urgent). ADR essential (court access difficult). Ombudsman important (independent resolution)."
+                },
+                {
+                    "q_id": "Q3.3.2_FIN",
+                    "text": "Platform Accountability for Financial Losses: Ensure platform accountability for user losses: (1) Fraud liability (who pays if user defrauded? platform? user?); (2) System failure liability (who pays if transaction fails due to system issue?); (3) Agent fraud liability (who pays if agent steals money?); (4) SIM swap fraud liability (who pays if SIM swapped and account drained?); (5) Insurance coverage (errors & omissions, fraud insurance); (6) Compensation mechanisms (refunds, damages, service credits); (7) Regulatory oversight (which agency oversees platform?).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Platform Operators",
+                        "Insurers",
+                        "Regulators"
+                    ],
+                    "evidence_required": "Fraud liability policies, System failure liability, Agent fraud policies, SIM swap liability, Insurance certificates, Compensation procedures, Regulatory oversight documentation",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Fraud liability critical (who pays?). SIM swap fraud epidemic. Agent fraud common. Users vulnerable - platform must be accountable. Insurance important. Regulatory oversight often weak."
+                }
+            ]
+        },
+        {
+            "id": "3.4",
+            "name": "Performance Accountability & Auditing",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q3.4.1_FIN",
+                    "text": "Mobile Money Platform Auditing: Demonstrate platform accountability through audits: (1) Financial audits (annual audits by independent auditors); (2) Operational audits (service delivery, SLA compliance); (3) Security audits (PCI-DSS, penetration testing); (4) AML/KYC audits (compliance with regulations); (5) Data protection audits (privacy compliance); (6) Agent network audits (fraud prevention, performance); (7) Audit transparency (are audit results shared with regulators, public?).",
+                    "stakeholder_types": [
+                        "Platform Operators",
+                        "Auditors",
+                        "Regulators",
+                        "Users"
+                    ],
+                    "evidence_required": "Financial audit reports, Operational audits, Security audits (PCI-DSS), AML/KYC audits, Data protection audits, Agent network audits, Audit publication policies",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Independent audits critical for trust. Financial audits mandatory (central bank requirement). Security audits essential (PCI-DSS). AML/KYC audits required. Audit results should be public (transparency)."
+                },
+                {
+                    "q_id": "Q3.4.2_FIN",
+                    "text": "User Feedback & Continuous Improvement - Mobile Money: Demonstrate responsiveness to user feedback: (1) User feedback collection (surveys, complaints, focus groups); (2) Feedback analysis and action (what changes made based on user input?); (3) User advisory boards (do users have voice in platform governance?); (4) Agent feedback integration (agents report user issues); (5) Transparency on improvements (are users informed of changes?); (6) User satisfaction tracking (NPS, retention, transaction volume).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Agents",
+                        "Product Managers",
+                        "Customer Success"
+                    ],
+                    "evidence_required": "Feedback mechanisms, Feedback analysis reports, Advisory board documentation, Agent feedback integration, Improvement communication, User satisfaction metrics",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "User feedback critical for improvement. Agent feedback important (agents hear user complaints). Advisory boards emerging. Transparency on improvements builds trust. Retention = key metric."
+                },
+                {
+                    "q_id": "Q3.4.3_FIN",
+                    "text": "Algorithmic Governance & Ethics: Governance of AI/ML models for credit/fraud: (1) Model approval process (who signs off?); (2) Fairness auditing (regular checks for bias); (3) Human-in-the-loop (can humans override model?); (4) Model decay monitoring (performance tracking); (5) Ethical guidelines (is there an AI ethics policy?).",
+                    "stakeholder_types": [
+                        "Risk Managers",
+                        "Data Scientists",
+                        "Regulators"
+                    ],
+                    "evidence_required": "Model governance policy, Fairness audit reports, Human oversight logs",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Predatory lending algorithms are a major issue. Governance is needed to prevent exploitation."
+                }
+            ]
+        }
+    ],
+    "scoring_notes": "Layer 3 (Governance) for Financial Services in Sub-Saharan Africa: Central bank licensing and AML/KYC compliance mandatory. KYC must work for unbanked (alternative ID). Dispute resolution must be accessible (not just courts). Fraud liability must be clear. Audits critical for trust."
+}

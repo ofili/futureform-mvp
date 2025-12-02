@@ -1,0 +1,169 @@
+{
+    "layer_id": "L5",
+    "layer_name": "Integrity",
+    "total_questions": 14,
+    "total_sub_dimensions": 4,
+    "sub_dimensions": [
+        {
+            "id": "5.1",
+            "name": "Vendor Financial Stability",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q5.1.1",
+                    "text": "Financial Health Documentation: Submit comprehensive financial information: Audited financial statements; Auditor information; Management accounts; Cash flow statement; Customer concentration; Backlog; Debt agreements; Cap table.",
+                    "stakeholder_types": [
+                        "CFO",
+                        "Finance Team"
+                    ],
+                    "evidence_required": "Audited financials (3 years), Management accounts, Cap table",
+                    "evidence_weight": "Critical"
+                },
+                {
+                    "q_id": "Q5.1.2",
+                    "text": "Entity-Specific Financial Analysis: Provide analysis based on entity type (Private, Startup, Public, SOE): Revenue quality; Burn rate; Funding stage; Segment fit; Government fiscal health.",
+                    "stakeholder_types": [
+                        "Financial Analyst"
+                    ],
+                    "evidence_required": "Financial analysis report, Credit rating report",
+                    "evidence_weight": "High"
+                },
+                {
+                    "q_id": "Q5.1.3",
+                    "text": "Financial Stability Risk Assessment: Provide financial risk analysis: Failure probability; Early warning indicators; Covenants proximity; Refinancing risk; Recommended protections.",
+                    "stakeholder_types": [
+                        "Risk Officer"
+                    ],
+                    "evidence_required": "Risk assessment report, Altman Z-score",
+                    "evidence_weight": "Critical"
+                }
+            ]
+        },
+        {
+            "id": "5.2",
+            "name": "Market Commitment",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q5.2.1",
+                    "text": "Organizational Commitment Evidence: Demonstrate market commitment depth: Legal entity structure; Staff presence; Capital investment; Executive engagement; Strategic roadmap; Public commitments.",
+                    "stakeholder_types": [
+                        "Vendor Executive"
+                    ],
+                    "evidence_required": "Org chart, Investment records, Roadmap deck",
+                    "evidence_weight": "High"
+                },
+                {
+                    "q_id": "Q5.2.2",
+                    "text": "Product/Market Fit & Localization: Assess product adaptation for market: Feature localization; Pricing adaptation; UX localization; Regulatory readiness; Local partnerships; Customer success infrastructure.",
+                    "stakeholder_types": [
+                        "Product Manager",
+                        "Sales Lead"
+                    ],
+                    "evidence_required": "Product roadmap, Localization plan, Partnership agreements",
+                    "evidence_weight": "High"
+                },
+                {
+                    "q_id": "Q5.2.3",
+                    "text": "Historical Commitment Analysis: Provide market entry/exit track record: Market portfolio; Market duration; Exit analysis; Exit count; Entry strategy.",
+                    "stakeholder_types": [
+                        "Market Analyst"
+                    ],
+                    "evidence_required": "Historical market data, Exit case studies",
+                    "evidence_weight": "Medium"
+                },
+                {
+                    "q_id": "Q5.2.4",
+                    "text": "Competitive Position: Assess market strength and sustainability: Market share; Competitive differentiation; Win/loss rate; Market perception; Competitive dynamics.",
+                    "stakeholder_types": [
+                        "Market Analyst",
+                        "Sales Ops"
+                    ],
+                    "evidence_required": "Market share report, Win/loss analysis, Analyst reports",
+                    "evidence_weight": "Medium"
+                }
+            ]
+        },
+        {
+            "id": "5.3",
+            "name": "Track Record & References",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q5.3.1",
+                    "text": "Reference Portfolio: Provide diverse reference sample: Vendor-provided references; Contact information; Reference relevance; Relationship timeline.",
+                    "stakeholder_types": [
+                        "Sales Lead"
+                    ],
+                    "evidence_required": "Reference list with contacts, Project summaries",
+                    "evidence_weight": "Critical"
+                },
+                {
+                    "q_id": "Q5.3.2",
+                    "text": "Structured Reference Interviews: References will be assessed on: Delivery quality; Technical reliability; Support responsiveness; Problem resolution; Value for money; Innovation; Communication; Relationship quality.",
+                    "stakeholder_types": [
+                        "Reference Clients"
+                    ],
+                    "evidence_required": "Interview transcripts/notes, Reference scorecards",
+                    "evidence_weight": "Critical"
+                },
+                {
+                    "q_id": "Q5.3.3",
+                    "text": "Reference Analysis: Provide reference validation: Quantitative scoring; Pattern analysis; Issue recurrence; Vendor vs. independent gap; Competitive intelligence.",
+                    "stakeholder_types": [
+                        "Analyst"
+                    ],
+                    "evidence_required": "Reference analysis report, Aggregated scores",
+                    "evidence_weight": "High"
+                }
+            ]
+        },
+        {
+            "id": "5.4",
+            "name": "Ethical Practices",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q5.4.1",
+                    "text": "Business Ethics Assessment: Demonstrate ethical business conduct: Pricing transparency; Sales honesty; Contract fairness; Competitive conduct; IP respect; Data privacy; Conflicts of interest.",
+                    "stakeholder_types": [
+                        "Compliance Officer",
+                        "Legal"
+                    ],
+                    "evidence_required": "Code of conduct, Ethics policy, Audit reports",
+                    "evidence_weight": "High"
+                },
+                {
+                    "q_id": "Q5.4.2",
+                    "text": "Labor & Human Rights: Provide labor practices evidence: Wage practices; Working conditions; Local hiring; Labor rights; Diversity and inclusion; Working hours; Supply chain labor.",
+                    "stakeholder_types": [
+                        "HR",
+                        "Sustainability Officer"
+                    ],
+                    "evidence_required": "Labor audit reports, HR policies, Supply chain audits",
+                    "evidence_weight": "High"
+                },
+                {
+                    "q_id": "Q5.4.3",
+                    "text": "Environmental & Social Responsibility: Document ESG practices: Environmental impact; Community engagement; Data privacy/security; Anti-corruption; Transparency.",
+                    "stakeholder_types": [
+                        "Sustainability Officer"
+                    ],
+                    "evidence_required": "ESG report, ISO 14001 cert, Community impact report",
+                    "evidence_weight": "Medium"
+                },
+                {
+                    "q_id": "Q5.4.4",
+                    "text": "Controversies & Violations Background Check: Disclose all material controversies: Legal disputes; Regulatory fines; Negative media coverage; NGO reports.",
+                    "stakeholder_types": [
+                        "Legal",
+                        "Risk Officer"
+                    ],
+                    "evidence_required": "Litigation disclosure, Background check report",
+                    "evidence_weight": "High"
+                }
+            ]
+        }
+    ],
+    "scoring_notes": "Layer 5 composite formula: Weighted average of sub-dimensions."
+}

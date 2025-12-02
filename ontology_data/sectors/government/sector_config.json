@@ -1,0 +1,31 @@
+{
+    "sector_id": "government",
+    "sector_name": "Government & Digital ID",
+    "description": "Trust framework for Government Digital Services (GovTech) and Digital Identity systems in Sub-Saharan Africa, focusing on inclusion, data privacy, service reliability, and anti-corruption.",
+    "context_notes": "Digital Identity is the foundational layer for the digital economy in Africa (KYC, Social Protection, Voting). However, centralized ID systems raise massive privacy and surveillance concerns. e-Government portals aim to reduce corruption and improve efficiency, but often suffer from downtime and exclusion of the poor/elderly who lack digital skills or devices.",
+    "stakeholders": [
+        "Citizens (Users)",
+        "Government Agencies (Immigration, Tax, Civil Reg)",
+        "Identity Authority (NIRA, NIMC, etc.)",
+        "Private Sector (Banks/Telcos verifying ID)",
+        "Donors (funding ID projects)",
+        "Civil Society (Privacy advocates)",
+        "Tech Vendors"
+    ],
+    "risk_factors": [
+        "Exclusion (Biometric failure for manual laborers/elderly)",
+        "Data Privacy / Surveillance abuse",
+        "System Downtime (denial of service)",
+        "Vendor Lock-in (foreign sovereign control of ID data)",
+        "Cybersecurity breaches (national security risk)",
+        "Bribery (bypassing digital queues)",
+        "Lack of legal framework"
+    ],
+    "regulatory_bodies": [
+        "Data Protection Commissioner",
+        "Ministry of ICT",
+        "National Identity Authority",
+        "Auditor General",
+        "Ombudsman"
+    ]
+}

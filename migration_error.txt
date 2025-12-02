@@ -1,0 +1,82 @@
+warn The configuration property `package.json#prisma` is deprecated and will be removed in Prisma 7. Please migrate to a Prisma config file (e.g., `prisma.config.ts`).
+For more information, see: https://pris.ly/prisma-config
+
+Environment variables loaded from .env
+Prisma schema loaded from prisma\schema.prisma
+Error: Prisma schema validation - (get-config wasm)
+Error code: P1012
+error: Error validating: This line is invalid. It does not start with any known Prisma schema keyword.
+  -->  prisma\schema.prisma:1727
+   | 
+1726 | }
+1727 |   processingError  String?               @db.Text
+1728 | 
+   | 
+
+
+error: Error validating: This line is invalid. It does not start with any known Prisma schema keyword.
+  -->  prisma\schema.prisma:1729
+   | 
+1728 | 
+1729 |   createdAt DateTime @default(now())
+1730 |   updatedAt DateTime @updatedAt
+   | 
+
+
+error: Error validating: This line is invalid. It does not start with any known Prisma schema keyword.
+  -->  prisma\schema.prisma:1730
+   | 
+1729 |   createdAt DateTime @default(now())
+1730 |   updatedAt DateTime @updatedAt
+1731 | 
+   | 
+
+
+error: Error validating: This line is invalid. It does not start with any known Prisma schema keyword.
+  -->  prisma\schema.prisma:1732
+   | 
+1731 | 
+1732 |   @@index([assessmentId])
+1733 |   @@index([responseId])
+   | 
+
+
+error: Error validating: This line is invalid. It does not start with any known Prisma schema keyword.
+  -->  prisma\schema.prisma:1733
+   | 
+1732 |   @@index([assessmentId])
+1733 |   @@index([responseId])
+1734 |   @@index([processingStatus])
+   | 
+
+
+error: Error validating: This line is invalid. It does not start with any known Prisma schema keyword.
+  -->  prisma\schema.prisma:1734
+   | 
+1733 |   @@index([responseId])
+1734 |   @@index([processingStatus])
+1735 |   @@map("trust_evidence_files")
+   | 
+
+
+error: Error validating: This line is invalid. It does not start with any known Prisma schema keyword.
+  -->  prisma\schema.prisma:1735
+   | 
+1734 |   @@index([processingStatus])
+1735 |   @@map("trust_evidence_files")
+1736 | }
+   | 
+
+
+error: Error validating: This line is invalid. It does not start with any known Prisma schema keyword.
+  -->  prisma\schema.prisma:1736
+   | 
+1735 |   @@map("trust_evidence_files")
+1736 | }
+1737 | 
+   | 
+
+Validation Error Count: 8
+[Context: getConfig]
+
+Prisma CLI Version : 6.19.0

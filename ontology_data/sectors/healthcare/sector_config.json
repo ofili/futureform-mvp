@@ -1,0 +1,57 @@
+{
+    "sector_id": "healthcare",
+    "sector_name": "Healthcare & Telemedicine",
+    "region": "Sub-Saharan Africa",
+    "languages": [
+        "en",
+        "fr"
+    ],
+    "description": "Digital health solutions, telemedicine platforms, and health data systems serving patients and health workers in Sub-Saharan Africa, often in low-resource and offline settings.",
+    "key_stakeholders": [
+        "Patients",
+        "Community Health Workers (CHWs)",
+        "Doctors/Nurses",
+        "Ministry of Health",
+        "Medical Boards",
+        "Health Insurers",
+        "Pharmacy Networks",
+        "Donors/NGOs"
+    ],
+    "critical_certifications": [
+        "Medical Board Registration",
+        "Data Protection Registration (Health Data)",
+        "Pharmacy Board Licenses",
+        "ISO 13485 (Medical Devices)",
+        "Clinical Algorithm Validation",
+        "HIPAA/GDPR Compliance (or local equivalent)"
+    ],
+    "infrastructure_context": {
+        "power": "Clinics often off-grid or unreliable power; solar fridges common for vaccines",
+        "connectivity": "2G/3G dominant in rural areas; offline-first data collection essential",
+        "devices": "CHWs use feature phones or basic smartphones; BYOD common",
+        "logistics": "Cold chain challenges; last-mile drug delivery difficult",
+        "literacy": "Patients often low literacy; rely on voice/video or CHW intermediation"
+    },
+    "regulatory_environment": {
+        "health": [
+            "Medical practice licenses",
+            "Telemedicine guidelines",
+            "Drug safety regulations"
+        ],
+        "data": [
+            "Patient data privacy (highly sensitive)",
+            "Data sovereignty (hosting location)"
+        ],
+        "technology": [
+            "Medical device regulation",
+            "Software as a Medical Device (SaMD) rules"
+        ]
+    },
+    "risk_factors": [
+        "Misdiagnosis due to poor connectivity/data",
+        "Fake/counterfeit medicines",
+        "Patient data leaks (stigma risks)",
+        "Lack of follow-up care",
+        "Algorithm bias in diagnostics"
+    ]
+}

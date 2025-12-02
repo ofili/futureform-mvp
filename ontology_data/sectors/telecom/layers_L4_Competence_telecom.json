@@ -1,0 +1,138 @@
+{
+    "layer_id": "L4",
+    "layer_name": "Competence",
+    "sector": "telecom",
+    "region": "Sub-Saharan Africa",
+    "total_questions": 12,
+    "total_sub_dimensions": 4,
+    "sub_dimensions": [
+        {
+            "id": "4.1",
+            "name": "Technical & Engineering Capabilities",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q4.1.1_TEL",
+                    "text": "Network Engineering & Operations Skills: Technical mastery: (1) RF planning & optimization skills; (2) Core network management; (3) Fiber splicing & maintenance capacity; (4) Power system maintenance (solar/diesel); (5) Cybersecurity expertise; (6) Vendor certification (Huawei/Ericsson/Nokia); (7) Incident response speed.",
+                    "stakeholder_types": [
+                        "CTO",
+                        "Engineers",
+                        "HR"
+                    ],
+                    "evidence_required": "Staff certifications, Training logs, MTTR stats",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Shortage of skilled fiber splicers and power technicians. Reliance on vendor managed services common."
+                },
+                {
+                    "q_id": "Q4.1.2_TEL",
+                    "text": "Software & Digital Development: Building apps/services: (1) App development capability (MyTelco App); (2) API management (for fintech integration); (3) Data science/Analytics capacity; (4) Agile/DevOps maturity; (5) USSD menu design (UX); (6) Legacy system integration; (7) Innovation labs.",
+                    "stakeholder_types": [
+                        "Digital Team",
+                        "Developers"
+                    ],
+                    "evidence_required": "App store ratings, API documentation, Deployment frequency",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Telcos trying to become 'TechCos'. Need internal dev talent, not just vendors. USSD UX is critical for mass market."
+                }
+            ]
+        },
+        {
+            "id": "4.2",
+            "name": "Agent Network Competence",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q4.2.1_TEL",
+                    "text": "Mobile Money Agent Training: Frontline skills: (1) Transaction processing (deposit/withdraw); (2) Fraud awareness (spotting fakes/social engineering); (3) Liquidity management (balancing cash/float); (4) Customer service skills; (5) Dispute resolution; (6) KYC procedure adherence; (7) Digital literacy.",
+                    "stakeholder_types": [
+                        "Agents",
+                        "Agent Managers",
+                        "Users"
+                    ],
+                    "evidence_required": "Agent training manual, Certification records, Mystery shopper scores",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Agents are the face of the brand. Poorly trained agents cause fraud losses and bad UX. Liquidity management is a key skill."
+                },
+                {
+                    "q_id": "Q4.2.2_TEL",
+                    "text": "Sales & Registration Agent Skills: Onboarding users: (1) Product knowledge (bundles/tariffs); (2) SIM registration compliance (ID checks); (3) Device setup assistance; (4) Ethics (no overselling); (5) Data privacy awareness; (6) Troubleshooting basics; (7) Commission structure understanding.",
+                    "stakeholder_types": [
+                        "Sales Agents",
+                        "Sales Managers"
+                    ],
+                    "evidence_required": "Sales training logs, Compliance audit results",
+                    "evidence_weight": "High",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "Street agents often skip KYC steps to get commission. Training must emphasize compliance."
+                }
+            ]
+        },
+        {
+            "id": "4.3",
+            "name": "Customer Service & Support",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q4.3.1_TEL",
+                    "text": "Call Center Competence: Resolving issues: (1) First Call Resolution (FCR) rate; (2) Language support (local dialects); (3) Technical knowledge of agents; (4) Empathy & soft skills; (5) System access (can they see the problem?); (6) Escalation procedures; (7) Wait times.",
+                    "stakeholder_types": [
+                        "Customer Care",
+                        "Subscribers"
+                    ],
+                    "evidence_required": "Call center metrics (FCR, AHT), QA scores, Training materials",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Multi-lingual support is essential. Agents often lack tools to solve technical issues, leading to frustration."
+                },
+                {
+                    "q_id": "Q4.3.2_TEL",
+                    "text": "Self-Service & Digital Support: User empowerment: (1) USSD self-service menu clarity; (2) App functionality (buy bundles, check balance); (3) Chatbot effectiveness; (4) Knowledge base availability; (5) Community forums; (6) Ease of use; (7) Accessibility.",
+                    "stakeholder_types": [
+                        "Digital Team",
+                        "Users"
+                    ],
+                    "evidence_required": "Self-service adoption rates, App ratings, USSD flow diagrams",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "USSD is the primary interface. It must be simple and foolproof."
+                }
+            ]
+        },
+        {
+            "id": "4.4",
+            "name": "User Digital Literacy",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q4.4.1_TEL",
+                    "text": "User Capability & Education: Helping users connect: (1) Smartphone onboarding (how to use data); (2) Internet safety education; (3) Mobile money literacy; (4) Phishing awareness campaigns; (5) Parental control education; (6) Value-added service management; (7) Understanding tariffs.",
+                    "stakeholder_types": [
+                        "CSR Team",
+                        "Marketing",
+                        "Users"
+                    ],
+                    "evidence_required": "Education campaign reports, User surveys, Digital literacy programs",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "Many first-time internet users. They are vulnerable to fraud and bill shock. Telcos have a duty to educate."
+                },
+                {
+                    "q_id": "Q4.4.2_TEL",
+                    "text": "Enterprise Client Capability: B2B competence: (1) Understanding of SLAs; (2) Cloud/IoT adoption readiness; (3) Cybersecurity awareness; (4) Connectivity management; (5) API integration skills; (6) Strategic partnership potential; (7) Technical point of contact.",
+                    "stakeholder_types": [
+                        "Enterprise Sales",
+                        "B2B Clients"
+                    ],
+                    "evidence_required": "Client needs assessment, B2B training workshops",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "SMEs need help digitizing. Telcos moving from selling connectivity to selling 'solutions' (ICT)."
+                }
+            ]
+        }
+    ],
+    "scoring_notes": "Layer 4 (Competence) for Telecom in SSA: Agent competence is the face of the network. Engineering competence keeps the lights on. User education reduces support costs and fraud."
+}

@@ -1,0 +1,138 @@
+{
+    "layer_id": "L3",
+    "layer_name": "Governance",
+    "sector": "government",
+    "region": "Sub-Saharan Africa",
+    "total_questions": 12,
+    "total_sub_dimensions": 4,
+    "sub_dimensions": [
+        {
+            "id": "3.1",
+            "name": "Legal & Regulatory Framework",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q3.1.1_GOV",
+                    "text": "Data Protection Legislation: Legal basis for privacy: (1) Existence of Data Protection Act (GDPR-aligned?); (2) Independent Data Protection Authority (DPA); (3) Enforcement powers of DPA (fines?); (4) Government exemption limits (can state bypass law?); (5) Cross-border data transfer rules; (6) Mandatory breach notification; (7) Judicial oversight.",
+                    "stakeholder_types": [
+                        "Legal",
+                        "Parliament",
+                        "Civil Society"
+                    ],
+                    "evidence_required": "Data Protection Act, DPA annual report, Court rulings",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Many countries passing DPAs, but enforcement is weak. State often exempts itself on 'national security' grounds."
+                },
+                {
+                    "q_id": "Q3.1.2_GOV",
+                    "text": "Digital Identity Legal Framework: Rules for ID: (1) Mandatory vs Voluntary nature; (2) Consequences of non-registration (denial of services?); (3) Use of ID for surveillance (legal limits); (4) Biometric data collection mandate; (5) Right to be forgotten (if applicable); (6) Linking of databases (legal basis); (7) Discrimination protection.",
+                    "stakeholder_types": [
+                        "Identity Authority",
+                        "Human Rights Groups"
+                    ],
+                    "evidence_required": "Digital ID Act, Regulations, Constitutional court judgments",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Courts (e.g., in Kenya, Jamaica) have halted ID systems due to lack of legal framework. Law must precede technology."
+                }
+            ]
+        },
+        {
+            "id": "3.2",
+            "name": "Institutional Oversight & Accountability",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q3.2.1_GOV",
+                    "text": "Independent Oversight Mechanisms: Who watches the watchers?: (1) Parliamentary committee oversight; (2) Auditor General audits of ID system; (3) Civil society observation role; (4) Ombudsman for complaints; (5) Judicial review of decisions; (6) Whistleblower protection for officials; (7) Regular impact assessments.",
+                    "stakeholder_types": [
+                        "Parliament",
+                        "Auditor General",
+                        "Civil Society"
+                    ],
+                    "evidence_required": "Committee reports, Audit reports, Court cases",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Executive branch often pushes ID systems without legislative scrutiny. Independent oversight prevents abuse."
+                },
+                {
+                    "q_id": "Q3.2.2_GOV",
+                    "text": "Grievance Redress Mechanism (GRM): Fixing mistakes: (1) Clear channel for complaints (ID errors, exclusion); (2) Timeline for resolution; (3) Accessibility of GRM (rural/offline); (4) Appeal process; (5) Compensation for errors; (6) Tracking of complaint stats; (7) Independence of GRM.",
+                    "stakeholder_types": [
+                        "Citizens",
+                        "Ombudsman"
+                    ],
+                    "evidence_required": "GRM procedure, Complaint logs, Resolution stats",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "If your ID has the wrong name/DOB, your life stops. Fixing it can take years without a proper GRM."
+                }
+            ]
+        },
+        {
+            "id": "3.3",
+            "name": "Inclusion & Non-Discrimination",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q3.3.1_GOV",
+                    "text": "Inclusion Mandate & Strategy: Leaving no one behind: (1) Strategy for marginalized groups (nomads, border communities); (2) Alternative proof of ID (if no birth cert); (3) Mobile registration units; (4) Affirmative action in registration; (5) Staff training on non-discrimination; (6) Monitoring of exclusion rates; (7) Budget for inclusion.",
+                    "stakeholder_types": [
+                        "Minority Groups",
+                        "NGOs",
+                        "Identity Authority"
+                    ],
+                    "evidence_required": "Inclusion strategy, Registration stats by group, Training materials",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Border communities (e.g., Somalis in Kenya, Nubians) often face vetting/discrimination. ID system must not weaponize citizenship."
+                },
+                {
+                    "q_id": "Q3.3.2_GOV",
+                    "text": "Accessibility Governance: Access for disabled: (1) Physical access to centers; (2) Biometric exception policy (amputees); (3) Website accessibility (WCAG standards); (4) Sign language support; (5) Assistive technology compatibility; (6) Consultation with disability groups; (7) Staff sensitization.",
+                    "stakeholder_types": [
+                        "Disability Orgs",
+                        "Citizens"
+                    ],
+                    "evidence_required": "Accessibility audit, Exception policy, Consultation minutes",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Blind users need screen readers for e-Gov. Amputees need non-fingerprint options."
+                }
+            ]
+        },
+        {
+            "id": "3.4",
+            "name": "Vendor & Technology Governance",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q3.4.1_GOV",
+                    "text": "Data Sovereignty & Vendor Lock-in: Owning the system: (1) State ownership of data; (2) State ownership of source code/IP; (3) Ability to switch vendors; (4) Local hosting requirement; (5) Knowledge transfer clauses; (6) Open standards usage; (7) Exit strategy.",
+                    "stakeholder_types": [
+                        "ICT Ministry",
+                        "Tech Vendors"
+                    ],
+                    "evidence_required": "Contract IP clauses, Data hosting location, Exit plan",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "African nations often 'rent' their ID systems from foreign firms. If they stop paying, the system turns off. Sovereignty is key."
+                },
+                {
+                    "q_id": "Q3.4.2_GOV",
+                    "text": "Algorithmic Accountability: Governing AI: (1) Policy on AI use in government; (2) Human oversight requirements; (3) Impact assessment for automated decisions; (4) Ban on certain uses (e.g., social scoring); (5) Public register of algorithms; (6) Ethical AI guidelines; (7) Liability for AI errors.",
+                    "stakeholder_types": [
+                        "Policy Makers",
+                        "AI Experts"
+                    ],
+                    "evidence_required": "AI policy, Impact assessments, Ethical guidelines",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "AI adoption is early but risky. Preventing 'black box' government decisions is a governance priority."
+                }
+            ]
+        }
+    ],
+    "scoring_notes": "Layer 3 (Governance) for Government in SSA: Legal protection (DPA) and Inclusion are the pillars. Without them, ID systems become tools of exclusion and surveillance."
+}

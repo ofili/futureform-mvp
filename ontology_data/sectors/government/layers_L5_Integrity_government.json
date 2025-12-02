@@ -1,0 +1,139 @@
+{
+    "layer_id": "L5",
+    "layer_name": "Integrity",
+    "sector": "government",
+    "region": "Sub-Saharan Africa",
+    "total_questions": 12,
+    "total_sub_dimensions": 4,
+    "sub_dimensions": [
+        {
+            "id": "5.1",
+            "name": "Anti-Corruption & Bribery",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q5.1.1_GOV",
+                    "text": "Prevention of Bribery in Service Delivery: Stopping 'Kitua Kidogo': (1) Cashless payment mandate; (2) CCTV monitoring of centers; (3) Whistleblower channels for citizens; (4) Rotation of staff (to break cartels); (5) Automated queue management; (6) Prosecution of corrupt officials; (7) Public awareness campaigns.",
+                    "stakeholder_types": [
+                        "Anti-Corruption Agency",
+                        "Citizens",
+                        "Staff"
+                    ],
+                    "evidence_required": "Corruption perception surveys, Prosecution stats, Cashless transaction logs",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Petty corruption (bribes for ID) is endemic. Digitization helps, but human 'brokers' often adapt."
+                },
+                {
+                    "q_id": "Q5.1.2_GOV",
+                    "text": "Procurement Integrity: Clean tenders: (1) Open contracting standards; (2) Beneficial ownership disclosure of vendors; (3) Conflict of interest declarations; (4) Independent audit of tenders; (5) Debarment of corrupt firms; (6) Value for money analysis; (7) Prevention of 'Emergency Procurement' abuse.",
+                    "stakeholder_types": [
+                        "Procurement Authority",
+                        "Civil Society"
+                    ],
+                    "evidence_required": "Tender audit reports, Conflict of interest forms, Debarment list",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "ID projects are multi-million dollar honeypots. 'Emergency' procurement often used to bypass rules."
+                }
+            ]
+        },
+        {
+            "id": "5.2",
+            "name": "Political Neutrality & Democracy",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q5.2.1_GOV",
+                    "text": "Voter Register Integrity: Fair elections: (1) Independence of ID authority from Electoral Commission; (2) Prevention of gerrymandering using ID data; (3) Audit of voter register against civil registry; (4) Transparency of de-duplication; (5) Equal access to ID in opposition strongholds; (6) Observer access to data; (7) Dispute resolution.",
+                    "stakeholder_types": [
+                        "Electoral Commission",
+                        "Political Parties",
+                        "Observers"
+                    ],
+                    "evidence_required": "Voter register audit, Registration stats by region, Observer reports",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "In many countries, 'no ID = no vote'. Suppressing ID issuance in opposition areas is a rigging tactic."
+                },
+                {
+                    "q_id": "Q5.2.2_GOV",
+                    "text": "Surveillance & Political Targeting: Human rights: (1) Legal safeguards against surveillance; (2) Judicial warrant requirement for interception; (3) Protection of journalists/activists; (4) Transparency reports on state requests; (5) Ban on facial recognition in protests; (6) Oversight of intelligence agencies; (7) Redress for illegal surveillance.",
+                    "stakeholder_types": [
+                        "Human Rights Groups",
+                        "Judiciary",
+                        "Intelligence Agencies"
+                    ],
+                    "evidence_required": "Surveillance laws, Court warrants, Transparency reports",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Digital ID + CCTV + AI = Total Surveillance state risk. Activists often targeted."
+                }
+            ]
+        },
+        {
+            "id": "5.3",
+            "name": "Fiscal Integrity & Debt",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q5.3.1_GOV",
+                    "text": "Project Financing & Debt Transparency: Cost of the system: (1) Disclosure of loan terms (interest/conditions); (2) Cost-benefit analysis; (3) Sustainability of debt; (4) Hidden costs (maintenance/licenses); (5) Parliamentary approval of loans; (6) Sovereign guarantee transparency; (7) Impact on national debt.",
+                    "stakeholder_types": [
+                        "Treasury",
+                        "Parliament",
+                        "IMF/World Bank"
+                    ],
+                    "evidence_required": "Loan agreements, Parliamentary hansard, Debt sustainability analysis",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "ID projects often funded by opaque loans. Citizens pay the debt for decades."
+                },
+                {
+                    "q_id": "Q5.3.2_GOV",
+                    "text": "Revenue Management (e-Services): Where do the fees go?: (1) Treasury Single Account (TSA) usage; (2) Prevention of revenue leakage at source; (3) Audit of e-service revenues; (4) Reconciliation with bank statements; (5) Utilization of funds (re-invested?); (6) Transparency of convenience fees; (7) Agent commission structure.",
+                    "stakeholder_types": [
+                        "Treasury",
+                        "Auditor General"
+                    ],
+                    "evidence_required": "TSA reports, Revenue audits, Bank reconciliation",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "e-Government increases revenue collection, but funds must reach the Treasury, not diverted."
+                }
+            ]
+        },
+        {
+            "id": "5.4",
+            "name": "Social Impact & Ethics",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q5.4.1_GOV",
+                    "text": "Ethical Use of Data: Do no harm: (1) Prohibition of data sale to private sector (without consent); (2) Protection of vulnerable groups (refugees/HIV status); (3) Ethical AI guidelines; (4) Benefit sharing (if data monetized); (5) Right to opt-out of secondary uses; (6) Data minimization principle; (7) Impact assessment on marginalized.",
+                    "stakeholder_types": [
+                        "Ethics Board",
+                        "Civil Society"
+                    ],
+                    "evidence_required": "Data ethics policy, Impact assessments, Data sale contracts (if any)",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Refugee data is highly sensitive. Selling citizen data to advertisers/lenders destroys trust."
+                },
+                {
+                    "q_id": "Q5.4.2_GOV",
+                    "text": "Non-Discrimination in Service Delivery: Equal treatment: (1) Monitoring of service denial rates by ethnicity/region; (2) Affirmative action for remote areas; (3) Language inclusion in service delivery; (4) Cultural sensitivity training; (5) Grievance mechanism for discrimination; (6) Equal budget allocation; (7) Representation in staff.",
+                    "stakeholder_types": [
+                        "Ombudsman",
+                        "Minority Groups"
+                    ],
+                    "evidence_required": "Service delivery stats, Budget allocation, Staff diversity data",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "State resources often distributed along tribal/political lines. Digital systems should be blind to tribe, but can be engineered to discriminate."
+                }
+            ]
+        }
+    ],
+    "scoring_notes": "Layer 5 (Integrity) for Government in SSA: Political neutrality and anti-corruption are the tests of a democratic ID system. If it rigs elections or enriches cronies, it fails."
+}

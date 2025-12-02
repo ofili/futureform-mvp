@@ -1,0 +1,142 @@
+{
+    "layer_id": "L5",
+    "layer_name": "Integrity",
+    "sector": "education",
+    "region": "Sub-Saharan Africa",
+    "total_questions": 12,
+    "total_sub_dimensions": 4,
+    "sub_dimensions": [
+        {
+            "id": "5.1",
+            "name": "Financial Integrity & Sustainability",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q5.1.1_EDU",
+                    "text": "School Financial Management: Prevent embezzlement: (1) Digital fee collection (mobile money vs cash); (2) Audited financial statements; (3) Procurement transparency (textbooks, construction); (4) Budget oversight (Board of Management); (5) Asset register maintenance; (6) Debt management; (7) Donor fund reporting.",
+                    "stakeholder_types": [
+                        "School Boards",
+                        "Parents",
+                        "Donors"
+                    ],
+                    "evidence_required": "Audit reports, Mobile money statements, Procurement minutes, Asset register",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Cash fees often stolen. Procurement fraud (ghost supplies) common. Digital payments increase transparency."
+                },
+                {
+                    "q_id": "Q5.1.2_EDU",
+                    "text": "EdTech Business Model Sustainability: Viability of provider: (1) Unit economics (CAC vs LTV); (2) Path to profitability (vs grant dependence); (3) Pricing sustainability (affordable but covers costs?); (4) Burn rate; (5) Investor backing; (6) Revenue diversification (B2B vs B2C); (7) Market saturation risk.",
+                    "stakeholder_types": [
+                        "Investors",
+                        "Partners"
+                    ],
+                    "evidence_required": "Financial model, Investor updates, Unit economics analysis",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Many EdTechs rely on grants/donors. When funding dries up, they vanish, leaving schools stranded."
+                }
+            ]
+        },
+        {
+            "id": "5.2",
+            "name": "Academic Integrity & Ethics",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q5.2.1_EDU",
+                    "text": "Anti-Plagiarism & Cheating Culture: Promote honesty: (1) Plagiarism detection tools usage; (2) Honor code enforcement; (3) Exam supervision quality; (4) Consequences for cheating; (5) 'Contract cheating' prevention (essay mills); (6) Faculty integrity (not selling grades); (7) Student awareness training.",
+                    "stakeholder_types": [
+                        "Students",
+                        "Faculty",
+                        "Administrators"
+                    ],
+                    "evidence_required": "Plagiarism reports, Disciplinary records, Honor code",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Cheating normalized in some contexts due to high stakes. 'Essay mills' target students. Faculty integrity key."
+                },
+                {
+                    "q_id": "Q5.2.2_EDU",
+                    "text": "Ethical Research Practices: For higher ed: (1) IRB/Ethics committee approval; (2) Data fabrication prevention; (3) Predatory journal avoidance; (4) Student contribution recognition; (5) Conflict of interest disclosure; (6) Research funding transparency; (7) Local relevance of research.",
+                    "stakeholder_types": [
+                        "Researchers",
+                        "Universities",
+                        "Grant Bodies"
+                    ],
+                    "evidence_required": "IRB minutes, Publication list, Ethics policy",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Pressure to publish leads to predatory journals. 'Helicopter research' (Westerners taking data) is an issue."
+                }
+            ]
+        },
+        {
+            "id": "5.3",
+            "name": "Ethical Marketing & Admissions",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q5.3.1_EDU",
+                    "text": "Truth in Advertising (Education): Honest marketing: (1) Job placement claims verification; (2) 'International' status claims; (3) Facility representation (photos vs reality); (4) Hidden fee disclosure in ads; (5) Success story representativeness; (6) Partner logo usage rights; (7) Accreditation status clarity.",
+                    "stakeholder_types": [
+                        "Parents",
+                        "Students",
+                        "Regulators"
+                    ],
+                    "evidence_required": "Marketing materials, Placement data verification, Facility photos",
+                    "evidence_weight": "High",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "Schools often promise 'international jobs' or 'partnerships' that don't exist. Misleading ads exploit aspirations."
+                },
+                {
+                    "q_id": "Q5.3.2_EDU",
+                    "text": "Predatory Lending & Scholarships: Fair financial aid: (1) Student loan terms transparency (interest rates); (2) Scholarship criteria fairness; (3) 'Free' laptop schemes (hidden costs?); (4) Income Share Agreement (ISA) terms; (5) Debt collection ethics; (6) Financial literacy training for borrowers; (7) Default consequences.",
+                    "stakeholder_types": [
+                        "Students",
+                        "Lenders",
+                        "Regulators"
+                    ],
+                    "evidence_required": "Loan contracts, Scholarship selection minutes, ISA terms",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Predatory loans for school fees common. ISAs emerging but need regulation. Students often sign without understanding debt."
+                }
+            ]
+        },
+        {
+            "id": "5.4",
+            "name": "Social Impact & Inclusion",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q5.4.1_EDU",
+                    "text": "Gender Equity in Education: Support for girls: (1) Female enrollment/retention rates; (2) STEM participation for girls; (3) Menstrual hygiene support (sanitary pads/toilets); (4) Re-entry policy for teen mothers; (5) Gender-responsive pedagogy; (6) Female teacher role models; (7) GBV prevention.",
+                    "stakeholder_types": [
+                        "Girls",
+                        "Parents",
+                        "NGOs"
+                    ],
+                    "evidence_required": "Enrollment data by gender, Sanitation audit, Re-entry policy docs",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Girls drop out due to lack of pads, pregnancy, or early marriage. Schools must actively support retention."
+                },
+                {
+                    "q_id": "Q5.4.2_EDU",
+                    "text": "Disability Inclusion: Access for special needs: (1) Physical accessibility (ramps, toilets); (2) Assistive technology availability; (3) Specialized teacher training; (4) Curriculum adaptation (Braille, Sign Language); (5) Anti-stigma programs; (6) Assessment accommodation (extra time); (7) Individualized Education Plans (IEPs).",
+                    "stakeholder_types": [
+                        "Disabled Students",
+                        "Parents",
+                        "Special Needs Educators"
+                    ],
+                    "evidence_required": "Accessibility audit, Assistive tech inventory, IEP samples",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Disabled children often hidden or excluded. 'Inclusive education' often just means placement without support."
+                }
+            ]
+        }
+    ],
+    "scoring_notes": "Layer 5 (Integrity) for Education in SSA: Financial integrity prevents resource theft. Academic integrity protects the value of degrees. Inclusion (Gender/Disability) is a moral and development imperative."
+}

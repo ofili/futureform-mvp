@@ -1,0 +1,17 @@
+🔍 Phase 2: API Endpoint Verification
+
+============================================================
+
+📡 1. Testing GET /trust/layers...
+   ✅ Status: 200
+   ✅ Layers found: undefined
+
+📡 2. Testing GET /trust/questions...
+   ✅ Status: 200
+   ✅ Questions found: undefined
+
+📡 3. Testing GET /trust/partner-types...
+   ✅ Status: 200
+   ✅ Partner Types found: undefined
+
+⚠️  Skipping specific partner type tests (no ID found)

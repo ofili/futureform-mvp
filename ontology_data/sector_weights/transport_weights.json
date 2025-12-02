@@ -1,0 +1,12 @@
+{
+  "sector": "transport",
+  "context_applied": "Emerging Market Deployment",
+  "weights": {
+    "L1": 0.1364,
+    "L2": 0.1364,
+    "L3": 0.1364,
+    "L4": 0.2271,
+    "L5": 0.1364,
+    "L6": 0.2273
+  }
+}

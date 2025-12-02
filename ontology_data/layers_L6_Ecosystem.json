@@ -1,0 +1,221 @@
+{
+    "layer_id": "L6",
+    "layer_name": "Ecosystem",
+    "total_questions": 20,
+    "total_sub_dimensions": 6,
+    "sub_dimensions": [
+        {
+            "id": "6.1.1",
+            "name": "Infrastructure Dependencies",
+            "weight": 0.15,
+            "questions": [
+                {
+                    "q_id": "Q6.1.1.1",
+                    "text": "Electrical Power Reliability: What is the actual grid reliability in the deployment area? Provide uptime data for the past 12 months.",
+                    "stakeholder_types": [
+                        "Ops Team",
+                        "Infrastructure Provider"
+                    ],
+                    "evidence_required": "Utility reports, Independent monitoring logs",
+                    "evidence_weight": "Critical"
+                },
+                {
+                    "q_id": "Q6.1.1.2",
+                    "text": "Internet/Connectivity Reliability: What is the actual internet availability and reliability in the deployment area over the past 12 months?",
+                    "stakeholder_types": [
+                        "Ops Team",
+                        "ISP"
+                    ],
+                    "evidence_required": "ISP reports, Speed test data",
+                    "evidence_weight": "Critical"
+                },
+                {
+                    "q_id": "Q6.1.1.3",
+                    "text": "Cloud Service Dependencies: What cloud services does the system depend on, and what is their actual uptime vs. SLA?",
+                    "stakeholder_types": [
+                        "Cloud Architect",
+                        "Ops Team"
+                    ],
+                    "evidence_required": "Architecture diagrams, Service contracts, Status pages",
+                    "evidence_weight": "High"
+                }
+            ]
+        },
+        {
+            "id": "6.1.2",
+            "name": "Regulatory & Policy Environment",
+            "weight": 0.15,
+            "questions": [
+                {
+                    "q_id": "Q6.1.2.1",
+                    "text": "Regulatory Approvals: What regulatory approvals are required for deployment? Are they secured or pending?",
+                    "stakeholder_types": [
+                        "Legal",
+                        "Compliance Officer"
+                    ],
+                    "evidence_required": "Approval certificates, Application status",
+                    "evidence_weight": "Critical"
+                },
+                {
+                    "q_id": "Q6.1.2.2",
+                    "text": "Political Stability: What is the political stability of the jurisdictions where deployment occurs? Are there upcoming elections or policy shifts?",
+                    "stakeholder_types": [
+                        "Risk Officer",
+                        "Legal"
+                    ],
+                    "evidence_required": "Political risk indices, Election calendars",
+                    "evidence_weight": "High"
+                },
+                {
+                    "q_id": "Q6.1.2.3",
+                    "text": "Policy Alignment: Does this deployment align with government development priorities and industrial policy?",
+                    "stakeholder_types": [
+                        "Government Relations",
+                        "Strategy Lead"
+                    ],
+                    "evidence_required": "Development plans, Policy documents",
+                    "evidence_weight": "Medium"
+                }
+            ]
+        },
+        {
+            "id": "6.2.1",
+            "name": "Stakeholder Identification & Mapping",
+            "weight": 0.15,
+            "questions": [
+                {
+                    "q_id": "Q6.2.1.1",
+                    "text": "Primary Stakeholders: Who are the end-users and secondary beneficiaries? Who is negatively affected?",
+                    "stakeholder_types": [
+                        "Product Manager",
+                        "UX Researcher"
+                    ],
+                    "evidence_required": "User personas, Impact mapping, Winner/loser analysis",
+                    "evidence_weight": "High"
+                },
+                {
+                    "q_id": "Q6.2.1.2",
+                    "text": "Influencers & Gatekeepers: Who has veto power, approval authority, or informal influence (community leaders, NGOs)?",
+                    "stakeholder_types": [
+                        "Community Manager",
+                        "Public Affairs"
+                    ],
+                    "evidence_required": "Stakeholder map, Authority charts",
+                    "evidence_weight": "High"
+                },
+                {
+                    "q_id": "Q6.2.1.3",
+                    "text": "Power-Interest Matrix: Map stakeholders by Power vs. Interest. Which groups are High Power + High Interest?",
+                    "stakeholder_types": [
+                        "Project Manager",
+                        "Strategy Lead"
+                    ],
+                    "evidence_required": "Power-interest matrix, Engagement plan",
+                    "evidence_weight": "Medium"
+                }
+            ]
+        },
+        {
+            "id": "6.2.2",
+            "name": "Stakeholder Trust Assessment",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q6.2.2.1",
+                    "text": "Sentiment & Trust: What is the overall sentiment toward this deployment? Do stakeholders trust the technology and the organization?",
+                    "stakeholder_types": [
+                        "Community Manager",
+                        "Communications"
+                    ],
+                    "evidence_required": "Sentiment analysis, Survey results, Interview notes",
+                    "evidence_weight": "Critical"
+                },
+                {
+                    "q_id": "Q6.2.2.2",
+                    "text": "Engagement Quality: Has there been genuine stakeholder consultation? Are there ongoing engagement mechanisms?",
+                    "stakeholder_types": [
+                        "Community Manager",
+                        "Project Manager"
+                    ],
+                    "evidence_required": "Engagement logs, Meeting minutes, Feedback incorporation records",
+                    "evidence_weight": "High"
+                },
+                {
+                    "q_id": "Q6.2.2.3",
+                    "text": "Resistance Capacity: Have stakeholders organized? What is their capacity to block, delay, or disrupt deployment?",
+                    "stakeholder_types": [
+                        "Risk Officer",
+                        "Public Affairs"
+                    ],
+                    "evidence_required": "Opposition assessment, Media monitoring",
+                    "evidence_weight": "High"
+                }
+            ]
+        },
+        {
+            "id": "6.2.3",
+            "name": "Fairness & Distributional Impact",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q6.2.3.1",
+                    "text": "Access Fairness: Who can access this technology? Are there barriers (cost, location, literacy)?",
+                    "stakeholder_types": [
+                        "Product Manager",
+                        "Social Impact Lead"
+                    ],
+                    "evidence_required": "Access barrier analysis, Inclusion strategy",
+                    "evidence_weight": "High"
+                },
+                {
+                    "q_id": "Q6.2.3.2",
+                    "text": "Cost & Benefit Distribution: Who bears the costs and risks? Who captures the benefits? Is this distribution perceived as fair?",
+                    "stakeholder_types": [
+                        "Economist",
+                        "Social Impact Lead"
+                    ],
+                    "evidence_required": "Economic impact assessment, Fairness perception surveys",
+                    "evidence_weight": "Critical"
+                },
+                {
+                    "q_id": "Q6.2.3.3",
+                    "text": "Employment Impact: Will this technology displace workers? Are there retraining or transition programs?",
+                    "stakeholder_types": [
+                        "HR",
+                        "Social Impact Lead"
+                    ],
+                    "evidence_required": "Labor market analysis, Transition plans",
+                    "evidence_weight": "High"
+                }
+            ]
+        },
+        {
+            "id": "6.2.4",
+            "name": "Social License to Operate",
+            "weight": 0.15,
+            "questions": [
+                {
+                    "q_id": "Q6.2.4.1",
+                    "text": "Legitimacy: Are all legal approvals secured? Do affected communities view the deployment as legitimate?",
+                    "stakeholder_types": [
+                        "Legal",
+                        "Community Manager"
+                    ],
+                    "evidence_required": "Permits, Social license assessment",
+                    "evidence_weight": "Critical"
+                },
+                {
+                    "q_id": "Q6.2.4.2",
+                    "text": "Deployer Credibility: Do stakeholders view the deploying organizations as trustworthy and competent?",
+                    "stakeholder_types": [
+                        "Communications",
+                        "Brand Manager"
+                    ],
+                    "evidence_required": "Reputation research, Trust surveys",
+                    "evidence_weight": "High"
+                }
+            ]
+        }
+    ],
+    "scoring_notes": "Layer 6 composite formula: Weighted average of sub-dimensions. Critical Red Flags in any sub-dimension can veto the score."
+}

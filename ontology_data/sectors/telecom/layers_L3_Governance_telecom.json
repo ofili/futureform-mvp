@@ -1,0 +1,141 @@
+{
+    "layer_id": "L3",
+    "layer_name": "Governance",
+    "sector": "telecom",
+    "region": "Sub-Saharan Africa",
+    "total_questions": 12,
+    "total_sub_dimensions": 4,
+    "sub_dimensions": [
+        {
+            "id": "3.1",
+            "name": "Regulatory Compliance & Licensing",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q3.1.1_TEL",
+                    "text": "Quality of Service (QoS) Compliance: Adherence to standards: (1) Meeting regulator QoS targets (drop rate, success rate); (2) Payment of fines for non-compliance; (3) Reporting accuracy to regulator; (4) Spectrum license compliance; (5) Universal Service Fund contributions; (6) License renewal status; (7) Dispute resolution with regulator.",
+                    "stakeholder_types": [
+                        "Regulators",
+                        "Investors"
+                    ],
+                    "evidence_required": "QoS compliance reports, Fine payment receipts, License documents",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Regulators frequently fine Telcos for poor service. Compliance is a license-to-operate issue."
+                },
+                {
+                    "q_id": "Q3.1.2_TEL",
+                    "text": "Competition & Anti-Trust Governance: Fair market conduct: (1) Dominance abuse prevention; (2) Fair interconnection rates; (3) Infrastructure sharing (tower co-location); (4) Mobile money interoperability compliance; (5) Pricing floor/ceiling adherence; (6) Mergers & Acquisitions compliance; (7) Agent exclusivity rules.",
+                    "stakeholder_types": [
+                        "Competition Authority",
+                        "Competitors",
+                        "Agents"
+                    ],
+                    "evidence_required": "Interconnection agreements, Pricing filings, Anti-trust audit reports",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Dominant players often accused of blocking competitors (e.g., agent exclusivity). Interoperability is a key regulatory push."
+                }
+            ]
+        },
+        {
+            "id": "3.2",
+            "name": "Cybersecurity & Fraud Prevention",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q3.2.1_TEL",
+                    "text": "SIM Swap Fraud Prevention: Protecting identity: (1) Strict identity verification for SIM replacement; (2) Biometric verification; (3) Notification to owner of swap attempt; (4) Cooling-off period for transactions after swap; (5) Internal staff monitoring (insider threat); (6) API security (for banks checking SIM status); (7) Victim compensation policy.",
+                    "stakeholder_types": [
+                        "Subscribers",
+                        "Banks",
+                        "Police"
+                    ],
+                    "evidence_required": "SIM swap process docs, Fraud statistics, Audit logs",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "SIM swap is the #1 vector for financial fraud. Insiders often complicit. Banks rely on Telcos to stop this."
+                },
+                {
+                    "q_id": "Q3.2.2_TEL",
+                    "text": "Network Security & Data Protection: Defending infrastructure: (1) Signaling security (SS7/Diameter firewalls); (2) DDoS mitigation; (3) Customer data encryption; (4) Access control for engineers; (5) Vulnerability management; (6) Incident response plan; (7) ISO 27001 certification.",
+                    "stakeholder_types": [
+                        "CIO/CISO",
+                        "Regulators",
+                        "Enterprise Clients"
+                    ],
+                    "evidence_required": "Security audit reports, Penetration test results, ISO certificates",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "SS7 vulnerabilities allow tracking/intercepts. Data breaches can expose millions of users."
+                }
+            ]
+        },
+        {
+            "id": "3.3",
+            "name": "Mobile Money Governance",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q3.3.1_TEL",
+                    "text": "AML/CFT Compliance (Mobile Money): Preventing financial crime: (1) KYC tiers (Tier 1, 2, 3 limits); (2) Transaction monitoring (suspicious activity reports); (3) Sanctions screening; (4) Agent due diligence; (5) Reporting to Financial Intelligence Unit (FIU); (6) Staff training on AML; (7) Risk assessment.",
+                    "stakeholder_types": [
+                        "Central Bank",
+                        "FIU",
+                        "Compliance Officers"
+                    ],
+                    "evidence_required": "AML policy, Suspicious Activity Reports (stats), Audit reports",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Mobile money is a target for money laundering. Tiered KYC allows inclusion but requires monitoring."
+                },
+                {
+                    "q_id": "Q3.3.2_TEL",
+                    "text": "Float Management & Trust Accounts: Protecting user funds: (1) Separation of user funds from operational funds; (2) Trust account audits; (3) Interest distribution (if applicable); (4) Liquidity management (ensure agents have cash); (5) Insolvency protection; (6) Reconciliation frequency; (7) Insurance on float.",
+                    "stakeholder_types": [
+                        "Central Bank",
+                        "Users",
+                        "Agents"
+                    ],
+                    "evidence_required": "Trust account statements, Audit letters, Liquidity reports",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "User funds must be 100% backed in trust accounts. If Telco fails, money must be safe."
+                }
+            ]
+        },
+        {
+            "id": "3.4",
+            "name": "Corporate Governance & Ethics",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q3.4.1_TEL",
+                    "text": "Board Oversight & Risk Management: Leadership accountability: (1) Board composition (independence); (2) Risk committee activity; (3) Audit committee independence; (4) Executive compensation transparency; (5) Whistleblower policy; (6) Anti-bribery/corruption policy; (7) Stakeholder engagement.",
+                    "stakeholder_types": [
+                        "Investors",
+                        "Regulators",
+                        "Shareholders"
+                    ],
+                    "evidence_required": "Annual report, Board minutes, Risk register",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Telcos are massive entities. Corruption in procurement or licensing is a risk."
+                },
+                {
+                    "q_id": "Q3.4.2_TEL",
+                    "text": "Supply Chain & Vendor Governance: Ethical sourcing: (1) Vendor code of conduct; (2) Local content requirements (procuring locally); (3) Modern slavery checks (hardware supply chain); (4) Bribery prevention in procurement; (5) Vendor performance management; (6) Diversity in supply chain; (7) Payment terms for SMEs.",
+                    "stakeholder_types": [
+                        "Vendors",
+                        "Procurement"
+                    ],
+                    "evidence_required": "Vendor code, Procurement policy, Audit of suppliers",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Telcos are major buyers. Late payment to local SME vendors is a common grievance."
+                }
+            ]
+        }
+    ],
+    "scoring_notes": "Layer 3 (Governance) for Telecom in SSA: SIM swap fraud and Mobile Money AML are the critical operational risks. Regulatory compliance determines survival."
+}

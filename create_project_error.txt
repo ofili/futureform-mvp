@@ -1,0 +1,27 @@
+PrismaClientValidationError: 
+Invalid `prisma.organization.create()` invocation in
+C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\create-test-project.js:9:45
+
+  6 // Check if organization exists, if not create one
+  7 let org = await prisma.organization.findFirst();
+  8 if (!org) {
+→ 9     org = await prisma.organization.create({
+          data: {
+            name: "Test Org",
+            domain: "test.com",
+            industry: "Technology",
+            size: "100-500",
+            region: "North America",
+        +   type: String
+          }
+        })
+
+Argument `type` is missing.
+    at Nn (C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\node_modules\@prisma\client\runtime\library.js:29:1363)
+    at ei.handleRequestError (C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\node_modules\@prisma\client\runtime\library.js:121:6911)
+    at ei.handleAndLogRequestError (C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\node_modules\@prisma\client\runtime\library.js:121:6593)
+    at ei.request (C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\node_modules\@prisma\client\runtime\library.js:121:6300)
+    at async a (C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\node_modules\@prisma\client\runtime\library.js:130:9551)
+    at async main (C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\create-test-project.js:9:19) {
+  clientVersion: '6.19.0'
+}

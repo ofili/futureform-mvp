@@ -1,0 +1,140 @@
+{
+    "layer_id": "L6",
+    "layer_name": "Ecosystem",
+    "sector": "government",
+    "region": "Sub-Saharan Africa",
+    "total_questions": 12,
+    "total_sub_dimensions": 4,
+    "sub_dimensions": [
+        {
+            "id": "6.1",
+            "name": "Private Sector Dependencies",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q6.1.1_GOV",
+                    "text": "Reliance on Digital ID (KYC): Economy-wide impact: (1) Integration with Banks (e-KYC); (2) Integration with Telcos (SIM Reg); (3) Integration with Fintechs; (4) Cost of verification API (affordable?); (5) Reliability impact on business (downtime cost); (6) Liability for ID errors; (7) Data sharing protocols.",
+                    "stakeholder_types": [
+                        "Banks",
+                        "Telcos",
+                        "Fintechs"
+                    ],
+                    "evidence_required": "API usage stats, SLA agreements, Business impact assessments",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "The private sector is the biggest user of Digital ID. If the API is expensive or unreliable, the digital economy stalls."
+                },
+                {
+                    "q_id": "Q6.1.2_GOV",
+                    "text": "GovTech Vendor Ecosystem: Local capacity: (1) Share of contracts to local firms; (2) Technology transfer programs; (3) Open standards adoption (to avoid lock-in); (4) Innovation challenges/Hackathons; (5) Startup procurement policy; (6) Intellectual Property rights; (7) Sustainability of local vendors.",
+                    "stakeholder_types": [
+                        "Tech Hubs",
+                        "Startups",
+                        "ICT Ministry"
+                    ],
+                    "evidence_required": "Procurement data (local vs foreign), Innovation program reports",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Governments often buy from foreign giants (Idemia, Thales) ignoring local tech ecosystem. Building local capacity ensures long-term sustainability."
+                }
+            ]
+        },
+        {
+            "id": "6.2",
+            "name": "Civil Society & Donor Influence",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q6.2.1_GOV",
+                    "text": "Civil Society Oversight & Engagement: The watchdog role: (1) Freedom of operation for NGOs; (2) Consultation in policy making; (3) Access to information; (4) Strategic litigation (court cases); (5) Public awareness campaigns; (6) Protection of activists; (7) Funding independence.",
+                    "stakeholder_types": [
+                        "Human Rights NGOs",
+                        "Privacy Advocates"
+                    ],
+                    "evidence_required": "Consultation minutes, Court case records, NGO reports",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Civil society (e.g., Nubian Rights Forum in Kenya) has been the main check on ID abuse. They need space to operate."
+                },
+                {
+                    "q_id": "Q6.2.2_GOV",
+                    "text": "Donor Dependency & Conditionality: Who drives the agenda?: (1) Percentage of budget funded by donors; (2) Alignment with national priorities (vs donor interests); (3) Sustainability after donor exit; (4) Technology choices influenced by donors; (5) Transparency of donor agreements; (6) Capacity building component; (7) Sovereignty impact.",
+                    "stakeholder_types": [
+                        "World Bank",
+                        "UNDP",
+                        "Treasury"
+                    ],
+                    "evidence_required": "Project financing docs, Donor agreements, Sustainability plan",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "World Bank 'ID4D' is a major driver. Risks include 'copy-paste' solutions and lack of local ownership."
+                }
+            ]
+        },
+        {
+            "id": "6.3",
+            "name": "Regional Integration & Cross-Border",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q6.3.1_GOV",
+                    "text": "Cross-Border Identity & Travel: Regional mobility: (1) Recognition of ID as travel document (e.g., EAC ID); (2) Interoperability with neighbors; (3) One Network Area (roaming/calls); (4) Mutual recognition of professional certs; (5) Data sharing for security; (6) Border control efficiency; (7) Refugee management.",
+                    "stakeholder_types": [
+                        "Immigration",
+                        "Regional Blocs (EAC/ECOWAS)"
+                    ],
+                    "evidence_required": "Regional protocols, Border crossing stats, Interoperability specs",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "EAC (East African Community) allows travel with ID. AfCFTA (Free Trade Area) requires trusted identity for trade."
+                },
+                {
+                    "q_id": "Q6.3.2_GOV",
+                    "text": "Harmonization of Standards: Speaking the same language: (1) Adherence to international standards (ICAO, ISO); (2) Regional data protection harmonization; (3) Cybersecurity cooperation; (4) Payment system linkage (PAPSS); (5) Digital signature recognition; (6) Regulatory convergence; (7) Knowledge sharing.",
+                    "stakeholder_types": [
+                        "Standard Bodies",
+                        "Regulators"
+                    ],
+                    "evidence_required": "Standards adoption reports, Regional treaties",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Fragmented standards hinder trade. Harmonization is key for the African Single Digital Market."
+                }
+            ]
+        },
+        {
+            "id": "6.4",
+            "name": "Public Trust & Social Contract",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q6.4.1_GOV",
+                    "text": "Public Trust in Government Digital Systems: The ultimate metric: (1) Citizen satisfaction surveys; (2) Adoption rates of e-services; (3) Trust in data privacy; (4) Perception of corruption; (5) Willingness to register; (6) Feedback loop effectiveness; (7) Media sentiment.",
+                    "stakeholder_types": [
+                        "Citizens",
+                        "Media",
+                        "Government"
+                    ],
+                    "evidence_required": "Survey results, Adoption curves, Media analysis",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Trust is low. History of misuse (e.g., using census for tax/conscription) makes people wary. Building trust takes years."
+                },
+                {
+                    "q_id": "Q6.4.2_GOV",
+                    "text": "Digital Divide & Social Equity: Impact on society: (1) Gap between rural/urban adoption; (2) Gender gap in ID ownership; (3) Impact on poverty reduction (social safety nets); (4) Cost of access (device/data); (5) Digital literacy barrier; (6) Role of intermediaries; (7) Equity impact assessment.",
+                    "stakeholder_types": [
+                        "Sociologists",
+                        "Planners",
+                        "NGOs"
+                    ],
+                    "evidence_required": "Equity audits, Household surveys, Impact evaluations",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Digitization can widen the gap. If the poor can't get an ID, they disappear from the state's view."
+                }
+            ]
+        }
+    ],
+    "scoring_notes": "Layer 6 (Ecosystem) for Government in SSA: The private sector needs the ID system to work. Civil society needs it to be fair. Donors need it to be sustainable. The public needs to trust it."
+}

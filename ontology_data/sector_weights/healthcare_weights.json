@@ -1,0 +1,12 @@
+{
+  "sector": "healthcare",
+  "context_applied": "Mission-Critical Infrastructure",
+  "weights": {
+    "L1": 0.2727,
+    "L2": 0.1364,
+    "L3": 0.1364,
+    "L4": 0.1818,
+    "L5": 0.1818,
+    "L6": 0.0909
+  }
+}

@@ -1,0 +1,164 @@
+{
+    "layer_id": "L4",
+    "layer_name": "Competence",
+    "sector": "healthcare",
+    "region": "Sub-Saharan Africa",
+    "total_questions": 16,
+    "total_sub_dimensions": 4,
+    "sub_dimensions": [
+        {
+            "id": "4.1",
+            "name": "Health Worker Skills & Training",
+            "weight": 0.30,
+            "questions": [
+                {
+                    "q_id": "Q4.1.1_HLT",
+                    "text": "CHW Digital & Clinical Training: Training for Community Health Workers: (1) App usage training (data entry, sync); (2) Clinical protocol training (integrated Community Case Management - iCCM); (3) Danger sign recognition; (4) Patient counseling skills; (5) Refresher frequency; (6) Assessment of competence (exams/observation).",
+                    "stakeholder_types": [
+                        "CHWs",
+                        "Trainers",
+                        "Program Managers"
+                    ],
+                    "evidence_required": "Training curriculum, Attendance logs, Competence assessment scores",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "CHWs have varying literacy. Training must be hands-on. iCCM is the standard protocol."
+                },
+                {
+                    "q_id": "Q4.1.2_HLT",
+                    "text": "Telemedicine Provider Training: Training for doctors/nurses: (1) Webside manner (camera, lighting, empathy); (2) Remote physical exam techniques; (3) Limitations of telemedicine (when to refer); (4) Documentation standards; (5) Technology troubleshooting; (6) Legal/ethical guidelines.",
+                    "stakeholder_types": [
+                        "Doctors",
+                        "Nurses",
+                        "Medical Directors"
+                    ],
+                    "evidence_required": "Telemedicine training modules, Provider certification, QA feedback loops",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Doctors often resist telemedicine. Specific training needed on 'when to say no' and refer."
+                },
+                {
+                    "q_id": "Q4.1.3_HLT",
+                    "text": "Pharmacist/Dispenser Training: Training for e-pharmacy staff: (1) Order verification; (2) Drug interaction checking; (3) Patient counseling (via phone/chat); (4) Cold chain management; (5) Digital system usage.",
+                    "stakeholder_types": [
+                        "Pharmacists",
+                        "Dispensers"
+                    ],
+                    "evidence_required": "SOPs, Training logs, Error rates",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Dispensers often have lower qualifications than pharmacists. Supervision and training critical."
+                }
+            ]
+        },
+        {
+            "id": "4.2",
+            "name": "Patient Health & Digital Literacy",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q4.2.1_HLT",
+                    "text": "Patient App Usability & Literacy: Usability for low-literacy patients: (1) Icon-based navigation; (2) Voice/Audio instructions (local languages); (3) Video content; (4) Minimal text; (5) Accessibility features (large text); (6) User testing with target demographic.",
+                    "stakeholder_types": [
+                        "UX Designers",
+                        "Patients"
+                    ],
+                    "evidence_required": "UX research reports, Accessibility audit, User testing videos",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "Text-heavy apps fail. 'Oral' users need voice/video. Icons must be culturally relevant."
+                },
+                {
+                    "q_id": "Q4.2.2_HLT",
+                    "text": "Health Literacy Support: Helping patients understand advice: (1) Plain language explanations (no jargon); (2) Teach-back method support; (3) Visual aids (diagrams of how to take meds); (4) SMS reminders/tips; (5) FAQ accessibility.",
+                    "stakeholder_types": [
+                        "Content Creators",
+                        "Patients",
+                        "Doctors"
+                    ],
+                    "evidence_required": "Content readability analysis, Patient feedback, Educational materials",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Patients often nod but don't understand. Visuals (sun/moon for dosage) work best."
+                },
+                {
+                    "q_id": "Q4.2.3_HLT",
+                    "text": "Digital Onboarding Support: Helping patients get online: (1) Agent-assisted onboarding; (2) Data bundle provision (zero-rating?); (3) Device setup assistance; (4) Password management support; (5) Family member onboarding (proxy).",
+                    "stakeholder_types": [
+                        "Support Agents",
+                        "Patients"
+                    ],
+                    "evidence_required": "Onboarding scripts, Support logs",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "First-time internet users need hand-holding. Agents often do the setup."
+                }
+            ]
+        },
+        {
+            "id": "4.3",
+            "name": "Clinical & Technical Support",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q4.3.1_HLT",
+                    "text": "Clinical Support Desk: Support for medical issues: (1) Access to senior clinician for CHWs/Juniors; (2) 24/7 availability; (3) Response time for clinical queries; (4) Escalation protocols for emergencies; (5) Case discussion forums.",
+                    "stakeholder_types": [
+                        "CHWs",
+                        "Doctors",
+                        "Clinical Leads"
+                    ],
+                    "evidence_required": "Support desk logs, Escalation protocols, SLA data",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "CHWs are alone in the field. They need a 'lifeline' to a doctor for complex cases."
+                },
+                {
+                    "q_id": "Q4.3.2_HLT",
+                    "text": "Technical Support for Health Workers: IT support: (1) Device replacement/repair; (2) App troubleshooting; (3) Data sync support; (4) Password resets; (5) Connectivity troubleshooting.",
+                    "stakeholder_types": [
+                        "IT Support",
+                        "CHWs"
+                    ],
+                    "evidence_required": "Ticket logs, Device replacement policy",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "If the tablet breaks, the CHW stops working. Rapid replacement needed."
+                }
+            ]
+        },
+        {
+            "id": "4.4",
+            "name": "Institutional Capacity Building",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q4.4.1_HLT",
+                    "text": "Local Medical Capacity Building: Strengthening the system: (1) CME (Continuing Medical Education) credits; (2) Knowledge sharing (webinars, case studies); (3) Mentorship programs; (4) Partnership with medical schools; (5) Research capacity building.",
+                    "stakeholder_types": [
+                        "Medical Schools",
+                        "Associations",
+                        "Doctors"
+                    ],
+                    "evidence_required": "CME accreditation, Training calendar, Mentorship logs",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Tech should upskill the workforce, not just extract value. CME credits attract doctors."
+                },
+                {
+                    "q_id": "Q4.4.2_HLT",
+                    "text": "Supply Chain Capacity: Improving logistics skills: (1) Inventory management training; (2) Cold chain management training; (3) Forecasting skills; (4) Driver training (safety, security).",
+                    "stakeholder_types": [
+                        "Logistics Staff",
+                        "Pharmacists"
+                    ],
+                    "evidence_required": "Training records, SOPs",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Supply chain is often the weak link. Training drivers/store managers is high impact."
+                }
+            ]
+        }
+    ],
+    "scoring_notes": "Layer 4 (Competence) for Healthcare in SSA: CHW competence is the foundation of primary care. Patient literacy requires non-text interfaces. Clinical support structures must exist to back up frontline workers."
+}

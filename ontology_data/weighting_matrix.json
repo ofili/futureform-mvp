@@ -1,0 +1,47 @@
+{
+    "schema_version": "1.2.0",
+    "baseline_weights": {
+        "L1_Reliability": 0.20,
+        "L2_Transparency": 0.15,
+        "L3_Governance": 0.15,
+        "L4_Competence": 0.20,
+        "L5_Integrity": 0.15,
+        "L6_Ecosystem": 0.15
+    },
+    "context_adjustments": {
+        "Emerging Market Deployment": {
+            "L6_Ecosystem": {
+                "adjustment": 0.10,
+                "new_weight": 0.25,
+                "rationale": "Ecosystem and competence are make-or-break in emerging markets [12]."
+            },
+            "L4_Competence": {
+                "adjustment": 0.05,
+                "new_weight": 0.25
+            },
+            "L1_Reliability": {
+                "adjustment": -0.05,
+                "new_weight": 0.15,
+                "rationale": "Technical imperfections can be worked around with local support; L6 risk is higher [12]."
+            }
+        },
+        "Mission-Critical Infrastructure": {
+            "L1_Reliability": {
+                "adjustment": 0.10,
+                "new_weight": 0.30,
+                "rationale": "Reliability and vendor integrity are paramount; failure is catastrophic [12]."
+            },
+            "L5_Integrity": {
+                "adjustment": 0.05,
+                "new_weight": 0.20
+            },
+            "L6_Ecosystem": {
+                "adjustment": -0.05,
+                "new_weight": 0.10,
+                "rationale": "Governance (L3) and Reliability (L1) are prioritized over broad ecosystem for core infrastructure [12]."
+            }
+        }
+    },
+    "total_questions_cataloged": 602,
+    "last_updated": "2024-06-25"
+}

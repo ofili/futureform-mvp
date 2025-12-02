@@ -1,0 +1,157 @@
+{
+    "layer_id": "L1",
+    "layer_name": "Reliability",
+    "sector": "education",
+    "region": "Sub-Saharan Africa",
+    "total_questions": 12,
+    "total_sub_dimensions": 4,
+    "sub_dimensions": [
+        {
+            "id": "1.1",
+            "name": "System Availability & Uptime",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q1.1.1_EDU",
+                    "text": "Platform Uptime & Exam Reliability: Assess availability during critical periods: (1) Uptime guarantee (SLA) during exams/enrollment; (2) Peak load capacity (can it handle all students logging in at once?); (3) Failover mechanisms (backup servers); (4) Offline mode availability (can students take exams offline?); (5) Sync reliability (do offline results sync correctly?); (6) DDoS protection; (7) Historical uptime performance.",
+                    "stakeholder_types": [
+                        "Students",
+                        "Teachers",
+                        "Administrators",
+                        "IT Staff"
+                    ],
+                    "evidence_required": "Uptime logs, Stress test results, Offline sync test reports, SLA documentation",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Exam periods create massive traffic spikes. Offline mode critical as power/net often fails during exams."
+                },
+                {
+                    "q_id": "Q1.1.2_EDU",
+                    "text": "Offline-First Functionality: Assess capability to function without internet: (1) Content caching (download lessons for offline view); (2) Offline assessment (take quizzes offline); (3) Background syncing (upload progress when net returns); (4) Data conflict resolution (if multiple devices sync); (5) App size (lightweight for low storage phones); (6) P2P sharing (Bluetooth sharing of content); (7) Duration of offline viability.",
+                    "stakeholder_types": [
+                        "Rural Students",
+                        "Teachers",
+                        "Developers"
+                    ],
+                    "evidence_required": "Offline capability demo, Sync logic documentation, App size metrics, P2P sharing features",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Internet is intermittent/expensive. 'Offline-first' is not a feature, it's a requirement for equity."
+                },
+                {
+                    "q_id": "Q1.1.3_EDU",
+                    "text": "Low-Bandwidth Performance: Assess performance on slow networks: (1) Video compression quality (adaptive bitrate); (2) Audio-only mode availability; (3) Text-based fallback; (4) Image optimization; (5) Latency tolerance (for live classes); (6) Data consumption per hour; (7) 2G/3G compatibility.",
+                    "stakeholder_types": [
+                        "Students",
+                        "Parents (paying for data)",
+                        "Developers"
+                    ],
+                    "evidence_required": "Bandwidth usage tests, Compression specs, 2G/3G performance logs",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Data is expensive. 4G not universal. Video must work on 3G or have audio/text alternatives."
+                }
+            ]
+        },
+        {
+            "id": "1.2",
+            "name": "Data Integrity & Record Keeping",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q1.2.1_EDU",
+                    "text": "Academic Record Integrity: Ensure grades/certificates are permanent and unalterable: (1) Database backup frequency; (2) Immutable logs (audit trail of grade changes); (3) Prevention of unauthorized changes (teacher bribery risk); (4) Long-term archiving (records kept for 50+ years?); (5) Disaster recovery for records; (6) Digital signature verification; (7) Blockchain usage (optional for immutability).",
+                    "stakeholder_types": [
+                        "Students",
+                        "Employers",
+                        "Universities",
+                        "Regulators"
+                    ],
+                    "evidence_required": "Backup policy, Audit log samples, Archiving strategy, Disaster recovery plan",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Loss of academic records is common (fires, floods, lost paper). Digital records must be safer than paper. 'Sex for grades' or bribery requires strict audit trails."
+                },
+                {
+                    "q_id": "Q1.2.2_EDU",
+                    "text": "Identity Management Reliability: Ensure correct student identification: (1) Unique Student Identifier (USI) stability; (2) Biometric reliability (if used for exams); (3) Duplicate account prevention; (4) Account recovery reliability (lost password/phone); (5) Integration with national ID; (6) Session management (prevent cheating via multiple logins); (7) Parent-Student account linking.",
+                    "stakeholder_types": [
+                        "Administrators",
+                        "Exam Bodies",
+                        "Students"
+                    ],
+                    "evidence_required": "Identity management specs, Account recovery flows, Biometric accuracy data",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Exam impersonation is a major issue. Biometrics often used but can fail. Account recovery needed as phone numbers change often."
+                }
+            ]
+        },
+        {
+            "id": "1.3",
+            "name": "Device & Infrastructure Compatibility",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q1.3.1_EDU",
+                    "text": "Device Compatibility Matrix: Assess support for common devices: (1) Low-end Android support (older OS versions); (2) Feature phone support (SMS/USSD/KaiOS); (3) Desktop/Laptop support (shared school computers); (4) Tablet support; (5) Screen responsiveness (small screens); (6) Browser compatibility (Opera Mini, Chrome Lite); (7) Hardware requirement (RAM/Storage).",
+                    "stakeholder_types": [
+                        "Students",
+                        "Developers",
+                        "Schools"
+                    ],
+                    "evidence_required": "Device support list, Browser testing reports, Minimum specs documentation",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Most students use low-end Androids or parents' phones. Opera Mini common for data saving. Feature phone interface (SMS) increases reach."
+                },
+                {
+                    "q_id": "Q1.3.2_EDU",
+                    "text": "School Infrastructure Resilience: For hardware deployed in schools: (1) Power dependency (battery life of tablets/laptops); (2) Charging infrastructure (solar carts?); (3) Local server reliability (Raspberry Pi/Content hub); (4) Physical durability (dust/drop proof); (5) Theft prevention (locking mechanisms); (6) Maintenance simplicity; (7) Heat tolerance.",
+                    "stakeholder_types": [
+                        "School Administrators",
+                        "Hardware Providers",
+                        "Donors"
+                    ],
+                    "evidence_required": "Hardware specs (battery/ruggedness), Charging solution docs, Maintenance guides",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "School devices often sit unused due to lack of power or broken chargers. Ruggedization essential."
+                }
+            ]
+        },
+        {
+            "id": "1.4",
+            "name": "Content Delivery Reliability",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q1.4.1_EDU",
+                    "text": "Content Delivery Network (CDN) Performance: Assess content serving speed: (1) Local caching nodes (in-country servers); (2) Latency metrics; (3) Download success rates; (4) Resume capability (if download interrupted); (5) Bandwidth optimization; (6) DRM reliability (does protection block legitimate access?); (7) Update mechanism (delta updates).",
+                    "stakeholder_types": [
+                        "Students",
+                        "IT Staff",
+                        "Content Providers"
+                    ],
+                    "evidence_required": "CDN architecture, Latency tests, Download reliability logs, DRM policy",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "International CDNs often slow. Local caching/peering needed. Interrupted downloads must resume (data cost)."
+                },
+                {
+                    "q_id": "Q1.4.2_EDU",
+                    "text": "Live Class Reliability: For synchronous learning: (1) Connection stability handling (reconnect logic); (2) Audio clarity under packet loss; (3) Screen sharing quality; (4) Chat reliability; (5) Recording availability (immediate access after class); (6) Bandwidth scaling; (7) Participant limit handling.",
+                    "stakeholder_types": [
+                        "Teachers",
+                        "Students"
+                    ],
+                    "evidence_required": "Live stream metrics, Packet loss handling specs, Recording availability logs",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Live classes difficult due to connectivity. Audio clarity > Video. Recordings essential for those who miss live session."
+                }
+            ]
+        }
+    ],
+    "scoring_notes": "Layer 1 (Reliability) for Education in SSA: Offline-first is the defining requirement. If it doesn't work offline, it doesn't work for the majority. Data integrity (grades) is critical for trust."
+}

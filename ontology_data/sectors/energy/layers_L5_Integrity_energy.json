@@ -1,0 +1,192 @@
+{
+    "layer_id": "L5",
+    "layer_name": "Integrity",
+    "sector": "energy",
+    "region": "Sub-Saharan Africa",
+    "total_questions": 15,
+    "total_sub_dimensions": 4,
+    "sub_dimensions": [
+        {
+            "id": "5.1",
+            "name": "Vendor Financial Stability & Sustainability",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q5.1.1_ENR",
+                    "text": "Energy Company Financial Health - SSA: Assess long-term viability: (1) Unit economics (CAC vs LTV); (2) Portfolio quality (PAR30, PAR90 - repayment rates); (3) Funding runway; (4) Path to profitability; (5) Currency risk exposure (revenue in local currency, debt in USD); (6) Investor backing; (7) Audit status.",
+                    "stakeholder_types": [
+                        "Investors",
+                        "Regulators",
+                        "Partners"
+                    ],
+                    "evidence_required": "Financial statements, Portfolio quality reports (PAR), Unit economics analysis, Currency hedging strategy",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Many PAYG companies struggle with profitability. High PAR (Portfolio at Risk) indicates bad credit/product. Currency devaluation kills business models."
+                },
+                {
+                    "q_id": "Q5.1.2_ENR",
+                    "text": "Warranty Fund & Liability Management: Ability to honor warranties: (1) Warranty reserve fund; (2) Liability estimation; (3) Insurance coverage; (4) Bankruptcy contingency (who honors warranty if co fails?); (5) Spare parts financing; (6) Claims history; (7) Re-insurance.",
+                    "stakeholder_types": [
+                        "Regulators",
+                        "Consumer Protection",
+                        "Investors"
+                    ],
+                    "evidence_required": "Warranty reserve data, Liability analysis, Contingency plans",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "If company exits, warranties become worthless. Reserve funds essential. Bankruptcy contingency protects users."
+                },
+                {
+                    "q_id": "Q5.1.3_ENR",
+                    "text": "Business Model Sustainability: Viability of model: (1) Pricing sustainability (covers costs?); (2) Scale requirements; (3) Subsidy dependence (RBF, grants); (4) Market saturation risk; (5) Regulatory dependence; (6) Technology obsolescence risk; (7) Diversification.",
+                    "stakeholder_types": [
+                        "Investors",
+                        "Strategy Teams"
+                    ],
+                    "evidence_required": "Business plan, Sensitivity analysis, Subsidy dependency analysis",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Heavy reliance on grants/RBF (Results Based Financing) is a risk. Pricing must cover high logistics/service costs."
+                }
+            ]
+        },
+        {
+            "id": "5.2",
+            "name": "Market Commitment & Track Record",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q5.2.1_ENR",
+                    "text": "Operational Track Record - Off-Grid: Proven experience: (1) Years in operation in SSA; (2) Systems installed / Connections made; (3) Geographic footprint; (4) Retention rates; (5) Repayment track record; (6) Growth consistency; (7) Crisis management history (COVID, supply chain).",
+                    "stakeholder_types": [
+                        "Investors",
+                        "Partners",
+                        "Regulators"
+                    ],
+                    "evidence_required": "Operational dashboard, Impact reports, Historical data",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Fly-by-night operators common. Years of operation matters. Scale indicates reliability."
+                },
+                {
+                    "q_id": "Q5.2.2_ENR",
+                    "text": "Local Presence & Investment: Commitment to the country: (1) Local entity registration; (2) Physical offices/warehouses; (3) Local staff headcount; (4) Asset investment (vehicles, stock); (5) Community relationships; (6) Tax contribution; (7) Long-term strategy.",
+                    "stakeholder_types": [
+                        "Regulators",
+                        "Community",
+                        "Government"
+                    ],
+                    "evidence_required": "Registration docs, Asset register, Staffing records, Tax filings",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "Physical presence builds trust. 'Briefcase companies' avoided. Local assets show commitment."
+                }
+            ]
+        },
+        {
+            "id": "5.3",
+            "name": "References & Demonstrated Outcomes",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q5.3.1_ENR",
+                    "text": "User Impact Outcomes: Verified impact: (1) Energy access tier improvement (Tier 1 to Tier 2 etc.); (2) Economic impact (savings, income generation); (3) Quality of life (study hours, health); (4) Gender impact; (5) Environmental impact (kerosene displacement); (6) Customer satisfaction (NPS); (7) Independent impact studies.",
+                    "stakeholder_types": [
+                        "Donors",
+                        "Investors",
+                        "Users"
+                    ],
+                    "evidence_required": "Impact studies (GOGLA standardized), NPS scores, Case studies",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Impact claims must be verified. Kerosene displacement is key metric. Productive use impact growing importance."
+                },
+                {
+                    "q_id": "Q5.3.2_ENR",
+                    "text": "Industry Recognition & Certification: External validation: (1) Lighting Global / VeraSol certification; (2) GOGLA membership; (3) Industry awards; (4) Partner endorsements (mobile operators, banks); (5) Regulatory good standing; (6) ISO certifications; (7) Investor reputation.",
+                    "stakeholder_types": [
+                        "Partners",
+                        "Regulators"
+                    ],
+                    "evidence_required": "Certificates, Membership proof, Awards, Endorsement letters",
+                    "evidence_weight": "High",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "Lighting Global/VeraSol is the primary quality signal. GOGLA membership indicates adherence to industry code of conduct."
+                },
+                {
+                    "q_id": "Q5.3.3_ENR",
+                    "text": "Customer References: Verifiable user feedback: (1) Testimonials; (2) Village/Community references; (3) Pilot project results; (4) Complaint resolution examples; (5) Referenceable client list (for B2B/Mini-grids); (6) Social media sentiment; (7) Word of mouth reputation.",
+                    "stakeholder_types": [
+                        "New Users",
+                        "Partners"
+                    ],
+                    "evidence_required": "Testimonial database, Pilot reports, Social media analysis",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "Word of mouth is the strongest marketing channel. Community leaders' opinion is decisive."
+                }
+            ]
+        },
+        {
+            "id": "5.4",
+            "name": "Ethical Practices & Social Responsibility",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q5.4.1_ENR",
+                    "text": "Consumer Protection & Fair Sales: Ethical sales practices: (1) Sales agent code of conduct; (2) Prevention of overselling; (3) Transparent pricing disclosure; (4) No-pressure sales policies; (5) Vulnerable customer protection; (6) Data ethics; (7) Mystery shopper results.",
+                    "stakeholder_types": [
+                        "Consumers",
+                        "Regulators",
+                        "Industry Associations"
+                    ],
+                    "evidence_required": "Code of conduct, Sales training materials, Mystery shopper reports",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Agents commission-driven, risk of overselling/misleading. Vulnerable users (illiterate, elderly) need protection. GOGLA Consumer Protection Code."
+                },
+                {
+                    "q_id": "Q5.4.2_ENR",
+                    "text": "E-Waste Management & Circular Economy: Responsible end-of-life management: (1) Take-back schemes (batteries, panels); (2) Recycling partnerships; (3) Refurbishment programs; (4) E-waste policy; (5) Disposal tracking; (6) Battery life extension strategies; (7) Compliance with e-waste regulations.",
+                    "stakeholder_types": [
+                        "Regulators",
+                        "Environmental Agencies",
+                        "Community"
+                    ],
+                    "evidence_required": "E-waste policy, Recycling contracts, Take-back records, Refurbishment data",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Solar e-waste is a ticking time bomb. Batteries are hazardous. Take-back schemes difficult in rural areas but essential."
+                },
+                {
+                    "q_id": "Q5.4.3_ENR",
+                    "text": "Gender & Social Inclusion: Inclusive practices: (1) Women in workforce (agents, techs, management); (2) Products designed for women; (3) Reaching marginalized groups (refugees, extreme poor); (4) Gender pay equity; (5) Safe working conditions; (6) Community engagement; (7) Inclusion strategy.",
+                    "stakeholder_types": [
+                        "Community",
+                        "Donors",
+                        "Employees"
+                    ],
+                    "evidence_required": "Gender stats, Inclusion strategy, Product design notes",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Women are primary energy users (cooking, home). Female agents often more effective. Refugee settlements are large off-grid markets."
+                },
+                {
+                    "q_id": "Q5.4.4_ENR",
+                    "text": "Carbon Credit Integrity & Verification: Ensure validity of environmental claims: (1) Methodology used (Gold Standard, Verra, CDM?); (2) Verification process (third-party audits?); (3) Double counting prevention (registry tracking?); (4) Additionality proof (would project happen without credits?); (5) Baseline accuracy (kerosene displacement assumptions?); (6) Vintage of credits; (7) Buyer transparency (who buys the credits?).",
+                    "stakeholder_types": [
+                        "Investors",
+                        "Regulators",
+                        "Auditors"
+                    ],
+                    "evidence_required": "Carbon credit verification reports, Registry certificates, Methodology documentation",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Carbon finance is growing but risks 'greenwashing'. Verification is key."
+                }
+            ]
+        }
+    ],
+    "scoring_notes": "Layer 5 (Integrity) for Energy in SSA: Product quality (VeraSol) and financial sustainability (portfolio quality) are key. E-waste management is the major long-term integrity challenge. Ethical sales practices protect vulnerable consumers."
+}

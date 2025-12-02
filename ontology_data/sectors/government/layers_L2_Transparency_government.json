@@ -1,0 +1,140 @@
+{
+    "layer_id": "L2",
+    "layer_name": "Transparency",
+    "sector": "government",
+    "region": "Sub-Saharan Africa",
+    "total_questions": 12,
+    "total_sub_dimensions": 4,
+    "sub_dimensions": [
+        {
+            "id": "2.1",
+            "name": "Data Access & Usage Transparency",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q2.1.1_GOV",
+                    "text": "Citizen Data Access Logs: Knowing who viewed your data: (1) User portal to view access history ('Who checked my ID?'); (2) Notification of access; (3) Purpose of access declaration; (4) List of authorized agencies; (5) Dispute mechanism for unauthorized access; (6) Data sharing agreements publication; (7) Audit trail visibility.",
+                    "stakeholder_types": [
+                        "Citizens",
+                        "Privacy Advocates",
+                        "Data Protection Commissioner"
+                    ],
+                    "evidence_required": "Portal screenshots, Access log samples, Data sharing MOUs",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Citizens fear state surveillance. Seeing who accessed their data builds massive trust (e.g., Estonia model)."
+                },
+                {
+                    "q_id": "Q2.1.2_GOV",
+                    "text": "Privacy Policy & Rights: Clear rules: (1) Plain language privacy policy; (2) Translation into local languages; (3) Disclosure of third-party processors; (4) Right to correction explanation; (5) Data retention policy disclosure; (6) Contact for privacy officer; (7) Consent management (for optional services).",
+                    "stakeholder_types": [
+                        "Citizens",
+                        "Legal"
+                    ],
+                    "evidence_required": "Privacy policy docs, Translation samples, Consent forms",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Privacy policies often copy-pasted and ignored. Illiterate users need audio/visual explanations."
+                }
+            ]
+        },
+        {
+            "id": "2.2",
+            "name": "Procurement & Vendor Transparency",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q2.2.1_GOV",
+                    "text": "ID System Procurement Transparency: Who built it?: (1) Open tender process; (2) Publication of contract awards; (3) Beneficial ownership of local partners; (4) Cost per card/registrant disclosure; (5) Vendor track record check; (6) Technology lock-in disclosure; (7) Source code ownership (Open Source?).",
+                    "stakeholder_types": [
+                        "Civil Society",
+                        "Journalists",
+                        "Donors"
+                    ],
+                    "evidence_required": "Tender documents, Contract awards, Beneficial ownership registry",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "ID contracts are multi-million dollar deals prone to corruption. 'Secret' security contracts often hide kickbacks."
+                },
+                {
+                    "q_id": "Q2.2.2_GOV",
+                    "text": "Public Expenditure Tracking: Where the money goes: (1) Budget allocation for digital projects; (2) Expenditure reports; (3) Audit General reports on project; (4) Value for money assessment; (5) Donor funding transparency; (6) Recurring cost disclosure (license fees); (7) Public dashboard.",
+                    "stakeholder_types": [
+                        "Taxpayers",
+                        "Donors",
+                        "Auditor General"
+                    ],
+                    "evidence_required": "Budget docs, Audit reports, Expenditure dashboards",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Digital projects often have huge cost overruns. Public needs to know if loan money was used effectively."
+                }
+            ]
+        },
+        {
+            "id": "2.3",
+            "name": "Service Delivery & Fees",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q2.3.1_GOV",
+                    "text": "Official Fee Transparency: Preventing bribes: (1) Clear display of official fees (posters/online); (2) Digital payment only (no cash = no bribes); (3) Receipt generation; (4) 'Service Charter' (timelines); (5) Reporting channel for bribe demands; (6) Refund policy; (7) Fee breakdown.",
+                    "stakeholder_types": [
+                        "Citizens",
+                        "Anti-Corruption Agency"
+                    ],
+                    "evidence_required": "Fee schedule, Digital receipt samples, Service charter",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "Citizens often pay 'facilitation fees' to get IDs. Digital payments (Mobile Money) reduce this friction."
+                },
+                {
+                    "q_id": "Q2.3.2_GOV",
+                    "text": "Application Tracking & Status: Reducing uncertainty: (1) SMS/Online status tracking; (2) Clear rejection reasons; (3) Estimated completion date; (4) Notification of readiness; (5) Queue visibility (for physical centers); (6) Escalation for delays; (7) Lost application recovery.",
+                    "stakeholder_types": [
+                        "Applicants",
+                        "Support Staff"
+                    ],
+                    "evidence_required": "Tracking portal demo, SMS logs, Rejection letter templates",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "People travel long distances to check if ID is ready. SMS notification saves time and money."
+                }
+            ]
+        },
+        {
+            "id": "2.4",
+            "name": "Algorithm & Decision Transparency",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q2.4.1_GOV",
+                    "text": "Automated Decision Transparency: Explaining algorithms: (1) Explanation of automated rejection (e.g., photo quality); (2) Criteria for 'flagging' suspicious applications; (3) Human-in-the-loop for final rejection; (4) Bias testing of algorithms; (5) Appeal process for automated decisions; (6) Source of data for verification; (7) Error rates disclosure.",
+                    "stakeholder_types": [
+                        "Legal",
+                        "Citizens",
+                        "Human Rights Groups"
+                    ],
+                    "evidence_required": "Algorithm documentation, Appeal process flow, Bias audit",
+                    "evidence_weight": "Advanced",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Automated systems might flag certain names/regions as 'suspicious'. Transparency prevents discrimination."
+                },
+                {
+                    "q_id": "Q2.4.2_GOV",
+                    "text": "Open Data & Statistics: Public insights: (1) Publication of enrollment stats (by region/gender); (2) Service delivery stats; (3) API for researchers (anonymized); (4) Census data integration; (5) Timeliness of data; (6) Data quality reports; (7) Visualization dashboards.",
+                    "stakeholder_types": [
+                        "Researchers",
+                        "Planning Ministry",
+                        "Public"
+                    ],
+                    "evidence_required": "Open data portal, Statistical reports, API docs",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Data often hidden. Open data helps private sector plan and civil society monitor inclusion."
+                }
+            ]
+        }
+    ],
+    "scoring_notes": "Layer 2 (Transparency) for Government in SSA: Transparency is the antidote to corruption. Knowing 'who accessed my data' and 'what is the official fee' changes the power dynamic."
+}

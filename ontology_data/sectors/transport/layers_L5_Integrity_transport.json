@@ -1,0 +1,142 @@
+{
+    "layer_id": "L5",
+    "layer_name": "Integrity",
+    "sector": "transport",
+    "region": "Sub-Saharan Africa",
+    "total_questions": 12,
+    "total_sub_dimensions": 4,
+    "sub_dimensions": [
+        {
+            "id": "5.1",
+            "name": "Fair Treatment & Non-Discrimination",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q5.1.1_TRN",
+                    "text": "Passenger Non-Discrimination: Equal service: (1) Policy against discrimination (race, gender, disability); (2) Monitoring of trip refusals (by destination); (3) Accessibility features (wheelchair-accessible vehicles); (4) Service to 'unsafe' areas; (5) Pricing fairness (no redlining); (6) Complaint mechanism for discrimination; (7) Driver training on inclusion.",
+                    "stakeholder_types": [
+                        "Passengers",
+                        "Disability Rights Groups",
+                        "Regulators"
+                    ],
+                    "evidence_required": "Non-discrimination policy, Trip refusal analysis, Accessibility vehicle count",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Drivers often refuse trips to 'slum' areas or at night. Wheelchair-accessible vehicles are rare. Discrimination by tribe/accent occurs."
+                },
+                {
+                    "q_id": "Q5.1.2_TRN",
+                    "text": "Driver Fair Treatment: Algorithmic fairness: (1) Fair allocation of trips (no favoritism); (2) Transparent deactivation criteria; (3) Appeal process for penalties; (4) Protection from false passenger accusations; (5) Fair rating system (outlier removal); (6) Equal access to incentives; (7) Bias testing of algorithms.",
+                    "stakeholder_types": [
+                        "Drivers",
+                        "Labor Advocates"
+                    ],
+                    "evidence_required": "Trip allocation algorithm, Deactivation appeal logs, Rating fairness analysis",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Drivers suspect favoritism (better trips to 'preferred' drivers). False accusations (theft, harassment) can destroy livelihoods."
+                }
+            ]
+        },
+        {
+            "id": "5.2",
+            "name": "Environmental & Social Responsibility",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q5.2.1_TRN",
+                    "text": "Environmental Impact Management: Green transport: (1) Emissions tracking (carbon footprint); (2) Incentives for electric/hybrid vehicles; (3) Route optimization for fuel efficiency; (4) Carpooling/shared rides promotion; (5) Offset programs (tree planting); (6) Reporting on environmental impact; (7) Transition plan to clean energy.",
+                    "stakeholder_types": [
+                        "Environmental Groups",
+                        "Regulators",
+                        "Public"
+                    ],
+                    "evidence_required": "Carbon footprint reports, EV incentive programs, Offset initiatives",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Air pollution is a major urban issue. EVs are expensive but growing (e.g., electric boda-bodas in Kenya). Carpooling reduces congestion."
+                },
+                {
+                    "q_id": "Q5.2.2_TRN",
+                    "text": "Traffic Congestion & Urban Impact: Responsible growth: (1) Congestion impact assessment; (2) Collaboration with city planners; (3) Support for public transport integration; (4) Peak hour demand management; (5) Parking compliance; (6) Noise pollution mitigation (boda-bodas); (7) Community engagement.",
+                    "stakeholder_types": [
+                        "City Governments",
+                        "Urban Planners",
+                        "Residents"
+                    ],
+                    "evidence_required": "Congestion studies, Public transport integration plans, Community feedback",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Ride-hailing adds to congestion. Integration with matatus (minibuses) could help. Boda-bodas are noisy and chaotic."
+                }
+            ]
+        },
+        {
+            "id": "5.3",
+            "name": "Ethical Business Practices",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q5.3.1_TRN",
+                    "text": "Pricing Ethics & Exploitation Prevention: Fair pricing: (1) Cap on surge pricing (during emergencies); (2) Transparency on dynamic pricing; (3) Protection of vulnerable users (elderly, disabled); (4) No predatory pricing (undercutting to monopolize); (5) Fair commission rates; (6) No hidden fees; (7) Regulatory compliance on pricing.",
+                    "stakeholder_types": [
+                        "Passengers",
+                        "Drivers",
+                        "Regulators"
+                    ],
+                    "evidence_required": "Pricing policy, Surge cap documentation, Regulatory filings",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Surge during emergencies (floods, protests) is seen as exploitative. Regulators have intervened (e.g., Kenya capping surge)."
+                },
+                {
+                    "q_id": "Q5.3.2_TRN",
+                    "text": "Anti-Corruption & Bribery: Clean operations: (1) Policy against bribes (to police, regulators); (2) Reporting mechanism for bribery; (3) Training on anti-corruption; (4) Transparency in regulatory interactions; (5) Whistleblower protection; (6) Audit of payments to officials; (7) Collaboration with anti-corruption agencies.",
+                    "stakeholder_types": [
+                        "Drivers",
+                        "Regulators",
+                        "Anti-Corruption Agencies"
+                    ],
+                    "evidence_required": "Anti-bribery policy, Training logs, Whistleblower reports",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Traffic police often demand bribes. Platforms must not facilitate this. Drivers need support to resist."
+                }
+            ]
+        },
+        {
+            "id": "5.4",
+            "name": "Data Ethics & User Trust",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q5.4.1_TRN",
+                    "text": "Ethical Data Use: Responsible data practices: (1) No sale of user data to third parties; (2) Consent for secondary uses (research, marketing); (3) Anonymization for analytics; (4) Protection of sensitive data (health, political); (5) Transparency on government data requests; (6) Data minimization principle; (7) User control over data.",
+                    "stakeholder_types": [
+                        "Users",
+                        "Privacy Advocates",
+                        "Data Protection Commissioner"
+                    ],
+                    "evidence_required": "Data ethics policy, Consent management system, Transparency reports",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Location data is highly sensitive (can reveal political affiliations, religious sites). Government surveillance is a risk."
+                },
+                {
+                    "q_id": "Q5.4.2_TRN",
+                    "text": "Algorithmic Accountability: Fair algorithms: (1) Bias testing (gender, race, location); (2) Explainability of decisions (deactivation, pricing); (3) Human oversight of automated decisions; (4) Regular audits of algorithms; (5) Transparency on algorithm changes; (6) Redress for algorithmic harm; (7) Stakeholder input on algorithm design.",
+                    "stakeholder_types": [
+                        "Drivers",
+                        "Passengers",
+                        "Ethicists"
+                    ],
+                    "evidence_required": "Bias audit reports, Algorithm change logs, Redress mechanisms",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Algorithms can perpetuate discrimination (e.g., avoiding certain neighborhoods). Transparency and accountability are essential."
+                }
+            ]
+        }
+    ],
+    "scoring_notes": "Layer 5 (Integrity) for Transport in SSA: Non-discrimination (destination, disability) is a major trust issue. Environmental impact is growing in importance. Ethical pricing (surge caps) is a regulatory flashpoint."
+}

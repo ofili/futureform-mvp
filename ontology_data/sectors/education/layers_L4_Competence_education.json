@@ -1,0 +1,140 @@
+{
+    "layer_id": "L4",
+    "layer_name": "Competence",
+    "sector": "education",
+    "region": "Sub-Saharan Africa",
+    "total_questions": 12,
+    "total_sub_dimensions": 4,
+    "sub_dimensions": [
+        {
+            "id": "4.1",
+            "name": "Teacher Skills & Training",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q4.1.1_EDU",
+                    "text": "Teacher Digital Literacy: Assess ability to use EdTech: (1) Basic computer/smartphone skills; (2) Ability to use LMS/SIS; (3) Troubleshooting basic issues; (4) Online pedagogy (teaching via Zoom/WhatsApp); (5) Digital content creation; (6) Cyber safety awareness; (7) Training frequency.",
+                    "stakeholder_types": [
+                        "Teachers",
+                        "Trainers",
+                        "EdTech Providers"
+                    ],
+                    "evidence_required": "Digital literacy assessment results, Training logs, Usage analytics",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Teachers often less tech-savvy than students. Hardware deployed often sits unused because teachers can't use it."
+                },
+                {
+                    "q_id": "Q4.1.2_EDU",
+                    "text": "Pedagogical Competence: Assess teaching quality: (1) Subject matter mastery; (2) Learner-centered methods (vs rote learning); (3) Classroom management (large classes); (4) Inclusive teaching (special needs); (5) Assessment skills (formative vs summative); (6) Continuous Professional Development (CPD); (7) Certification status.",
+                    "stakeholder_types": [
+                        "Teachers",
+                        "School Inspectors",
+                        "Students"
+                    ],
+                    "evidence_required": "Lesson observation reports, CPD records, Student performance data",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Rote learning dominant. Shift to CBC (Competency Based Curriculum) requires massive re-training. Large class sizes (50-100) challenge pedagogy."
+                }
+            ]
+        },
+        {
+            "id": "4.2",
+            "name": "Student Skills & Learning Outcomes",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q4.2.1_EDU",
+                    "text": "Foundational Literacy & Numeracy: Assess core skills: (1) Reading fluency (grade level); (2) Basic numeracy; (3) Language of instruction mastery (English/French vs Mother Tongue); (4) Remedial support availability; (5) Assessment frequency; (6) Learning poverty rate; (7) Transition readiness.",
+                    "stakeholder_types": [
+                        "Students",
+                        "Parents",
+                        "Ministry of Education"
+                    ],
+                    "evidence_required": "Standardized test scores (EGRA/EGMA), Report cards, Remedial program data",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "Learning poverty high (10-year-olds can't read). EdTech must address foundations before advanced topics. Language barrier is huge."
+                },
+                {
+                    "q_id": "Q4.2.2_EDU",
+                    "text": "Digital & 21st Century Skills: Assess future readiness: (1) Digital literacy (using devices/internet); (2) Coding/Computational thinking; (3) Critical thinking & problem solving; (4) Collaboration skills; (5) Financial literacy; (6) Online safety awareness; (7) Employability skills.",
+                    "stakeholder_types": [
+                        "Students",
+                        "Employers",
+                        "EdTech Providers"
+                    ],
+                    "evidence_required": "Digital skills assessment, Project portfolios, Employer feedback",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Digital divide means many leave school without touching a computer. Mobile-first digital skills essential."
+                }
+            ]
+        },
+        {
+            "id": "4.3",
+            "name": "Institutional Management Capacity",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q4.3.1_EDU",
+                    "text": "School Leadership & Management: Assess admin capacity: (1) Financial management (budgeting, fee collection); (2) Strategic planning; (3) Staff management (hiring, retention); (4) Infrastructure maintenance planning; (5) Community engagement; (6) Data management (EMIS usage); (7) Crisis management.",
+                    "stakeholder_types": [
+                        "Head Teachers",
+                        "School Boards",
+                        "Ministry of Education"
+                    ],
+                    "evidence_required": "School development plan, Financial audits, Staff retention data",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Head teachers often promoted for seniority, not management skills. Financial mismanagement common."
+                },
+                {
+                    "q_id": "Q4.3.2_EDU",
+                    "text": "EdTech Implementation Capacity: Ability to deploy technology: (1) IT support staff availability; (2) Change management strategy; (3) Device management policy; (4) Helpdesk responsiveness; (5) Vendor relationship management; (6) Pilot evaluation skills; (7) Sustainability planning.",
+                    "stakeholder_types": [
+                        "IT Staff",
+                        "Administrators"
+                    ],
+                    "evidence_required": "IT support logs, Implementation plan, Device inventory",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Schools often receive donated tech but lack capacity to maintain it. 'Graveyards' of computers common."
+                }
+            ]
+        },
+        {
+            "id": "4.4",
+            "name": "User Experience (UX) & Design",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q4.4.1_EDU",
+                    "text": "UX for Low Literacy/Digital Skills: Design for context: (1) Intuitive navigation (icons vs text); (2) Voice/Audio instructions; (3) Local language interfaces; (4) Minimal steps to access content; (5) Error tolerance (easy to undo); (6) Onboarding simplicity; (7) Accessibility features.",
+                    "stakeholder_types": [
+                        "Designers",
+                        "Users (Parents/Students)"
+                    ],
+                    "evidence_required": "UX testing reports, User feedback, Interface screenshots",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Apps designed for West often fail. Users may be first-time smartphone users. Text-heavy UIs fail."
+                },
+                {
+                    "q_id": "Q4.4.2_EDU",
+                    "text": "Gamification & Engagement: Keeping students motivated: (1) Age-appropriate gamification (points, badges); (2) Streak mechanics (daily usage); (3) Social learning features (leaderboards?); (4) Feedback loops (immediate correction); (5) Notification strategy (nudges); (6) Content interactivity; (7) Retention rates.",
+                    "stakeholder_types": [
+                        "Students",
+                        "Product Managers"
+                    ],
+                    "evidence_required": "Engagement metrics (DAU/MAU), Retention curves, Gamification design doc",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Self-paced learning requires high motivation. Gamification helps, but must not distract from learning."
+                }
+            ]
+        }
+    ],
+    "scoring_notes": "Layer 4 (Competence) for Education in SSA: Teacher digital literacy is the bottleneck for EdTech. Student foundational literacy is the crisis. UX must accommodate low digital exposure."
+}

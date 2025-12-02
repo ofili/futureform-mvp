@@ -1,0 +1,68 @@
+🔍 Phase 1-3 Database Verification
+
+============================================================
+
+📊 1. Trust Layers:
+   ✅ Found 6 layers (expected: 6)
+      - L1: Reliability (4 sub-dimensions)
+      - L2: Transparency (5 sub-dimensions)
+      - L3: Governance (4 sub-dimensions)
+      - L4: Competence (5 sub-dimensions)
+      - L5: Integrity (4 sub-dimensions)
+      - L6: Ecosystem (6 sub-dimensions)
+
+📊 2. Sub-Dimensions:
+   ✅ Found 28 sub-dimensions (expected: ~28)
+
+📊 3. Trust Questions:
+   ✅ Found 83 questions (expected: ~83)
+
+📊 4. Partner Types:
+   ✅ Found 0 partner types
+
+📊 5. Question-Partner Type Mappings:
+   ✅ Found 0 question mappings
+
+📊 6. Data Integrity:
+❌ Error during verification: PrismaClientValidationError: 
+Invalid `prisma.trustSubDimension.count()` invocation in
+C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\prisma\verify-database.js:49:68
+
+  46 console.log('\n📊 6. Data Integrity:');
+  47 
+  48 // All sub-dimensions should have a layer
+→ 49 const subDimsWithoutLayer = await prisma.trustSubDimension.count({
+       select: {
+         _count: {
+           select: {
+             _all: true
+           }
+         }
+       },
+       where: {
+     +   layerId: {
+     +     equals: String | StringFieldRefInput,
+     +     in: String[] | ListStringFieldRefInput,
+     +     notIn: String[] | ListStringFieldRefInput,
+     +     lt: String | StringFieldRefInput,
+     +     lte: String | StringFieldRefInput,
+     +     gt: String | StringFieldRefInput,
+     +     gte: String | StringFieldRefInput,
+     +     contains: String | StringFieldRefInput,
+     +     startsWith: String | StringFieldRefInput,
+     +     endsWith: String | StringFieldRefInput,
+     +     mode: QueryMode,
+     +     not: String | NestedStringFilter
+     +   }
+       }
+     })
+
+Argument `layerId` must not be null.
+    at Nn (C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\node_modules\@prisma\client\runtime\library.js:29:1363)
+    at ei.handleRequestError (C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\node_modules\@prisma\client\runtime\library.js:121:6911)
+    at ei.handleAndLogRequestError (C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\node_modules\@prisma\client\runtime\library.js:121:6593)
+    at ei.request (C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\node_modules\@prisma\client\runtime\library.js:121:6300)
+    at async a (C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\node_modules\@prisma\client\runtime\library.js:130:9551)
+    at async verifyDatabase (C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\prisma\verify-database.js:49:37) {
+  clientVersion: '6.19.0'
+}

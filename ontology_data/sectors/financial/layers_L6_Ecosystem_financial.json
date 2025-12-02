@@ -1,0 +1,335 @@
+{
+    "layer_id": "L6",
+    "layer_name": "Ecosystem",
+    "sector": "financial",
+    "region": "Sub-Saharan Africa",
+    "total_questions": 21,
+    "total_sub_dimensions": 6,
+    "sub_dimensions": [
+        {
+            "id": "6.1",
+            "name": "Infrastructure Dependencies & Constraints",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q6.1.1.1_FIN",
+                    "text": "Mobile Network Infrastructure for Mobile Money - SSA: Assess mobile network dependency and quality: (1) USSD gateway reliability (uptime %, redundancy); (2) SMS delivery infrastructure (success rates, latency); (3) 2G/3G/4G coverage (rural areas where users live); (4) Network congestion (performance during peak hours); (5) Multi-operator support (works on all networks - Safaricom, Airtel, MTN, Orange?); (6) Network outage impact (what happens when network down?); (7) Cost of USSD/SMS (affordable for users?).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Mobile Network Operators",
+                        "Platform Operators",
+                        "Regulators"
+                    ],
+                    "evidence_required": "USSD gateway reliability data, SMS delivery metrics, Network coverage maps, Congestion analysis, Multi-operator support documentation, Outage impact assessment, USSD/SMS pricing",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "USSD gateway = single point of failure. SMS delivery critical (confirmations). 2G still dominant (rural). Network congestion common. Multi-operator support essential. USSD/SMS costs add up."
+                },
+                {
+                    "q_id": "Q6.1.1.2_FIN",
+                    "text": "Agent Infrastructure Dependencies: Assess agent operational infrastructure: (1) Electricity access (for POS device charging); (2) Mobile network coverage (for POS connectivity); (3) Physical security (safe locations for cash storage); (4) Banking access (can agents deposit/withdraw cash?); (5) Transport access (can agents travel to rebalance liquidity?); (6) Real estate (can agents afford shop rent?); (7) Regulatory environment (licensing, taxation of agents).",
+                    "stakeholder_types": [
+                        "Agents",
+                        "Platform Operators",
+                        "Banks",
+                        "Regulators"
+                    ],
+                    "evidence_required": "Electricity access data, Network coverage at agent locations, Security assessments, Banking access mapping, Transport availability, Real estate costs, Agent regulatory framework",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Electricity unreliable (agents struggle to charge POS). Network coverage gaps. Security major concern (agents hold cash). Banking access limited (rural). Transport expensive. Rent high (urban)."
+                },
+                {
+                    "q_id": "Q6.1.1.3_FIN",
+                    "text": "Banking System Integration Dependencies: Assess integration with banking infrastructure: (1) Bank-to-mobile money interoperability (can users link accounts?); (2) Real-time settlement (or batch processing?); (3) Banking hours constraints (banks closed weekends - impact on mobile money?); (4) Cross-border banking (for international remittances); (5) Trust account management (where are customer funds held?); (6) Payment system integration (national payment switches); (7) Banking system reliability (do bank systems go down often?).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Banks",
+                        "Platform Operators",
+                        "Central Banks"
+                    ],
+                    "evidence_required": "Bank integration documentation, Settlement procedures, Banking hours analysis, Cross-border banking, Trust account details, Payment system integration, Banking system reliability data",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Bank integration weak but improving. Real-time settlement limited. Banking hours constrain mobile money. Cross-border banking complex. Trust accounts mandatory (fund safety). Bank systems unreliable."
+                }
+            ]
+        },
+        {
+            "id": "6.1.2",
+            "name": "Regulatory & Policy Environment",
+            "weight": 0.15,
+            "questions": [
+                {
+                    "q_id": "Q6.1.2.1_FIN",
+                    "text": "Financial Services Regulatory Environment - SSA: Assess regulatory landscape for mobile money: (1) Central bank policies (supportive of mobile money? barriers?); (2) E-money regulations (licensing requirements, capital requirements); (3) AML/KYC regulations (compliance burden, flexibility for unbanked); (4) Consumer protection regulations (fee caps, dispute resolution); (5) Agent regulations (licensing, supervision); (6) Interoperability regulations (mandated or voluntary?); (7) Cross-border regulations (remittance rules, FX controls).",
+                    "stakeholder_types": [
+                        "Platform Operators",
+                        "Central Banks",
+                        "Regulators",
+                        "Industry Associations"
+                    ],
+                    "evidence_required": "Central bank policies, E-money regulations, AML/KYC requirements, Consumer protection rules, Agent regulations, Interoperability mandates, Cross-border regulations",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Regulatory environment varies widely (54 countries). Some supportive, others restrictive. AML/KYC balance critical (inclusion vs compliance). Consumer protection emerging. Interoperability mandated in some countries."
+                },
+                {
+                    "q_id": "Q6.1.2.2_FIN",
+                    "text": "Telecommunications Regulatory Environment: Assess telecom regulations affecting mobile money: (1) USSD pricing regulations (who sets prices? caps?); (2) SMS pricing regulations (cost to send confirmations); (3) Mobile network operator regulations (can MNOs offer mobile money?); (4) SIM registration regulations (mandatory SIM registration - KYC implications); (5) Network quality regulations (minimum service standards); (6) Interoperability regulations (must MNOs interconnect?); (7) Taxation of mobile money (transaction taxes, VAT).",
+                    "stakeholder_types": [
+                        "Platform Operators",
+                        "Mobile Network Operators",
+                        "Telecom Regulators",
+                        "Tax Authorities"
+                    ],
+                    "evidence_required": "USSD pricing regulations, SMS pricing, MNO mobile money regulations, SIM registration rules, Network quality standards, Interconnection requirements, Mobile money taxation",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "USSD pricing contentious (MNOs vs mobile money providers). SMS costs significant. MNO dominance in mobile money. SIM registration mandatory (KYC). Transaction taxes controversial (Uganda)."
+                },
+                {
+                    "q_id": "Q6.1.2.3_FIN",
+                    "text": "Political & Policy Risk - Financial Services: Assess political risk to mobile money operations: (1) Political stability (risk of regime change, conflict); (2) Policy continuity (will mobile money policies survive elections?); (3) Regulatory risk (sudden policy changes - transaction taxes, fee caps); (4) Currency controls (can providers repatriate profits?); (5) Expropriation risk (could government seize mobile money operations?); (6) Corruption risk (bribes for licenses, compliance?); (7) Political risk mitigation (insurance, diversification).",
+                    "stakeholder_types": [
+                        "Platform Operators",
+                        "Investors",
+                        "Insurers",
+                        "Political Risk Analysts"
+                    ],
+                    "evidence_required": "Political risk assessments, Policy continuity analysis, Regulatory change history, Currency control documentation, Expropriation risk insurance, Corruption risk mitigation, Political risk insurance",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Political risk significant (some countries). Policy changes sudden (Uganda transaction tax). Currency controls affect profit repatriation. Expropriation rare but possible. Corruption varies by country."
+                }
+            ]
+        },
+        {
+            "id": "6.2",
+            "name": "Stakeholder Ecosystem & Relationships",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q6.2.1.1_FIN",
+                    "text": "Agent Network Ecosystem: Assess agent network structure and dynamics: (1) Agent density (agents per 1000 people, geographic distribution); (2) Agent types (exclusive, non-exclusive, super-agents); (3) Agent ownership (independent, franchised, company-owned); (4) Agent associations (do agents organize collectively?); (5) Agent-provider relationships (power dynamics, fairness); (6) Agent-user relationships (trust, accessibility); (7) Agent competition (multiple providers at same location?).",
+                    "stakeholder_types": [
+                        "Agents",
+                        "Platform Operators",
+                        "Users",
+                        "Agent Associations"
+                    ],
+                    "evidence_required": "Agent density mapping, Agent type breakdown, Ownership structures, Agent association documentation, Agent-provider contracts, Agent-user trust studies, Competition analysis",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Agent network = distribution infrastructure. Density varies (urban vs rural). Super-agents emerging. Agent associations forming (collective bargaining). Agent-provider power imbalance. User-agent trust critical."
+                },
+                {
+                    "q_id": "Q6.2.1.2_FIN",
+                    "text": "Financial Services Ecosystem Integration: Map integration with broader financial ecosystem: (1) Banking partnerships (which banks integrated?); (2) Microfinance partnerships (MFI loan disbursement/repayment); (3) Insurance partnerships (micro-insurance products); (4) Merchant ecosystem (how many merchants accept mobile money?); (5) Biller ecosystem (utilities, schools, government accepting mobile money); (6) Remittance partnerships (international money transfer); (7) Fintech ecosystem (third-party apps, services).",
+                    "stakeholder_types": [
+                        "Banks",
+                        "MFIs",
+                        "Insurers",
+                        "Merchants",
+                        "Billers",
+                        "Remittance Companies",
+                        "Fintechs"
+                    ],
+                    "evidence_required": "Banking partnerships, MFI integrations, Insurance products, Merchant acceptance data, Biller integrations, Remittance partnerships, Fintech ecosystem mapping",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Mobile money = financial ecosystem hub. Banking integration growing. MFI integration important (credit access). Merchant acceptance expanding. Bill payment critical. Remittances huge. Fintech ecosystem emerging."
+                },
+                {
+                    "q_id": "Q6.2.1.3_FIN",
+                    "text": "Regulatory & Industry Stakeholder Relationships: Assess relationships with key stakeholders: (1) Central bank relationship (collaborative or adversarial?); (2) Telecom regulator relationship (USSD pricing disputes?); (3) Tax authority relationship (compliance, disputes); (4) Consumer protection agency relationship (complaints, investigations); (5) Industry association participation (GSMA, local associations); (6) Development partner relationships (World Bank, USAID support); (7) Civil society relationships (consumer advocates, privacy groups).",
+                    "stakeholder_types": [
+                        "Central Banks",
+                        "Regulators",
+                        "Tax Authorities",
+                        "Consumer Protection",
+                        "Industry Associations",
+                        "Development Partners",
+                        "Civil Society"
+                    ],
+                    "evidence_required": "Central bank engagement documentation, Telecom regulator interactions, Tax compliance, Consumer protection cases, Industry association membership, Development partner support, Civil society engagement",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Central bank relationship critical (licensing, regulation). Telecom regulator important (USSD pricing). Tax compliance essential. Consumer protection growing. Industry associations important (GSMA). Development partners influential."
+                }
+            ]
+        },
+        {
+            "id": "6.2.2",
+            "name": "Community & Cultural Context",
+            "weight": 0.15,
+            "questions": [
+                {
+                    "q_id": "Q6.2.2.1_FIN",
+                    "text": "Community Trust & Adoption - Mobile Money: Assess community-level trust and adoption dynamics: (1) Community acceptance (do communities trust mobile money?); (2) Traditional leader engagement (chiefs, elders - do they support?); (3) Agent reputation (are agents trusted in communities?); (4) Word-of-mouth dynamics (how do users learn about mobile money?); (5) Social network effects (do users influence each other?); (6) Cultural barriers (cash culture, distrust of formal finance); (7) Trust-building strategies (how is trust established?).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Communities",
+                        "Traditional Leaders",
+                        "Agents",
+                        "Platform Operators"
+                    ],
+                    "evidence_required": "Community acceptance studies, Traditional leader engagement, Agent reputation surveys, Adoption pathway analysis, Social network studies, Cultural barrier analysis, Trust-building documentation",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Community trust critical for adoption. Traditional leaders influential. Agent reputation key (local trust). Word-of-mouth powerful. Social networks drive adoption. Cash culture strong. Trust takes time."
+                },
+                {
+                    "q_id": "Q6.2.2.2_FIN",
+                    "text": "Language & Financial Literacy Ecosystem: Assess language and literacy context: (1) Language diversity (how many languages in target area?); (2) Platform language support (English, French, local languages); (3) Financial literacy levels (do users understand financial concepts?); (4) Numeracy levels (can users calculate fees, balances?); (5) Financial education ecosystem (who provides financial literacy training?); (6) Agent role in education (do agents educate users?); (7) Media channels (radio, SMS, in-person - which work for education?).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Financial Educators",
+                        "Agents",
+                        "Media",
+                        "Platform Operators"
+                    ],
+                    "evidence_required": "Language mapping, Platform language support, Financial literacy assessments, Numeracy assessments, Financial education ecosystem mapping, Agent education role, Media channel effectiveness",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "Language diversity extreme. Local languages essential. Financial literacy low. Numeracy challenges. Financial education limited. Agents critical educators. Radio effective (mass reach)."
+                },
+                {
+                    "q_id": "Q6.2.2.3_FIN",
+                    "text": "Social Norms & Gender Dynamics - Mobile Money: Assess social norms affecting mobile money adoption: (1) Gender norms (women's access to phones, money, decision-making); (2) Age norms (youth vs elderly - adoption patterns); (3) Wealth stratification (do benefits reach poorest or only better-off?); (4) Urban-rural dynamics (different adoption patterns, needs); (5) Social networks (how do users share information, make decisions?); (6) Gender-based violence risk (does mobile money increase women's vulnerability?); (7) Inclusion strategies (how are marginalized groups included?).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Women",
+                        "Youth",
+                        "Social Scientists",
+                        "Gender Specialists"
+                    ],
+                    "evidence_required": "Gender analysis, Age-disaggregated data, Wealth stratification analysis, Urban-rural comparison, Social network analysis, GBV risk assessment, Inclusion strategy documentation",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Gender norms major barrier (women lack phone access, control over money). Youth more tech-savvy. Wealth stratification - benefits may not reach poorest. Urban-rural divide. GBV risk must be assessed."
+                }
+            ]
+        },
+        {
+            "id": "6.2.3",
+            "name": "Equity, Access & Inclusion",
+            "weight": 0.15,
+            "questions": [
+                {
+                    "q_id": "Q6.2.3.1_FIN",
+                    "text": "Urban-Rural Financial Inclusion Gap: Assess and address urban-rural disparities: (1) Agent density gap (urban vs rural agent availability); (2) Network coverage gap (urban 4G vs rural 2G); (3) Financial literacy gap (urban vs rural understanding); (4) Service availability gap (all features available in rural?); (5) Pricing equity (do rural users pay more?); (6) Support access gap (call centers vs rural agents); (7) Outcome equity (do rural users benefit equally?).",
+                    "stakeholder_types": [
+                        "Rural Users",
+                        "Urban Users",
+                        "Platform Operators",
+                        "Regulators"
+                    ],
+                    "evidence_required": "Urban-rural agent density comparison, Network coverage comparison, Financial literacy assessments, Service availability mapping, Pricing equity analysis, Support access comparison, Outcome equity studies",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Urban-rural divide extreme. Rural agent density low. Network coverage worse. Financial literacy lower. Services may not work (network). Pricing may be higher (agent fees). Outcomes worse."
+                },
+                {
+                    "q_id": "Q6.2.3.2_FIN",
+                    "text": "Gender Equity in Mobile Money Access: Ensure women have equal access and benefit: (1) Women's phone access (do women own phones or share?); (2) Women's ID access (for KYC - many women lack ID); (3) Women's financial autonomy (can women control their money?); (4) Women's agent access (are agents accessible, safe for women?); (5) Women's financial literacy (targeted training for women?); (6) Women-specific features (address women's needs); (7) Women's outcome equity (do women benefit equally?).",
+                    "stakeholder_types": [
+                        "Women Users",
+                        "Gender Specialists",
+                        "Platform Operators",
+                        "Women's Organizations"
+                    ],
+                    "evidence_required": "Women's phone access data, ID access analysis, Financial autonomy studies, Agent accessibility for women, Women's financial literacy programs, Women-specific features, Gender-disaggregated outcomes",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Women face multiple barriers: limited phone access, lack ID, limited financial autonomy, agent access/safety concerns, lower financial literacy. Gender-intentional design essential."
+                },
+                {
+                    "q_id": "Q6.2.3.3_FIN",
+                    "text": "Financial Inclusion of Unbanked & Underbanked: Ensure mobile money serves those excluded from formal finance: (1) Unbanked population reach (% of unbanked using mobile money); (2) Low-income user access (do poorest users have access?); (3) Informal sector workers (do they have access? KYC challenges?); (4) Refugees & displaced persons (can they access mobile money?); (5) Disabled users (accessibility features?); (6) Elderly users (can they use service?); (7) Outcome equity (do marginalized groups benefit?).",
+                    "stakeholder_types": [
+                        "Unbanked Users",
+                        "Low-income Users",
+                        "Informal Workers",
+                        "Refugees",
+                        "Disabled Users",
+                        "Elderly Users"
+                    ],
+                    "evidence_required": "Unbanked reach data, Low-income access data, Informal sector access, Refugee access policies, Accessibility features, Elderly user support, Outcome equity by group",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "Unbanked = core target (70%+ in many countries). Low-income users most in need. Informal sector dominant (KYC challenges). Refugees often excluded. Disabled users need accessibility. Elderly struggle with technology."
+                }
+            ]
+        },
+        {
+            "id": "6.2.4",
+            "name": "Informal Economy Integration",
+            "weight": 0.10,
+            "questions": [
+                {
+                    "q_id": "Q6.2.4_FIN",
+                    "text": "Informal Financial Group (Chama) Support: Integration with community savings groups: (1) Group account functionality (joint accounts, multi-sig); (2) Transparency for members (all members see balance/transactions); (3) Record keeping tools (digitizing the 'book'); (4) Credit scoring for groups (lending to the group); (5) Security features (preventing treasurer fraud); (6) Social features (chat, voting).",
+                    "stakeholder_types": [
+                        "Chama Members",
+                        "Group Leaders",
+                        "Platform Operators"
+                    ],
+                    "evidence_required": "Group account features demo, Multi-sig documentation, Group credit scoring model",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Chamas are the backbone of savings in SSA. Supporting them builds massive trust."
+                }
+            ]
+        },
+        {
+            "id": "6.3",
+            "name": "Environmental & Sustainability Context",
+            "weight": 0.15,
+            "questions": [
+                {
+                    "q_id": "Q6.3.1_FIN",
+                    "text": "Economic Context for Mobile Money - SSA: Assess economic environment affecting mobile money: (1) Inflation rates (impact on transaction values, savings); (2) Currency volatility (FX risk for cross-border); (3) Informal economy size (% of economy informal - KYC implications); (4) Remittance flows (diaspora remittances - major use case); (5) Financial sector development (banking penetration, competition); (6) Digital economy growth (e-commerce, digital payments); (7) Economic shocks (COVID, droughts - impact on mobile money usage).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Platform Operators",
+                        "Economists",
+                        "Central Banks"
+                    ],
+                    "evidence_required": "Inflation data, Currency volatility analysis, Informal economy estimates, Remittance flow data, Financial sector indicators, Digital economy metrics, Economic shock impact studies",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Inflation high (erodes savings). Currency volatility major risk (FX). Informal economy dominant (KYC challenges). Remittances huge (diaspora). Banking penetration low. Digital economy growing. Economic shocks common."
+                },
+                {
+                    "q_id": "Q6.3.2_FIN",
+                    "text": "Competition & Market Structure - Mobile Money: Assess competitive landscape: (1) Number of mobile money providers (monopoly, duopoly, competitive?); (2) Market concentration (Herfindahl index, market shares); (3) Barriers to entry (licensing, capital, network effects); (4) Interoperability (can users transact across providers?); (5) Pricing competition (are fees competitive?); (6) Innovation competition (new features, services); (7) Regulatory approach to competition (pro-competition policies?).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Platform Operators",
+                        "Regulators",
+                        "Competition Authorities"
+                    ],
+                    "evidence_required": "Provider count, Market share data, Barrier analysis, Interoperability status, Pricing comparison, Innovation tracking, Competition policy documentation",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Market structure varies (M-Pesa dominance in Kenya, competitive in Tanzania). Network effects create barriers. Interoperability limited. Pricing competition weak (high fees). Innovation important. Regulators promoting competition."
+                },
+                {
+                    "q_id": "Q6.3.3_FIN",
+                    "text": "Environmental Sustainability - Mobile Money Operations: Assess environmental impact and sustainability: (1) Agent POS device lifecycle (e-waste management); (2) Paper receipt usage (environmental impact, alternatives); (3) Energy consumption (data centers, agent POS charging); (4) Carbon footprint (overall operations); (5) Renewable energy usage (solar for agents, data centers); (6) Environmental policies (company commitments); (7) Circular economy (device recycling, refurbishment).",
+                    "stakeholder_types": [
+                        "Platform Operators",
+                        "Environmental Organizations",
+                        "Regulators"
+                    ],
+                    "evidence_required": "E-waste management procedures, Paper usage data, Energy consumption metrics, Carbon footprint analysis, Renewable energy usage, Environmental policies, Circular economy programs",
+                    "evidence_weight": "Low",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Environmental sustainability emerging concern. E-waste growing (POS devices). Paper receipts common (environmental impact). Solar charging for agents (environmental + practical). Carbon footprint relatively low (digital service)."
+                }
+            ]
+        }
+    ],
+    "scoring_notes": "Layer 6 (Ecosystem) for Financial Services in Sub-Saharan Africa: MOST CRITICAL LAYER. Mobile network infrastructure (USSD, SMS) is the foundation. Agent network is the distribution infrastructure. Regulatory environment complex (financial + telecom). Gender equity and financial inclusion of unbanked are core objectives. Competition and interoperability emerging priorities."
+}

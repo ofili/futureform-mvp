@@ -1,0 +1,143 @@
+{
+    "layer_id": "L6",
+    "layer_name": "Ecosystem",
+    "sector": "telecom",
+    "region": "Sub-Saharan Africa",
+    "total_questions": 12,
+    "total_sub_dimensions": 4,
+    "sub_dimensions": [
+        {
+            "id": "6.1",
+            "name": "Infrastructure & Supply Chain Dependencies",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q6.1.1_TEL",
+                    "text": "National Grid & Power Dependency: Reliance on external power: (1) Grid reliability in operating areas; (2) Cost of diesel vs grid power; (3) Fuel supply chain resilience; (4) Impact of fuel price shocks; (5) Partnership with power utilities; (6) Renewable energy transition plan; (7) Backup redundancy.",
+                    "stakeholder_types": [
+                        "Power Utilities",
+                        "Operations",
+                        "Finance"
+                    ],
+                    "evidence_required": "Power mix analysis, Fuel cost reports, Utility contracts",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Telcos are often the largest diesel consumers in the country. Grid failure = Network failure (eventually)."
+                },
+                {
+                    "q_id": "Q6.1.2_TEL",
+                    "text": "Fiber & Backhaul Ecosystem: Connectivity backbone: (1) Reliance on national fiber backbone (NOFBI etc.); (2) Redundancy of international cables (undersea); (3) Cross-border connectivity; (4) Fiber cut frequency (road works); (5) Last-mile fiber rollout challenges; (6) Microwave backhaul reliance; (7) Satellite backup.",
+                    "stakeholder_types": [
+                        "Fiber Cos",
+                        "Government",
+                        "Regulators"
+                    ],
+                    "evidence_required": "Fiber network map, Redundancy plan, Incident logs (fiber cuts)",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Landlocked countries rely on neighbors for undersea cable access. Road construction is the #1 enemy of fiber."
+                }
+            ]
+        },
+        {
+            "id": "6.2",
+            "name": "Regulatory & Policy Environment",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q6.2.1_TEL",
+                    "text": "Spectrum Policy & Allocation: Access to airwaves: (1) Fairness of spectrum allocation; (2) Cost of spectrum (auction vs beauty contest); (3) 4G/5G roadmap clarity; (4) Spectrum trading/sharing rules; (5) TV White Space usage; (6) License duration; (7) Political interference in allocation.",
+                    "stakeholder_types": [
+                        "Regulators",
+                        "Government",
+                        "Investors"
+                    ],
+                    "evidence_required": "Spectrum license, Policy documents, Auction reports",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Spectrum is scarce and expensive. Delays in 4G/5G spectrum release hold back the digital economy."
+                },
+                {
+                    "q_id": "Q6.2.2_TEL",
+                    "text": "Taxation & Fiscal Policy: Cost of doing business: (1) Excise duty on airtime/data; (2) Mobile money transaction taxes; (3) Import duties on equipment; (4) Multiple taxation (national vs county/state); (5) Stability of tax regime; (6) Impact on affordability; (7) Industry advocacy effectiveness.",
+                    "stakeholder_types": [
+                        "Treasury",
+                        "Tax Authority",
+                        "Industry Associations"
+                    ],
+                    "evidence_required": "Tax impact assessment, Lobbying papers, Tariff analysis",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Governments view Telcos as 'cash cows'. High taxes (e.g., 20% excise) directly reduce affordability and inclusion."
+                }
+            ]
+        },
+        {
+            "id": "6.3",
+            "name": "Digital Economy & Fintech Ecosystem",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q6.3.1_TEL",
+                    "text": "Fintech & Developer Ecosystem: Enabling innovation: (1) Open APIs for developers (Mobile Money); (2) Sandbox availability; (3) Developer support/community; (4) Revenue share models (VAS); (5) Investment in local startups; (6) Ease of integration; (7) Intellectual Property respect.",
+                    "stakeholder_types": [
+                        "Developers",
+                        "Startups",
+                        "Fintechs"
+                    ],
+                    "evidence_required": "API portal stats, Developer feedback, Partnership list",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Telcos are the platform. If they block access (or copy ideas), the startup ecosystem dies. Open APIs drive innovation."
+                },
+                {
+                    "q_id": "Q6.3.2_TEL",
+                    "text": "Mobile Money Interoperability: Connecting the financial system: (1) P2P interoperability (send to other networks); (2) Merchant interoperability (Paybill); (3) Bank-to-Wallet integration; (4) Cross-border remittance support; (5) Cost of interoperability; (6) Settlement efficiency; (7) Regulatory mandate compliance.",
+                    "stakeholder_types": [
+                        "Banks",
+                        "Central Bank",
+                        "Users"
+                    ],
+                    "evidence_required": "Interoperability stats, Settlement logs, User experience tests",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Walled gardens are breaking down. Regulators pushing for full interoperability to boost financial inclusion."
+                }
+            ]
+        },
+        {
+            "id": "6.4",
+            "name": "Community & Social Context",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q6.4.1_TEL",
+                    "text": "Community Relations & NIMBY: Social license to operate: (1) Tower siting consultation; (2) Radiation fear management (health concerns); (3) Land lease fairness; (4) Community benefits (CSR); (5) Conflict resolution; (6) Visual impact of towers; (7) Noise pollution (generators).",
+                    "stakeholder_types": [
+                        "Communities",
+                        "Landlords",
+                        "Local Government"
+                    ],
+                    "evidence_required": "Community meeting minutes, EIA reports, Lease agreements",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Communities often block tower construction due to radiation myths or land disputes. Generator noise at night is a nuisance."
+                },
+                {
+                    "q_id": "Q6.4.2_TEL",
+                    "text": "Digital Literacy & Cultural Adoption: Readiness for digital: (1) Language barriers (English vs Local); (2) Cultural relevance of content; (3) Trust in digital finance; (4) Gender norms (women owning phones); (5) Age demographics (youth bulge); (6) Urban vs Rural divide; (7) Impact of social media.",
+                    "stakeholder_types": [
+                        "Sociologists",
+                        "Marketing",
+                        "NGOs"
+                    ],
+                    "evidence_required": "Market research, Adoption studies, User personas",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "Technology must fit the culture. Women often share phones or are discouraged from owning them. Trust is hard to win, easy to lose."
+                }
+            ]
+        }
+    ],
+    "scoring_notes": "Layer 6 (Ecosystem) for Telecom in SSA: Power and Fiber infrastructure are the physical constraints. Taxation and Spectrum policy are the regulatory constraints. The developer ecosystem is the growth engine."
+}

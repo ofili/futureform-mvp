@@ -1,0 +1,137 @@
+{
+    "layer_id": "L4",
+    "layer_name": "Competence",
+    "sector": "transport",
+    "region": "Sub-Saharan Africa",
+    "total_questions": 12,
+    "total_sub_dimensions": 4,
+    "sub_dimensions": [
+        {
+            "id": "4.1",
+            "name": "Driver Skills & Training",
+            "weight": 0.30,
+            "questions": [
+                {
+                    "q_id": "Q4.1.1_TRN",
+                    "text": "Driving Skills & Safety Training: Competent drivers: (1) Defensive driving training; (2) First aid training; (3) Customer service training; (4) Route knowledge assessment; (5) Vehicle maintenance basics; (6) Emergency response training; (7) Refresher training frequency.",
+                    "stakeholder_types": [
+                        "Drivers",
+                        "Trainers",
+                        "Safety Advocates"
+                    ],
+                    "evidence_required": "Training curriculum, Attendance logs, Skill assessment results",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Many drivers have minimal training. Defensive driving critical (chaotic traffic). First aid can save lives (slow ambulances)."
+                },
+                {
+                    "q_id": "Q4.1.2_TRN",
+                    "text": "Digital Literacy & App Proficiency: Using the platform: (1) App navigation training; (2) GPS usage training; (3) Payment system training (cash, mobile money, card); (4) Troubleshooting common issues; (5) Offline mode usage; (6) Rating system understanding; (7) Support for low-literacy drivers.",
+                    "stakeholder_types": [
+                        "Drivers",
+                        "Support Team"
+                    ],
+                    "evidence_required": "Onboarding materials, Training videos, Support ticket analysis",
+                    "evidence_weight": "High",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "Many drivers are first-time smartphone users. Visual/video training works best. Support in local languages essential."
+                }
+            ]
+        },
+        {
+            "id": "4.2",
+            "name": "Customer Service & Professionalism",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q4.2.1_TRN",
+                    "text": "Driver Professionalism & Conduct: Quality service: (1) Dress code/appearance standards; (2) Communication skills (polite, helpful); (3) Handling of complaints; (4) Respect for passenger preferences (music, AC, route); (5) Punctuality; (6) Vehicle cleanliness; (7) Prohibition of harassment.",
+                    "stakeholder_types": [
+                        "Passengers",
+                        "Drivers",
+                        "Quality Assurance"
+                    ],
+                    "evidence_required": "Code of conduct, Passenger feedback, Quality audits",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Professionalism varies widely. Passengers value cleanliness and respect. Harassment (especially of women) is a major issue."
+                },
+                {
+                    "q_id": "Q4.2.2_TRN",
+                    "text": "Merchant & Delivery Partner Support: Supporting the ecosystem: (1) Merchant onboarding training; (2) Packaging best practices; (3) Order management training; (4) Dispute resolution support; (5) Performance analytics access; (6) Feedback loops; (7) Account management for large merchants.",
+                    "stakeholder_types": [
+                        "Merchants",
+                        "Delivery Partners"
+                    ],
+                    "evidence_required": "Merchant training materials, Support logs, Performance dashboards",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Small merchants (kiosks, restaurants) often lack digital skills. Hand-holding needed for onboarding."
+                }
+            ]
+        },
+        {
+            "id": "4.3",
+            "name": "Navigation & Route Optimization",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q4.3.1_TRN",
+                    "text": "Local Route Knowledge: Knowing the terrain: (1) Knowledge of shortcuts; (2) Awareness of road conditions (potholes, floods); (3) Knowledge of traffic patterns; (4) Awareness of unsafe areas; (5) Alternative routes during events; (6) Landmark-based navigation (poor addressing); (7) Rural area navigation.",
+                    "stakeholder_types": [
+                        "Drivers",
+                        "Passengers"
+                    ],
+                    "evidence_required": "Driver assessments, Passenger feedback on route efficiency",
+                    "evidence_weight": "High",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "GPS often wrong. Local knowledge is critical. Drivers must know which areas are unsafe at night."
+                },
+                {
+                    "q_id": "Q4.3.2_TRN",
+                    "text": "Technology-Assisted Navigation: Using tools: (1) GPS app proficiency; (2) Traffic app usage (Google Maps, Waze); (3) Offline map usage; (4) ETA accuracy improvement; (5) Multi-stop route optimization (delivery); (6) Fuel-efficient routing; (7) Handling of GPS errors.",
+                    "stakeholder_types": [
+                        "Drivers",
+                        "Operations"
+                    ],
+                    "evidence_required": "Navigation tool usage stats, ETA accuracy metrics",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Data costs are a barrier to real-time navigation. Offline maps essential. GPS drift common in dense urban areas."
+                }
+            ]
+        },
+        {
+            "id": "4.4",
+            "name": "Support & Escalation Competence",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q4.4.1_TRN",
+                    "text": "Customer Support Quality: Helping users: (1) Multi-channel support (phone, chat, email); (2) Local language support; (3) Response time (first response, resolution); (4) Escalation protocols; (5) Support agent training; (6) Self-service resources (FAQs); (7) Accessibility (hours of operation).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Support Team"
+                    ],
+                    "evidence_required": "Support metrics (response time, resolution rate), Training logs, User satisfaction scores",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Phone support preferred (low digital literacy). Local language critical. 24/7 support needed for safety issues."
+                },
+                {
+                    "q_id": "Q4.4.2_TRN",
+                    "text": "Driver Support & Welfare Services: Supporting drivers: (1) Driver support hotline; (2) In-person support centers (hubs); (3) Financial literacy training; (4) Access to credit/savings products; (5) Health services (clinics, insurance); (6) Legal support (accidents, disputes); (7) Community building (driver forums).",
+                    "stakeholder_types": [
+                        "Drivers",
+                        "Driver Welfare Teams"
+                    ],
+                    "evidence_required": "Support center locations, Service usage stats, Driver satisfaction surveys",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Drivers need holistic support beyond the app. Financial literacy helps with earnings management. Community reduces isolation."
+                }
+            ]
+        }
+    ],
+    "scoring_notes": "Layer 4 (Competence) for Transport in SSA: Driver training (safety, customer service) is the foundation of quality. Local route knowledge compensates for poor GPS/maps. Support in local languages is essential."
+}

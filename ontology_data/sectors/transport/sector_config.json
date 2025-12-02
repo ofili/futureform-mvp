@@ -1,0 +1,34 @@
+{
+    "sector_id": "transport",
+    "sector_name": "Transport & Logistics",
+    "description": "Trust framework for digital transport and logistics platforms in Sub-Saharan Africa, including ride-hailing (Uber, Bolt), delivery services (food, parcels), and freight/trucking platforms.",
+    "context_notes": "Transport is the backbone of the economy. Digital platforms (ride-hailing, delivery) are transforming urban mobility and last-mile logistics. However, safety (accidents, crime), driver welfare (gig economy exploitation), and regulatory compliance (licensing, insurance) are major concerns. Road infrastructure is poor, traffic enforcement is weak, and insurance penetration is low.",
+    "stakeholders": [
+        "Riders/Passengers",
+        "Drivers/Riders (Motorcycle/Bicycle)",
+        "Fleet Owners",
+        "Merchants (Delivery)",
+        "Transport Regulators",
+        "Traffic Police",
+        "Insurance Companies",
+        "Road Safety Authorities"
+    ],
+    "risk_factors": [
+        "Passenger safety (assault, kidnapping, accidents)",
+        "Driver exploitation (low pay, no benefits)",
+        "Unlicensed/uninsured drivers",
+        "Vehicle roadworthiness (accidents)",
+        "Traffic violations (speeding, overloading)",
+        "Fraud (fake deliveries, route manipulation)",
+        "Data privacy (location tracking)",
+        "Congestion and pollution"
+    ],
+    "regulatory_bodies": [
+        "Transport Licensing Board",
+        "National Transport and Safety Authority (NTSA)",
+        "Traffic Police",
+        "Insurance Regulatory Authority",
+        "Competition Authority",
+        "Data Protection Commissioner"
+    ]
+}

@@ -1,0 +1,138 @@
+{
+    "layer_id": "L2",
+    "layer_name": "Transparency",
+    "sector": "transport",
+    "region": "Sub-Saharan Africa",
+    "total_questions": 12,
+    "total_sub_dimensions": 4,
+    "sub_dimensions": [
+        {
+            "id": "2.1",
+            "name": "Pricing & Fee Transparency",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q2.1.1_TRN",
+                    "text": "Upfront Fare Transparency: Clear pricing: (1) Upfront fare estimate (before booking); (2) Breakdown of fare (base, distance, time, surge); (3) Surge pricing notification (multiplier); (4) Toll/parking fees disclosure; (5) Cancellation fee clarity; (6) Comparison with alternatives (public transport); (7) Historical pricing visibility.",
+                    "stakeholder_types": [
+                        "Passengers",
+                        "Regulators"
+                    ],
+                    "evidence_required": "Fare calculation algorithm, Surge pricing policy, User interface screenshots",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "Surge pricing often opaque. Users need to know the multiplier upfront. Comparison with matatu (minibus) helps decision-making."
+                },
+                {
+                    "q_id": "Q2.1.2_TRN",
+                    "text": "Driver Earnings Transparency: What drivers earn: (1) Commission rate disclosure; (2) Breakdown of deductions (platform fee, insurance, penalties); (3) Incentive structure clarity (bonuses); (4) Comparison of gross vs net earnings; (5) Visibility of trip-level earnings; (6) Explanation of rating impact on earnings; (7) Transparency on 'ghost trips' (unpaid cancellations).",
+                    "stakeholder_types": [
+                        "Drivers",
+                        "Labor Advocates"
+                    ],
+                    "evidence_required": "Driver earnings dashboard, Commission structure docs, Deduction policy",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Drivers often don't understand deductions. 'Ghost trips' (accepted but cancelled by passenger) are a major complaint."
+                }
+            ]
+        },
+        {
+            "id": "2.2",
+            "name": "Safety & Incident Disclosure",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q2.2.1_TRN",
+                    "text": "Safety Incident Reporting & Disclosure: Transparency on safety: (1) Public safety report (aggregate incidents); (2) Response time to safety incidents; (3) Outcome disclosure (driver suspension/deactivation); (4) Transparency on insurance claims; (5) Collaboration with police (crime reports); (6) User notification of nearby incidents; (7) Safety feature effectiveness (SOS button usage).",
+                    "stakeholder_types": [
+                        "Passengers",
+                        "Regulators",
+                        "Media"
+                    ],
+                    "evidence_required": "Safety transparency report, Incident response logs, Insurance claim stats",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Platforms often hide safety incidents. Public pressure (e.g., after high-profile assault) forces transparency."
+                },
+                {
+                    "q_id": "Q2.2.2_TRN",
+                    "text": "Driver & Vehicle Information: Know before you ride: (1) Driver name and photo; (2) Vehicle make, model, color, plate number; (3) Driver rating and trip count; (4) Real-time location sharing; (5) Emergency contact visibility; (6) Vehicle inspection status; (7) Driver license verification badge.",
+                    "stakeholder_types": [
+                        "Passengers",
+                        "Safety Advocates"
+                    ],
+                    "evidence_required": "App interface screenshots, Verification badge logic",
+                    "evidence_weight": "High",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "Passengers need to verify driver/vehicle before entering. Fake drivers (using someone else's account) are a risk."
+                }
+            ]
+        },
+        {
+            "id": "2.3",
+            "name": "Data Privacy & Tracking",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q2.3.1_TRN",
+                    "text": "Location Data Usage & Sharing: Who sees your location: (1) Purpose of location tracking (trip only vs always); (2) Sharing with third parties (advertisers, government); (3) Retention period for trip history; (4) User control over location sharing; (5) Anonymization for analytics; (6) Explanation of background location access; (7) Opt-out options.",
+                    "stakeholder_types": [
+                        "Users",
+                        "Privacy Advocates",
+                        "Data Protection Commissioner"
+                    ],
+                    "evidence_required": "Privacy policy, Location data policy, User consent flows",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Location data can reveal home/work addresses. Risk of stalking or government surveillance. Users need control."
+                },
+                {
+                    "q_id": "Q2.3.2_TRN",
+                    "text": "Trip History & Data Portability: User access to data: (1) Can user download trip history?; (2) Can user delete trip history?; (3) Data retention policy; (4) Sharing trip data with employers (corporate accounts); (5) Access by law enforcement (transparency on requests); (6) Export format (PDF, CSV).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Regulators"
+                    ],
+                    "evidence_required": "Data export feature, Deletion policy, Law enforcement request transparency report",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Corporate accounts often track employee movements. Law enforcement requests common (crime investigations)."
+                }
+            ]
+        },
+        {
+            "id": "2.4",
+            "name": "Algorithmic Transparency",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q2.4.1_TRN",
+                    "text": "Rating & Deactivation Logic: Explain the algorithm: (1) How ratings are calculated (weighted average?); (2) Threshold for deactivation; (3) Appeal process for low ratings; (4) Impact of false accusations; (5) Explanation of 'acceptance rate' impact; (6) Transparency on 'preferred driver' logic; (7) Bias testing (discrimination).",
+                    "stakeholder_types": [
+                        "Drivers",
+                        "Passengers",
+                        "Labor Advocates"
+                    ],
+                    "evidence_required": "Rating algorithm documentation, Deactivation policy, Appeal process",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Drivers fear arbitrary deactivation. Passengers sometimes give low ratings for discriminatory reasons (tribe, accent)."
+                },
+                {
+                    "q_id": "Q2.4.2_TRN",
+                    "text": "Surge Pricing & Demand Prediction: How surge works: (1) Explanation of surge calculation; (2) Notification of surge before booking; (3) Historical surge patterns (predictability); (4) Cap on surge multiplier; (5) Transparency on demand prediction model; (6) Impact of events (concerts, rain) on surge.",
+                    "stakeholder_types": [
+                        "Passengers",
+                        "Regulators"
+                    ],
+                    "evidence_required": "Surge pricing algorithm, Historical surge data, Regulatory filings",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Surge during rain can be exploitative. Regulators (e.g., Kenya) have tried to cap surge. Transparency helps acceptance."
+                }
+            ]
+        }
+    ],
+    "scoring_notes": "Layer 2 (Transparency) for Transport in SSA: Pricing transparency (surge) and driver earnings transparency are trust-builders. Safety incident disclosure is a regulatory and public pressure issue."
+}

@@ -1,0 +1,143 @@
+{
+    "layer_id": "L2",
+    "layer_name": "Transparency",
+    "sector": "education",
+    "region": "Sub-Saharan Africa",
+    "total_questions": 12,
+    "total_sub_dimensions": 4,
+    "sub_dimensions": [
+        {
+            "id": "2.1",
+            "name": "Pricing & Cost Transparency",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q2.1.1_EDU",
+                    "text": "Total Cost of Education Disclosure: Reveal all costs to parents: (1) Tuition fees; (2) Exam fees; (3) Uniform/Book costs; (4) 'Development levies' or PTA fees; (5) Digital device costs; (6) Data consumption estimates (cost to use app); (7) Hidden charges (late fees).",
+                    "stakeholder_types": [
+                        "Parents",
+                        "Students",
+                        "Regulators"
+                    ],
+                    "evidence_required": "Fee structure document, Data usage estimates, Parent contracts",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "Hidden fees are rampant. 'Free' education often has many levies. Data cost is a major hidden cost of EdTech."
+                },
+                {
+                    "q_id": "Q2.1.2_EDU",
+                    "text": "EdTech Subscription Transparency: Clear digital pricing: (1) Freemium limits (what is free vs paid?); (2) Auto-renewal terms; (3) Cancellation process (easy to cancel?); (4) Refund policy; (5) Bundle pricing (with telco data?); (6) Payment methods (mobile money charges?); (7) Trial period terms.",
+                    "stakeholder_types": [
+                        "Parents",
+                        "Students",
+                        "Consumer Protection"
+                    ],
+                    "evidence_required": "Subscription terms, Cancellation flow screenshots, Payment integration docs",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Auto-renewal on mobile money can drain wallets unnoticed. Cancellation must be simple (USSD/SMS)."
+                }
+            ]
+        },
+        {
+            "id": "2.2",
+            "name": "Curriculum & Accreditation Transparency",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q2.2.1_EDU",
+                    "text": "Accreditation Status Disclosure: Prove legitimacy: (1) Registration with Ministry of Education; (2) Exam body accreditation (WAEC, KNEC, etc.); (3) TVET accreditation; (4) University charter status; (5) International recognition (if applicable); (6) Teacher certification status; (7) Expiration of accreditation.",
+                    "stakeholder_types": [
+                        "Parents",
+                        "Students",
+                        "Employers",
+                        "Regulators"
+                    ],
+                    "evidence_required": "Registration certificates, Accreditation letters, Teacher license list",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "'Certificate mills' common. Parents sacrifice to pay fees, need assurance degree is valid. Government registration essential."
+                },
+                {
+                    "q_id": "Q2.2.2_EDU",
+                    "text": "Curriculum Alignment & Relevance: Explain what is taught: (1) Alignment with National Curriculum (CBC, 8-4-4, etc.); (2) Adaptation for local context; (3) Language of instruction policy; (4) Learning outcomes definition; (5) Skills vs Theory balance; (6) Digital skills inclusion; (7) Update frequency.",
+                    "stakeholder_types": [
+                        "Parents",
+                        "Teachers",
+                        "Curriculum Developers"
+                    ],
+                    "evidence_required": "Curriculum syllabus, Mapping to national standards, Learning outcome guides",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Curriculum changes (e.g., CBC in Kenya) cause confusion. Parents need to know if content helps child pass national exams."
+                }
+            ]
+        },
+        {
+            "id": "2.3",
+            "name": "Data Privacy & Usage (Minors)",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q2.3.1_EDU",
+                    "text": "Student Data Privacy (Minors): Protect child data: (1) Parental consent mechanism; (2) Data minimization (collect only what's needed); (3) No behavioral advertising to children; (4) Third-party sharing restrictions; (5) Anonymization of research data; (6) Right to delete data (upon graduation/leaving); (7) Compliance with Data Protection Acts.",
+                    "stakeholder_types": [
+                        "Parents",
+                        "Regulators",
+                        "Data Protection Officers"
+                    ],
+                    "evidence_required": "Privacy policy (child-friendly), Consent forms, Data flow maps",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Minors' data highly sensitive. EdTech often monetizes data. Strict consent needed. No ads targeting kids."
+                },
+                {
+                    "q_id": "Q2.3.2_EDU",
+                    "text": "Algorithmic Grading & Tracking Transparency: Explain AI/Auto-grading: (1) How auto-grading works; (2) Bias testing (language/accent bias in oral apps); (3) Progress tracking logic; (4) Recommendation algorithm (why this lesson next?); (5) Human review option for contested grades; (6) Behavioral tracking (attention monitoring?); (7) Data used for profiling.",
+                    "stakeholder_types": [
+                        "Students",
+                        "Teachers",
+                        "Parents"
+                    ],
+                    "evidence_required": "Algorithm explanation docs, Bias audit reports, Grading appeal process",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "AI grading can be biased against African accents/dialects. Parents need to trust the 'machine' grading."
+                }
+            ]
+        },
+        {
+            "id": "2.4",
+            "name": "Performance & Progress Visibility",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q2.4.1_EDU",
+                    "text": "Parental Progress Reporting: Keep parents informed: (1) SMS/WhatsApp progress reports (for low-tech parents); (2) Real-time gradebook access; (3) Attendance tracking visibility; (4) Behavior reports; (5) Local language reports; (6) Simple visualizations (traffic lights); (7) Teacher feedback channels.",
+                    "stakeholder_types": [
+                        "Parents",
+                        "Teachers"
+                    ],
+                    "evidence_required": "Report card templates (SMS/App), Parent portal demo, Language options",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Many parents illiterate or low-tech. SMS/Voice reports effective. Parents invest heavily, want to see results."
+                },
+                {
+                    "q_id": "Q2.4.2_EDU",
+                    "text": "School/Provider Performance Transparency: Public accountability: (1) National exam pass rates; (2) University transition rates; (3) Teacher qualification stats; (4) Student-teacher ratios; (5) Infrastructure status (labs, libraries); (6) Safety/Discipline records; (7) Financial audits (for public schools).",
+                    "stakeholder_types": [
+                        "Parents",
+                        "Community",
+                        "Regulators"
+                    ],
+                    "evidence_required": "Annual performance reports, Exam result summaries, Staffing data",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Parents choose schools based on exam results. Transparency drives quality. 'Ghost schools' exist."
+                }
+            ]
+        }
+    ],
+    "scoring_notes": "Layer 2 (Transparency) for Education in SSA: Accreditation transparency is the baseline for trust. Pricing transparency (including data costs) is essential for affordability. Data privacy for minors is a growing regulatory focus."
+}

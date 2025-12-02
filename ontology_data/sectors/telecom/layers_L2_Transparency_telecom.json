@@ -1,0 +1,138 @@
+{
+    "layer_id": "L2",
+    "layer_name": "Transparency",
+    "sector": "telecom",
+    "region": "Sub-Saharan Africa",
+    "total_questions": 12,
+    "total_sub_dimensions": 4,
+    "sub_dimensions": [
+        {
+            "id": "2.1",
+            "name": "Pricing & Billing Transparency",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q2.1.1_TEL",
+                    "text": "Tariff & Bundle Clarity: Understandable pricing: (1) Clear cost per MB/min; (2) Validity period clarity (24h vs 1 day); (3) Rollover terms disclosure; (4) Out-of-bundle rate visibility; (5) Tax inclusion (VAT/Excise); (6) Promotional terms (hidden conditions?); (7) Comparison tools availability.",
+                    "stakeholder_types": [
+                        "Subscribers",
+                        "Regulators"
+                    ],
+                    "evidence_required": "Tariff sheets, USSD menu screenshots, Marketing material review",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "Complex bundles confuse users. 'Unlimited' often has hidden caps. Taxes (Excise) often high and hidden."
+                },
+                {
+                    "q_id": "Q2.1.2_TEL",
+                    "text": "Premium Rate Services (VAS) Transparency: Prevent unwanted charges: (1) Double opt-in for subscriptions; (2) Clear pricing for ringback tones/games; (3) Unsubscribe instructions visibility; (4) Monthly statement of VAS charges; (5) Prevention of 'clickjacking' subscriptions; (6) Refund policy for accidental subs; (7) Adult content labeling.",
+                    "stakeholder_types": [
+                        "Subscribers",
+                        "Content Providers",
+                        "Regulators"
+                    ],
+                    "evidence_required": "VAS subscription flow logs, Opt-in confirmation messages, Complaint logs",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Predatory VAS is a plague. Users find credit drained by services they didn't knowingly sign up for."
+                }
+            ]
+        },
+        {
+            "id": "2.2",
+            "name": "Data Usage & Management",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q2.2.1_TEL",
+                    "text": "Data Usage Visibility: Real-time tracking: (1) Real-time balance check (USSD/App); (2) Detailed usage history (which app used data?); (3) Background data warnings; (4) Low balance alerts; (5) Data manager tools in-app; (6) Accuracy of metering; (7) Dispute resolution for data drain.",
+                    "stakeholder_types": [
+                        "Subscribers",
+                        "Customer Care"
+                    ],
+                    "evidence_required": "App usage screens, Metering audit reports, Alert logs",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Users suspect Telcos of 'stealing' data. Detailed usage logs build trust. Background updates on smartphones consume expensive data."
+                },
+                {
+                    "q_id": "Q2.2.2_TEL",
+                    "text": "Fair Usage Policy (FUP) Disclosure: Throttling rules: (1) Clear definition of 'Unlimited'; (2) Throttling speed disclosure; (3) Notification when FUP hit; (4) Reset timing; (5) Policy accessibility; (6) Justification for FUP limits; (7) Business vs Consumer FUP distinction.",
+                    "stakeholder_types": [
+                        "Heavy Users",
+                        "Regulators"
+                    ],
+                    "evidence_required": "FUP terms, Throttling notification SMS, Website T&Cs",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "'Unlimited' usually means 1GB/day then slow speed. Users feel cheated if not clear."
+                }
+            ]
+        },
+        {
+            "id": "2.3",
+            "name": "Service Status & Outage Communication",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q2.3.1_TEL",
+                    "text": "Outage Notification: Informing users of downtime: (1) Proactive SMS/Social media alerts; (2) Estimated Time to Repair (ETR) provision; (3) Reason for outage disclosure (fiber cut?); (4) Affected area map; (5) Apology/Compensation (free data?); (6) Planned maintenance warnings; (7) Post-incident report.",
+                    "stakeholder_types": [
+                        "Subscribers",
+                        "Enterprise Clients"
+                    ],
+                    "evidence_required": "Outage SMS logs, Social media posts, Incident reports",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Silence during outages breeds anger. Proactive communication is rare but highly valued."
+                },
+                {
+                    "q_id": "Q2.3.2_TEL",
+                    "text": "Coverage Map Accuracy: Honest coverage representation: (1) Publicly available maps; (2) Granularity (street level vs city level); (3) Distinction between 2G/3G/4G; (4) Updates for new sites; (5) Crowdsourced verification (e.g., OpenSignal); (6) Disclaimer on indoor coverage; (7) Future rollout plans.",
+                    "stakeholder_types": [
+                        "Potential Customers",
+                        "Regulators"
+                    ],
+                    "evidence_required": "Public coverage map URL, Map update logs",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "Marketing maps often exaggerate reality. Users buy SIMs only to find no signal at home."
+                }
+            ]
+        },
+        {
+            "id": "2.4",
+            "name": "Data Privacy & Surveillance",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q2.4.1_TEL",
+                    "text": "Privacy Policy & Data Sharing: How data is used: (1) Clear privacy policy (local language?); (2) Third-party sharing disclosure (advertisers?); (3) Government access transparency (transparency reports); (4) Data retention period; (5) User right to access/delete; (6) Call Record (CDR) privacy; (7) Mobile Money transaction privacy.",
+                    "stakeholder_types": [
+                        "Privacy Advocates",
+                        "Regulators",
+                        "Subscribers"
+                    ],
+                    "evidence_required": "Privacy policy, Transparency reports, Data sharing agreements",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Governments often demand data without warrants. Telcos must balance license obligations with user privacy."
+                },
+                {
+                    "q_id": "Q2.4.2_TEL",
+                    "text": "SIM Registration Transparency: Handling of ID data: (1) Purpose of collection disclosure; (2) Storage security of ID copies; (3) Prevention of ID misuse (agents selling IDs); (4) Verification process transparency; (5) Deregistration process; (6) Handling of deceased users' SIMs; (7) Linking to other databases.",
+                    "stakeholder_types": [
+                        "Subscribers",
+                        "Agents",
+                        "Regulators"
+                    ],
+                    "evidence_required": "SIM registration protocols, Agent training docs, Data protection audit",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "SIM registration mandatory everywhere. Agents often take photos of IDs on personal phones (risk)."
+                }
+            ]
+        }
+    ],
+    "scoring_notes": "Layer 2 (Transparency) for Telecom in SSA: Billing transparency is the primary consumer demand. Privacy transparency is the primary civil society demand."
+}

@@ -1,0 +1,192 @@
+{
+    "layer_id": "L3",
+    "layer_name": "Governance",
+    "sector": "agriculture",
+    "region": "Sub-Saharan Africa",
+    "total_questions": 12,
+    "total_sub_dimensions": 4,
+    "sub_dimensions": [
+        {
+            "id": "3.1",
+            "name": "Contractual Clarity & Enforceability",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q3.1.1_AGR",
+                    "text": "Farmer-Buyer Contract Enforceability - SSA Context: For digital agricultural marketplaces connecting farmers to buyers, provide: (1) Contract templates (simple, visual, in local languages); (2) Payment terms clarity (when will farmer be paid? penalties for late payment?); (3) Quality standards (how is produce quality defined? who grades? dispute resolution?); (4) Delivery terms (who arranges transport? cost? risk transfer point?); (5) Force majeure provisions (what happens if crop fails, transport blocked, buyer defaults?); (6) Legal enforceability (are contracts binding under local law? can farmers enforce in court?); (7) Alternative dispute resolution (arbitration, mediation accessible to farmers).",
+                    "stakeholder_types": [
+                        "Farmers",
+                        "Buyers",
+                        "Legal",
+                        "Cooperatives",
+                        "Arbitrators"
+                    ],
+                    "evidence_required": "Contract templates (farmer-friendly), Payment guarantee mechanisms, Quality grading procedures, Delivery term documentation, Force majeure policies, Legal opinion on enforceability, ADR procedures",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Many farmers illiterate - contracts must be visual/voice. Oral agreements common - how to formalize? Court access difficult - ADR essential. Payment defaults major risk."
+                },
+                {
+                    "q_id": "Q3.1.2_AGR",
+                    "text": "Agricultural Input Supply Agreements: For platforms providing seeds, fertilizer, pesticides on credit: (1) Input quality guarantees (seed germination rates, fertilizer composition); (2) Pricing transparency (total cost, interest rate/APR, payment schedule); (3) Repayment terms (harvest-linked? what if crop fails?); (4) Collateral requirements (land title? group guarantee? no collateral?); (5) Default consequences (asset seizure? credit blacklist? grace periods?); (6) Insurance integration (crop insurance to cover loan repayment?).",
+                    "stakeholder_types": [
+                        "Farmers",
+                        "Input Suppliers",
+                        "Lenders",
+                        "Insurance Providers"
+                    ],
+                    "evidence_required": "Input quality certifications, Pricing disclosure (all-in cost, APR), Repayment term documentation, Collateral policies, Default procedures, Insurance integration details",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Predatory lending risk high. Must show fair terms, crop failure protection. Many farmers lack land titles - alternative collateral needed."
+                },
+                {
+                    "q_id": "Q3.1.3_AGR",
+                    "text": "Service Level Agreements for Agricultural Services: Define SLAs for critical agricultural services: (1) Advisory delivery SLAs (weather alerts 24-48 hours before event, pest alerts within 24 hours of detection); (2) Marketplace SLAs (produce listing → buyer match within X days, payment within Y days of delivery); (3) Input delivery SLAs (seeds delivered before planting window, fertilizer within X days of order); (4) Technical support SLAs (critical issues <4 hours, device repair <7 days); (5) Penalties for SLA breaches (refunds, compensation, service credits); (6) Farmer recourse (how to claim compensation?).",
+                    "stakeholder_types": [
+                        "Farmers",
+                        "Platform Operators",
+                        "Input Suppliers",
+                        "Support Teams"
+                    ],
+                    "evidence_required": "SLA documentation (all services), SLA performance data (actual vs target), Penalty/compensation policies, Farmer recourse procedures",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Timing critical in agriculture - late delivery = lost season. SLAs must account for infrastructure constraints (roads, connectivity). Compensation must be accessible."
+                }
+            ]
+        },
+        {
+            "id": "3.2",
+            "name": "Regulatory Compliance & Standards",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q3.2.1_AGR",
+                    "text": "Agricultural Regulatory Compliance - Sub-Saharan Africa: Demonstrate compliance with agricultural regulations: (1) Ministry of Agriculture registration/licensing; (2) Seed certification compliance (if distributing seeds); (3) Pesticide regulations (if recommending/selling pesticides); (4) Food safety standards (if handling produce); (5) Export compliance (if facilitating cross-border trade - phytosanitary certificates, etc.); (6) Organic certification (if claiming organic); (7) Cross-border compliance (if operating in multiple SSA countries - EAC, ECOWAS harmonization).",
+                    "stakeholder_types": [
+                        "Platform Operators",
+                        "Regulators",
+                        "Ministry of Agriculture",
+                        "Export Authorities"
+                    ],
+                    "evidence_required": "Ministry registration certificates, Seed certification documentation, Pesticide handling licenses, Food safety compliance, Export permits, Organic certifications, Multi-country compliance matrix",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Regulatory capacity varies widely across SSA. Some countries strict, others lax. Cross-border trade complex - multiple regulatory regimes."
+                },
+                {
+                    "q_id": "Q3.2.2_AGR",
+                    "text": "Data Protection & Privacy Compliance - Agriculture: Ensure farmer data protection compliance: (1) National data protection law compliance (Nigeria NDPR, Kenya DPA, South Africa POPIA, etc.); (2) ECOWAS Data Protection Regulation compliance (if operating in West Africa); (3) Data protection officer appointed; (4) Privacy impact assessments conducted; (5) Farmer consent mechanisms (informed, voluntary, specific); (6) Cross-border data transfer compliance (if data leaves Africa); (7) Data breach notification procedures (to farmers and regulators).",
+                    "stakeholder_types": [
+                        "Farmers",
+                        "Data Protection Officers",
+                        "Regulators",
+                        "Legal"
+                    ],
+                    "evidence_required": "Data protection compliance certificates, DPO appointment documentation, Privacy impact assessments, Consent mechanisms (farmer-friendly), Cross-border transfer safeguards, Breach notification procedures",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Data protection laws emerging across Africa. Farmers often don't understand data rights. Consent must be truly informed (visual, voice, local language)."
+                },
+                {
+                    "q_id": "Q3.2.3_AGR",
+                    "text": "Mobile Money & Financial Services Compliance: For agricultural platforms integrating mobile money/credit: (1) Mobile money integration licenses (agreements with M-Pesa, Airtel Money, MTN, Orange); (2) Central bank compliance (if providing credit/financial services); (3) AML/KYC compliance (know your customer for farmers); (4) Consumer protection compliance (fair lending, transparent pricing); (5) Agent network compliance (if using village agents for cash-in/out); (6) Cross-border remittance compliance (if facilitating cross-border payments).",
+                    "stakeholder_types": [
+                        "Platform Operators",
+                        "Mobile Money Providers",
+                        "Central Banks",
+                        "Regulators"
+                    ],
+                    "evidence_required": "Mobile money integration agreements, Central bank licenses, KYC procedures, Consumer protection compliance, Agent network documentation, Remittance licenses",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Financial services heavily regulated. Must have proper licenses. KYC challenging for undocumented farmers - alternative ID methods needed."
+                },
+                {
+                    "q_id": "Q3.2.4_AGR",
+                    "text": "Land Tenure Data Governance: For platforms collecting farm GPS polygons: (1) Ownership of geospatial data (does farmer own the map?); (2) Usage restrictions (can platform sell land data to investors/government?); (3) Privacy of land boundaries (sensitive in conflict zones); (4) Integration with land registries (if applicable); (5) Farmer consent for mapping.",
+                    "stakeholder_types": ["Farmers", "Land Registries", "Legal"],
+                    "evidence_required": "Data usage policy for geospatial data, Consent forms for mapping",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Land tenure is sensitive. Mapping farms can create legal risks for farmers if data is misused (e.g., land grabs)."
+                }
+            ]
+        },
+        {
+            "id": "3.3",
+            "name": "Dispute Resolution & Accountability",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q3.3.1_AGR",
+                    "text": "Farmer Dispute Resolution Mechanisms: Provide accessible dispute resolution for farmers: (1) Internal complaint process (how do farmers file complaints? via SMS, phone, village agent?); (2) Response timelines (acknowledgment within 24 hours, resolution within 7 days for critical issues); (3) Escalation procedures (when is dispute escalated? to whom?); (4) Alternative dispute resolution (mediation, arbitration accessible to farmers); (5) Legal recourse (can farmers go to court? legal aid available?); (6) Farmer protection (no retaliation for filing complaints); (7) Dispute resolution track record (how many disputes? resolution rate? farmer satisfaction?).",
+                    "stakeholder_types": [
+                        "Farmers",
+                        "Customer Support",
+                        "Mediators",
+                        "Legal",
+                        "Consumer Protection"
+                    ],
+                    "evidence_required": "Complaint filing procedures (multi-channel), Response time SLA data, Escalation protocols, ADR procedures, Legal recourse documentation, Anti-retaliation policies, Dispute resolution metrics",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Court access difficult for farmers - ADR essential. Complaint filing must be simple (SMS, phone, village agent). Local language support critical."
+                },
+                {
+                    "q_id": "Q3.3.2_AGR",
+                    "text": "Platform Accountability & Farmer Recourse: Ensure platform accountability to farmers: (1) Platform liability for failures (payment defaults, input quality issues, advisory errors); (2) Compensation mechanisms (refunds, service credits, damages); (3) Insurance coverage (errors & omissions, professional liability); (4) Farmer recourse for data breaches (notification, compensation, credit monitoring); (5) Third-party accountability (if platform uses third-party suppliers - who is liable?); (6) Regulatory oversight (which government agency oversees platform?).",
+                    "stakeholder_types": [
+                        "Farmers",
+                        "Platform Operators",
+                        "Insurers",
+                        "Regulators",
+                        "Legal"
+                    ],
+                    "evidence_required": "Liability policies, Compensation procedures, Insurance certificates, Data breach response plans, Third-party liability agreements, Regulatory oversight documentation",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Farmers vulnerable - platform must be accountable. Insurance critical given infrastructure risks. Regulatory oversight often weak - self-regulation important."
+                }
+            ]
+        },
+        {
+            "id": "3.4",
+            "name": "Performance Accountability & Auditing",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q3.4.1_AGR",
+                    "text": "Agricultural Platform Performance Auditing: Demonstrate platform performance accountability: (1) Independent audits (financial, operational, data protection); (2) Farmer outcome audits (are farmers actually better off? income, yield, food security); (3) Advisory accuracy audits (were weather forecasts correct? pest alerts timely?); (4) Pricing fairness audits (are market prices fair? commission rates reasonable?); (5) Data governance audits (is farmer data protected? used ethically?); (6) Audit transparency (are audit results shared with farmers, regulators, public?).",
+                    "stakeholder_types": [
+                        "Farmers",
+                        "Auditors",
+                        "Regulators",
+                        "Civil Society",
+                        "Investors"
+                    ],
+                    "evidence_required": "Independent audit reports (financial, operational, data), Farmer outcome studies, Advisory accuracy metrics, Pricing fairness analysis, Data governance audits, Audit publication policies",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Independent audits critical for trust. Farmer outcome audits essential - adoption metrics insufficient. Audit results should be public (transparency)."
+                },
+                {
+                    "q_id": "Q3.4.2_AGR",
+                    "text": "Farmer Feedback & Continuous Improvement: Demonstrate responsiveness to farmer feedback: (1) Farmer feedback collection (surveys, focus groups, complaint analysis); (2) Feedback analysis and action (what changes were made based on farmer input?); (3) Farmer advisory boards (do farmers have voice in platform governance?); (4) Cooperative integration (do farmer cooperatives have representation?); (5) Transparency on improvements (are farmers informed of changes made based on their feedback?); (6) Farmer satisfaction tracking (NPS, retention rates, referral rates).",
+                    "stakeholder_types": [
+                        "Farmers",
+                        "Cooperatives",
+                        "Product Managers",
+                        "Customer Success"
+                    ],
+                    "evidence_required": "Farmer feedback mechanisms, Feedback analysis reports, Advisory board documentation, Cooperative engagement records, Improvement communication logs, Farmer satisfaction metrics",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "Farmers must have voice in platform evolution. Cooperative representation important (collective bargaining power). Feedback must be actionable, not performative."
+                }
+            ]
+        }
+    ],
+    "scoring_notes": "Layer 3 (Governance) for Agriculture in Sub-Saharan Africa: Contract enforceability critical given weak legal systems. Dispute resolution must be accessible (not just courts). Regulatory compliance complex (54 countries). Farmer accountability mechanisms essential for trust."
+}

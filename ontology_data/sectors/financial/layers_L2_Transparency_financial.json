@@ -1,0 +1,228 @@
+{
+    "layer_id": "L2",
+    "layer_name": "Transparency",
+    "sector": "financial",
+    "region": "Sub-Saharan Africa",
+    "total_questions": 14,
+    "total_sub_dimensions": 5,
+    "sub_dimensions": [
+        {
+            "id": "2.1",
+            "name": "System Logic & Decision-Making Transparency",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q2.1.1_FIN",
+                    "text": "Mobile Money Fee Structure Transparency - SSA: Provide complete fee disclosure for all mobile money services: (1) Transaction fees (send money, withdraw, deposit - tiered by amount); (2) Cross-border fees (remittance fees, FX margins); (3) Agent fees (do agents charge extra? disclosed?); (4) Merchant payment fees (who pays - customer or merchant?); (5) Bill payment fees (utility, school, government payments); (6) Account maintenance fees (monthly fees, inactivity fees); (7) Fee comparison vs competitors (are fees competitive?).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Agents",
+                        "Merchants",
+                        "Regulators",
+                        "Consumer Protection"
+                    ],
+                    "evidence_required": "Complete fee schedule, Cross-border fee breakdown, Agent fee policies, Merchant fee structures, Bill payment fees, Account fees, Competitive fee analysis",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "Fee transparency critical - users very price-sensitive. Hidden fees destroy trust. Agent fees often not disclosed. Cross-border fees complex (FX + transfer fee)."
+                },
+                {
+                    "q_id": "Q2.1.2_FIN",
+                    "text": "Credit Scoring & Limit Determination Transparency: For mobile money credit/loans, explain: (1) How are credit limits determined (transaction history, airtime purchases, bill payments)?; (2) Alternative data usage (mobile money behavior, social network, psychometrics); (3) Credit scoring algorithm (what factors, what weights?); (4) Bias prevention (gender, geography, ethnicity - tested for discrimination?); (5) Rejection explanations (why was user denied? in simple language); (6) Credit score improvement (how can users improve their score?); (7) Data usage disclosure (is credit data sold to third parties?).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Lenders",
+                        "Regulators",
+                        "Consumer Protection",
+                        "Data Protection"
+                    ],
+                    "evidence_required": "Credit scoring methodology, Alternative data sources, Algorithm documentation, Bias testing reports, Rejection explanation samples, Score improvement guidance, Data sharing policies",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Alternative data critical (most users lack formal credit history). Bias risk high (gender, rural discrimination). Rejection reasons must be simple (low literacy). Credit data privacy concerns."
+                },
+                {
+                    "q_id": "Q2.1.3_FIN",
+                    "text": "Exchange Rate Transparency for Cross-Border Transactions: For international remittances and cross-border mobile money: (1) Exchange rate disclosure (real-time rate shown before transaction?); (2) FX margin transparency (markup over interbank rate disclosed?); (3) Total cost disclosure (fees + FX margin = total cost); (4) Rate comparison (vs banks, Western Union, competitors); (5) Rate lock-in (is rate guaranteed at transaction time?); (6) Rate update frequency (how often do rates change?); (7) Historical rate data (can users see past rates?).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Remittance Senders",
+                        "Regulators",
+                        "Consumer Protection"
+                    ],
+                    "evidence_required": "Exchange rate disclosure interface, FX margin documentation, Total cost calculator, Rate comparison data, Rate lock-in policies, Rate update frequency, Historical rate access",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Remittances huge (diaspora sending money home). FX margins often hidden. Users don't understand FX vs fees. Total cost disclosure mandatory. Rate volatility high (local currencies)."
+                }
+            ]
+        },
+        {
+            "id": "2.2",
+            "name": "Operational Visibility & Monitoring",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q2.2.1_FIN",
+                    "text": "User Transaction History Visibility - Mobile Money: Provide complete transaction visibility: (1) Transaction history accessible via USSD (not just app); (2) SMS confirmations for every transaction (send, receive, withdraw, deposit); (3) Real-time balance updates (accurate, immediate); (4) Transaction details (date, time, amount, recipient, fees, reference number); (5) Dispute tracking (can users see complaint status?); (6) Statement generation (monthly statements via SMS/email/USSD); (7) Multi-language support (English, French, local languages).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Agents",
+                        "Platform Operators",
+                        "Regulators"
+                    ],
+                    "evidence_required": "USSD transaction history demo, SMS confirmation samples, Balance update accuracy, Transaction detail completeness, Dispute tracking interface, Statement generation, Language support",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "USSD access critical (many users no smartphone). SMS confirmations mandatory (users don't trust without SMS). Transaction history = proof for disputes. Statements needed for loans."
+                },
+                {
+                    "q_id": "Q2.2.2_FIN",
+                    "text": "Agent Transaction Transparency: For agent-assisted transactions, provide visibility: (1) Agent identification (agent name, ID, location shown to user); (2) Transaction confirmation (user gets SMS with agent details); (3) Agent commission disclosure (does user see agent's commission?); (4) Receipt provision (paper or SMS receipt from agent); (5) Agent rating system (can users rate agents? see ratings?); (6) Complaint mechanism (how to report agent fraud/poor service?); (7) Agent location tracking (can users find nearest agent?).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Agents",
+                        "Platform Operators",
+                        "Regulators"
+                    ],
+                    "evidence_required": "Agent identification system, Transaction confirmations with agent details, Commission disclosure, Receipt samples, Agent rating system, Complaint procedures, Agent location finder",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Agent fraud common - identification critical. SMS confirmation with agent details = accountability. Agent ratings help users avoid bad agents. Agent location finder essential (rural areas)."
+                }
+            ]
+        },
+        {
+            "id": "2.3",
+            "name": "Data Governance & Privacy",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q2.3.1_FIN",
+                    "text": "Mobile Money User Data Collection & Usage: Document all data practices: (1) What data collected (transactions, location, device, contacts, call logs)?; (2) Why each data type needed (specific use cases); (3) How data used (fraud detection, credit scoring, marketing, research); (4) Data sharing with third parties (who? for what? with consent?); (5) Data retention (how long kept?); (6) User data rights (access, correction, deletion, portability); (7) Consent mechanisms (simple, clear, in local languages).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Data Protection Officers",
+                        "Regulators",
+                        "Privacy Advocates"
+                    ],
+                    "evidence_required": "Data collection inventory, Purpose documentation, Data usage policies, Third-party sharing agreements, Retention schedules, User rights procedures, Consent interfaces",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Mobile money collects extensive data (transaction patterns reveal everything). Credit scoring uses sensitive data. Users don't understand data implications. Consent must be truly informed."
+                },
+                {
+                    "q_id": "Q2.3.2_FIN",
+                    "text": "Financial Data Security & Protection: Demonstrate user financial data protection: (1) Data encryption (transactions, PINs, personal data); (2) Access controls (who can see user data? role-based); (3) Breach notification (how quickly are users notified?); (4) Fraud detection (real-time monitoring, suspicious activity alerts); (5) SIM swap protection (how is SIM swap detected and prevented?); (6) Data residency (where is data stored? in-country or abroad?); (7) Security certifications (PCI-DSS, ISO 27001).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Security Officers",
+                        "Regulators",
+                        "Auditors"
+                    ],
+                    "evidence_required": "Encryption documentation, Access control policies, Breach procedures, Fraud detection systems, SIM swap protection, Data residency policies, Security certifications",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Financial data extremely sensitive (life savings). SIM swap fraud epidemic. Fraud detection critical. Data residency important (sovereignty). PCI-DSS compliance mandatory."
+                },
+                {
+                    "q_id": "Q2.3.3_FIN",
+                    "text": "User Data Portability & Account Closure: Ensure users control their financial data: (1) Can users export transaction history (CSV, PDF)?; (2) Can users close account and withdraw all funds?; (3) What happens to data after account closure (deleted? retained?); (4) Can users switch to competitor and take data?; (5) Data deletion timeline (how long to delete after request?); (6) Credit history portability (can users take credit score to other lenders?); (7) Account closure fees (any charges to close account?).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Platform Operators",
+                        "Regulators",
+                        "Competition Authorities"
+                    ],
+                    "evidence_required": "Data export functionality, Account closure procedures, Data deletion policies, Credit history portability, Closure fee schedules",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Users must be able to leave (prevent lock-in). Transaction history = proof for disputes, loans. Credit history portability enables competition. Account closure must be free/cheap."
+                }
+            ]
+        },
+        {
+            "id": "2.4",
+            "name": "Documentation Quality & Accessibility",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q2.4.1_FIN",
+                    "text": "User-Accessible Financial Service Documentation: Provide documentation accessible to low-literacy users: (1) Terms of service in simple language (no legal jargon, 5th-grade level); (2) Visual guides (pictograms, infographics for USSD navigation); (3) Video tutorials (local languages, showing USSD steps); (4) Voice/IVR instructions (phone-based, no internet needed); (5) Agent training materials (agents can explain to users); (6) FAQ in local languages (common questions answered simply); (7) Offline-accessible (printed materials, radio broadcasts).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Agents",
+                        "Consumer Protection",
+                        "Literacy Advocates"
+                    ],
+                    "evidence_required": "Simplified terms samples, Visual guide examples, Video tutorials, IVR system, Agent training materials, FAQ documentation, Offline materials",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "Literacy low - visual/voice essential. USSD navigation not intuitive (need guides). Agents critical for explaining to users. Local languages mandatory. Offline materials needed (no internet)."
+                },
+                {
+                    "q_id": "Q2.4.2_FIN",
+                    "text": "Fee & Terms Transparency in User Interface: Ensure fees and terms clear at point of transaction: (1) Fees shown before transaction confirmation (USSD, app); (2) Total cost displayed (amount + fees = total deducted); (3) Exchange rate shown for cross-border (before confirmation); (4) Terms acceptance (user must confirm understanding); (5) Changes communicated proactively (SMS when fees/terms change); (6) Dispute process explained (how to complain if issue); (7) Refund policy clear (when are refunds given?).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Platform Operators",
+                        "Regulators",
+                        "Consumer Protection"
+                    ],
+                    "evidence_required": "USSD fee display screenshots, Total cost calculation, FX rate display, Terms acceptance flow, Change notification procedures, Dispute process documentation, Refund policies",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "Fee disclosure at transaction time critical (users very price-sensitive). Total cost must be clear (not hidden). Changes must be communicated (SMS). Dispute process must be accessible."
+                }
+            ]
+        },
+        {
+            "id": "2.5",
+            "name": "Communication Protocols & Responsiveness",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q2.5.1_FIN",
+                    "text": "User Support Channels & Responsiveness - Mobile Money: Provide accessible, responsive support: (1) Multi-channel support (phone, SMS, USSD, WhatsApp, in-person at agents); (2) Local language support (English, French, major African languages); (3) Response time SLAs (critical issues <1 hour, general <4 hours); (4) 24/7 availability (money emergencies don't wait); (5) Escalation procedures (when is issue escalated?); (6) Issue resolution tracking (can users check complaint status?); (7) User satisfaction metrics (NPS, resolution rates).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Customer Support",
+                        "Agents",
+                        "Regulators"
+                    ],
+                    "evidence_required": "Support channel documentation, Language support matrix, Response time SLA data, 24/7 availability proof, Escalation procedures, Resolution tracking system, Satisfaction metrics",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Phone/SMS critical (many users no internet). Local language essential. 24/7 needed (emergencies). Fast response critical (money issues urgent). Agent support important (in-person)."
+                },
+                {
+                    "q_id": "Q2.5.2_FIN",
+                    "text": "Transaction Status & Alert Communication: For all mobile money transactions, provide clear communication: (1) Transaction initiation confirmation (SMS when transaction started); (2) Transaction completion confirmation (SMS with reference number, amount, fees); (3) Failed transaction notification (SMS explaining why failed, next steps); (4) Suspicious activity alerts (SMS if unusual transaction detected); (5) Account balance alerts (low balance, large withdrawal); (6) Service disruption alerts (SMS if system down, expected recovery); (7) Promotional communication opt-out (users can stop marketing SMS).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Platform Operators",
+                        "Regulators"
+                    ],
+                    "evidence_required": "SMS confirmation samples, Failure notification templates, Fraud alert examples, Balance alert settings, Disruption communication, Opt-out procedures",
+                    "evidence_weight": "High",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "SMS confirmations mandatory (users don't trust without SMS). Failure notifications critical (users panic). Fraud alerts important (SIM swap). Disruption communication essential (users assume money lost)."
+                },
+                {
+                    "q_id": "Q2.5.3_FIN",
+                    "text": "Dispute Resolution Visibility: Transparently track and communicate dispute progress: (1) Ticket issuance (immediate SMS with ticket #); (2) Status tracking (USSD/App check status); (3) Resolution timeline communication (estimated time to resolve); (4) Outcome explanation (why was refund granted/denied?); (5) Escalation path visibility (how to escalate if unsatisfied).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Support Agents",
+                        "Regulators"
+                    ],
+                    "evidence_required": "Dispute tracking system demo, SMS notification logs, Resolution timeline policy",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Disputes (wrong number, failed tx) cause panic. Transparency reduces anxiety and builds trust."
+                }
+            ]
+        }
+    ],
+    "scoring_notes": "Layer 2 (Transparency) for Financial Services in Sub-Saharan Africa: Fee transparency at transaction time is mandatory. Credit scoring must be explainable and bias-free. SMS confirmations for every transaction non-negotiable. Data privacy critical given sensitive financial data."
+}

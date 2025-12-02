@@ -1,0 +1,195 @@
+{
+    "layer_id": "L6",
+    "layer_name": "Ecosystem",
+    "sector": "healthcare",
+    "region": "Sub-Saharan Africa",
+    "total_questions": 18,
+    "total_sub_dimensions": 5,
+    "sub_dimensions": [
+        {
+            "id": "6.1",
+            "name": "Health System Integration",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q6.1.1_HLT",
+                    "text": "Referral Pathway Integration: Connection to physical care: (1) Directory of physical facilities; (2) Electronic referral letters; (3) Feedback loop (did patient arrive?); (4) Emergency transport integration (ambulance/taxi); (5) Agreement with receiving facilities; (6) Continuity of care record transfer.",
+                    "stakeholder_types": [
+                        "Hospitals",
+                        "Clinics",
+                        "Ministry of Health"
+                    ],
+                    "evidence_required": "Referral SOPs, MOUs with facilities, Referral tracking data",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Telemedicine without referral is dangerous. 'Closed loop' referrals (knowing patient arrived) is the gold standard."
+                },
+                {
+                    "q_id": "Q6.1.2_HLT",
+                    "text": "Public Health Reporting (Surveillance): Disease tracking: (1) Auto-reporting of notifiable diseases (Cholera, Measles, Ebola); (2) Integration with DHIS2 (District Health Information System); (3) Anonymized population health dashboards; (4) Outbreak alert generation; (5) Compliance with MoH reporting mandates.",
+                    "stakeholder_types": [
+                        "Ministry of Health",
+                        "CDC/WHO",
+                        "Epidemiologists"
+                    ],
+                    "evidence_required": "DHIS2 integration logs, Reporting protocols, MoH acknowledgment",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Private sector often fails to report outbreaks. DHIS2 is the standard for MoH data in Africa."
+                },
+                {
+                    "q_id": "Q6.1.3_HLT",
+                    "text": "Laboratory & Diagnostic Ecosystem: Connection to labs: (1) E-ordering of lab tests; (2) Sample collection logistics (riders); (3) Digital result delivery; (4) Quality assurance of partner labs; (5) Integration with lab information systems (LIS).",
+                    "stakeholder_types": [
+                        "Labs",
+                        "Patients",
+                        "Doctors"
+                    ],
+                    "evidence_required": "Lab integration APIs, Partner lab QA reports",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Diagnostics often missing link. 'Uber for labs' models growing."
+                }
+            ]
+        },
+        {
+            "id": "6.2",
+            "name": "Financial Ecosystem (Payer Integration)",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q6.2.1_HLT",
+                    "text": "Health Insurance Integration: Who pays: (1) Integration with National Health Insurance (NHIF/NHIS); (2) Private insurer integration; (3) Real-time eligibility checks; (4) Digital claims submission; (5) Co-pay collection via mobile money; (6) Fraud detection in claims.",
+                    "stakeholder_types": [
+                        "Insurers",
+                        "Patients",
+                        "Providers"
+                    ],
+                    "evidence_required": "Insurance API docs, Claims logs, Fraud detection rules",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Out-of-pocket payment is a barrier. NHIF integration is the holy grail for scale. Claims fraud is rampant."
+                },
+                {
+                    "q_id": "Q6.2.2_HLT",
+                    "text": "Digital Payment Ecosystem: Mobile money for health: (1) M-Pesa/Mobile Money integration; (2) Installment plans for expensive care (health loans); (3) Voucher systems (donor funded); (4) Wallet system for savings; (5) Transparent receipts.",
+                    "stakeholder_types": [
+                        "Fintechs",
+                        "Patients",
+                        "Donors"
+                    ],
+                    "evidence_required": "Payment gateway logs, Loan product terms, Voucher redemption logs",
+                    "evidence_weight": "High",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "Health wallets/savings help resilience. Vouchers common for maternal health programs."
+                }
+            ]
+        },
+        {
+            "id": "6.3",
+            "name": "Regulatory & Policy Environment",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q6.3.1_HLT",
+                    "text": "National Digital Health Strategy Alignment: Strategic fit: (1) Alignment with MoH eHealth strategy; (2) Adoption of national standards (HL7/FHIR); (3) Participation in technical working groups; (4) Interoperability with national health exchange.",
+                    "stakeholder_types": [
+                        "Ministry of Health",
+                        "Donors"
+                    ],
+                    "evidence_required": "Strategy alignment doc, Interoperability certifications",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Fragmented pilots ('pilotitis') plague Africa. Solutions must align with national strategy to scale."
+                },
+                {
+                    "q_id": "Q6.3.2_HLT",
+                    "text": "Cross-Border Regulatory Compliance: Regional expansion: (1) Compliance with regional blocks (EAC, ECOWAS); (2) Cross-border data transfer rules; (3) Mutual recognition of medical licenses; (4) Harmonized drug regulations.",
+                    "stakeholder_types": [
+                        "Regional Bodies",
+                        "Regulators"
+                    ],
+                    "evidence_required": "Regional compliance analysis, Legal opinions",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Telemedicine crosses borders easily; regulation doesn't. Harmonization is slow."
+                }
+            ]
+        },
+        {
+            "id": "6.4",
+            "name": "Community & Cultural Context",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q6.4.1_HLT",
+                    "text": "Community Trust & Acceptance: Social license: (1) Engagement with community leaders/chiefs; (2) Perception of digital vs traditional healers; (3) Trust in CHWs; (4) Stigma management (privacy trust); (5) Feedback mechanisms.",
+                    "stakeholder_types": [
+                        "Community Leaders",
+                        "Anthropologists"
+                    ],
+                    "evidence_required": "Community engagement reports, Qualitative surveys",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Traditional healers are the competition. Tech must complement, not alienate. Privacy trust is fragile."
+                },
+                {
+                    "q_id": "Q6.4.2_HLT",
+                    "text": "Gender Dynamics in Health Access: Women's access: (1) Female CHW availability; (2) Privacy for reproductive health; (3) Male involvement strategies; (4) Phone ownership gap (women borrowing phones); (5) GBV (Gender Based Violence) screening/referral.",
+                    "stakeholder_types": [
+                        "Women",
+                        "Gender Experts"
+                    ],
+                    "evidence_required": "Gender strategy, Disaggregated data",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Women often need husband's permission to seek care. Shared phones compromise privacy. GBV is a shadow pandemic."
+                },
+                {
+                    "q_id": "Q6.4.3_HLT",
+                    "text": "Language & Cultural Appropriateness: Cultural fit: (1) Local language support (beyond English/French); (2) Culturally relevant content (diet, lifestyle); (3) Respectful terminology; (4) Religious considerations.",
+                    "stakeholder_types": [
+                        "Translators",
+                        "Cultural Experts"
+                    ],
+                    "evidence_required": "Translation validation, Content audit",
+                    "evidence_weight": "High",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "Dietary advice must match local food. Religious views on contraception/vaccines matter."
+                }
+            ]
+        },
+        {
+            "id": "6.5",
+            "name": "Infrastructure Dependencies",
+            "weight": 0.15,
+            "questions": [
+                {
+                    "q_id": "Q6.5.1_HLT",
+                    "text": "Power & Connectivity Resilience: Infrastructure reliance: (1) Solar power for clinics/devices; (2) Backup connectivity (dual SIM); (3) Offline-first architecture; (4) Paper backup processes.",
+                    "stakeholder_types": [
+                        "Engineers",
+                        "Operations"
+                    ],
+                    "evidence_required": "Infrastructure audit, Uptime logs",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Clinics often have no power. Solar is standard. Network outages are daily events."
+                },
+                {
+                    "q_id": "Q6.5.2_HLT",
+                    "text": "Medical Waste Management: Environmental impact: (1) Sharps disposal; (2) E-waste (old tablets/phones); (3) Expired drug disposal; (4) Incinerator access.",
+                    "stakeholder_types": [
+                        "Environmental Agencies",
+                        "Clinics"
+                    ],
+                    "evidence_required": "Waste management plan, Disposal certificates",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Digital health generates e-waste. Home care generates medical waste. Safe disposal needed."
+                }
+            ]
+        }
+    ],
+    "scoring_notes": "Layer 6 (Ecosystem) for Healthcare in SSA: Integration with the public sector (MoH) and insurance (NHIF) is the path to scale. Community trust and gender dynamics determine uptake."
+}

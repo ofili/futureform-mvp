@@ -1,0 +1,6 @@
+Testing database connection...
+Connection successful. User count: 0
+Testing TrustLayer model access...
+TrustLayer count: 6
+TrustSubDimension count: 28
+TrustQuestion count: 83

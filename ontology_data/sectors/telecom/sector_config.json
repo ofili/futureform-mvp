@@ -1,0 +1,31 @@
+{
+    "sector_id": "telecom",
+    "sector_name": "Telecommunications",
+    "description": "Trust framework for Telecommunications providers in Sub-Saharan Africa, focusing on network reliability, data privacy, pricing transparency, and infrastructure resilience.",
+    "context_notes": "In Sub-Saharan Africa, Telcos are the primary digital infrastructure, enabling mobile money, internet access, and digital identity. Trust issues center on network quality (dropped calls/slow data), opaque billing (disappearing airtime), and data privacy (government surveillance/SIM registration). Market dominance by a few players raises competition concerns.",
+    "stakeholders": [
+        "Subscribers (Consumers & Enterprise)",
+        "Regulators (Communications Authority)",
+        "Mobile Money Agents",
+        "Infrastructure Providers (TowerCos)",
+        "Content Providers (VAS)",
+        "Government (Security Agencies)",
+        "Investors"
+    ],
+    "risk_factors": [
+        "Network downtime / Fiber cuts",
+        "Cybersecurity breaches (SIM swap fraud)",
+        "Regulatory fines (Quality of Service)",
+        "Infrastructure vandalism",
+        "Power dependency (Grid reliability)",
+        "Data privacy violations",
+        "Predatory pricing / Opaque billing"
+    ],
+    "regulatory_bodies": [
+        "Communications Authority / Commission",
+        "Data Protection Commissioner",
+        "Central Bank (for Mobile Money)",
+        "Competition Authority",
+        "Universal Service Fund"
+    ]
+}

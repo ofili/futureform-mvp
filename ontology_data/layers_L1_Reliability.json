@@ -1,0 +1,157 @@
+{
+  "layer_id": "L1",
+  "layer_name": "Reliability",
+  "total_questions": 12,
+  "total_sub_dimensions": 4,
+  "sub_dimensions": [
+    {
+      "id": "1.1",
+      "name": "System Availability & Performance",
+      "weight": 0.25,
+      "questions": [
+        {
+          "q_id": "Q1.1.1",
+          "text": "Availability Commitments & Verification: Please provide a comprehensive analysis of system availability commitments, including: Contractually guaranteed availability levels; Measurement methodologies; Exclusions; Historical performance data; Penalties and remedies.",
+          "stakeholder_types": [
+            "Vendor",
+            "Technical Team"
+          ],
+          "evidence_required": "SLA documentation, Independent verification reports, Historical performance logs",
+          "evidence_weight": "Critical"
+        },
+        {
+          "q_id": "Q1.1.2",
+          "text": "End-to-End Reliability Assessment: Describe the complete reliability chain from end-user perspective: Component-level availability; Network connectivity dependencies; Authentication/access success rates; Geographic variations; Real user monitoring data.",
+          "stakeholder_types": [
+            "Vendor",
+            "Operations Team"
+          ],
+          "evidence_required": "Architecture diagrams, RUM data, Network dependency map",
+          "evidence_weight": "High"
+        },
+        {
+          "q_id": "Q1.1.3",
+          "text": "Performance Quality Metrics: Provide detailed performance quality indicators beyond binary uptime: Response time distributions; Data quality metrics; Transaction success rates; Degradation patterns; User satisfaction scores.",
+          "stakeholder_types": [
+            "Vendor",
+            "Technical Team"
+          ],
+          "evidence_required": "Performance dashboards, Data quality reports, User satisfaction surveys",
+          "evidence_weight": "High"
+        }
+      ]
+    },
+    {
+      "id": "1.2",
+      "name": "Environmental & Operational Stress Resilience",
+      "weight": 0.25,
+      "questions": [
+        {
+          "q_id": "Q1.2.1",
+          "text": "Deployment Environment Characterization: Provide a comprehensive environmental profile for deployment locations: Temperature ranges; Humidity ranges; Dust/corrosive exposure; Solar radiation; Physical stress factors.",
+          "stakeholder_types": [
+            "Vendor",
+            "Field Ops"
+          ],
+          "evidence_required": "Environmental specifications, Site survey reports",
+          "evidence_weight": "High"
+        },
+        {
+          "q_id": "Q1.2.2",
+          "text": "Context-Specific Stress Testing: Document comprehensive stress testing under deployment-realistic conditions: Multi-factor stress scenarios; Duration of tests; Population-representative testing; Pass/fail criteria; Independent verification.",
+          "stakeholder_types": [
+            "Vendor",
+            "QA Team"
+          ],
+          "evidence_required": "Stress test protocols, Independent lab reports, Test results",
+          "evidence_weight": "Critical"
+        },
+        {
+          "q_id": "Q1.2.3",
+          "text": "Infrastructure Dependency Resilience: Analyze system resilience to infrastructure variability: Power quality tolerance; Power outage survival; Connectivity tolerance; Supply chain resilience.",
+          "stakeholder_types": [
+            "Vendor",
+            "Engineering Team"
+          ],
+          "evidence_required": "Power tolerance specs, Backup capability documentation, Supply chain strategy",
+          "evidence_weight": "High"
+        }
+      ]
+    },
+    {
+      "id": "1.3",
+      "name": "Interoperability & Integration",
+      "weight": 0.25,
+      "questions": [
+        {
+          "q_id": "Q1.3.1",
+          "text": "Standards Compliance Verification: Provide evidence of standards compliance and interoperability: Claimed standards with certification; Scope of certification; Interoperability testing results; API completeness; Version control policies.",
+          "stakeholder_types": [
+            "Vendor",
+            "Integration Team"
+          ],
+          "evidence_required": "Compliance certificates, Interoperability test reports, API documentation",
+          "evidence_weight": "High"
+        },
+        {
+          "q_id": "Q1.3.2",
+          "text": "Integration Complexity Assessment: Evaluate the practical complexity of system integration: Time/effort for integration; Error rates; Custom code requirements; Support requirements; Performance impact.",
+          "stakeholder_types": [
+            "System Integrator",
+            "Dev Team"
+          ],
+          "evidence_required": "Integration case studies, Developer logs, Support ticket analysis",
+          "evidence_weight": "Medium"
+        },
+        {
+          "q_id": "Q1.3.3",
+          "text": "Vendor Lock-In Risk Analysis: Assess the risk and cost of vendor dependency: Technology openness; Data portability; Skills transferability; Switching cost quantification; Alternative vendor availability.",
+          "stakeholder_types": [
+            "Architect",
+            "Procurement"
+          ],
+          "evidence_required": "Data export documentation, Open standard verification, Switching cost analysis",
+          "evidence_weight": "High"
+        }
+      ]
+    },
+    {
+      "id": "1.4",
+      "name": "Failure Modes & Recovery Capabilities",
+      "weight": 0.25,
+      "questions": [
+        {
+          "q_id": "Q1.4.1",
+          "text": "Comprehensive Failure Mode Analysis: Provide detailed Failure Mode and Effects Analysis (FMEA): Identification of critical failure modes; Risk Priority Numbers; Single points of failure; Cascading failure scenarios; Historical failure data.",
+          "stakeholder_types": [
+            "Vendor",
+            "Risk Team"
+          ],
+          "evidence_required": "FMEA report, Historical incident logs, Redundancy plans",
+          "evidence_weight": "Critical"
+        },
+        {
+          "q_id": "Q1.4.2",
+          "text": "Graceful Degradation Assessment: Demonstrate system behavior under partial failure conditions: Degradation levels defined; Functionality retained; Automatic vs. manual transitions; User experience; Recovery pathways.",
+          "stakeholder_types": [
+            "Vendor",
+            "Product Owner"
+          ],
+          "evidence_required": "Degradation protocols, UX failure state designs, Recovery procedures",
+          "evidence_weight": "High"
+        },
+        {
+          "q_id": "Q1.4.3",
+          "text": "Recovery Metrics & Capabilities: Provide quantified recovery performance data: Mean Time to Detect (MTTD); Mean Time to Repair (MTTR); Mean Time Between Failures (MTBF); Recovery documentation quality; Disaster recovery capabilities.",
+          "stakeholder_types": [
+            "Ops Team",
+            "Vendor"
+          ],
+          "evidence_required": "MTTD/MTTR/MTBF metrics, Disaster recovery plan, Recovery manuals",
+          "evidence_weight": "High"
+        }
+      ]
+    }
+  ],
+  "scoring_notes": "Layer 1 composite formula: Weighted average of sub-dimensions. Critical evidence missing triggers automatic flag."
+}

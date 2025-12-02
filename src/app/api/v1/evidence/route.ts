@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
-import { prisma } from '@/lib/prisma';
+import prisma from '@/lib/prisma';
 import { logger } from '@/lib/logger';
 import { EvidenceLayer, VerificationStatus } from '@prisma/client';
 
@@ -32,7 +32,11 @@ export async function GET(req: NextRequest) {
     const evidence = await prisma.enhancedEvidence.findMany({
       where: {
         uploader: {
-          organizationId: organizationId, // Assuming uploader belongs to the org
+          organizations: {
+            some: {
+              organizationId: organizationId,
+            },
+          },
         },
         ...(layer && { layer }),
         ...(status && { verificationStatus: status }),

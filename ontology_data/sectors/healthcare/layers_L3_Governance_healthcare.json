@@ -1,0 +1,155 @@
+{
+    "layer_id": "L3",
+    "layer_name": "Governance",
+    "sector": "healthcare",
+    "region": "Sub-Saharan Africa",
+    "total_questions": 14,
+    "total_sub_dimensions": 4,
+    "sub_dimensions": [
+        {
+            "id": "3.1",
+            "name": "Medical Licensing & Regulatory Compliance",
+            "weight": 0.30,
+            "questions": [
+                {
+                    "q_id": "Q3.1.1_HLT",
+                    "text": "Medical Practitioner Licensing: Verification of licenses: (1) Automated check with Medical Board (if API available); (2) Manual verification process; (3) License expiry tracking; (4) Disciplinary history check; (5) Scope of practice verification (e.g., nurse vs doctor); (6) Cross-border licensing (can doctor treat patient in another country?).",
+                    "stakeholder_types": [
+                        "Medical Boards",
+                        "Platform Operators",
+                        "Regulators"
+                    ],
+                    "evidence_required": "Verification SOPs, License database, Expiry tracking logs",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Manual verification often needed (no APIs). Cross-border telemedicine common but legally grey. Scope of practice critical (nurses doing doctor work)."
+                },
+                {
+                    "q_id": "Q3.1.2_HLT",
+                    "text": "Telemedicine Specific Regulations: Compliance with tele-health rules: (1) Telemedicine license (if required); (2) Prescription restrictions (e.g., no narcotics via video); (3) Patient consent for telemedicine; (4) Record keeping standards; (5) Emergency referral protocols; (6) Liability insurance for telemedicine.",
+                    "stakeholder_types": [
+                        "Regulators",
+                        "Legal",
+                        "Insurers"
+                    ],
+                    "evidence_required": "Telemedicine license, Consent forms, Prescription policy, Insurance certificate",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Telemedicine guidelines emerging (Kenya, Nigeria, SA have them). Narcotics restrictions common. Liability insurance often overlooked."
+                },
+                {
+                    "q_id": "Q3.1.3_HLT",
+                    "text": "Pharmacy & Drug Regulation: Compliance for e-pharmacy: (1) Pharmacy Board registration; (2) Pharmacist supervision requirements; (3) Controlled substance handling; (4) Cold chain compliance certification; (5) Import licenses (if importing drugs); (6) Anti-counterfeit measures.",
+                    "stakeholder_types": [
+                        "Pharmacy Board",
+                        "Regulators"
+                    ],
+                    "evidence_required": "Pharmacy licenses, Pharmacist contracts, Cold chain certs",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Online pharmacy highly regulated. Pharmacist must supervise. Counterfeits are the main regulatory target."
+                }
+            ]
+        },
+        {
+            "id": "3.2",
+            "name": "Data Protection & Sovereignty",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q3.2.1_HLT",
+                    "text": "Health Data Protection Compliance: Compliance with DPA/GDPR: (1) Data Protection Officer (DPO) appointment; (2) Health data classification (sensitive personal data); (3) Data sovereignty (hosting in-country if required); (4) Breach notification protocol; (5) Processor agreements (with cloud providers); (6) Impact assessments (DPIA).",
+                    "stakeholder_types": [
+                        "Data Protection Commissioner",
+                        "Legal",
+                        "DPO"
+                    ],
+                    "evidence_required": "DPO appointment letter, DPIA reports, Hosting contracts, Breach protocol",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Health data is 'Sensitive Personal Data' in most African DPAs. Local hosting often mandated (e.g., Nigeria, Kenya for government data)."
+                },
+                {
+                    "q_id": "Q3.2.2_HLT",
+                    "text": "Consent Management Governance: Governance of patient consent: (1) Explicit consent for data collection; (2) Consent for sharing (referrals, insurance); (3) Age of consent (minors accessing sexual health); (4) Withdrawal of consent mechanism; (5) Auditability of consent.",
+                    "stakeholder_types": [
+                        "Patients",
+                        "Legal",
+                        "Ethics Committees"
+                    ],
+                    "evidence_required": "Consent flows, Audit logs of consent",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Minors accessing sexual health (HIV/contraception) is legally complex. Consent must be informed (literacy issues)."
+                }
+            ]
+        },
+        {
+            "id": "3.3",
+            "name": "Clinical Governance & Quality Assurance",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q3.3.1_HLT",
+                    "text": "Clinical Oversight Structure: Who is responsible for medical quality: (1) Chief Medical Officer (CMO) role; (2) Medical Advisory Board; (3) Clinical protocol review process; (4) Peer review of consultations; (5) Adverse event reporting system; (6) Quality improvement plans.",
+                    "stakeholder_types": [
+                        "CMO",
+                        "Medical Board",
+                        "Investors"
+                    ],
+                    "evidence_required": "Org chart (CMO), Committee minutes, Peer review logs, Adverse event reports",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Tech companies often lack medical leadership. CMO is essential. Peer review ensures doctors don't cut corners."
+                },
+                {
+                    "q_id": "Q3.3.2_HLT",
+                    "text": "Adverse Event Management: Handling medical errors: (1) Reporting mechanism for errors/near misses; (2) Investigation process (Root Cause Analysis); (3) Reporting to authorities (if required); (4) Patient disclosure policy; (5) Corrective action tracking.",
+                    "stakeholder_types": [
+                        "Quality Assurance",
+                        "Regulators",
+                        "Patients"
+                    ],
+                    "evidence_required": "Incident logs, RCA reports, Corrective action plans",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "If a patient dies or is harmed, there must be a process. 'Move fast' doesn't apply to medical errors."
+                }
+            ]
+        },
+        {
+            "id": "3.4",
+            "name": "Ethical Governance",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q3.4.1_HLT",
+                    "text": "Medical Ethics Compliance: Adherence to ethical principles: (1) Beneficence (act in patient interest); (2) Non-maleficence (do no harm); (3) Autonomy (patient choice); (4) Justice (fair access); (5) Conflict of interest policy (pharma kickbacks); (6) Research ethics (if using data for research).",
+                    "stakeholder_types": [
+                        "Ethics Committees",
+                        "Doctors",
+                        "Patients"
+                    ],
+                    "evidence_required": "Code of Ethics, Conflict of interest declarations, IRB approvals (for research)",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Pharma kickbacks are a major ethical risk. Research on African data requires IRB approval."
+                },
+                {
+                    "q_id": "Q3.4.2_HLT",
+                    "text": "Algorithmic Ethics (AI in Health): Governance of AI tools: (1) Bias testing (skin tone, gender); (2) Explainability requirements; (3) Human-in-the-loop for critical decisions; (4) Liability assignment (AI vs Doctor); (5) Validation on local datasets.",
+                    "stakeholder_types": [
+                        "Data Scientists",
+                        "Ethicists",
+                        "Regulators"
+                    ],
+                    "evidence_required": "Bias test reports, Validation studies, Liability policy",
+                    "evidence_weight": "Advanced",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "AI trained on Western data fails in Africa (e.g., skin lesions). Local validation mandatory."
+                }
+            ]
+        }
+    ],
+    "scoring_notes": "Layer 3 (Governance) for Healthcare in SSA: Medical licensing and data protection are the pillars. Clinical governance (CMO oversight) distinguishes legitimate health tech from dangerous apps."
+}

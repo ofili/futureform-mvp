@@ -1,35 +1,101 @@
- ΓÜá `images.domains` is deprecated in favor of `images.remotePatterns`. Please update next.config.js to protect your application from malicious users.
- ΓÜá Warning: Next.js inferred your workspace root, but it may not be correct.
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+ ⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
  We detected multiple lockfiles and selected the directory of C:\Users\ofili\package-lock.json as the root directory.
- To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
-   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ To silence this warning, set `outputFileTracingRoot` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/output#caveats for more information.
  Detected additional lockfiles: 
    * C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\package-lock.json
    * C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\package-lock.json
 
-   Γû▓ Next.js 16.0.3 (Turbopack)
+   ▲ Next.js 16.0.3 (webpack)
    - Environments: .env.local, .env
 
- ΓÜá The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
    Creating an optimized production build ...
- Γ£ô Compiled successfully in 24.4s
-   Running TypeScript ...
+warn  - It seems like you don't have a global error handler set up. It is recommended that you add a global-error.js file with Sentry instrumentation so that React rendering errors are reported to Sentry. Read more: https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/#react-render-errors-in-app-router
+
+warn  - In order to be able to deminify errors, @sentry/nextjs creates sourcemaps and uploads them to the Sentry server. Depending on your deployment setup, this means your original code may be visible in browser devtools in production. To prevent this, set hideSourceMaps to true in the sentry options in your next.config.js. To disable this warning without changing sourcemap behavior, set hideSourceMaps to false. (In @sentry/nextjs version 8.0.0 and beyond, this option will default to true.) See https://webpack.js.org/configuration/devtool/ and https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/#use-hidden-source-map for more information.
+
+warn  - The Sentry SDK could not access the RequestAsyncStorage module. Certain features may not work. There is nothing you can do to fix this yourself, but future SDK updates may resolve this.
+
+error - No Sentry organization slug configured. Source maps will not be uploaded.
+To fix this, set the SENTRY_ORG environment variable to the to your organization slug during the build.
+
 Failed to compile.
 
-.next/types/validator.ts:891:31
-Type error: Type 'typeof import("C:/Users/ofili/Documents/FutureForm/mvp-production/FutureForm-MVP/frontend/src/app/api/v1/assessments/[id]/evidence/route")' does not satisfy the constraint 'RouteHandlerConfig<"/api/v1/assessments/[id]/evidence">'.
-  Types of property 'GET' are incompatible.
-    Type '(request: NextRequest, { params }: { params: { id: string; }; }) => Promise<NextResponse<{ error: string; }> | NextResponse<{ evidence: ({ response: { question: { id: string; category: string; ... 9 more ...; baseScore: number; }; } & { ...; }; uploader: { ...; }; verifier: { ...; } | null; } & { ...; })[]; }>>' is not assignable to type '(request: NextRequest, context: { params: Promise<{ id: string; }>; }) => void | Response | Promise<void | Response>'.
-      Types of parameters '__1' and 'context' are incompatible.
-        Type '{ params: Promise<{ id: string; }>; }' is not assignable to type '{ params: { id: string; }; }'.
-          Types of property 'params' are incompatible.
-            Property 'id' is missing in type 'Promise<{ id: string; }>' but required in type '{ id: string; }'.
+./src/components/admin/trust/PartnerTypeCard.tsx:5:1
+Module not found: Can't resolve '@/components/ui/scroll-area'
+  3 | import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+  4 | import { Badge } from '@/components/ui/badge';
+> 5 | import { ScrollArea } from '@/components/ui/scroll-area';
+    | ^
+  6 | import { Users, Shield, BarChart3 } from 'lucide-react';
+  7 |
+  8 | interface PartnerTypeCardProps {
 
-  889 |   type __IsExpected<Specific extends RouteHandlerConfig<"/api/v1/assessments/[id]/evidence">> = Specific
-  890 |   const handler = {} as typeof import("../../src/app/api/v1/assessments/[id]/evidence/route.js")
-> 891 |   type __Check = __IsExpected<typeof handler>
-      |                               ^
-  892 |   // @ts-ignore
-  893 |   type __Unused = __Check
-  894 | }
-Next.js build worker exited with code: 1 and signal: null
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./src/app/admin/trust-ontology/page.tsx
+
+./src/components/admin/trust/QuestionList.tsx:8:1
+Module not found: Can't resolve '@/components/ui/scroll-area'
+   6 | import { Badge } from '@/components/ui/badge';
+   7 | import { Search, Filter, AlertTriangle } from 'lucide-react';
+>  8 | import { ScrollArea } from '@/components/ui/scroll-area';
+     | ^
+   9 |
+  10 | interface QuestionListProps {
+  11 |     questions: TrustQuestionWithSubDimension[];
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./src/app/admin/trust-ontology/page.tsx
+
+./src/components/credits/ec-dashboard.tsx:11:1
+Module not found: Can't resolve '@/components/ui/use-toast'
+   9 | import { format } from 'date-fns';
+  10 | import { ECBalance, ECTransaction } from '@/services';
+> 11 | import { useToast } from '@/components/ui/use-toast';
+     | ^
+  12 | import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+  13 | import { Input } from '@/components/ui/input';
+  14 |
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./src/app/dashboard/credits/page.tsx
+
+./src/components/credits/rc-dashboard.tsx:11:1
+Module not found: Can't resolve '@/components/ui/use-toast'
+   9 | import { format } from 'date-fns';
+  10 | import { RCBalance, RCTransaction } from '@/services';
+> 11 | import { useToast } from '@/components/ui/use-toast';
+     | ^
+  12 |
+  13 | interface RCDashboardProps {
+  14 |     organizationId: string;
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./src/app/dashboard/credits/page.tsx
+
+./src/components/evidence/evidence-list.tsx:19:1
+Module not found: Can't resolve '@/components/ui/use-toast'
+  17 | import { format } from 'date-fns';
+  18 | import { EvidenceLayer, VerificationStatus } from '@/types/evidence';
+> 19 | import { useToast } from '@/components/ui/use-toast';
+     | ^
+  20 |
+  21 | interface EvidenceListProps {
+  22 |     organizationId: string;
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./src/app/dashboard/evidence/page.tsx
+
+
+> Build failed because of webpack errors

@@ -1,0 +1,32 @@
+{
+    "sector_id": "education",
+    "sector_name": "Education & EdTech",
+    "description": "Trust framework for Education and Educational Technology (EdTech) in Sub-Saharan Africa, focusing on learning outcomes, data privacy for minors, credential integrity, and infrastructure resilience.",
+    "context_notes": "Sub-Saharan Africa faces unique educational challenges: large class sizes, teacher shortages, and limited infrastructure (power/connectivity) in schools. EdTech solutions must be 'offline-first' and mobile-optimized. Trust issues include 'certificate mills' (fake degrees), predatory student lending, data privacy for children, and the relevance of curriculum to local labor markets.",
+    "stakeholders": [
+        "Students (Minors & Adults)",
+        "Teachers & Educators",
+        "Parents & Guardians",
+        "School Administrators",
+        "EdTech Providers",
+        "Ministry of Education / Regulators",
+        "Examination Bodies",
+        "Donors & NGOs"
+    ],
+    "risk_factors": [
+        "Data privacy violations of minors",
+        "Predatory lending for school fees",
+        "Fake credentials / Academic fraud",
+        "Teacher absenteeism / Ghost teachers",
+        "Digital divide (exclusion of rural/poor)",
+        "Content irrelevance (colonial/outdated curriculum)",
+        "Infrastructure failure (power/internet loss)"
+    ],
+    "regulatory_bodies": [
+        "Ministry of Education",
+        "National Examinations Council",
+        "Data Protection Authority",
+        "Technical & Vocational Education Training (TVET) Authority",
+        "Higher Education Commission"
+    ]
+}

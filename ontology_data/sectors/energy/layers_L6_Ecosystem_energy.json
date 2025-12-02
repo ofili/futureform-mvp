@@ -1,0 +1,275 @@
+{
+    "layer_id": "L6",
+    "layer_name": "Ecosystem",
+    "sector": "energy",
+    "region": "Sub-Saharan Africa",
+    "total_questions": 21,
+    "total_sub_dimensions": 6,
+    "sub_dimensions": [
+        {
+            "id": "6.1",
+            "name": "Infrastructure Dependencies & Constraints",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q6.1.1_ENR",
+                    "text": "Grid Extension Risk & Interface: Interaction with national grid: (1) Grid arrival risk (what if grid reaches off-grid customer?); (2) Grid reliability (is grid a competitor or backup?); (3) Interconnection potential (can mini-grid connect to main grid?); (4) Compensation policy (if grid arrives); (5) Grid compatibility (voltage/frequency); (6) Hybrid opportunities; (7) Policy on exclusivity zones.",
+                    "stakeholder_types": [
+                        "Investors",
+                        "Regulators",
+                        "Mini-grid Operators"
+                    ],
+                    "evidence_required": "Grid expansion plans, Exclusivity agreements, Interconnection technical standards, Compensation regulations",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Grid arrival is #1 risk for mini-grids. 'Grid is coming' rumors stop sales. Grid often unreliable, so solar remains relevant as backup."
+                },
+                {
+                    "q_id": "Q6.1.2_ENR",
+                    "text": "Mobile Network Dependency: Reliance on telco infrastructure: (1) 2G/3G coverage at user locations; (2) SMS/USSD reliability; (3) Mobile money uptime; (4) IoT data connectivity; (5) SIM card management (M2M SIMs); (6) Telco partnerships; (7) Offline fallback capabilities.",
+                    "stakeholder_types": [
+                        "Telcos",
+                        "Energy Companies",
+                        "Users"
+                    ],
+                    "evidence_required": "Coverage maps, Connectivity logs, SLA with telcos, Offline protocols",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "PAYG dead without network. IoT monitoring needs data. M2M SIM management complex across borders."
+                },
+                {
+                    "q_id": "Q6.1.3_ENR",
+                    "text": "Logistics & Transport Infrastructure: Moving hardware: (1) Port efficiency (clearing times); (2) Road quality (last-mile damage risk); (3) Rainy season accessibility; (4) Warehousing availability; (5) Transport costs; (6) Security during transport; (7) Reverse logistics capacity.",
+                    "stakeholder_types": [
+                        "Logistics Partners",
+                        "Operations"
+                    ],
+                    "evidence_required": "Logistics plan, Clearing time data, Transport cost analysis, Insurance claims",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Poor roads damage panels. Rainy season cuts off villages. Port delays cause stockouts."
+                }
+            ]
+        },
+        {
+            "id": "6.2",
+            "name": "Regulatory & Policy Environment",
+            "weight": 0.15,
+            "questions": [
+                {
+                    "q_id": "Q6.2.1_ENR",
+                    "text": "National Energy Policy & Targets: Alignment with government: (1) Electrification targets (universal access by 2030?); (2) Off-grid strategy (is it recognized?); (3) Integrated National Energy Plan; (4) Subsidy policy (Kerosene subsidies? Solar subsidies?); (5) VAT/Duty exemptions (consistency?); (6) Political support; (7) Policy stability.",
+                    "stakeholder_types": [
+                        "Government",
+                        "Donors",
+                        "Private Sector"
+                    ],
+                    "evidence_required": "National energy policy docs, Gazette notices (VAT/Duty), Electrification plans",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "VAT/Duty exemptions often change overnight. Clear off-grid strategy essential for investment. Kerosene subsidies distort market."
+                },
+                {
+                    "q_id": "Q6.2.2_ENR",
+                    "text": "Mini-Grid Regulatory Framework: Specific mini-grid rules: (1) Licensing tiers (simplified for small grids?); (2) Tariff setting rules (cost-reflective?); (3) Technical standards; (4) Arrival of grid rules; (5) Subsidy frameworks; (6) Concession zones; (7) Approval timelines.",
+                    "stakeholder_types": [
+                        "Regulators",
+                        "Developers"
+                    ],
+                    "evidence_required": "Mini-grid regulations, Tariff guidelines, Licensing procedures",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Cost-reflective tariffs often politically difficult. Licensing can take years. Clear 'arrival of grid' rules needed for bankability."
+                },
+                {
+                    "q_id": "Q6.2.3_ENR",
+                    "text": "E-Waste & Environmental Regulation: Environmental rules: (1) E-waste management laws; (2) Battery disposal regulations; (3) Producer responsibility (EPR); (4) Environmental impact assessment (EIA) requirements; (5) Carbon credit frameworks; (6) Enforcement levels; (7) Recycling infrastructure support.",
+                    "stakeholder_types": [
+                        "Environmental Agencies",
+                        "Regulators"
+                    ],
+                    "evidence_required": "E-waste laws, EIA regulations, EPR guidelines",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "E-waste laws emerging but enforcement weak. EPR (Extended Producer Responsibility) becoming standard."
+                }
+            ]
+        },
+        {
+            "id": "6.3",
+            "name": "Stakeholder Ecosystem & Relationships",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q6.3.1_ENR",
+                    "text": "Distribution & Sales Ecosystem: Last-mile reach: (1) Agent network density; (2) Partnership models (MFIs, Co-ops, Telcos); (3) Retail partnerships; (4) Community based organizations; (5) Last-mile logistics partners; (6) Marketing channels; (7) Trust networks.",
+                    "stakeholder_types": [
+                        "Partners",
+                        "Agents",
+                        "Community"
+                    ],
+                    "evidence_required": "Distribution map, Partnership contracts, Agent list",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Partnerships (e.g., with cocoa co-ops, dairy unions) lower CAC. Trust networks essential for sales."
+                },
+                {
+                    "q_id": "Q6.3.2_ENR",
+                    "text": "Financial Ecosystem Support: Access to finance: (1) Local bank lending to sector; (2) Microfinance availability for users; (3) Forex availability; (4) Mobile money liquidity; (5) Credit bureau coverage; (6) Investor landscape; (7) Grant/RBF availability.",
+                    "stakeholder_types": [
+                        "Banks",
+                        "Investors",
+                        "MFIs"
+                    ],
+                    "evidence_required": "Loan products, Forex availability data, Credit bureau reports",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Local debt hard to get (high interest). Forex scarcity (e.g., Ethiopia, Nigeria) is a major blocker. End-user finance (MFIs) boosts affordability."
+                },
+                {
+                    "q_id": "Q6.3.3_ENR",
+                    "text": "Industry Association & Advocacy: Collective action: (1) National renewable energy association strength; (2) GOGLA engagement; (3) Public-private dialogue; (4) Data sharing; (5) Standards adoption; (6) Joint advocacy (e.g., on VAT); (7) Code of conduct enforcement.",
+                    "stakeholder_types": [
+                        "Associations",
+                        "Private Sector"
+                    ],
+                    "evidence_required": "Association membership, Advocacy position papers, Meeting minutes",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "Strong associations (e.g., KEREA, USEA) critical for policy advocacy. Fragmented sector ignored by government."
+                },
+                {
+                    "q_id": "Q6.3.4_ENR",
+                    "text": "Productive Use Appliance Ecosystem: Availability of income-generating assets: (1) Appliance supply chain (availability of solar mills, pumps, fridges); (2) Appliance financing (asset finance for machines); (3) Maintenance services for appliances; (4) Market linkage (selling the produce); (5) Training on appliance use; (6) Quality standards for PUE appliances; (7) Bundling with energy service.",
+                    "stakeholder_types": [
+                        "Distributors",
+                        "MFIs",
+                        "Users"
+                    ],
+                    "evidence_required": "Appliance catalog, Financing terms, Maintenance contracts",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Energy is useless for income without the appliance. Supply chain for solar fridges/mills is weak."
+                }
+            ]
+        },
+        {
+            "id": "6.4",
+            "name": "Community & Cultural Context",
+            "weight": 0.15,
+            "questions": [
+                {
+                    "q_id": "Q6.4.1_ENR",
+                    "text": "Community Acceptance & Trust: Social license: (1) Perception of solar (past bad experiences?); (2) Trust in agents; (3) Community leader support; (4) Cultural alignment; (5) Theft/vandalism risk; (6) Willingness to pay; (7) Understanding of 'service' vs 'ownership'.",
+                    "stakeholder_types": [
+                        "Community",
+                        "Sociologists"
+                    ],
+                    "evidence_required": "Community surveys, Leader endorsements, Vandalism reports",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Market spoiled by cheap counterfeits ('solar doesn't work'). Trust must be rebuilt. Service model (PAYG) often confused with ownership."
+                },
+                {
+                    "q_id": "Q6.4.2_ENR",
+                    "text": "Productive Use & Economic Context: Economic integration: (1) Income seasonality (harvests); (2) Productive use opportunities (irrigation, cooling); (3) Market access for local produce; (4) Local economy vibrancy; (5) Skill levels; (6) Gender roles in economy; (7) Displacement effects.",
+                    "stakeholder_types": [
+                        "Economists",
+                        "Development Partners"
+                    ],
+                    "evidence_required": "Economic assessment, Seasonality calendars, Value chain analysis",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Farmers pay when they harvest (seasonality). PUE (Productive Use) drives income to pay for energy."
+                },
+                {
+                    "q_id": "Q6.4.3_ENR",
+                    "text": "Gender & Social Dynamics: Social inclusion: (1) Women's decision making power; (2) Female headed households; (3) Youth employment; (4) Marginalized groups; (5) Intra-household conflict (over light usage); (6) Safety benefits; (7) Health benefits.",
+                    "stakeholder_types": [
+                        "Gender Experts",
+                        "Community"
+                    ],
+                    "evidence_required": "Gender analysis, Household surveys",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Women benefit most (health, safety, chores). Youth often early adopters. Light reduces snake bites/fires."
+                }
+            ]
+        },
+        {
+            "id": "6.5",
+            "name": "Equity, Access & Inclusion",
+            "weight": 0.15,
+            "questions": [
+                {
+                    "q_id": "Q6.5.1_ENR",
+                    "text": "Affordability & Tiered Access: Reaching the poor: (1) Entry-level product affordability; (2) Flexible payment terms; (3) Subsidies for poorest; (4) Credit scoring inclusion; (5) Cost per kWh comparison; (6) Deposit barriers; (7) Reaching 'last mile'.",
+                    "stakeholder_types": [
+                        "Users",
+                        "Donors"
+                    ],
+                    "evidence_required": "Pricing analysis, Affordability studies, Subsidy data",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "Deposit is the biggest barrier. Daily payments match irregular income. Subsidies needed for ultra-poor."
+                },
+                {
+                    "q_id": "Q6.5.2_ENR",
+                    "text": "Geographic Equity: Serving remote areas: (1) Urban vs rural coverage; (2) Service quality in remote areas; (3) Logistics cost equalization; (4) Maintenance access in deep rural; (5) Network coverage in remote areas; (6) Island/mountain access; (7) Conflict zone access.",
+                    "stakeholder_types": [
+                        "Regulators",
+                        "Operations"
+                    ],
+                    "evidence_required": "Coverage maps, Service logs by region",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Companies cherry-pick peri-urban areas. Deep rural left behind. Logistics costs drive inequality."
+                },
+                {
+                    "q_id": "Q6.5.3_ENR",
+                    "text": "Vulnerable Group Inclusion: Specific groups: (1) Refugees/IDPs; (2) Disabled persons; (3) Elderly; (4) Female-headed households; (5) Child-headed households; (6) Ethnic minorities; (7) Illiterate users.",
+                    "stakeholder_types": [
+                        "NGOs",
+                        "UN Agencies"
+                    ],
+                    "evidence_required": "Inclusion strategy, Beneficiary data",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Refugees often pay more for energy (diesel/candles). ID requirements block access. Accessibility features needed."
+                }
+            ]
+        },
+        {
+            "id": "6.6",
+            "name": "Environmental & Sustainability Context",
+            "weight": 0.15,
+            "questions": [
+                {
+                    "q_id": "Q6.6.1_ENR",
+                    "text": "Climate Resilience: Adapting to climate change: (1) Extreme weather resilience; (2) Impact of drought on hydro (if mini-grid); (3) Impact of cloud cover changes; (4) Flood risk to infrastructure; (5) Heat impact on efficiency; (6) Climate adaptation role of energy; (7) Disaster recovery.",
+                    "stakeholder_types": [
+                        "Climate Experts",
+                        "Engineers"
+                    ],
+                    "evidence_required": "Climate risk assessment, Resilience plans",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Climate change increasing extreme weather. Hydro mini-grids fail in drought. Solar helps pumping (adaptation)."
+                },
+                {
+                    "q_id": "Q6.6.2_ENR",
+                    "text": "Carbon & Pollution Impact: Environmental benefits: (1) Kerosene displacement; (2) Diesel displacement; (3) Carbon credits generation; (4) Indoor air quality improvement; (5) Deforestation reduction (less charcoal?); (6) Lifecycle emissions; (7) Black carbon reduction.",
+                    "stakeholder_types": [
+                        "Environmental Agencies",
+                        "Carbon Markets"
+                    ],
+                    "evidence_required": "Carbon calculations, Impact studies",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Kerosene/candles cause fires and lung disease. Diesel expensive and polluting. Carbon credits becoming revenue stream."
+                }
+            ]
+        }
+    ],
+    "scoring_notes": "Layer 6 (Ecosystem) for Energy in SSA: Grid extension risk and regulatory environment are existential factors. Mobile network dependency is absolute for PAYG. Last-mile distribution and affordability determine who gets access."
+}

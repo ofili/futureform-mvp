@@ -1,0 +1,213 @@
+{
+    "layer_id": "L4",
+    "layer_name": "Competence",
+    "sector": "energy",
+    "region": "Sub-Saharan Africa",
+    "total_questions": 17,
+    "total_sub_dimensions": 5,
+    "sub_dimensions": [
+        {
+            "id": "4.1",
+            "name": "User Skill Match & Capability Assessment",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q4.1.1_ENR",
+                    "text": "User Technical Capability Assessment: Assess user ability to operate system: (1) Understanding of solar limitations (day/night, weather); (2) Load management skills (what appliances can run?); (3) Basic maintenance skills (cleaning panels); (4) Safety awareness (battery safety); (5) Digital literacy (for PAYG payments); (6) Troubleshooting ability; (7) Prior experience with solar.",
+                    "stakeholder_types": [
+                        "Users",
+                        "Sales Agents",
+                        "Trainers"
+                    ],
+                    "evidence_required": "User assessment checklists, Training needs analysis, Digital literacy surveys",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Users often overload systems (expect grid-like power). PAYG requires digital payment skills. Safety awareness low."
+                },
+                {
+                    "q_id": "Q4.1.2_ENR",
+                    "text": "Energy Literacy Assessment: Assess understanding of energy concepts: (1) Watts vs Watt-hours; (2) Battery capacity understanding; (3) Efficiency awareness (LED vs incandescent); (4) Cost of energy understanding; (5) Appliance rating awareness; (6) Energy saving behaviors; (7) Expectation management.",
+                    "stakeholder_types": [
+                        "Users",
+                        "Educators",
+                        "Marketing"
+                    ],
+                    "evidence_required": "Energy literacy survey results, Customer onboarding scripts",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "Misunderstanding 'Watts' leads to overloading. Users buy inefficient cheap appliances. Managing expectations is key to satisfaction."
+                },
+                {
+                    "q_id": "Q4.1.3_ENR",
+                    "text": "Business User Capability (Productive Use): For productive use of energy (PUE): (1) Business skills (cash flow to pay PAYG); (2) Appliance operation skills (milling, pumping, cooling); (3) Market access for products; (4) Financial management; (5) Technical maintenance of PUE equipment; (6) Business planning; (7) Risk management.",
+                    "stakeholder_types": [
+                        "Business Users",
+                        "PUE Program Managers",
+                        "Lenders"
+                    ],
+                    "evidence_required": "Business capability assessment, PUE training records, Income verification",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "PUE (Productive Use of Energy) is a growth area. Users need business skills, not just power, to succeed and repay."
+                }
+            ]
+        },
+        {
+            "id": "4.2",
+            "name": "Training Quality & Effectiveness",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q4.2.1_ENR",
+                    "text": "User Training Program - Solar Home Systems: Describe user training: (1) Installation training (if self-install); (2) Operation training (dos and don'ts); (3) Payment training (how to pay via mobile money); (4) Maintenance training (cleaning); (5) Safety training; (6) Training materials (visual, local language); (7) Verification of understanding.",
+                    "stakeholder_types": [
+                        "Users",
+                        "Installers",
+                        "Agents"
+                    ],
+                    "evidence_required": "Training guides, Agent training checklists, User sign-off sheets",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "Training must be at point of sale/installation. Visuals essential. Payment training critical for PAYG."
+                },
+                {
+                    "q_id": "Q4.2.2_ENR",
+                    "text": "Technician Training & Certification: Ensure technician competence: (1) Solar installation training (PV sizing, wiring, safety); (2) Troubleshooting & repair training; (3) Safety certification (working at heights, electrical); (4) Product-specific training; (5) Soft skills (customer interaction); (6) Certification (national curriculum?); (7) Refresher training.",
+                    "stakeholder_types": [
+                        "Technicians",
+                        "Training Institutes",
+                        "Energy Companies"
+                    ],
+                    "evidence_required": "Training curriculum, Technician certificates, Safety training logs, Refresher schedules",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Poor installation = #1 cause of failure. Local technicians need formal training. Safety often overlooked."
+                },
+                {
+                    "q_id": "Q4.2.3_ENR",
+                    "text": "Sales Agent Training: Ensure agents sell correctly: (1) Product capability training (don't oversell); (2) Financial terms training (explain PAYG clearly); (3) Assessment training (sizing system for user); (4) Ethics training; (5) Troubleshooting basics; (6) Mobile money training; (7) Ongoing coaching.",
+                    "stakeholder_types": [
+                        "Sales Agents",
+                        "Sales Managers"
+                    ],
+                    "evidence_required": "Agent training manual, Ethics code, Product knowledge tests",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Agents often oversell capabilities ('it can run a TV' when it can't). Financial terms explanation critical."
+                }
+            ]
+        },
+        {
+            "id": "4.3",
+            "name": "Ongoing Support & Assistance",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q4.3.1_ENR",
+                    "text": "Technical Support Infrastructure: Accessibility of support: (1) Call center availability (hours, languages); (2) Field technician network (coverage, response time); (3) Remote diagnostics capability; (4) Spare parts logistics; (5) Service centers (walk-in); (6) Self-help resources; (7) Escalation process.",
+                    "stakeholder_types": [
+                        "Users",
+                        "Support Teams",
+                        "Logistics"
+                    ],
+                    "evidence_required": "Support channel map, Technician coverage map, Spare parts inventory, SLA data",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Remote diagnostics save truck rolls. Field technicians essential for hardware issues. Spare parts logistics is the bottleneck."
+                },
+                {
+                    "q_id": "Q4.3.2_ENR",
+                    "text": "Payment Support Services: Support for PAYG issues: (1) Payment troubleshooting (failed transactions); (2) Token entry support (unlocking system); (3) Account status queries; (4) Restructuring plans (for hardship); (5) Refund processing; (6) Mobile money agent liaison; (7) Grace period requests.",
+                    "stakeholder_types": [
+                        "Users",
+                        "Finance Support",
+                        "Agents"
+                    ],
+                    "evidence_required": "Payment support scripts, Hardship policies, Refund logs",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Payment issues = darkness. Users need immediate help. Hardship policies needed for shocks (drought, COVID)."
+                }
+            ]
+        },
+        {
+            "id": "4.4",
+            "name": "Institutional Learning & Adaptation",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q4.4.1_ENR",
+                    "text": "Product Adaptation from Feedback: Improving products for Africa: (1) Feedback loops (technicians -> engineering); (2) Product modifications (e.g., stronger cables, dust protection); (3) Software updates (PAYG logic); (4) User interface improvements; (5) Failure analysis integration; (6) Pilot testing of new features; (7) Local R&D.",
+                    "stakeholder_types": [
+                        "R&D",
+                        "Product Managers",
+                        "Technicians"
+                    ],
+                    "evidence_required": "Product iteration logs, Field failure reports, R&D roadmaps",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Products must evolve for African reality (e.g., rat-proof cables, tamper resistance). Feedback from field techs is gold."
+                },
+                {
+                    "q_id": "Q4.4.2_ENR",
+                    "text": "Local Capacity Building: Building long-term local skills: (1) Training local trainers; (2) Partnering with vocational schools; (3) Career paths for agents/techs; (4) Management training for local staff; (5) Gender inclusion in technical roles; (6) Knowledge transfer from expats; (7) Industry association participation.",
+                    "stakeholder_types": [
+                        "HR",
+                        "Local Institutions",
+                        "Industry Associations"
+                    ],
+                    "evidence_required": "Capacity building programs, Partnership MOUs, Staff promotion records",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Sustainable sector needs local experts. Vocational schools key partners. Women often excluded from technical roles."
+                },
+                {
+                    "q_id": "Q4.4.3_ENR",
+                    "text": "Regulatory & Institutional Capacity Building: Support for sector governance: (1) Regulator training (educating officials on DRE technologies); (2) Standard setting support (helping define quality standards); (3) Data sharing for planning (sharing usage data to help national planning); (4) Policy advocacy (constructive engagement on tariffs/subsidies); (5) Utility partnership (working with national utility, not just competing); (6) Association leadership (leading industry bodies).",
+                    "stakeholder_types": [
+                        "Regulators",
+                        "Industry Associations",
+                        "Policy Makers"
+                    ],
+                    "evidence_required": "Training workshop records, Policy submission papers, Data sharing agreements",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Regulators often unfamiliar with off-grid tech. Industry must help build their capacity."
+                }
+            ]
+        },
+        {
+            "id": "4.5",
+            "name": "Local Technical Ecosystem & Supply Chain",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q4.5.1_ENR",
+                    "text": "Spare Parts & Warranty Supply Chain: Availability of parts: (1) In-country inventory levels; (2) Last-mile distribution of parts; (3) Reverse logistics (collecting e-waste/faulty units); (4) Customs clearance efficiency; (5) Local sourcing (cables, mounts); (6) Inventory management systems; (7) Supply chain resilience.",
+                    "stakeholder_types": [
+                        "Supply Chain Managers",
+                        "Logistics Partners"
+                    ],
+                    "evidence_required": "Inventory reports, Logistics contracts, Reverse logistics plan, Customs data",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Spare parts often stuck in port. Last-mile distribution expensive. Reverse logistics critical for e-waste."
+                },
+                {
+                    "q_id": "Q4.5.2_ENR",
+                    "text": "Local Installation & Maintenance Ecosystem: Capacity of local partners: (1) Third-party installer network; (2) Independent repair shops; (3) Quality control of partners; (4) Standardized pricing for services; (5) Tool availability; (6) Partner training & certification; (7) Geographic coverage.",
+                    "stakeholder_types": [
+                        "Partners",
+                        "Installers",
+                        "Operations"
+                    ],
+                    "evidence_required": "Partner map, QC reports, Service pricing lists, Tool inventories",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Companies can't employ everyone - need partner ecosystem. Independent repair shops can extend product life if trained."
+                }
+            ]
+        }
+    ],
+    "scoring_notes": "Layer 4 (Competence) for Energy in SSA: Technician training is the backbone of reliability. User training prevents misuse/overloading. Local supply chain for spare parts is the biggest operational challenge."
+}

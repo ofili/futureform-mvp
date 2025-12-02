@@ -1,0 +1,138 @@
+{
+    "layer_id": "L1",
+    "layer_name": "Reliability",
+    "sector": "government",
+    "region": "Sub-Saharan Africa",
+    "total_questions": 12,
+    "total_sub_dimensions": 4,
+    "sub_dimensions": [
+        {
+            "id": "1.1",
+            "name": "System Availability & Critical Uptime",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q1.1.1_GOV",
+                    "text": "National ID System Uptime: Critical infrastructure availability: (1) Uptime of ID verification API (for banks/telcos); (2) Redundancy of central database; (3) Disaster recovery capability (off-site backup); (4) Impact of downtime on economy; (5) Maintenance window scheduling; (6) DDoS protection; (7) SLA with private sector verifiers.",
+                    "stakeholder_types": [
+                        "Identity Authority",
+                        "Banks",
+                        "Telcos"
+                    ],
+                    "evidence_required": "API uptime logs, Disaster recovery plan, Incident reports",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "When ID system goes down, SIM registration and banking stops. It is a single point of failure for the digital economy."
+                },
+                {
+                    "q_id": "Q1.1.2_GOV",
+                    "text": "e-Government Portal Reliability: Service delivery uptime: (1) Portal availability (e.g., e-Citizen); (2) Payment gateway reliability; (3) Load handling (e.g., tax filing deadline spikes); (4) Mobile app stability; (5) Browser compatibility; (6) Error rate during submission; (7) Receipt generation reliability.",
+                    "stakeholder_types": [
+                        "Citizens",
+                        "ICT Ministry"
+                    ],
+                    "evidence_required": "Portal uptime stats, Payment failure rates, Load test results",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Portals often crash during deadlines (e.g., tax returns). Payment failures leave citizens with money deducted but no service."
+                }
+            ]
+        },
+        {
+            "id": "1.2",
+            "name": "Biometric & Data Accuracy",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q1.2.1_GOV",
+                    "text": "Biometric Accuracy & Failure Rates: Ensuring inclusion: (1) False Rejection Rate (FRR) for manual laborers/elderly; (2) False Acceptance Rate (FAR); (3) Multi-modal capability (Iris/Face if fingerprints fail); (4) Exception handling process (for amputees/unreadable prints); (5) De-duplication accuracy (ABIS performance); (6) Latency of matching; (7) Spoof detection (liveness check).",
+                    "stakeholder_types": [
+                        "Identity Authority",
+                        "Tech Vendor",
+                        "Citizens"
+                    ],
+                    "evidence_required": "Biometric performance report (FRR/FAR), Exception logs, ABIS test results",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Manual laborers often have worn fingerprints. High FRR leads to exclusion from voting/benefits. Exception handling is often missing."
+                },
+                {
+                    "q_id": "Q1.2.2_GOV",
+                    "text": "Data Registry Integrity: Clean records: (1) Prevention of 'Ghost Workers' (payroll); (2) Prevention of duplicate IDs; (3) Deceased person management (updating death registry); (4) Audit trail of record changes; (5) Data cleansing frequency; (6) Integration between Civil Reg and ID; (7) Historical record preservation.",
+                    "stakeholder_types": [
+                        "Civil Registration",
+                        "Auditor General"
+                    ],
+                    "evidence_required": "Data audit reports, De-duplication stats, Ghost worker purge reports",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Ghost workers are a massive drain on public funds. Dead voters often remain on rolls. Linking birth/death to ID is a challenge."
+                }
+            ]
+        },
+        {
+            "id": "1.3",
+            "name": "Infrastructure & Offline Capability",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q1.3.1_GOV",
+                    "text": "Offline Registration Capability: Reaching the last mile: (1) Kit battery life; (2) Store-and-forward capability (sync when online); (3) Data encryption on device (if lost); (4) Ruggedness of kits; (5) Solar charging options; (6) GPS tagging of registration; (7) Sync conflict resolution.",
+                    "stakeholder_types": [
+                        "Field Officers",
+                        "Rural Citizens"
+                    ],
+                    "evidence_required": "Kit specs, Field test reports, Sync logs",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Registration often happens in villages without power/net. Kits must store data securely for days before syncing."
+                },
+                {
+                    "q_id": "Q1.3.2_GOV",
+                    "text": "Connectivity & Hosting Infrastructure: Backend resilience: (1) Data center tier (Tier 3?); (2) Local hosting (sovereignty); (3) Bandwidth capacity for government WAN; (4) Power backup for data centers; (5) Cloud strategy (Private vs Public); (6) Network redundancy; (7) Hardware lifecycle management.",
+                    "stakeholder_types": [
+                        "ICT Ministry",
+                        "Data Center Ops"
+                    ],
+                    "evidence_required": "Data center audit, Network topology, Hosting contracts",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Government data centers often poorly maintained. 'Sovereign cloud' is a growing trend to keep data in-country."
+                }
+            ]
+        },
+        {
+            "id": "1.4",
+            "name": "Security & Cyber Resilience",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q1.4.1_GOV",
+                    "text": "Cybersecurity & Breach Prevention: Protecting national data: (1) Encryption at rest and in transit; (2) Access control (PKI/MFA for officials); (3) SOC (Security Operations Center) monitoring; (4) Penetration testing frequency; (5) Insider threat monitoring; (6) Patch management; (7) Supply chain security (hardware backdoors).",
+                    "stakeholder_types": [
+                        "National Cyber Security Agency",
+                        "CISO"
+                    ],
+                    "evidence_required": "Pen test reports, SOC logs, Encryption policy",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "ID databases are high-value targets. Insider threat (selling data) is high. Hardware often imported from nations with geopolitical interests."
+                },
+                {
+                    "q_id": "Q1.4.2_GOV",
+                    "text": "Identity Credential Security: Preventing forgery: (1) Smart card security features (chip/hologram); (2) Digital signature on QR codes; (3) Mobile ID security (TEE/SE); (4) Revocation mechanism (CRL); (5) Anti-cloning measures; (6) Secure issuance process; (7) Verification API security.",
+                    "stakeholder_types": [
+                        "Immigration",
+                        "Police",
+                        "Citizens"
+                    ],
+                    "evidence_required": "Card specs, Security feature documentation, Revocation logs",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Fake IDs facilitate crime/terrorism. Verifiable credentials (QR codes) are replacing plastic cards in some areas."
+                }
+            ]
+        }
+    ],
+    "scoring_notes": "Layer 1 (Reliability) for Government in SSA: The ID system is the 'root of trust' for the nation. If it fails or excludes people (biometrics), the social contract breaks."
+}

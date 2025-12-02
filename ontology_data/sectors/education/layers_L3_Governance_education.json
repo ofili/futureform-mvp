@@ -1,0 +1,143 @@
+{
+    "layer_id": "L3",
+    "layer_name": "Governance",
+    "sector": "education",
+    "region": "Sub-Saharan Africa",
+    "total_questions": 12,
+    "total_sub_dimensions": 4,
+    "sub_dimensions": [
+        {
+            "id": "3.1",
+            "name": "Teacher & Staff Accountability",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q3.1.1_EDU",
+                    "text": "Teacher Attendance & 'Ghost Teacher' Prevention: Ensure teachers are present: (1) Biometric/Digital attendance tracking; (2) Random spot checks; (3) Payroll audit (verify identity); (4) Community monitoring (parents report absence); (5) Substitute teacher protocols; (6) Disciplinary process for absenteeism; (7) Ghost worker removal policy.",
+                    "stakeholder_types": [
+                        "Ministry of Education",
+                        "School Administrators",
+                        "Parents"
+                    ],
+                    "evidence_required": "Attendance logs, Payroll audit reports, Disciplinary records, Community monitoring reports",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Teacher absenteeism is a crisis (20-40% in some areas). 'Ghost teachers' drain budgets. Digital tracking helps."
+                },
+                {
+                    "q_id": "Q3.1.2_EDU",
+                    "text": "Teacher Code of Conduct & Ethics: Prevent abuse and misconduct: (1) Signed Code of Conduct (sexual harassment, corporal punishment); (2) Background checks (criminal record); (3) Reporting channels for abuse (anonymous for students); (4) Zero-tolerance policy enforcement; (5) Ethics training; (6) Teacher registration (TSC number); (7) Whistleblower protection.",
+                    "stakeholder_types": [
+                        "Students",
+                        "Parents",
+                        "Teachers Service Commission"
+                    ],
+                    "evidence_required": "Code of Conduct documents, Background check policy, Abuse reporting logs, Enforcement records",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Sexual harassment ('sex for grades') and corporal punishment are major issues. Safe reporting channels essential."
+                }
+            ]
+        },
+        {
+            "id": "3.2",
+            "name": "Exam & Credential Integrity",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q3.2.1_EDU",
+                    "text": "Exam Security & Anti-Cheating: Prevent exam malpractice: (1) Secure paper chain of custody (tracking delivery); (2) Digital exam proctoring (AI or human); (3) Plagiarism detection; (4) Impersonation prevention (ID checks); (5) Leakage prevention protocols; (6) Results processing security; (7) Sanctions for cheating.",
+                    "stakeholder_types": [
+                        "Exam Bodies",
+                        "Students",
+                        "Invigilators"
+                    ],
+                    "evidence_required": "Exam security protocols, Proctoring logs, Malpractice reports, Chain of custody forms",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Exam leakage is a national security issue in some countries. Cheating undermines entire system credibility."
+                },
+                {
+                    "q_id": "Q3.2.2_EDU",
+                    "text": "Credential Verification & Anti-Fraud: Prevent fake degrees: (1) Digital certificate issuance (QR codes, blockchain); (2) Public verification portal; (3) Graduate registry; (4) Revocation policy for fraud; (5) Secure paper certificates (watermarks); (6) Integration with employers; (7) Audit of issued certificates.",
+                    "stakeholder_types": [
+                        "Employers",
+                        "Universities",
+                        "Graduates"
+                    ],
+                    "evidence_required": "Certificate samples (security features), Verification portal URL, Fraud detection stats",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Fake degrees common. Employers need instant verification. Digital credentials gaining traction."
+                }
+            ]
+        },
+        {
+            "id": "3.3",
+            "name": "Regulatory Compliance",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q3.3.1_EDU",
+                    "text": "School Registration & Licensing: Compliance with Ministry: (1) Valid registration certificate; (2) Compliance with safety standards (buildings, fire); (3) Compliance with curriculum standards; (4) Teacher qualification compliance; (5) Fee structure approval; (6) Health & Sanitation inspection; (7) Renewal status.",
+                    "stakeholder_types": [
+                        "School Owners",
+                        "Ministry of Education",
+                        "Parents"
+                    ],
+                    "evidence_required": "Registration certificate, Inspection reports, Health clearance",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "Unregistered schools (informal settlements) common. Safety standards often ignored (building collapse risk)."
+                },
+                {
+                    "q_id": "Q3.3.2_EDU",
+                    "text": "EdTech Regulatory Compliance: Compliance for digital providers: (1) E-learning content approval (KICD, etc.); (2) Data protection registration; (3) Consumer protection compliance; (4) Tax compliance (digital services tax); (5) Cross-border data transfer compliance; (6) Age-appropriate design code; (7) Cybercrime act compliance.",
+                    "stakeholder_types": [
+                        "EdTech Providers",
+                        "Regulators",
+                        "Legal"
+                    ],
+                    "evidence_required": "Content approval letters, Data protection certificate, Tax filings",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "EdTech regulation evolving. Content approval mandatory in some countries (e.g., Kenya). Digital tax enforcement increasing."
+                }
+            ]
+        },
+        {
+            "id": "3.4",
+            "name": "Student Safeguarding & Rights",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q3.4.1_EDU",
+                    "text": "Child Protection & Safeguarding Policy: Protect students from harm: (1) Comprehensive safeguarding policy; (2) Designated Safeguarding Officer; (3) Staff training on safeguarding; (4) Digital safety (cyberbullying prevention); (5) Physical safety (secure compound); (6) Reporting & referral mechanisms; (7) Support for victims.",
+                    "stakeholder_types": [
+                        "Students",
+                        "Parents",
+                        "School Staff"
+                    ],
+                    "evidence_required": "Safeguarding policy, Training logs, Incident reports (anonymized), Safety audit",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Schools must be safe havens. Bullying, corporal punishment, and sexual abuse are risks. Digital safety new frontier."
+                },
+                {
+                    "q_id": "Q3.4.2_EDU",
+                    "text": "Inclusion & Non-Discrimination Governance: Ensure equal access: (1) Non-discrimination policy (religion, tribe, gender, disability); (2) Admission transparency; (3) Support for pregnant students (re-entry policy); (4) Support for students with disabilities; (5) Scholarship/Bursary allocation fairness; (6) Language inclusion; (7) Grievance mechanism for discrimination.",
+                    "stakeholder_types": [
+                        "Marginalized Students",
+                        "Parents",
+                        "Civil Society"
+                    ],
+                    "evidence_required": "Inclusion policy, Admission records, Bursary allocation logs, Accessibility audit",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Discrimination based on tribe/religion happens. Pregnant girls often expelled (policy shifting to re-entry). Disability inclusion often poor."
+                }
+            ]
+        }
+    ],
+    "scoring_notes": "Layer 3 (Governance) for Education in SSA: Teacher accountability and student safeguarding are the pillars. Exam integrity is crucial for the value of the education. Regulatory compliance ensures baseline safety and quality."
+}

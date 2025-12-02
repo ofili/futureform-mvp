@@ -1,0 +1,54 @@
+{
+    "sector_id": "agriculture",
+    "sector_name": "Agriculture & Agritech",
+    "region": "Sub-Saharan Africa",
+    "languages": [
+        "en",
+        "fr"
+    ],
+    "description": "Technology deployments in agricultural contexts across Sub-Saharan Africa, including digital advisory, marketplaces, precision farming, and supply chain solutions.",
+    "key_stakeholders": [
+        "Smallholder Farmers",
+        "Agro-dealers",
+        "Extension Officers",
+        "Cooperatives",
+        "Buyers/Processors",
+        "Ministry of Agriculture",
+        "Mobile Network Operators",
+        "Financial Service Providers"
+    ],
+    "critical_certifications": [
+        "National agricultural certifications",
+        "Organic certifications (where applicable)",
+        "Export compliance (GlobalGAP, etc.)",
+        "Mobile money integration certifications",
+        "Data protection compliance (national DPA laws)"
+    ],
+    "infrastructure_context": {
+        "power": "Unreliable grid (40-60% uptime), solar charging common",
+        "connectivity": "2G/3G dominant, 4G urban-only, intermittent",
+        "devices": "Feature phones + low-end smartphones, shared devices common",
+        "payment": "Mobile money (M-Pesa, Airtel Money, MTN MoMo, Orange Money)",
+        "roads": "Poor, impassable during rainy season",
+        "language": "Local languages + English/French, low literacy rates"
+    },
+    "regulatory_environment": {
+        "data_protection": [
+            "National DPA laws",
+            "ECOWAS Data Protection Regulation"
+        ],
+        "agricultural": [
+            "Ministry of Agriculture regulations",
+            "Seed certification",
+            "Pesticide regulations"
+        ],
+        "financial": [
+            "Mobile money regulations",
+            "Central bank guidelines"
+        ],
+        "telecommunications": [
+            "National telecom regulators",
+            "USSD/SMS regulations"
+        ]
+    }
+}

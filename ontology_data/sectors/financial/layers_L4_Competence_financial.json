@@ -1,0 +1,243 @@
+{
+    "layer_id": "L4",
+    "layer_name": "Competence",
+    "sector": "financial",
+    "region": "Sub-Saharan Africa",
+    "total_questions": 17,
+    "total_sub_dimensions": 5,
+    "sub_dimensions": [
+        {
+            "id": "4.1",
+            "name": "User Skill Match & Capability Assessment",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q4.1.1_FIN",
+                    "text": "User Financial Literacy Assessment - SSA: Document baseline financial literacy of mobile money users: (1) Prior banking experience (% of users previously banked); (2) Digital literacy (can users navigate USSD menus?); (3) Financial concepts understanding (interest, fees, savings, credit); (4) Numeracy levels (can users calculate fees, balances?); (5) Scam awareness (do users recognize fraud attempts?); (6) PIN security understanding (do users protect PINs?); (7) Skills gap analysis (what training needed?).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Financial Literacy Trainers",
+                        "Researchers",
+                        "Regulators"
+                    ],
+                    "evidence_required": "Financial literacy surveys, Banking experience data, Digital literacy assessments, Financial concepts testing, Numeracy assessments, Scam awareness studies, Skills gap analysis",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Many users first-time formal financial service users. Digital literacy low. Financial concepts unfamiliar. Scams common (users vulnerable). PIN sharing common (security risk)."
+                },
+                {
+                    "q_id": "Q4.1.2_FIN",
+                    "text": "User-Technology Fit for Mobile Money: Assess match between user capabilities and mobile money interface: (1) Is USSD interface appropriate for user skill level?; (2) Can illiterate users use service (voice, visual aids)?; (3) Can elderly users navigate menus?; (4) Works on devices users have (feature phones)?; (5) Language support (English, French, local languages)?; (6) Accessibility for disabled users (visual, hearing impairments)?; (7) Shared device scenarios (multiple family members using same phone).",
+                    "stakeholder_types": [
+                        "Users",
+                        "UX Designers",
+                        "Accessibility Experts",
+                        "Product Managers"
+                    ],
+                    "evidence_required": "User testing with target demographics, Accessibility testing, Device compatibility testing, Language support verification, Shared device scenario testing",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "USSD not intuitive (need training). Illiterate users need voice/visual. Elderly struggle with menus. Feature phones dominant. Local languages essential. Shared devices common (privacy risk)."
+                },
+                {
+                    "q_id": "Q4.1.3_FIN",
+                    "text": "Financial Knowledge Requirements for Safe Usage: Assess financial knowledge needed to use mobile money safely: (1) Understanding fees (can users calculate total cost?); (2) Understanding interest (for credit/loans); (3) Understanding exchange rates (for cross-border); (4) Recognizing scams (fake agents, phishing); (5) Protecting PINs (not sharing, changing regularly); (6) Checking balances (verifying transactions); (7) Knowledge gaps and training needs.",
+                    "stakeholder_types": [
+                        "Users",
+                        "Financial Educators",
+                        "Consumer Protection",
+                        "Fraud Prevention"
+                    ],
+                    "evidence_required": "Financial knowledge assessments, Fee calculation testing, Interest understanding, FX comprehension, Scam recognition testing, PIN security practices, Training needs analysis",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Users often don't understand fees (hidden costs). Interest concepts unfamiliar. FX rates confusing. Scams sophisticated (users vulnerable). PIN sharing cultural norm (must change behavior)."
+                }
+            ]
+        },
+        {
+            "id": "4.2",
+            "name": "Training Quality & Effectiveness",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q4.2.1_FIN",
+                    "text": "User Financial Literacy Training - SSA: Describe comprehensive financial literacy program: (1) Training mode (in-person essential, agent-led, community sessions); (2) Language (local languages, not just English/French); (3) Training materials (visual, video, printed - not just online); (4) Trainer qualifications (financial knowledge + local context); (5) Training content (USSD navigation, fees, security, scam prevention); (6) Hands-on practice (users practice transactions); (7) Ongoing support (refresher training, help resources).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Trainers",
+                        "Agents",
+                        "Financial Educators"
+                    ],
+                    "evidence_required": "Training curriculum, Trainer qualifications, Training materials (visual, local language), Training delivery data, Hands-on practice documentation, Ongoing support programs",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "In-person training essential (digital literacy low). Local language mandatory. Visual materials critical (low literacy). Agent-led training effective (trusted, accessible). Scam prevention essential."
+                },
+                {
+                    "q_id": "Q4.2.2_FIN",
+                    "text": "Agent Training & Certification: Ensure agents are competent to serve users: (1) Initial training (USSD, transactions, customer service, fraud prevention); (2) Ongoing training (new features, regulatory changes, scam trends); (3) Certification requirements (must pass test to become agent?); (4) Training quality (qualified trainers, comprehensive curriculum); (5) Agent knowledge assessment (regular testing); (6) Customer service training (handling complaints, assisting users); (7) Fraud prevention training (detecting fake users, protecting liquidity).",
+                    "stakeholder_types": [
+                        "Agents",
+                        "Trainers",
+                        "Platform Operators",
+                        "Regulators"
+                    ],
+                    "evidence_required": "Agent training curriculum, Certification procedures, Ongoing training programs, Knowledge assessment results, Customer service training, Fraud prevention training",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Agents = frontline (must be competent). Many agents low education. Training must be practical (hands-on). Fraud prevention critical (agents vulnerable). Customer service essential (users trust agents)."
+                },
+                {
+                    "q_id": "Q4.2.3_FIN",
+                    "text": "Training Effectiveness Measurement - Mobile Money: Demonstrate training actually works: (1) Pre/post training assessments (knowledge gained?); (2) Service adoption rates (are trained users using mobile money?); (3) Correct usage rates (are users using safely, correctly?); (4) User confidence levels (do users feel competent?); (5) Retention over time (do users remember 3-6 months later?); (6) Fraud victimization rates (does training reduce scams?); (7) User outcomes (does training lead to better financial health?).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Trainers",
+                        "M&E Teams",
+                        "Researchers"
+                    ],
+                    "evidence_required": "Pre/post assessments, Adoption tracking, Usage correctness audits, Confidence surveys, Retention studies, Fraud victimization data, Outcome measurements",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Training effectiveness critical (resources scarce). Must show training leads to safe usage, not just knowledge. Fraud reduction key metric. Financial health outcomes important."
+                },
+                {
+                    "q_id": "Q4.2.4_FIN",
+                    "text": "Merchant & SME Financial Training: Competence building for business users: (1) Transaction verification (how to spot fake payment SMS); (2) Merchant portal usage (reconciling accounts, downloading statements); (3) Liquidity management for business (managing cash vs e-float); (4) Fraud prevention for merchants (common merchant scams); (5) Customer assistance (helping customers pay); (6) Record keeping (integrating mobile money with books).",
+                    "stakeholder_types": [
+                        "Merchants",
+                        "SMEs",
+                        "Trainers"
+                    ],
+                    "evidence_required": "Merchant training materials, Fraud prevention guides, Portal usage tutorials",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Merchants often targeted by fake SMS scams. Need specific training on verification and liquidity."
+                }
+            ]
+        },
+        {
+            "id": "4.3",
+            "name": "Ongoing Support & Assistance",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q4.3.1_FIN",
+                    "text": "User Support Channels - Mobile Money SSA: Provide accessible, multi-channel support: (1) Phone support (toll-free, local language, 24/7); (2) SMS support (for simple queries); (3) USSD support (help menus within USSD); (4) Agent support (in-person assistance); (5) WhatsApp support (for smartphone users); (6) Branch support (physical locations in cities); (7) Response time SLAs (critical <1 hour, general <4 hours).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Customer Support",
+                        "Agents",
+                        "Platform Operators"
+                    ],
+                    "evidence_required": "Support channel documentation, Language support matrix, 24/7 availability proof, Response time SLA data, Agent support procedures, Branch locations",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "Phone support critical (many users no internet). Local language essential. 24/7 needed (money emergencies). Agent support most accessible (in-person). Fast response critical (money urgent)."
+                },
+                {
+                    "q_id": "Q4.3.2_FIN",
+                    "text": "Issue Resolution Capacity - Mobile Money: Ensure support can resolve user issues: (1) Self-service troubleshooting (USSD help menus, IVR); (2) Agent troubleshooting (agents can resolve common issues); (3) Call center troubleshooting (phone support can diagnose, resolve); (4) Escalation procedures (complex issues escalated to specialists); (5) Transaction reversal capability (failed transactions reversed quickly); (6) Account recovery (locked accounts, forgotten PINs); (7) Issue resolution tracking (are problems actually solved?).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Agents",
+                        "Customer Support",
+                        "Technical Teams"
+                    ],
+                    "evidence_required": "Self-service tools, Agent troubleshooting training, Call center capabilities, Escalation procedures, Reversal processes, Account recovery procedures, Resolution tracking metrics",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Self-service limited (low digital literacy). Agents critical for troubleshooting. Transaction reversals must be fast (users panic). Account recovery essential (forgotten PINs common)."
+                }
+            ]
+        },
+        {
+            "id": "4.4",
+            "name": "Institutional Learning & Adaptation",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q4.4.1_FIN",
+                    "text": "Platform Learning from User Feedback - Mobile Money: Demonstrate continuous improvement: (1) User feedback collection (surveys, complaints, focus groups); (2) Agent feedback integration (agents report user issues); (3) Feedback analysis (what are pain points?); (4) Product improvements (what changes made based on feedback?); (5) User communication (are users told about improvements?); (6) User advisory boards (do users have voice in decisions?); (7) Fraud pattern analysis (learning from scam attempts).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Agents",
+                        "Product Managers",
+                        "Fraud Prevention"
+                    ],
+                    "evidence_required": "Feedback mechanisms, Agent feedback integration, Analysis reports, Product improvement logs, User communication, Advisory boards, Fraud pattern analysis",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "User feedback critical for improvement. Agent feedback valuable (frontline insights). Fraud patterns evolve (must adapt). User communication builds trust. Advisory boards emerging."
+                },
+                {
+                    "q_id": "Q4.4.2_FIN",
+                    "text": "Knowledge Transfer & Local Capacity Building - Financial Services: Build long-term local capacity: (1) Local hiring (how many local staff vs expats?); (2) Skills transfer (are local staff trained for senior roles?); (3) Agent capacity building (training agents to support users); (4) Financial literacy ecosystem (supporting local educators); (5) Regulatory capacity building (supporting regulators); (6) Local partner development (working with local banks, MFIs); (7) Sustainability plan (can local team run platform if vendor exits?).",
+                    "stakeholder_types": [
+                        "Local Staff",
+                        "Agents",
+                        "Educators",
+                        "Regulators",
+                        "Partners"
+                    ],
+                    "evidence_required": "Local hiring data, Skills transfer programs, Agent capacity building, Financial literacy support, Regulatory engagement, Partner development, Sustainability plan",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Local capacity building critical for sustainability. Can't rely on expats long-term. Agent capacity essential. Financial literacy ecosystem important. Regulatory capacity building valued."
+                }
+            ]
+        },
+        {
+            "id": "4.5",
+            "name": "Local Technical Ecosystem & Supply Chain",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q4.5.1_FIN",
+                    "text": "Agent POS Device Support Infrastructure: Ensure agent devices can be maintained: (1) Local technician training (can local technicians repair POS devices?); (2) Repair documentation (visual guides, local language); (3) Spare parts availability (local inventory, lead times); (4) Repair cost (affordable for agents?); (5) Warranty claim process (accessible, fast); (6) Device replacement program (if repair not possible); (7) Alternative devices (can agents use smartphones as backup?).",
+                    "stakeholder_types": [
+                        "Agents",
+                        "Technicians",
+                        "Device Manufacturers",
+                        "Platform Operators"
+                    ],
+                    "evidence_required": "Technician training programs, Repair documentation, Spare parts inventory, Repair pricing, Warranty procedures, Replacement programs, Alternative device options",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Agent POS devices critical (no device = no service). Local repair capacity essential. Spare parts often stuck in customs. Repair must be affordable. Smartphone backup useful."
+                },
+                {
+                    "q_id": "Q4.5.2_FIN",
+                    "text": "Agent Liquidity Management Infrastructure: Assess agent liquidity support systems: (1) E-float provision (how do agents get e-float? cost? speed?); (2) Cash management (how do agents get/deposit physical cash?); (3) Bank relationships (do agents have bank accounts? accessible?); (4) Super-agent network (do super-agents support smaller agents?); (5) Liquidity forecasting (can agents predict liquidity needs?); (6) Emergency liquidity (what if agent runs out of cash/e-float?); (7) Liquidity costs (fees for rebalancing).",
+                    "stakeholder_types": [
+                        "Agents",
+                        "Super-Agents",
+                        "Banks",
+                        "Platform Operators"
+                    ],
+                    "evidence_required": "E-float provision procedures, Cash management systems, Bank relationship documentation, Super-agent network, Forecasting tools, Emergency liquidity procedures, Liquidity fee structures",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Liquidity = biggest agent challenge. E-float provision must be fast, affordable. Cash management difficult (security, transport). Bank access limited (rural areas). Super-agents critical."
+                },
+                {
+                    "q_id": "Q4.5.3_FIN",
+                    "text": "Financial Services Ecosystem Integration: Assess integration with broader financial ecosystem: (1) Banking system integration (can users link bank accounts?); (2) Microfinance integration (loan disbursement, repayment via mobile money); (3) Insurance integration (micro-insurance via mobile money); (4) Savings products (can users save via mobile money?); (5) Credit products (mobile money-based credit); (6) Investment products (can users invest via mobile money?); (7) Interoperability (can users transact across providers?).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Banks",
+                        "MFIs",
+                        "Insurers",
+                        "Platform Operators"
+                    ],
+                    "evidence_required": "Bank integration documentation, MFI partnerships, Insurance integration, Savings products, Credit products, Investment products, Interoperability agreements",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Mobile money = gateway to financial services. Bank integration weak but growing. MFI integration important (credit access). Insurance emerging. Savings products critical. Interoperability limited."
+                }
+            ]
+        }
+    ],
+    "scoring_notes": "Layer 4 (Competence) for Financial Services in Sub-Saharan Africa: Financial literacy cannot be assumed - many first-time formal financial service users. Agent training critical (frontline service delivery). Support must be accessible (phone, local language, 24/7). Liquidity management = biggest agent challenge."
+}

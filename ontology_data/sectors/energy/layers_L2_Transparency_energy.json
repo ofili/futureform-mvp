@@ -1,0 +1,204 @@
+{
+    "layer_id": "L2",
+    "layer_name": "Transparency",
+    "sector": "energy",
+    "region": "Sub-Saharan Africa",
+    "total_questions": 14,
+    "total_sub_dimensions": 5,
+    "sub_dimensions": [
+        {
+            "id": "2.1",
+            "name": "System Logic & Decision-Making Transparency",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q2.1.1_ENR",
+                    "text": "PAYG Pricing & Terms Transparency - SSA: Provide complete disclosure of Pay-As-You-Go terms: (1) Total Cost of Ownership (cash price vs total PAYG payments); (2) Interest rate/finance charges (implied APR); (3) Payment schedule (daily/weekly/monthly amounts); (4) Deposit requirements; (5) Ownership transfer terms (when does user own system?); (6) Penalty fees (late payment fees, unlock fees); (7) Repossession terms (when is system removed?).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Energy Companies",
+                        "Regulators",
+                        "Consumer Protection"
+                    ],
+                    "evidence_required": "PAYG contract templates, Pricing sheets showing TCO, APR calculations, Repossession policies, User communication materials",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "Users often don't understand they are taking a loan. Implied interest rates can be high. TCO must be clear. Ownership transfer often confused (lease-to-own vs perpetual lease)."
+                },
+                {
+                    "q_id": "Q2.1.2_ENR",
+                    "text": "Energy Tariff & Billing Transparency (Mini-Grids): For mini-grids, disclose tariff structure: (1) Cost per kWh (vs national grid, vs diesel); (2) Connection fees; (3) Fixed monthly charges; (4) Tariff approval status (approved by regulator?); (5) Tariff adjustment mechanism (inflation, fuel costs); (6) Prepaid meter logic (how is credit deducted?); (7) Cross-subsidies (do commercial users subsidize households?).",
+                    "stakeholder_types": [
+                        "Community Users",
+                        "Mini-grid Operators",
+                        "Regulators"
+                    ],
+                    "evidence_required": "Tariff sheets, Regulator approval letters, Billing logic documentation, Meter calibration reports, User billing examples",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Mini-grid tariffs usually higher than national grid (friction point). Users need to understand why. Prepaid meters standard. Regulator approval critical."
+                },
+                {
+                    "q_id": "Q2.1.3_ENR",
+                    "text": "Remote Monitoring & Control Logic: Explain remote monitoring capabilities: (1) What data is monitored (voltage, usage, location)?; (2) Remote switch logic (under what conditions is power cut?); (3) Data transmission frequency; (4) User visibility (can user see their own data?); (5) Tamper detection logic (what triggers a tamper alert?); (6) Firmware update process; (7) Privacy implications of monitoring.",
+                    "stakeholder_types": [
+                        "Users",
+                        "Regulators",
+                        "Data Protection Officers"
+                    ],
+                    "evidence_required": "Monitoring system specs, Remote switch protocols, User dashboard demos, Tamper detection logic, Privacy policies",
+                    "evidence_weight": "Medium",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Remote monitoring standard for PAYG. Privacy concerns (location tracking). Users should know if they are being monitored. Remote switch = enforcement mechanism."
+                },
+                {
+                    "q_id": "Q2.1.4_ENR",
+                    "text": "Carbon Credit & Data Monetization Transparency: Disclose non-payment revenue streams: (1) Carbon credit generation (does company sell credits based on user system?); (2) Benefit sharing (do users get lower prices due to credits?); (3) Data monetization (selling usage data to investors/researchers); (4) Consent for monetization (did user agree?); (5) Value reporting (how much value generated per user?); (6) Ownership of environmental attributes (who owns the carbon offset?).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Regulators",
+                        "Investors"
+                    ],
+                    "evidence_required": "Carbon credit policy, User consent forms, Benefit sharing model",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Carbon finance is growing. Users generate the value but often don't know or benefit."
+                }
+            ]
+        },
+        {
+            "id": "2.2",
+            "name": "Operational Visibility & Monitoring",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q2.2.1_ENR",
+                    "text": "User Energy Consumption Visibility: Provide users with consumption data: (1) Remaining credit display (days/kWh); (2) Current load/usage display; (3) Battery state of charge indicator; (4) Solar generation indicator; (5) Historical usage data (via app or USSD); (6) Low credit alerts (SMS/visual); (7) Overload warnings.",
+                    "stakeholder_types": [
+                        "Users",
+                        "Energy Companies",
+                        "Product Designers"
+                    ],
+                    "evidence_required": "User interface screenshots/photos, USSD menu trees, Alert system documentation, User manual explaining indicators",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "Users need to know 'how many hours left'. Battery indicators often confusing. USSD checks common. Low credit alerts prevent blackout."
+                },
+                {
+                    "q_id": "Q2.2.2_ENR",
+                    "text": "System Health & Maintenance Visibility: Alert users to system health issues: (1) Panel cleaning reminders; (2) Battery health status; (3) Fault codes/indicators (simple to understand); (4) Maintenance schedules (for mini-grids); (5) Technician arrival tracking; (6) Ticket status tracking (for repairs); (7) End-of-life warnings (battery replacement needed).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Technicians",
+                        "Customer Support"
+                    ],
+                    "evidence_required": "Fault code list, Maintenance notification system, Ticket tracking interface, End-of-life policy",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Panel cleaning often neglected (dust). Fault codes must be simple (icons/colors). Users need to know when battery dying."
+                }
+            ]
+        },
+        {
+            "id": "2.3",
+            "name": "Data Governance & Privacy",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q2.3.1_ENR",
+                    "text": "Energy Usage Data Privacy: Protect user energy data: (1) Data collection scope (usage patterns, location, payment history); (2) Third-party sharing (credit bureaus, government, investors); (3) Anonymization protocols; (4) Data retention policies; (5) User consent mechanisms; (6) Cross-border data transfer (server location); (7) Data security measures.",
+                    "stakeholder_types": [
+                        "Users",
+                        "Regulators",
+                        "Investors",
+                        "Data Protection Officers"
+                    ],
+                    "evidence_required": "Data privacy policy, Third-party sharing agreements, Consent forms, Data security certifications",
+                    "evidence_weight": "High",
+                    "assessment_level": "Advanced",
+                    "africa_specific_notes": "Energy usage data reveals lifestyle/wealth. Payment history used for credit scoring. Data often stored on servers outside Africa (sovereignty issues)."
+                },
+                {
+                    "q_id": "Q2.3.2_ENR",
+                    "text": "Credit Assessment Data Transparency: If energy payments build credit history: (1) Reporting to credit bureaus (which ones?); (2) Positive vs negative reporting (only defaults or also good payments?); (3) Credit score impact explanation; (4) Data accuracy dispute mechanism; (5) User consent for credit reporting; (6) Alternative credit scoring methodology; (7) Data portability (can credit history be used elsewhere?).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Credit Bureaus",
+                        "Regulators",
+                        "Lenders"
+                    ],
+                    "evidence_required": "Credit reporting agreements, User consent forms, Dispute resolution procedures, Credit scoring methodology",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "PAYG often first formal credit history. Reporting to credit bureaus (CRBs) growing. Negative reporting can harm unbanked users. Transparency essential."
+                }
+            ]
+        },
+        {
+            "id": "2.4",
+            "name": "Documentation Quality & Accessibility",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q2.4.1_ENR",
+                    "text": "User Manuals & Guides - Low Literacy Context: Provide accessible documentation: (1) Pictorial/visual guides (installation, operation, troubleshooting); (2) Local language manuals; (3) Video tutorials (shareable via WhatsApp/Bluetooth); (4) Voice instructions (IVR or embedded in device); (5) Laminated quick-start guides (durability); (6) Agent training materials (to explain to users); (7) Safety warnings (battery safety, electrical shock).",
+                    "stakeholder_types": [
+                        "Users",
+                        "Installers",
+                        "Product Designers"
+                    ],
+                    "evidence_required": "User manual samples (visual/local language), Video tutorial links, Safety warning labels, Agent training aids",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "Text-heavy manuals useless for many. Visuals essential. Local languages mandatory. Safety warnings critical (lithium batteries)."
+                },
+                {
+                    "q_id": "Q2.4.2_ENR",
+                    "text": "Contract & Warranty Documentation: Ensure contracts are understandable: (1) Simple language contracts (lease-to-own); (2) Warranty terms clearly stated (what is covered/excluded); (3) Verbal explanation confirmation (agent checklist); (4) Digital copy access (SMS link); (5) Physical copy provision; (6) Cancellation rights explanation; (7) Contact info for support clearly visible.",
+                    "stakeholder_types": [
+                        "Users",
+                        "Legal",
+                        "Sales Agents"
+                    ],
+                    "evidence_required": "Contract templates, Warranty cards, Agent explanation checklists, Cancellation policies",
+                    "evidence_weight": "High",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Contracts often signed without understanding. Warranty terms often misunderstood (e.g., tampering voids warranty). Verbal explanation by agent is key."
+                }
+            ]
+        },
+        {
+            "id": "2.5",
+            "name": "Communication Protocols & Responsiveness",
+            "weight": 0.20,
+            "questions": [
+                {
+                    "q_id": "Q2.5.1_ENR",
+                    "text": "Customer Support Channels - Off-Grid: Provide accessible support: (1) Toll-free phone line; (2) USSD help menu; (3) WhatsApp support; (4) Local agent network (in-person); (5) SMS support; (6) Response time SLAs; (7) Language support availability.",
+                    "stakeholder_types": [
+                        "Users",
+                        "Customer Support",
+                        "Agents"
+                    ],
+                    "evidence_required": "Support channel list, Call center metrics, SLA documentation, Language support matrix",
+                    "evidence_weight": "Critical",
+                    "assessment_level": "Basic",
+                    "africa_specific_notes": "Phone/Agent support primary. WhatsApp growing. Toll-free essential (users have no airtime). Local language support critical."
+                },
+                {
+                    "q_id": "Q2.5.2_ENR",
+                    "text": "Service Alert Communication: Proactively communicate service issues: (1) Planned maintenance alerts (mini-grids); (2) System fault alerts (PAYG); (3) Payment reminders (before cutoff); (4) Tariff change notifications; (5) Weather warnings (protect panels); (6) Technician arrival notifications; (7) Complaint resolution updates.",
+                    "stakeholder_types": [
+                        "Users",
+                        "Operations Teams"
+                    ],
+                    "evidence_required": "SMS alert templates, Notification logs, Payment reminder schedule, Complaint tracking system",
+                    "evidence_weight": "Standard",
+                    "assessment_level": "Standard",
+                    "africa_specific_notes": "Payment reminders prevent blackout. Maintenance alerts manage expectations. Complaint resolution updates build trust."
+                }
+            ]
+        }
+    ],
+    "scoring_notes": "Layer 2 (Transparency) for Energy in SSA: Pricing transparency (TCO) for PAYG is paramount. Users must understand they are entering a financial contract. Visual documentation and local language support are mandatory for inclusivity."
+}

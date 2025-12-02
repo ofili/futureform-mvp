@@ -1,0 +1,59 @@
+{
+    "sector_id": "energy",
+    "sector_name": "Energy & Off-Grid Solutions",
+    "region": "Sub-Saharan Africa",
+    "languages": [
+        "en",
+        "fr"
+    ],
+    "description": "Solar home systems, mini-grids, pay-as-you-go energy, and off-grid energy solutions serving populations without reliable grid electricity across Sub-Saharan Africa.",
+    "key_stakeholders": [
+        "Off-grid Households",
+        "Solar Home System Users",
+        "Mini-grid Communities",
+        "Energy Service Companies",
+        "Mobile Money Providers",
+        "Equipment Manufacturers",
+        "Energy Regulators",
+        "Rural Electrification Agencies"
+    ],
+    "critical_certifications": [
+        "IEC solar product standards",
+        "Lighting Global quality standards",
+        "GOGLA quality assurance",
+        "National energy regulator licenses",
+        "Mobile money integration licenses",
+        "Import/customs certifications"
+    ],
+    "infrastructure_context": {
+        "power": "40-60% grid access, unreliable where available",
+        "connectivity": "2G/3G for mobile money payments, SMS monitoring",
+        "devices": "Feature phones for PAYG payments, basic IoT for monitoring",
+        "payment": "Mobile money essential (M-Pesa, Airtel Money, MTN, Orange)",
+        "distribution": "Last-mile distribution challenging (poor roads, rainy season)",
+        "maintenance": "Local technician capacity limited, spare parts scarce"
+    },
+    "regulatory_environment": {
+        "energy": [
+            "Energy regulator licenses",
+            "Mini-grid regulations",
+            "Tariff approvals",
+            "Quality standards"
+        ],
+        "financial": [
+            "Mobile money integration",
+            "Consumer credit regulations",
+            "Microfinance partnerships"
+        ],
+        "trade": [
+            "Import duties on solar equipment",
+            "VAT exemptions",
+            "Customs procedures"
+        ],
+        "environmental": [
+            "E-waste management",
+            "Battery disposal",
+            "Carbon credits"
+        ]
+    }
+}

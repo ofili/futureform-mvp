@@ -1,0 +1,28 @@
+PrismaClientValidationError: 
+Invalid `prisma.project.create()` invocation in
+C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\create-test-project.js:22:46
+
+  19 }
+  20 
+  21 // Create Project
+→ 22 const project = await prisma.project.create({
+       data: {
+         name: "Trust Assessment Test Project",
+         description: "Project for testing trust intelligence",
+         organizationId: "cmiobn7ai0000bgfc7job7ttu",
+         status: "PLANNING",
+         startDate: new Date("2025-12-02T08:36:33.027Z"),
+         type: "IMPLEMENTATION",
+     +   sector: String
+       }
+     })
+
+Argument `sector` is missing.
+    at Nn (C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\node_modules\@prisma\client\runtime\library.js:29:1363)
+    at ei.handleRequestError (C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\node_modules\@prisma\client\runtime\library.js:121:6911)
+    at ei.handleAndLogRequestError (C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\node_modules\@prisma\client\runtime\library.js:121:6593)
+    at ei.request (C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\node_modules\@prisma\client\runtime\library.js:121:6300)
+    at async a (C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\node_modules\@prisma\client\runtime\library.js:130:9551)
+    at async main (C:\Users\ofili\Documents\FutureForm\mvp-production\FutureForm-MVP\frontend\create-test-project.js:22:25) {
+  clientVersion: '6.19.0'
+}

@@ -1,0 +1,143 @@
+{
+    "layer_id": "L3",
+    "layer_name": "Governance",
+    "total_questions": 11,
+    "total_sub_dimensions": 4,
+    "sub_dimensions": [
+        {
+            "id": "3.1",
+            "name": "Contractual Clarity & Service Level Agreements",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q3.1.1",
+                    "text": "SLA Depth & Enforceability: Provide comprehensive SLA documentation with analysis: Performance metrics specificity; Measurement independence; Exclusion narrowness; Financial penalty adequacy; Service credit usability.",
+                    "stakeholder_types": [
+                        "Legal",
+                        "Procurement"
+                    ],
+                    "evidence_required": "SLA contract, Penalty/credit policy",
+                    "evidence_weight": "Critical"
+                },
+                {
+                    "q_id": "Q3.1.2",
+                    "text": "Contract Balance & Fairness: Analyze contract symmetry: Liability limitations; Indemnification balance; Termination rights; Force majeure definitions; Change control; Dispute resolution.",
+                    "stakeholder_types": [
+                        "Legal"
+                    ],
+                    "evidence_required": "Contract terms analysis, Legal review summary",
+                    "evidence_weight": "High"
+                },
+                {
+                    "q_id": "Q3.1.3",
+                    "text": "SLA Enforcement Track Record: Provide evidence of SLA accountability: Historical breach frequency; Credit application timeliness; Vendor responsiveness; Dispute resolution outcomes; Performance improvement trends.",
+                    "stakeholder_types": [
+                        "Vendor Account Manager",
+                        "Reference Clients"
+                    ],
+                    "evidence_required": "SLA performance reports, Credit issuance logs",
+                    "evidence_weight": "High"
+                }
+            ]
+        },
+        {
+            "id": "3.2",
+            "name": "Regulatory Compliance Verification",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q3.2.1",
+                    "text": "Compliance Certifications & Audits: Submit compliance evidence portfolio: All applicable certifications; Independent audit reports; Regulatory licenses; Compliance policies; DPAs/BAAs.",
+                    "stakeholder_types": [
+                        "Compliance Officer"
+                    ],
+                    "evidence_required": "Certificates (ISO, SOC2), Audit reports, Licenses",
+                    "evidence_weight": "Critical"
+                },
+                {
+                    "q_id": "Q3.2.2",
+                    "text": "Jurisdiction-Specific Compliance: Demonstrate compliance readiness for deployment jurisdiction: Regulatory requirement mapping; Compliance status per requirement; Gap remediation plans; Local entity requirements; Product certifications.",
+                    "stakeholder_types": [
+                        "Legal",
+                        "Local Counsel"
+                    ],
+                    "evidence_required": "Local compliance matrix, Gap analysis report",
+                    "evidence_weight": "Critical"
+                },
+                {
+                    "q_id": "Q3.2.3",
+                    "text": "Ongoing Compliance Monitoring: Describe compliance maintenance: Re-certification commitments; Regulatory change tracking; Audit rights; Breach notification protocols; Compliance reporting.",
+                    "stakeholder_types": [
+                        "Compliance Officer"
+                    ],
+                    "evidence_required": "Compliance monitoring plan, Sample compliance reports",
+                    "evidence_weight": "High"
+                }
+            ]
+        },
+        {
+            "id": "3.3",
+            "name": "Dispute Resolution Mechanisms",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q3.3.1",
+                    "text": "Dispute Resolution Structure: Detail dispute resolution framework: Multi-tier process; Accessibility; Neutrality; Speed; Enforceability.",
+                    "stakeholder_types": [
+                        "Legal"
+                    ],
+                    "evidence_required": "Dispute resolution policy, Arbitration clause",
+                    "evidence_weight": "Medium"
+                },
+                {
+                    "q_id": "Q3.3.2",
+                    "text": "Dispute Resolution Track Record: Provide dispute history and outcomes: Dispute frequency; Resolution effectiveness; Vendor accountability culture; Reference client experiences.",
+                    "stakeholder_types": [
+                        "Legal",
+                        "Reference Clients"
+                    ],
+                    "evidence_required": "Litigation history, Dispute logs (anonymized)",
+                    "evidence_weight": "Medium"
+                }
+            ]
+        },
+        {
+            "id": "3.4",
+            "name": "Performance Monitoring & Accountability",
+            "weight": 0.25,
+            "questions": [
+                {
+                    "q_id": "Q3.4.1",
+                    "text": "Independent Monitoring Framework: Describe performance verification systems: Monitoring independence; Real-time data access; SLA compliance tracking; Alert mechanisms; Historical data retention.",
+                    "stakeholder_types": [
+                        "Ops Team",
+                        "Vendor"
+                    ],
+                    "evidence_required": "Monitoring tool specs, Dashboard access",
+                    "evidence_weight": "High"
+                },
+                {
+                    "q_id": "Q3.4.2",
+                    "text": "Performance Review Mechanisms: Detail accountability structures: Review frequency and participants; Review effectiveness; Scorecarding systems; Continuous improvement mechanisms; Client satisfaction measurement.",
+                    "stakeholder_types": [
+                        "Account Manager",
+                        "Client Success"
+                    ],
+                    "evidence_required": "QBR decks, Scorecard templates, CSAT results",
+                    "evidence_weight": "Medium"
+                },
+                {
+                    "q_id": "Q3.4.3",
+                    "text": "Change Management Governance: Assess change control maturity: Change classification; Advance notice requirements; Client approval rights; Testing protocols; Communication quality; Post-change review.",
+                    "stakeholder_types": [
+                        "Change Manager",
+                        "Ops Team"
+                    ],
+                    "evidence_required": "Change management policy, Change logs",
+                    "evidence_weight": "High"
+                }
+            ]
+        }
+    ],
+    "scoring_notes": "Layer 3 composite formula: Weighted average of sub-dimensions."
+}
