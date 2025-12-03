@@ -21,22 +21,19 @@ export async function GET() {
     const [totalProjects, activeAssessments, completedAssessments, assessmentScores] = await Promise.all([
       prisma.project.count({
         where: {
-          organizationId: { in: orgIds },
-          deletedAt: null
+          organizationId: { in: orgIds }
         }
       }),
       prisma.assessment.count({
         where: {
           project: { organizationId: { in: orgIds } },
-          status: 'IN_PROGRESS',
-          deletedAt: null
+          status: 'IN_PROGRESS'
         }
       }),
       prisma.assessment.count({
         where: {
           project: { organizationId: { in: orgIds } },
-          status: 'COMPLETED',
-          deletedAt: null
+          status: 'COMPLETED'
         }
       }),
       // Get average score from AssessmentScore table
