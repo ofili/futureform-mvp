@@ -36,7 +36,7 @@ export async function GET(
             });
 
             const uploaderOrgs = await prisma.organizationMember.findMany({
-                where: { userId: evidence.uploadedById, deletedAt: null },
+                where: { userId: evidence.uploadedBy, deletedAt: null },
                 select: { organizationId: true }
             });
 
