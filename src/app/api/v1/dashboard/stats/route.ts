@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
-import prisma from '@/lib/prisma';
+import { dashboardService } from '@/services/dashboard/dashboard.service';
+import { logger } from '@/lib/logger';
 
 export async function GET() {
   try {
@@ -9,55 +10,12 @@ export async function GET() {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    // Get user's organizations
-    const userOrgs = await prisma.organizationMember.findMany({
-      where: { userId: session.user.id, deletedAt: null },
-      select: { organizationId: true }
-    });
-
-    const orgIds = userOrgs.map(o => o.organizationId);
-
-    // Calculate stats
-    const [totalProjects, activeAssessments, completedAssessments, assessmentScores] = await Promise.all([
-      prisma.project.count({
-        where: {
-          organizationId: { in: orgIds }
-        }
-      }),
-      prisma.assessment.count({
-        where: {
-          project: { organizationId: { in: orgIds } },
-          status: 'IN_PROGRESS'
-        }
-      }),
-      prisma.assessment.count({
-        where: {
-          project: { organizationId: { in: orgIds } },
-          status: 'COMPLETED'
-        }
-      }),
-      // Get average score from AssessmentScore table
-      prisma.assessmentScore.aggregate({
-        where: {
-          assessment: {
-            project: { organizationId: { in: orgIds } },
-            status: 'COMPLETED'
-          }
-        },
-        _avg: { score: true }
-      })
-    ]);
-
-    const stats = {
-      totalProjects,
-      activeAssessments,
-      completedAssessments,
-      averageTrustScore: assessmentScores._avg.score || 0
-    };
+    // Delegate to service layer
+    const stats = await dashboardService.getStats(session.user.id);
 
     return NextResponse.json({ success: true, data: stats });
   } catch (error) {
-    console.error('Dashboard stats error:', error);
+    logger.error('Dashboard stats error', error as Error);
     return NextResponse.json({ error: 'Failed to fetch stats' }, { status: 500 });
   }
 }
