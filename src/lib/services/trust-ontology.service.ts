@@ -117,24 +117,25 @@ export class TrustOntologyService {
     /**
      * Get questions for a specific partner type
      */
-    async getQuestionsForPartnerType(partnerTypeId: string): Promise<TrustQuestion[]> {
+    async getQuestionsForPartnerType(partnerTypeId: string) {
         const partnerTypeQuestions = await prisma.trustPartnerTypeQuestion.findMany({
             where: { partnerTypeId },
             include: {
-                question: {
-                    include: {
-                        subDimension: true,
-                    },
+            question: {
+                include: {
+                subDimension: true, // ✅ This loads the full subDimension object!
                 },
             },
+            },
             orderBy: {
-                question: {
-                    questionId: 'asc',
-                },
+            question: {
+                questionId: 'asc',
+            },
             },
         });
 
-        return partnerTypeQuestions.map((ptq) => ptq.question) as TrustQuestion[];
+        // Return the questions WITH subDimension
+        return partnerTypeQuestions.map((ptq) => ptq.question);
     }
 
     /**

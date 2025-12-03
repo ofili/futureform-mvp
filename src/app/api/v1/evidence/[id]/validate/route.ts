@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
-import { evidenceService } from '@/services';
+import { evidenceService } from '@/services/evidence/evidence.service';
 import { logger } from '@/lib/logger';
 import { VerificationStatus } from '@prisma/client';
+import prisma from '@/lib/prisma';
 
 export async function POST(
     req: NextRequest,
@@ -15,8 +16,26 @@ export async function POST(
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
         }
 
-        // TODO: Check if user has VERIFIER role or similar permission
-        // For now, assuming any authenticated user can validate (for dev/testing)
+        // Check if user has VERIFIER role (ADMIN or ANALYST in any organization)
+        const isAdmin = session.user.role === 'ADMIN';
+
+        if (!isAdmin) {
+            const userOrgs = await prisma.organizationMember.findMany({
+                where: {
+                    userId: session.user.id,
+                    deletedAt: null,
+                    role: { in: ['ADMIN', 'ANALYST'] }
+                },
+                select: { role: true }
+            });
+
+            if (userOrgs.length === 0) {
+                return NextResponse.json(
+                    { error: 'Forbidden: Only admins and analysts can validate evidence' },
+                    { status: 403 }
+                );
+            }
+        }
 
         const body = await req.json();
         const { status, notes } = body;

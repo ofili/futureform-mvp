@@ -27,7 +27,21 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    // TODO: Add authorization check
+    // Authorization check: verify user belongs to the requested organization
+    const userOrgs = await prisma.organizationMember.findMany({
+      where: { userId: session.user.id, deletedAt: null },
+      select: { organizationId: true }
+    });
+
+    const hasAccess = session.user.role === 'ADMIN' ||
+      userOrgs.some(org => org.organizationId === organizationId);
+
+    if (!hasAccess) {
+      return NextResponse.json(
+        { error: 'Forbidden: You do not have access to this organization' },
+        { status: 403 }
+      );
+    }
 
     const evidence = await prisma.enhancedEvidence.findMany({
       where: {

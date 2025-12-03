@@ -197,6 +197,109 @@ export class BillingService {
             totalAmount: amount * pricePerCredit,
         };
     }
+
+    /**
+     * Process successful payment from Flutterwave
+     */
+    async processSuccessfulPayment(transactionId: string): Promise<void> {
+        logger.info('Processing successful payment', {
+            service: 'BillingService',
+            method: 'processSuccessfulPayment',
+            transactionId,
+        });
+
+        // Get transaction details
+        const transaction = await prisma.paymentTransaction.findUnique({
+            where: { id: transactionId },
+            include: {
+                organization: true,
+                package: true,
+                tier: true,
+            },
+        });
+
+        if (!transaction) {
+            throw new Error(`Transaction not found: ${transactionId}`);
+        }
+
+        // Process based on payment type
+        switch (transaction.type) {
+            case 'TIER_UPGRADE':
+                if (!transaction.tierId) {
+                    throw new Error('Tier ID missing for tier upgrade');
+                }
+
+                // Update organization tier
+                await prisma.organization.update({
+                    where: { id: transaction.organizationId },
+                    data: { tierId: transaction.tierId },
+                });
+
+                logger.info('Tier upgraded successfully', {
+                    organizationId: transaction.organizationId,
+                    tierId: transaction.tierId,
+                });
+                break;
+
+            case 'RC_PURCHASE':
+                if (!transaction.package) {
+                    throw new Error('Package not found for RC purchase');
+                }
+
+                // Add RC credits
+                const rcAmount = transaction.package.rcAmount || transaction.package.creditAmount;
+                if (!rcAmount) {
+                    throw new Error('RC amount not found in package');
+                }
+
+                await rcService.purchaseRC(
+                    transaction.organizationId,
+                    rcAmount,
+                    transaction.packageId!,
+                    `Purchased ${transaction.package.name} via Flutterwave`
+                );
+
+                logger.info('RC credits added successfully', {
+                    organizationId: transaction.organizationId,
+                    amount: rcAmount,
+                });
+                break;
+
+            case 'EC_PURCHASE':
+                if (!transaction.package) {
+                    throw new Error('Package not found for EC purchase');
+                }
+
+                // Add EC credits
+                const ecAmount = transaction.package.ecAmount || transaction.package.creditAmount;
+                if (!ecAmount) {
+                    throw new Error('EC amount not found in package');
+                }
+
+                await ecService.purchaseEC(
+                    transaction.organizationId,
+                    Number(ecAmount),
+                    transaction.packageId!,
+                    `Purchased ${transaction.package.name} via Flutterwave`
+                );
+
+                logger.info('EC credits added successfully', {
+                    organizationId: transaction.organizationId,
+                    amount: ecAmount,
+                });
+                break;
+
+            default:
+                throw new Error(`Unknown payment type: ${transaction.type}`);
+        }
+
+        logger.info('Payment processed successfully', {
+            service: 'BillingService',
+            method: 'processSuccessfulPayment',
+            transactionId,
+            type: transaction.type,
+        });
+    }
 }
 
 // Export singleton instance

@@ -74,6 +74,9 @@ model User {
   uploadedEnhancedEvidence EnhancedEvidence[]   @relation("EnhancedEvidenceUploader")
   verifiedEnhancedEvidence EnhancedEvidence[]   @relation("EnhancedEvidenceVerifier")
 
+  // Payment transactions
+  paymentTransactions PaymentTransaction[]
+
   @@map("users")
 }
 
@@ -105,6 +108,9 @@ model Organization {
   // RC/EC Credit System
   respondentCredits RespondentCredit[]
   evidenceCredits   EvidenceCredit[]
+
+  // Payment transactions
+  paymentTransactions PaymentTransaction[]
 
   @@map("organizations")
 }
@@ -1049,9 +1055,10 @@ model SubscriptionTier {
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 
-  organizations Organization[]
-  features      TierFeature[]
-  bands         CreditBand[]
+  organizations       Organization[]
+  features            TierFeature[]
+  bands               CreditBand[]
+  paymentTransactions PaymentTransaction[]
 
   @@map("subscription_tiers")
 }
@@ -1264,7 +1271,7 @@ model SystemLog {
 model RespondentCredit {
   id             String @id @default(cuid())
   organizationId String
-  amount          Int       @default(0)
+  amount         Int    @default(0)
 
   // Credit tracking
   totalPurchased Int @default(0)
@@ -1321,7 +1328,7 @@ enum RCTxType {
 model EvidenceCredit {
   id             String @id @default(cuid())
   organizationId String
-  amount          Int       @default(0)
+  amount         Int    @default(0)
 
   // Credit tracking (using Decimal for fractional credits)
   totalPurchased Decimal @default(0) @db.Decimal(10, 2)
@@ -1415,8 +1422,9 @@ model CreditPackage {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  rcPurchases RespondentCreditTx[] @relation("RCPackagePurchases")
-  ecPurchases EvidenceCreditTx[]   @relation("ECPackagePurchases")
+  rcPurchases         RespondentCreditTx[] @relation("RCPackagePurchases")
+  ecPurchases         EvidenceCreditTx[]   @relation("ECPackagePurchases")
+  paymentTransactions PaymentTransaction[]
 
   @@map("credit_packages")
 }
@@ -1851,4 +1859,61 @@ model TrustVetoCriterion {
   @@index([isActive])
   @@index([sector])
   @@map("trust_veto_criteria")
+}
+
+// ============================================================================
+// PAYMENT SYSTEM
+// ============================================================================
+
+// Payment transactions for Flutterwave integration
+model PaymentTransaction {
+  id               String        @id @default(cuid())
+  organizationId   String
+  userId           String
+  type             PaymentType
+  amount           Decimal       @db.Decimal(10, 2)
+  currency         String        @default("NGN")
+  status           PaymentStatus
+  provider         String        @default("flutterwave")
+  transactionRef   String        @unique
+  flutterwaveTxId  Int?
+  flutterwaveTxRef String?
+  metadata         Json?
+  tierId           String?
+  packageId        String?
+  paymentLink      String?
+  redirectUrl      String?
+  webhookReceived  Boolean       @default(false)
+  verifiedAt       DateTime?
+  completedAt      DateTime?
+  failureReason    String?
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+
+  organization Organization      @relation(fields: [organizationId], references: [id])
+  user         User              @relation(fields: [userId], references: [id])
+  tier         SubscriptionTier? @relation(fields: [tierId], references: [id])
+  package      CreditPackage?    @relation(fields: [packageId], references: [id])
+
+  @@index([organizationId])
+  @@index([userId])
+  @@index([transactionRef])
+  @@index([status])
+  @@index([createdAt])
+  @@map("payment_transactions")
+}
+
+enum PaymentType {
+  TIER_UPGRADE
+  RC_PURCHASE
+  EC_PURCHASE
+}
+
+enum PaymentStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+  CANCELLED
+  REFUNDED
 }

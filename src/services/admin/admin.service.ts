@@ -64,8 +64,8 @@ export class AdminService {
     }
 
     /**
-     * Get monthly report
-     */
+ * Get comprehensive monthly report
+ */
     async getMonthlyReport(userId: string, month: number, year: number) {
         await this.verifyAdmin(userId);
 
@@ -77,36 +77,135 @@ export class AdminService {
             year,
         });
 
-        const startDate = new Date(year, month - 1, 1);
-        const endDate = new Date(year, month, 0, 23, 59, 59);
+        // Validate input
+        if (month < 1 || month > 12) {
+            throw new Error('Invalid month. Must be between 1 and 12.');
+        }
+        if (year < 2000 || year > 2100) {
+            throw new Error('Invalid year.');
+        }
 
+        // Use consistent date logic (match your DB timezone)
+        // If your DB uses UTC, prefer Date.UTC — but many apps use local dates for reporting
+        const startDate = new Date(year, month - 1, 1);
+        const endDate = new Date(year, month, 0, 23, 59, 59, 999);
+
+        // Fetch all data in parallel
         const [
+            totalUsers,
             newUsers,
+            totalOrganizations,
             newOrganizations,
-            newProjects,
-            newAssessments,
+            totalProjects,
+            totalAssessments,
+            completedAssessments,
+            revenueByTier,
+            tiers,
+            topOrganizations,
         ] = await Promise.all([
-            prisma.user.count({
-                where: { createdAt: { gte: startDate, lte: endDate } }
-            }),
-            prisma.organization.count({
-                where: { createdAt: { gte: startDate, lte: endDate } }
-            }),
-            prisma.project.count({
-                where: { createdAt: { gte: startDate, lte: endDate } }
-            }),
+            prisma.user.count(),
+            prisma.user.count({ where: { createdAt: { gte: startDate, lte: endDate } } }),
+            prisma.organization.count(),
+            prisma.organization.count({ where: { createdAt: { gte: startDate, lte: endDate } } }),
+            prisma.project.count({ where: { createdAt: { gte: startDate, lte: endDate } } }),
+            prisma.assessment.count({ where: { createdAt: { gte: startDate, lte: endDate } } }),
             prisma.assessment.count({
-                where: { createdAt: { gte: startDate, lte: endDate } }
+                where: {
+                    createdAt: { gte: startDate, lte: endDate },
+                    status: 'COMPLETED',
+                },
+            }),
+            prisma.organization.groupBy({
+                by: ['tierId'],
+                _count: { _all: true },
+                where: { tierId: { not: null } },
+            }),
+            prisma.subscriptionTier.findMany(),
+            prisma.organization.findMany({
+                take: 10,
+                select: {
+                    id: true,
+                    name: true,
+                    _count: { select: { projects: true } },
+                },
+                orderBy: { projects: { _count: 'desc' } },
             }),
         ]);
 
-        return {
-            period: { month, year, startDate, endDate },
-            newUsers,
-            newOrganizations,
-            newProjects,
-            newAssessments,
+        // Helper to safely convert Decimal to number
+        const decimalToNumber = (value: unknown): number => {
+            if (value == null) return 0;
+            if (typeof value === 'number') return value;
+            if (typeof value === 'object' && value !== null && 'toNumber' in value) {
+                return (value as any).toNumber();
+            }
+            return Number(value);
         };
+
+        const tierMap = new Map(tiers.map((t) => [t.id, t]));
+
+        const monthlyRevenue = revenueByTier.reduce((sum, group) => {
+            const tier = tierMap.get(group.tierId!);
+            if (tier?.priceUSD != null) {
+                const price = decimalToNumber(tier.priceUSD);
+                return sum + price * group._count._all;
+            }
+            return sum;
+        }, 0);
+
+        const revenueByTierFormatted = revenueByTier.map((group) => {
+            const tier = tierMap.get(group.tierId!);
+            const price = tier?.priceUSD ? decimalToNumber(tier.priceUSD) : 0;
+            return {
+                tier: tier?.name || 'Unknown',
+                count: group._count._all,
+                revenue: price * group._count._all,
+            };
+        });
+
+        const report = {
+            period: {
+                month,
+                year,
+                startDate: startDate.toISOString(),
+                endDate: endDate.toISOString(),
+            },
+            users: {
+                total: totalUsers,
+                new: newUsers,
+                growth: totalUsers > 0 ? ((newUsers / totalUsers) * 100).toFixed(1) : '0.0',
+            },
+            organizations: {
+                total: totalOrganizations,
+                new: newOrganizations,
+                growth:
+                    totalOrganizations > 0
+                        ? ((newOrganizations / totalOrganizations) * 100).toFixed(1)
+                        : '0.0',
+            },
+            projects: {
+                total: totalProjects,
+            },
+            assessments: {
+                total: totalAssessments,
+                completed: completedAssessments,
+                completionRate:
+                    totalAssessments > 0
+                        ? ((completedAssessments / totalAssessments) * 100).toFixed(1)
+                        : '0.0',
+            },
+            revenue: {
+                monthly: monthlyRevenue,
+                byTier: revenueByTierFormatted,
+            },
+            topOrganizations: topOrganizations.map((org) => ({
+                id: org.id,
+                name: org.name,
+                projects: org._count.projects,
+            })),
+        };
+
+        return report;
     }
 
     /**

@@ -5,6 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { RCDashboard } from '@/components/credits/rc-dashboard';
 import { ECDashboard } from '@/components/credits/ec-dashboard';
+import { PaymentHistory } from '@/components/billing/PaymentHistory';
 import { Loader2 } from 'lucide-react';
 
 export default function CreditsPage() {
@@ -48,6 +49,7 @@ export default function CreditsPage() {
                 <TabsList>
                     <TabsTrigger value="rc">Respondent Credits (RC)</TabsTrigger>
                     <TabsTrigger value="ec">Evidence Credits (EC)</TabsTrigger>
+                    <TabsTrigger value="history">Payment History</TabsTrigger>
                 </TabsList>
 
                 <TabsContent value="rc" className="space-y-4">
@@ -74,6 +76,10 @@ export default function CreditsPage() {
                         </div>
                         <ECDashboard organizationId={session.user.organizationId} />
                     </div>
+                </TabsContent>
+
+                <TabsContent value="history" className="space-y-4">
+                    <PaymentHistory organizationId={session.user.organizationId} />
                 </TabsContent>
             </Tabs>
         </div>

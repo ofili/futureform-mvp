@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
-import { rcService } from '@/services';
+import { rcService } from '@/services/credits/rc.service';
 import { logger } from '@/lib/logger';
+import prisma from '@/lib/prisma';
 
 export async function GET(req: NextRequest) {
     try {
@@ -22,8 +23,25 @@ export async function GET(req: NextRequest) {
             );
         }
 
-        // Check if user has access to this organization
-        // TODO: Add proper authorization check here
+        // Authorization: verify user belongs to the organization
+        const isAdmin = session.user.role === 'ADMIN';
+
+        if (!isAdmin) {
+            const userOrg = await prisma.organizationMember.findFirst({
+                where: {
+                    userId: session.user.id,
+                    organizationId,
+                    deletedAt: null
+                }
+            });
+
+            if (!userOrg) {
+                return NextResponse.json(
+                    { error: 'Forbidden: You do not have access to this organization' },
+                    { status: 403 }
+                );
+            }
+        }
 
         const balance = await rcService.getBalance(organizationId);
 

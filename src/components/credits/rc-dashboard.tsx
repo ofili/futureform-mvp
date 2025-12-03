@@ -7,7 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Loader2, Plus, History, CreditCard, Users } from 'lucide-react';
 import { format } from 'date-fns';
-import { RCBalance, RCTransaction } from '@/services';
+import { RCBalance, RCTransaction } from '@/services/credits/rc.service';
 import { useToast } from '@/components/ui/use-toast';
 
 interface RCDashboardProps {

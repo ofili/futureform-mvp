@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
-import { projectService } from '@/services';
+import { projectService } from '@/services/projects/project.service';
 import { rateLimit, RateLimitPresets } from '@/lib/rate-limit';
 
 async function getAuthenticatedUser() {

@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
-import { ecService } from '@/services';
+import { ecService } from '@/services/credits/ec.service';
 import { logger } from '@/lib/logger';
+import prisma from '@/lib/prisma';
 
 export async function POST(req: NextRequest) {
     try {
@@ -21,9 +22,26 @@ export async function POST(req: NextRequest) {
             );
         }
 
-        // In a real implementation, this would be called by the billing service/webhook
-        // after successful payment. For now, we allow direct purchase for testing/admin.
-        // TODO: Add admin-only check or verify payment token
+        // Authorization: Only platform admins or org admins can purchase credits
+        const isAdmin = session.user.role === 'ADMIN';
+
+        if (!isAdmin) {
+            const userOrg = await prisma.organizationMember.findFirst({
+                where: {
+                    userId: session.user.id,
+                    organizationId,
+                    role: 'ADMIN',
+                    deletedAt: null
+                }
+            });
+
+            if (!userOrg) {
+                return NextResponse.json(
+                    { error: 'Forbidden: Only organization admins can purchase credits' },
+                    { status: 403 }
+                );
+            }
+        }
 
         const transaction = await ecService.purchaseEC(
             organizationId,

@@ -20,6 +20,7 @@ interface AssessmentWizardProps {
 export interface WizardData {
     // Step 1: Basics
     type: string;
+    typeSubcategory?: string;
     depth: 'quick' | 'standard' | 'deep';
     sector: string;
     deadline: Date | null;
@@ -58,6 +59,7 @@ export default function AssessmentWizard({ projectId }: AssessmentWizardProps) {
     const [isLoading, setIsLoading] = useState(false);
     const [wizardData, setWizardData] = useState<WizardData>({
         type: '',
+        typeSubcategory: '',
         depth: 'standard',
         sector: '',
         deadline: null,

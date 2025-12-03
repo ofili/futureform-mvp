@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
-import { evidenceService } from '@/services';
+import { evidenceService } from '@/services/evidence/evidence.service';
 import { logger } from '@/lib/logger';
 import { InsufficientCreditsError, CreditExpiredError, EvidenceValidationError } from '@/lib/errors/credit-errors';
 

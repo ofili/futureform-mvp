@@ -3,6 +3,7 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import prisma from '@/lib/prisma';
 import { selectQuestions } from '@/lib/services/ai-question-selector';
+import { trustOntologyService } from '@/lib/services/trust-ontology.service';
 
 /**
  * POST /api/v1/projects/[id]/assessments
@@ -63,8 +64,17 @@ export async function POST(
 
         // Check if this is a Trust Assessment
         if (body.trustPartnerTypeId) {
+            // Fetch partner type to derive partnerType
+            const partnerTypeDetails = await trustOntologyService.getPartnerTypeById(body.trustPartnerTypeId);
+            if (!partnerTypeDetails) {
+                return NextResponse.json({ error: 'Partner type not found' }, { status: 404 });
+            }
+
             // Fetch questions for the selected partner type
             const trustQuestions = await trustOntologyService.getQuestionsForPartnerType(body.trustPartnerTypeId);
+
+            // Derive partnerType from ontology
+            const derivedPartnerType = partnerTypeDetails.name;
 
             // Create assessment with trust fields
             const assessment = await prisma.assessment.create({
@@ -72,7 +82,7 @@ export async function POST(
                     projectId,
                     partnerId: session.user.id,
                     partnerName,
-                    partnerType: 'Organization', // Default for now, or derive from trustPartnerType
+                    partnerType: derivedPartnerType,
                     partnerAliasId,
                     partnerGlobalId,
                     trustPartnerTypeId: body.trustPartnerTypeId,

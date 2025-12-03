@@ -44,6 +44,7 @@ async function main() {
     const packages = [
         {
             name: 'Small Project Pack',
+            displayName: 'Small Project Pack',
             description: 'Perfect for pilots and small team assessments',
             type: PackageType.RC_ONLY,
             creditAmount: 10,
@@ -52,6 +53,7 @@ async function main() {
         },
         {
             name: 'Standard Project Pack',
+            displayName: 'Standard Project Pack',
             description: 'The standard for departmental or unit assessments',
             type: PackageType.RC_ONLY,
             creditAmount: 25,
@@ -60,6 +62,7 @@ async function main() {
         },
         {
             name: 'Organizational Pack',
+            displayName: 'Organizational Pack',
             description: 'For comprehensive organizational diagnostics',
             type: PackageType.RC_ONLY,
             creditAmount: 50,
@@ -68,6 +71,7 @@ async function main() {
         },
         {
             name: 'High-Volume Pack',
+            displayName: 'High-Volume Pack',
             description: 'For large scale deployments',
             type: PackageType.RC_ONLY,
             creditAmount: 100,
@@ -76,6 +80,7 @@ async function main() {
         },
         {
             name: 'Starter Monitoring',
+            displayName: 'Starter Monitoring',
             description: 'Essential evidence collection',
             type: PackageType.EC_ONLY,
             creditAmount: 500,
@@ -84,6 +89,7 @@ async function main() {
         },
         {
             name: 'Pro Verification',
+            displayName: 'Pro Verification',
             description: 'Deep verification and continuous monitoring',
             type: PackageType.EC_ONLY,
             creditAmount: 3000,
@@ -92,6 +98,7 @@ async function main() {
         },
         {
             name: 'Enterprise Intelligence',
+            displayName: 'Enterprise Intelligence',
             description: 'High-volume signal processing',
             type: PackageType.EC_ONLY,
             creditAmount: 15000,

@@ -7,7 +7,7 @@ import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { Loader2, Plus, History, CreditCard, Zap, Settings } from 'lucide-react';
 import { format } from 'date-fns';
-import { ECBalance, ECTransaction } from '@/services';
+import { ECBalance, ECTransaction } from '@/services/credits/ec.service';
 import { useToast } from '@/components/ui/use-toast';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';

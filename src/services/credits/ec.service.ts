@@ -5,8 +5,7 @@ import prisma from '@/lib/prisma';
 import { InsufficientCreditsError, CreditExpiredError } from '@/lib/errors/credit-errors';
 import { logger } from '@/lib/logger';
 import { ECTxType, EvidenceLayer, Prisma } from '@prisma/client';
-import { Decimal } from 'decimal.js';
-// import { Decimal } from '@prisma/client/runtime/library';
+import Decimal from 'decimal.js';
 
 export interface ECBalance {
     totalPurchased: Decimal;

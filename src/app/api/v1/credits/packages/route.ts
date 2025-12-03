@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
-import { packageService } from '@/services';
+import { packageService } from '@/services/credits/package.service';
 import { logger } from '@/lib/logger';
 import { PackageType } from '@prisma/client';
 

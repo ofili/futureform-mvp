@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
-import { assessmentService } from '@/services';
+import { assessmentService } from '@/services/assessments/assessment.service';
 import { rateLimit, RateLimitPresets } from '@/lib/rate-limit';
 
 async function getAuthenticatedUser() {

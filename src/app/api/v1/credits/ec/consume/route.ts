@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
-import { ecService } from '@/services';
+import { ecService } from '@/services/credits/ec.service';
 import { logger } from '@/lib/logger';
 import { InsufficientCreditsError, CreditExpiredError } from '@/lib/errors/credit-errors';
 

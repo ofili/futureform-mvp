@@ -1,6 +1,6 @@
 import { notFound, redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
-import { assessmentService } from '@/services';
+import { assessmentService } from '@/services/assessments/assessment.service';
 import AssessmentDetailClient from './AssessmentDetailClient';
 
 export default async function AssessmentDetail({ params }: { params: Promise<{ id: string }> }) {

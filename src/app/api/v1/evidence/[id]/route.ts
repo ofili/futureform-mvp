@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
-import { evidenceService } from '@/services';
+import { evidenceService } from '@/services/evidence/evidence.service';
 import { logger } from '@/lib/logger';
 import prisma from '@/lib/prisma';
 
@@ -25,40 +25,35 @@ export async function GET(
             );
         }
 
-        // Authorization check - ensure user has access to this evidence
-        // Get user's organization memberships
-        const userOrgs = await prisma.organizationMember.findMany({
-            where: { userId: session.user.id },
-            select: { organizationId: true, role: true }
-        });
-
-        const userOrgIds = userOrgs.map(org => org.organizationId);
-
-        // Check if uploader belongs to any of user's organizations
-        const uploaderOrgs = await prisma.organizationMember.findMany({
-            where: {
-                userId: evidence.uploadedBy,
-                organizationId: { in: userOrgIds }
-            }
-        });
-
-        // Check if user is admin or has verifier role in any org
+        // Authorization check: user must be admin, verifier, or belong to evidence owner's org
         const isAdmin = session.user.role === 'ADMIN';
-        const isVerifier = userOrgs.some(org =>
-            ['ADMIN', 'ANALYST'].includes(org.role)
-        );
 
-        // User has access if:
-        // 1. They are a platform admin
-        // 2. They are a verifier/analyst
-        // 3. The evidence uploader is in the same organization
-        const hasAccess = isAdmin || isVerifier || uploaderOrgs.length > 0;
+        if (!isAdmin) {
+            // Check if user belongs to same organization as evidence uploader
+            const userOrgs = await prisma.organizationMember.findMany({
+                where: { userId: session.user.id, deletedAt: null },
+                select: { organizationId: true, role: true }
+            });
 
-        if (!hasAccess) {
-            return NextResponse.json(
-                { error: 'Forbidden - You do not have access to this evidence' },
-                { status: 403 }
+            const uploaderOrgs = await prisma.organizationMember.findMany({
+                where: { userId: evidence.uploadedById, deletedAt: null },
+                select: { organizationId: true }
+            });
+
+            const hasOrgAccess = userOrgs.some(userOrg =>
+                uploaderOrgs.some(uploaderOrg => uploaderOrg.organizationId === userOrg.organizationId)
             );
+
+            const isVerifier = userOrgs.some(org =>
+                ['ADMIN', 'ANALYST'].includes(org.role)
+            );
+
+            if (!hasOrgAccess && !isVerifier) {
+                return NextResponse.json(
+                    { error: 'Forbidden: You do not have access to this evidence' },
+                    { status: 403 }
+                );
+            }
         }
 
         return NextResponse.json(evidence);

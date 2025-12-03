@@ -1,5 +1,8 @@
 import { TrustEvidenceWeight, TrustRoleCriticality } from '@prisma/client';
 
+// Re-export Prisma enums for use in other files
+export { TrustEvidenceWeight, TrustRoleCriticality };
+
 // ============================================================================
 // TRUST LAYER TYPES
 // ============================================================================
