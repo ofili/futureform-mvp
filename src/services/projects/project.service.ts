@@ -72,7 +72,7 @@ export class ProjectService {
                 assessments: {
                     select: {
                         id: true,
-                        title: true,
+                        partnerName: true,
                         status: true,
                         createdAt: true
                     }
