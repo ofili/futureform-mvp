@@ -68,6 +68,9 @@ model User {
   // Trust evidence relations
   uploadedTrustEvidence  TrustEvidenceFile[] @relation("EvidenceUploader")
   validatedTrustEvidence TrustEvidenceFile[] @relation("EvidenceValidator")
+  
+  // Currency exchange rate updates
+  currencyRatesUpdated CurrencyExchangeRate[]
 
   // RC/EC Credit System relations
   rcTransactions           RespondentCreditTx[] @relation("RCRespondent")
@@ -157,6 +160,17 @@ model Partner {
   verification   PartnerVerification @default(UNVERIFIED)
   metadata       Json?
 
+  // CAC Verification fields
+  cacNumber          String?   // CAC/RC registration number
+  cacVerifiedName    String?   // Verified name from CAC
+  cacVerifiedAt      DateTime? // When verification was performed
+  cacVerificationData Json?    // Full CAC response data
+  directors          Json?     // Array of company directors
+  registeredAddress  String?   // Official registered address
+  incorporationDate  DateTime? // Date of incorporation
+  companyType        String?   // e.g., "Limited Liability", "PLC"
+  rcNumber           String?   // RC number (same as CAC number typically)
+
   // Internal intelligence (not exposed to clients)
   aggregateScore Float? // Computed trust score across all assessments
   usageCount     Int    @default(0) // How many orgs use this partner
@@ -168,6 +182,8 @@ model Partner {
 
   @@index([legalName])
   @@index([sector, country])
+  @@index([cacNumber])
+  @@index([rcNumber])
   @@map("partners")
 }
 
@@ -1059,6 +1075,7 @@ model SubscriptionTier {
   features            TierFeature[]
   bands               CreditBand[]
   paymentTransactions PaymentTransaction[]
+  creditPackages      CreditPricing[] // Back-relation for subscription packages
 
   @@map("subscription_tiers")
 }
@@ -1144,17 +1161,46 @@ model FormOption {
 }
 
 model CreditPricing {
-  id           String   @id @default(cuid())
+  id           String      @id @default(cuid())
   packageName  String
-  type         String   @default("CREDIT_BUNDLE") // 'CREDIT_BUNDLE', 'RESPONDENT_BUNDLE'
-  creditAmount Int
-  priceUSD     Decimal  @db.Decimal(10, 2)
-  isActive     Boolean  @default(true)
-  displayOrder Int      @default(0)
+  type         PackageType @default(RC_ONLY) // Use enum instead of string
+  
+  // Credit amounts for different package types
+  creditAmount Int?        // For RC_ONLY or EC_ONLY packages
+  rcAmount     Int?        // For COMBINED packages - RC portion
+  ecAmount     Int?        // For COMBINED packages - EC portion
+  
+  // Multi-currency pricing
+  priceUSD     Decimal     @db.Decimal(10, 2)
+  priceNGN     Decimal?    @db.Decimal(10, 2)
+  priceGBP     Decimal?    @db.Decimal(10, 2)
+  priceEUR     Decimal?    @db.Decimal(10, 2)
+  
+  // For SUBSCRIPTION type packages
+  tierId       String?
+  tier         SubscriptionTier? @relation(fields: [tierId], references: [id])
+  
+  isActive     Boolean     @default(true)
+  displayOrder Int         @default(0)
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+
+  @@map("credit_pricing")
+}
+
+// Currency exchange rates for multi-currency support
+model CurrencyExchangeRate {
+  id           String   @id @default(cuid())
+  fromCurrency String   // e.g., "USD"
+  toCurrency   String   // e.g., "NGN", "GBP", "EUR"
+  rate         Decimal  @db.Decimal(10, 4)
+  updatedBy    String   // Admin user ID
+  updatedByUser User   @relation(fields: [updatedBy], references: [id])
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
-  @@map("credit_pricing")
+  @@unique([fromCurrency, toCurrency])
+  @@map("currency_exchange_rates")
 }
 
 // ============================================================================

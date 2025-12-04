@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
-import prisma from '@/lib/prisma';
+import { billingService } from '@/services/billing/billing.service';
+import { logger } from '@/lib/logger';
 
 export async function GET(req: Request) {
     try {
@@ -9,19 +10,11 @@ export async function GET(req: Request) {
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
         }
 
-        const packages = await prisma.creditPricing.findMany({
-            where: { isActive: true },
-            orderBy: { displayOrder: 'asc' }
-        });
+        const packages = await billingService.getCreditPackages();
 
-        const transformedPackages = packages.map(pkg => ({
-            ...pkg,
-            priceUSD: Number(pkg.priceUSD)
-        }));
-
-        return NextResponse.json(transformedPackages);
+        return NextResponse.json(packages);
     } catch (error) {
-        console.error('Get billing packages error:', error);
+        logger.error('Get billing packages error', error as Error);
         return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
     }
 }

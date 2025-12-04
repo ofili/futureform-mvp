@@ -3,23 +3,15 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { projectService } from '@/services/projects/project.service';
 import { rateLimit, RateLimitPresets } from '@/lib/rate-limit';
-
-async function getAuthenticatedUser() {
-  // Try NextAuth session first (for server-side requests)
-  const session = await getServerSession(authOptions);
-  if (session?.user?.id) {
-    return session.user.id;
-  }
-
-  return null;
-}
+import { logger } from '@/lib/logger';
 
 export async function GET(request: NextRequest) {
   try {
-    const userId = await getAuthenticatedUser();
-    if (!userId) {
+    const session = await getServerSession(authOptions);
+    if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
+
     const { searchParams } = new URL(request.url);
 
     const filters = {
@@ -30,12 +22,11 @@ export async function GET(request: NextRequest) {
       budgetRange: searchParams.get('budget') || undefined,
     };
 
-    // Service handles filtering and authorization
-    const projects = await projectService.list(userId, filters);
+    const projects = await projectService.list(session.user.id, filters);
 
     return NextResponse.json({ data: projects });
   } catch (error) {
-    console.error('Get projects error:', error);
+    logger.error('Get projects error', error as Error);
     return NextResponse.json({ error: 'Failed to get projects' }, { status: 500 });
   }
 }
@@ -45,7 +36,6 @@ export async function GET(request: NextRequest) {
  * Rate Limited: 30 requests per minute
  */
 export async function POST(request: NextRequest) {
-  // Apply moderate rate limiting for project creation
   const rateLimitResult = await rateLimit(request, RateLimitPresets.api);
 
   if (!rateLimitResult.success) {
@@ -53,10 +43,11 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    const userId = await getAuthenticatedUser();
-    if (!userId) {
+    const session = await getServerSession(authOptions);
+    if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
+
     const body = await request.json();
 
     // Validate required fields
@@ -67,14 +58,13 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Service handles creation and authorization
-    const project = await projectService.create(body, userId);
+    const project = await projectService.create(body, session.user.id);
 
     return NextResponse.json({ project }, { status: 201 });
   } catch (error: any) {
-    console.error('Create project error:', error);
+    logger.error('Create project error', error as Error);
 
-    if (error.message?.includes('Unauthorized')) {
+    if (error.message?.includes('Unauthorized') || error.message?.includes('Forbidden')) {
       return NextResponse.json({ error: error.message }, { status: 403 });
     }
 

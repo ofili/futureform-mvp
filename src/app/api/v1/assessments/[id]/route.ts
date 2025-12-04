@@ -1,58 +1,41 @@
 import { NextRequest, NextResponse } from 'next/server';
-import prisma from '@/lib/prisma';
-import jwt from 'jsonwebtoken';
-
-function getUserFromToken(request: NextRequest) {
-    const token = request.headers.get('authorization')?.replace('Bearer ', '');
-    if (!token) return null;
-
-    try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET!) as { userId: string };
-        return decoded.userId;
-    } catch {
-        return null;
-    }
-}
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
+import { assessmentService } from '@/services/assessments/assessment.service';
+import { logger } from '@/lib/logger';
 
 export async function GET(
     request: NextRequest,
     { params }: { params: Promise<{ id: string }> }
 ) {
     try {
-        const { id } = await params;
-        const userId = getUserFromToken(request);
-
-        // If no user token, check if it's a public token access (for invited partners)
-        // For now, we'll assume authenticated user for simplicity
-        if (!userId) {
+        const session = await getServerSession(authOptions);
+        if (!session?.user?.id) {
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
         }
 
-        const assessment = await prisma.assessment.findUnique({
-            where: { id },
-            include: {
-                project: {
-                    select: { id: true, name: true }
-                },
-                scores: true,
-                redFlags: true,
-                responses: {
-                    include: {
-                        question: {
-                            select: { text: true, domain: true }
-                        }
-                    }
-                }
+        const { id } = await params;
+
+        try {
+            const assessment = await assessmentService.getById(id, session.user.id);
+            return NextResponse.json(assessment);
+        } catch (error: any) {
+            if (error.message.includes('Unauthorized') || error.message.includes('Forbidden')) {
+                return NextResponse.json(
+                    { error: error.message },
+                    { status: 403 }
+                );
             }
-        });
-
-        if (!assessment) {
-            return NextResponse.json({ error: 'Assessment not found' }, { status: 404 });
+            if (error.message.includes('Assessment not found')) {
+                return NextResponse.json(
+                    { error: error.message },
+                    { status: 404 }
+                );
+            }
+            throw error;
         }
-
-        return NextResponse.json(assessment);
     } catch (error) {
-        console.error('Get assessment error:', error);
+        logger.error('Get assessment error', error as Error);
         return NextResponse.json({ error: 'Failed to fetch assessment' }, { status: 500 });
     }
 }

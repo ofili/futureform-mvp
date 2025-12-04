@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
-import prisma from '@/lib/prisma';
+import { billingService } from '@/services/billing/billing.service';
+import { logger } from '@/lib/logger';
 
 export async function GET(req: Request) {
     try {
@@ -9,24 +10,11 @@ export async function GET(req: Request) {
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
         }
 
-        const tiers = await prisma.subscriptionTier.findMany({
-            where: { isActive: true },
-            include: {
-                features: {
-                    orderBy: { displayOrder: 'asc' }
-                }
-            },
-            orderBy: { displayOrder: 'asc' }
-        });
+        const tiers = await billingService.getSubscriptionTiers();
 
-        const transformedTiers = tiers.map(tier => ({
-            ...tier,
-            priceUSD: tier.priceUSD ? Number(tier.priceUSD) : null
-        }));
-
-        return NextResponse.json(transformedTiers);
+        return NextResponse.json(tiers);
     } catch (error) {
-        console.error('Get billing tiers error:', error);
+        logger.error('Get billing tiers error', error as Error);
         return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
     }
 }

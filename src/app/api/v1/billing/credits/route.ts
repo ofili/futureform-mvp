@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
-import prisma from '@/lib/prisma';
+import { billingService } from '@/services/billing/billing.service';
+import { logger } from '@/lib/logger';
 
 export async function GET(request: NextRequest) {
     try {
@@ -9,18 +10,12 @@ export async function GET(request: NextRequest) {
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
         }
 
-        const organizationId = session.user.organizationId;
+        const result = await billingService.getCreditBalance(session.user.organizationId);
 
-        const creditAccount = await prisma.credit.findFirst({
-            where: { organizationId }
-        });
-
-        return NextResponse.json({
-            balance: creditAccount?.amount || 0
-        });
+        return NextResponse.json(result);
 
     } catch (error) {
-        console.error('Error fetching credits:', error);
+        logger.error('Error fetching credits', error as Error);
         return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
     }
 }

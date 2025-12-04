@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
-import prisma from '@/lib/prisma';
+import { partnerService } from '@/services/partners/partner.service';
+import { logger } from '@/lib/logger';
 import { z } from 'zod';
 
 const searchSchema = z.object({
@@ -11,7 +12,7 @@ const searchSchema = z.object({
 export async function POST(req: Request) {
     try {
         const session = await auth();
-        if (!session?.user?.email) {
+        if (!session?.user?.id) {
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
         }
 
@@ -22,35 +23,12 @@ export async function POST(req: Request) {
             return NextResponse.json({ error: validation.error.errors }, { status: 400 });
         }
 
-        const { query, sector } = validation.data;
-
-        // Search global partners
-        // In a real app, this would use full-text search or a dedicated search service (Algolia, Elasticsearch)
-        // For MVP, we'll use Prisma's contains
-        const matches = await prisma.partner.findMany({
-            where: {
-                OR: [
-                    { legalName: { contains: query, mode: 'insensitive' } },
-                    { website: { contains: query, mode: 'insensitive' } },
-                ],
-                ...(sector ? { sector: { equals: sector, mode: 'insensitive' } } : {}),
-            },
-            take: 5,
-            select: {
-                id: true,
-                legalName: true,
-                website: true,
-                sector: true,
-                country: true,
-                verification: true,
-                // Don't expose usageCount or metadata publicly
-            }
-        });
+        const matches = await partnerService.searchPartners(validation.data);
 
         return NextResponse.json({ matches });
 
     } catch (error) {
-        console.error('Error searching partners:', error);
+        logger.error('Error searching partners', error as Error);
         return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
     }
 }

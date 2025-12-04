@@ -1,75 +1,30 @@
 import { NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
-import prisma from '@/lib/prisma';
+import { adminService } from '@/services/admin/admin.service';
+import { logger } from '@/lib/logger';
 
 export async function GET(req: Request) {
     try {
         const session = await auth();
-        if (!session?.user || session.user.role !== 'ADMIN') {
+        if (!session?.user?.id || !adminService.verifyAdminRole(session.user.role)) {
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
         }
 
         const { searchParams } = new URL(req.url);
-        const search = searchParams.get('search');
-        const tier = searchParams.get('tier');
-        const stage = searchParams.get('stage');
+        const search = searchParams.get('search') || undefined;
+        const tier = searchParams.get('tier') || undefined;
+        const stage = searchParams.get('stage') || undefined;
 
-        const where: any = {};
-
-        if (search) {
-            where.OR = [
-                { name: { contains: search, mode: 'insensitive' } },
-                { country: { contains: search, mode: 'insensitive' } }
-            ];
-        }
-
-        if (tier) {
-            where.tierId = tier;
-        }
-
-        if (stage) {
-            where.relationshipStage = stage;
-        }
-
-        const organizations = await prisma.organization.findMany({
-            where,
-            include: {
-                tier: true,
-                members: {
-                    where: { deletedAt: null },
-                    include: {
-                        user: {
-                            select: {
-                                id: true,
-                                firstName: true,
-                                lastName: true,
-                                email: true,
-                                role: true
-                            }
-                        }
-                    }
-                },
-                projects: {
-                    select: {
-                        id: true,
-                        name: true,
-                        status: true
-                    }
-                },
-                credits: {
-                    select: {
-                        id: true,
-                        amount: true
-                    },
-                    take: 1
-                }
-            },
-            orderBy: { createdAt: 'desc' }
-        });
+        const organizations = await adminService.listOrganizationsDetailed(
+            session.user.id,
+            search,
+            tier,
+            stage
+        );
 
         return NextResponse.json(organizations);
     } catch (error) {
-        console.error('Get organizations error:', error);
+        logger.error('Get organizations error', error as Error);
         return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
     }
 }
@@ -77,7 +32,7 @@ export async function GET(req: Request) {
 export async function PATCH(req: Request) {
     try {
         const session = await auth();
-        if (!session?.user || session.user.role !== 'ADMIN') {
+        if (!session?.user?.id || !adminService.verifyAdminRole(session.user.role)) {
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
         }
 
@@ -88,20 +43,17 @@ export async function PATCH(req: Request) {
             return NextResponse.json({ error: 'Organization ID required' }, { status: 400 });
         }
 
-        const organization = await prisma.organization.update({
-            where: { id },
-            data,
-            include: {
-                tier: true,
-                members: {
-                    where: { deletedAt: null }
-                }
+        try {
+            const organization = await adminService.updateOrganization(session.user.id, id, data);
+            return NextResponse.json(organization);
+        } catch (error: any) {
+            if (error.message.includes('not found')) {
+                return NextResponse.json({ error: error.message }, { status: 404 });
             }
-        });
-
-        return NextResponse.json(organization);
+            throw error;
+        }
     } catch (error) {
-        console.error('Update organization error:', error);
+        logger.error('Update organization error', error as Error);
         return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
     }
 }

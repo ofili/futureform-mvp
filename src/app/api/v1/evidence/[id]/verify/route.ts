@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
-import prisma from '@/lib/prisma';
+import { evidenceService } from '@/services/evidence/evidence.service';
+import { logger } from '@/lib/logger';
 
 /**
  * PATCH /api/v1/evidence/[id]/verify
@@ -29,85 +30,34 @@ export async function PATCH(
             );
         }
 
-        // Get evidence with related data
-        const evidence = await prisma.evidence.findUnique({
-            where: { id: evidenceId },
-            include: {
-                response: {
-                    include: {
-                        assessment: {
-                            include: {
-                                project: {
-                                    include: {
-                                        organization: {
-                                            include: { members: true },
-                                        },
-                                    },
-                                },
-                                invitations: true,
-                            },
-                        },
-                    },
-                },
-            },
-        });
-
-        if (!evidence) {
-            return NextResponse.json(
-                { error: 'Evidence not found' },
-                { status: 404 }
+        try {
+            const updatedEvidence = await evidenceService.verifyEvidenceWithAuth(
+                evidenceId,
+                session.user.id,
+                session.user.email!,
+                status,
+                notes
             );
+
+            if (!updatedEvidence) {
+                return NextResponse.json(
+                    { error: 'Evidence not found' },
+                    { status: 404 }
+                );
+            }
+
+            return NextResponse.json({ evidence: updatedEvidence }, { status: 200 });
+        } catch (error: any) {
+            if (error.message.includes('Forbidden')) {
+                return NextResponse.json(
+                    { error: error.message },
+                    { status: 403 }
+                );
+            }
+            throw error;
         }
-
-        // Check if user is authorized to verify evidence
-        // Only organization members or partner admins can verify
-        const isOrgMember = evidence.response.assessment.project.organization?.members.some(
-            (member) => member.userId === session.user.id
-        ) ?? false;
-
-        const isPartnerAdmin = evidence.response.assessment.invitations.some(
-            (inv) =>
-                inv.email === session.user.email &&
-                inv.status === 'ACCEPTED' &&
-                inv.email === evidence.response.assessment.partnerAdminEmail
-        );
-
-        if (!isOrgMember && !isPartnerAdmin) {
-            return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
-        }
-
-        // Update evidence verification status
-        const updatedEvidence = await prisma.evidence.update({
-            where: { id: evidenceId },
-            data: {
-                verificationStatus: status,
-                verifiedBy: session.user.id,
-                verifiedAt: new Date(),
-                verificationNotes: notes,
-            },
-            include: {
-                uploader: {
-                    select: {
-                        id: true,
-                        email: true,
-                        firstName: true,
-                        lastName: true,
-                    },
-                },
-                verifier: {
-                    select: {
-                        id: true,
-                        email: true,
-                        firstName: true,
-                        lastName: true,
-                    },
-                },
-            },
-        });
-
-        return NextResponse.json({ evidence: updatedEvidence }, { status: 200 });
     } catch (error) {
-        console.error('Error verifying evidence:', error);
+        logger.error('Error verifying evidence:', error as Error);
         return NextResponse.json(
             { error: 'Internal server error' },
             { status: 500 }

@@ -16,18 +16,20 @@ export interface AssessmentFilters {
 export interface CreateAssessmentInput {
     projectId: string;
     partnerName?: string;
-    partnerEmail?: string;
+    partnerAdminEmail?: string;
     partnerGlobalId?: string;
     partnerAliasId?: string;
-    title?: string;
-    description?: string;
+    type?: string;
+    depth?: string;
+    deadline?: Date;
 }
 
 export interface UpdateAssessmentInput {
     status?: AssessmentStatus;
     partnerName?: string;
-    title?: string;
-    description?: string;
+    type?: string;
+    depth?: string;
+    deadline?: Date;
 }
 
 export class AssessmentService {
@@ -78,6 +80,125 @@ export class AssessmentService {
         }
 
         return this.transformAssessment(assessment);
+    }
+
+    /**
+     * Get assessment with strict authorization check (for internal use)
+     */
+    async getAssessmentWithAuth(assessmentId: string, userId: string, userRole: string) {
+        const assessment = await prisma.assessment.findUnique({
+            where: { id: assessmentId },
+            include: {
+                project: {
+                    include: {
+                        organization: {
+                            include: { members: true }
+                        }
+                    }
+                },
+                invitations: true,
+                responses: {
+                    include: {
+                        user: {
+                            select: {
+                                id: true,
+                                email: true,
+                                firstName: true,
+                                lastName: true
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        if (!assessment) {
+            return null;
+        }
+
+        // Authorization check
+        if (userRole === 'ADMIN') {
+            return assessment;
+        }
+
+        // Check if user is a member of the project's organization
+        const isOrgMember = assessment.project.organization.members.some(
+            m => m.userId === userId && m.deletedAt === null
+        );
+
+        if (!isOrgMember) {
+            throw new Error('Forbidden: You do not have access to this assessment');
+        }
+
+        return assessment;
+    }
+
+    /**
+     * Submit assessment responses
+     */
+    async submitResponses(assessmentId: string, userId: string, responses: any[]) {
+        // Verify access first
+        const assessment = await prisma.assessment.findUnique({
+            where: { id: assessmentId },
+            include: {
+                project: {
+                    include: {
+                        organization: {
+                            include: { members: true }
+                        }
+                    }
+                }
+            }
+        });
+
+        if (!assessment) {
+            throw new Error('Assessment not found');
+        }
+
+        const isOrgMember = assessment.project.organization.members.some(
+            m => m.userId === userId && m.deletedAt === null
+        );
+
+        if (!isOrgMember) {
+            throw new Error('Forbidden: You do not have access to this assessment');
+        }
+
+        // Use transaction to save all responses
+        await prisma.$transaction(
+            responses.map((r: any) =>
+                prisma.assessmentResponse.upsert({
+                    where: {
+                        assessmentId_questionId: {
+                            assessmentId,
+                            questionId: r.questionId
+                        }
+                    },
+                    update: {
+                        response: r.response,
+                        evidenceFiles: r.evidenceFiles,
+                        updatedAt: new Date(),
+                        userId // Update last editor
+                    },
+                    create: {
+                        assessmentId,
+                        questionId: r.questionId,
+                        userId,
+                        response: r.response,
+                        evidenceFiles: r.evidenceFiles
+                    }
+                })
+            )
+        );
+
+        // Update assessment status to IN_PROGRESS if not already
+        if (assessment.status === AssessmentStatus.PENDING || assessment.status === AssessmentStatus.DRAFT) {
+            await prisma.assessment.update({
+                where: { id: assessmentId },
+                data: { status: AssessmentStatus.IN_PROGRESS }
+            });
+        }
+
+        return { success: true };
     }
 
     /**
@@ -158,13 +279,14 @@ export class AssessmentService {
             data: {
                 projectId: data.projectId,
                 partnerName: data.partnerName,
-                partnerEmail: data.partnerEmail,
+                partnerAdminEmail: data.partnerAdminEmail,
                 partnerGlobalId: data.partnerGlobalId,
                 partnerAliasId: data.partnerAliasId,
-                title: data.title,
-                description: data.description,
-                status: AssessmentStatus.DRAFT,
-                createdById: userId,
+                type: data.type,
+                depth: data.depth,
+                deadline: data.deadline,
+                status: AssessmentStatus.PENDING,
+                token: crypto.randomUUID(), // Generate unique token
             },
             include: {
                 project: {
@@ -205,7 +327,7 @@ export class AssessmentService {
     }
 
     /**
-     * Delete assessment (soft delete)
+     * Delete assessment
      */
     async delete(id: string, userId: string) {
         logger.info('Deleting assessment', {
@@ -218,9 +340,8 @@ export class AssessmentService {
         // Verify access
         await this.getById(id, userId);
 
-        await prisma.assessment.update({
-            where: { id },
-            data: { deletedAt: new Date() }
+        await prisma.assessment.delete({
+            where: { id }
         });
 
         return { success: true };
@@ -237,37 +358,33 @@ export class AssessmentService {
 
         const orgIds = userOrgs.map(o => o.organizationId);
 
-        const [total, completed, inProgress, draft] = await Promise.all([
+        const [total, completed, inProgress, pending] = await Promise.all([
             prisma.assessment.count({
                 where: {
-                    project: { organizationId: { in: orgIds } },
-                    deletedAt: null
+                    project: { organizationId: { in: orgIds } }
                 }
             }),
             prisma.assessment.count({
                 where: {
                     project: { organizationId: { in: orgIds } },
-                    status: AssessmentStatus.COMPLETED,
-                    deletedAt: null
+                    status: AssessmentStatus.COMPLETED
                 }
             }),
             prisma.assessment.count({
                 where: {
                     project: { organizationId: { in: orgIds } },
-                    status: AssessmentStatus.IN_PROGRESS,
-                    deletedAt: null
+                    status: AssessmentStatus.IN_PROGRESS
                 }
             }),
             prisma.assessment.count({
                 where: {
                     project: { organizationId: { in: orgIds } },
-                    status: AssessmentStatus.DRAFT,
-                    deletedAt: null
+                    status: AssessmentStatus.PENDING
                 }
             }),
         ]);
 
-        return { total, completed, inProgress, draft };
+        return { total, completed, inProgress, pending };
     }
 
     /**
@@ -279,10 +396,13 @@ export class AssessmentService {
             projectId: assessment.projectId,
             project: assessment.project,
             partnerName: assessment.partnerName || 'Unknown Partner',
-            partnerEmail: assessment.partnerEmail,
-            title: assessment.title,
-            description: assessment.description,
+            partnerAdminEmail: assessment.partnerAdminEmail,
+            type: assessment.type,
+            depth: assessment.depth,
+            deadline: assessment.deadline?.toISOString(),
             status: assessment.status,
+            overallScore: assessment.overallScore,
+            confidenceLevel: assessment.confidenceLevel,
             domainScores: assessment.scores?.map((s: any) => ({
                 domain: s.domain,
                 score: s.score,
@@ -298,7 +418,7 @@ export class AssessmentService {
             })) || [],
             createdAt: assessment.createdAt?.toISOString(),
             completedAt: assessment.completedAt?.toISOString(),
-            deletedAt: assessment.deletedAt?.toISOString(),
+            updatedAt: assessment.updatedAt?.toISOString(),
         };
     }
 }

@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
-import prisma from '@/lib/prisma';
+import { adminService } from '@/services/admin/admin.service';
+import { logger } from '@/lib/logger';
 
 export async function PATCH(
     req: NextRequest,
@@ -11,7 +12,7 @@ export async function PATCH(
     try {
         const session = await getServerSession(authOptions);
 
-        if (!session || session.user.role !== 'ADMIN') {
+        if (!session?.user?.id || !adminService.verifyAdminRole(session.user.role)) {
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
         }
 
@@ -24,44 +25,25 @@ export async function PATCH(
             );
         }
 
-        // Validate role
-        const validRoles = ['ADMIN', 'USER'];
-        if (!validRoles.includes(role.toUpperCase())) {
-            return NextResponse.json(
-                { error: 'Invalid role' },
-                { status: 400 }
+        try {
+            const updatedUser = await adminService.updateUserRoleValidated(
+                session.user.id,
+                params.id,
+                role
             );
-        }
 
-        const user = await prisma.user.findUnique({
-            where: { id: params.id },
-        });
-
-        if (!user) {
-            return NextResponse.json({ error: 'User not found' }, { status: 404 });
-        }
-
-        const updatedUser = await prisma.user.update({
-            where: { id: params.id },
-            data: { role: role.toUpperCase() },
-            include: {
-                organizations: {
-                    where: { deletedAt: null },
-                    include: {
-                        organization: {
-                            select: {
-                                id: true,
-                                name: true
-                            }
-                        }
-                    }
-                }
+            return NextResponse.json({ data: updatedUser });
+        } catch (error: any) {
+            if (error.message.includes('Invalid role')) {
+                return NextResponse.json({ error: error.message }, { status: 400 });
             }
-        });
-
-        return NextResponse.json({ data: updatedUser });
+            if (error.message.includes('not found')) {
+                return NextResponse.json({ error: error.message }, { status: 404 });
+            }
+            throw error;
+        }
     } catch (error) {
-        console.error('Error updating user:', error);
+        logger.error('Error updating user', error as Error);
         return NextResponse.json(
             { error: 'Failed to update user' },
             { status: 500 }

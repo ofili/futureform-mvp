@@ -3,16 +3,12 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { assessmentService } from '@/services/assessments/assessment.service';
 import { rateLimit, RateLimitPresets } from '@/lib/rate-limit';
-
-async function getAuthenticatedUser() {
-  const session = await getServerSession(authOptions);
-  return session?.user?.id;
-}
+import { logger } from '@/lib/logger';
 
 export async function GET(request: NextRequest) {
   try {
-    const userId = await getAuthenticatedUser();
-    if (!userId) {
+    const session = await getServerSession(authOptions);
+    if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
@@ -22,12 +18,11 @@ export async function GET(request: NextRequest) {
       status: searchParams.get('status') as any,
     };
 
-    // Service handles authorization and data fetching
-    const assessments = await assessmentService.list(userId, filters);
+    const assessments = await assessmentService.list(session.user.id, filters);
 
     return NextResponse.json({ data: assessments });
   } catch (error) {
-    console.error('Get assessments error:', error);
+    logger.error('Get assessments error', error as Error);
     return NextResponse.json({ error: 'Failed to fetch assessments' }, { status: 500 });
   }
 }
@@ -37,7 +32,6 @@ export async function GET(request: NextRequest) {
  * Rate Limited: 30 requests per minute
  */
 export async function POST(request: NextRequest) {
-  // Apply moderate rate limiting for assessment creation
   const rateLimitResult = await rateLimit(request, RateLimitPresets.api);
 
   if (!rateLimitResult.success) {
@@ -45,22 +39,20 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    const userId = await getAuthenticatedUser();
-    if (!userId) {
+    const session = await getServerSession(authOptions);
+    if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     const body = await request.json();
 
-    // Service handles validation, authorization, and credit consumption
-    const assessment = await assessmentService.create(body, userId);
+    const assessment = await assessmentService.create(body, session.user.id);
 
     return NextResponse.json(assessment, { status: 201 });
   } catch (error: any) {
-    console.error('Create assessment error:', error);
+    logger.error('Create assessment error', error as Error);
 
-    // Handle specific errors
-    if (error.message?.includes('Unauthorized')) {
+    if (error.message?.includes('Unauthorized') || error.message?.includes('Forbidden')) {
       return NextResponse.json({ error: error.message }, { status: 403 });
     }
     if (error.message?.includes('not found')) {

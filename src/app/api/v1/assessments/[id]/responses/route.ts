@@ -1,33 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server';
-import prisma from '@/lib/prisma';
-import jwt from 'jsonwebtoken';
-
-function getUserFromToken(request: NextRequest) {
-    const token = request.headers.get('authorization')?.replace('Bearer ', '');
-    if (!token) return null;
-
-    try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET!) as { userId: string };
-        return decoded.userId;
-    } catch {
-        return null;
-    }
-}
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
+import { assessmentService } from '@/services/assessments/assessment.service';
+import { logger } from '@/lib/logger';
 
 export async function POST(
     request: NextRequest,
     { params }: { params: Promise<{ id: string }> }
 ) {
     try {
-        const { id } = await params;
-        const userId = getUserFromToken(request);
-
-        // If no user token, check if it's a public token access (for invited partners)
-        // For now, we'll assume authenticated user for simplicity of this phase
-        if (!userId) {
+        const session = await getServerSession(authOptions);
+        if (!session?.user?.id) {
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
         }
 
+        const { id } = await params;
         const body = await request.json();
         const { responses } = body;
 
@@ -35,41 +22,26 @@ export async function POST(
             return NextResponse.json({ error: 'Invalid responses format' }, { status: 400 });
         }
 
-        // Use transaction to save all responses
-        await prisma.$transaction(
-            responses.map((r: any) =>
-                prisma.assessmentResponse.upsert({
-                    where: {
-                        assessmentId_questionId: {
-                            assessmentId: id,
-                            questionId: r.questionId
-                        }
-                    },
-                    update: {
-                        response: r.response,
-                        evidenceFiles: r.evidenceFiles,
-                        updatedAt: new Date()
-                    },
-                    create: {
-                        assessmentId: id,
-                        questionId: r.questionId,
-                        userId: userId,
-                        response: r.response,
-                        evidenceFiles: r.evidenceFiles
-                    }
-                })
-            )
-        );
-
-        // Update assessment status to IN_PROGRESS
-        await prisma.assessment.update({
-            where: { id },
-            data: { status: 'IN_PROGRESS' }
-        });
-
-        return NextResponse.json({ success: true });
+        try {
+            await assessmentService.submitResponses(id, session.user.id, responses);
+            return NextResponse.json({ success: true });
+        } catch (error: any) {
+            if (error.message.includes('Forbidden')) {
+                return NextResponse.json(
+                    { error: error.message },
+                    { status: 403 }
+                );
+            }
+            if (error.message.includes('Assessment not found')) {
+                return NextResponse.json(
+                    { error: error.message },
+                    { status: 404 }
+                );
+            }
+            throw error;
+        }
     } catch (error) {
-        console.error('Submit responses error:', error);
+        logger.error('Submit responses error', error as Error);
         return NextResponse.json({ error: 'Failed to submit responses' }, { status: 500 });
     }
 }

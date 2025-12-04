@@ -189,6 +189,252 @@ export class EvidenceService {
             throw new EvidenceValidationError('Invalid evidence submission', errors);
         }
     }
+
+    /**
+     * Get evidence with authorization check
+     */
+    async getEvidenceForUser(evidenceId: string, userId: string, userRole: string) {
+        const evidence = await this.getEvidenceById(evidenceId);
+        if (!evidence) {
+            return null;
+        }
+
+        const hasAccess = await this.checkEvidenceAccess(userId, userRole, evidence);
+        if (!hasAccess) {
+            throw new Error('Forbidden: You do not have access to this evidence');
+        }
+
+        return evidence;
+    }
+
+    /**
+     * Verify evidence with authorization check
+     */
+    async verifyEvidenceWithAuth(
+        evidenceId: string,
+        userId: string,
+        userEmail: string,
+        status: VerificationStatus,
+        notes?: string
+    ) {
+        // Fetch evidence with necessary relations for auth check
+        const evidence = await prisma.enhancedEvidence.findUnique({
+            where: { id: evidenceId },
+            include: {
+                response: {
+                    include: {
+                        assessment: {
+                            include: {
+                                project: {
+                                    include: {
+                                        organization: {
+                                            include: { members: true },
+                                        },
+                                    },
+                                },
+                                invitations: true,
+                            },
+                        },
+                    },
+                },
+            },
+        });
+
+        if (!evidence) {
+            return null;
+        }
+
+        // Check if user is authorized to verify evidence
+        // Only organization members or partner admins can verify
+        const isOrgMember = evidence.response.assessment.project.organization?.members.some(
+            (member) => member.userId === userId
+        ) ?? false;
+
+        const isPartnerAdmin = evidence.response.assessment.invitations.some(
+            (inv) =>
+                inv.email === userEmail &&
+                inv.status === 'ACCEPTED' &&
+                inv.email === evidence.response.assessment.partnerAdminEmail
+        );
+
+        if (!isOrgMember && !isPartnerAdmin) {
+            throw new Error('Forbidden: You are not authorized to verify this evidence');
+        }
+
+        // Update evidence verification status
+        return await prisma.enhancedEvidence.update({
+            where: { id: evidenceId },
+            data: {
+                verificationStatus: status,
+                verifiedBy: userId,
+                verifiedAt: new Date(),
+                verificationNotes: notes,
+            },
+            include: {
+                uploader: {
+                    select: {
+                        id: true,
+                        email: true,
+                        firstName: true,
+                        lastName: true,
+                    },
+                },
+                verifier: {
+                    select: {
+                        id: true,
+                        email: true,
+                        firstName: true,
+                        lastName: true,
+                    },
+                },
+            },
+        });
+    }
+
+    /**
+     * Validate evidence with authorization check
+     */
+    async validateEvidenceWithAuth(
+        evidenceId: string,
+        userId: string,
+        userRole: string,
+        status: VerificationStatus,
+        notes?: string
+    ) {
+        // Get evidence with project info
+        const evidence = await prisma.enhancedEvidence.findUnique({
+            where: { id: evidenceId },
+            include: {
+                response: {
+                    include: {
+                        assessment: {
+                            include: {
+                                project: true,
+                            },
+                        },
+                    },
+                },
+            },
+        });
+
+        if (!evidence) {
+            throw new Error('Evidence not found');
+        }
+
+        // Auth check - only ADMIN or REVIEWER can validate
+        if (userRole !== 'ADMIN') {
+            const org = await prisma.organizationMember.findFirst({
+                where: {
+                    organizationId: evidence.response.assessment.project.organizationId,
+                    userId,
+                    deletedAt: null,
+                    role: { in: ['ADMIN', 'REVIEWER'] }
+                },
+                select: { role: true }
+            });
+
+            if (!org) {
+                throw new Error('Forbidden: Only admins and reviewers can validate evidence');
+            }
+        }
+
+        return this.validateEvidence({
+            evidenceId,
+            status,
+            verifiedBy: userId,
+            notes
+        });
+    }
+
+    /**
+     * List evidence for organization with authorization check
+     */
+    async listEvidenceWithAuth(
+        userId: string,
+        userRole: string,
+        organizationId: string,
+        filters: {
+            layer?: EvidenceLayer;
+            status?: VerificationStatus;
+            limit?: number;
+            offset?: number;
+        }
+    ) {
+        // Auth check
+        if (userRole !== 'ADMIN') {
+            const userOrgs = await prisma.organizationMember.findMany({
+                where: { userId, deletedAt: null },
+                select: { organizationId: true }
+            });
+
+            const hasAccess = userOrgs.some(org => org.organizationId === organizationId);
+            if (!hasAccess) {
+                throw new Error('Forbidden: You do not have access to this organization');
+            }
+        }
+
+        return await prisma.enhancedEvidence.findMany({
+            where: {
+                uploader: {
+                    organizations: {
+                        some: {
+                            organizationId: organizationId,
+                        },
+                    },
+                },
+                ...(filters.layer && { layer: filters.layer }),
+                ...(filters.status && { verificationStatus: filters.status }),
+            },
+            include: {
+                uploader: {
+                    select: {
+                        firstName: true,
+                        lastName: true,
+                        email: true,
+                    },
+                },
+            },
+            orderBy: { createdAt: 'desc' },
+            take: filters.limit || 50,
+            skip: filters.offset || 0,
+        });
+    }
+
+    /**
+     * Check if user has access to evidence
+     */
+    private async checkEvidenceAccess(userId: string, userRole: string, evidence: any): Promise<boolean> {
+        // 1. Admin access
+        if (userRole === 'ADMIN') {
+            return true;
+        }
+
+        // 2. Check if user belongs to same organization as evidence uploader
+        const userOrgs = await prisma.organizationMember.findMany({
+            where: { userId, deletedAt: null },
+            select: { organizationId: true, role: true }
+        });
+
+        const uploaderOrgs = await prisma.organizationMember.findMany({
+            where: { userId: evidence.uploadedBy, deletedAt: null },
+            select: { organizationId: true }
+        });
+
+        const hasOrgAccess = userOrgs.some(userOrg =>
+            uploaderOrgs.some(uploaderOrg => uploaderOrg.organizationId === userOrg.organizationId)
+        );
+
+        if (hasOrgAccess) {
+            return true;
+        }
+
+        // 3. Reviewer access
+        const isReviewer = userOrgs.some(org =>
+            ['ADMIN', 'REVIEWER'].includes(org.role)
+        );
+
+        return isReviewer;
+    }
 }
 
 // Export singleton instance

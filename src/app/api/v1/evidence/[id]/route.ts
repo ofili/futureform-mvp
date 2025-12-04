@@ -16,47 +16,31 @@ export async function GET(
         }
 
         const { id } = await params;
-        const evidence = await evidenceService.getEvidenceById(id);
 
-        if (!evidence) {
-            return NextResponse.json(
-                { error: 'Evidence not found' },
-                { status: 404 }
-            );
-        }
-
-        // Authorization check: user must be admin, verifier, or belong to evidence owner's org
-        const isAdmin = session.user.role === 'ADMIN';
-
-        if (!isAdmin) {
-            // Check if user belongs to same organization as evidence uploader
-            const userOrgs = await prisma.organizationMember.findMany({
-                where: { userId: session.user.id, deletedAt: null },
-                select: { organizationId: true, role: true }
-            });
-
-            const uploaderOrgs = await prisma.organizationMember.findMany({
-                where: { userId: evidence.uploadedBy, deletedAt: null },
-                select: { organizationId: true }
-            });
-
-            const hasOrgAccess = userOrgs.some(userOrg =>
-                uploaderOrgs.some(uploaderOrg => uploaderOrg.organizationId === userOrg.organizationId)
+        try {
+            const evidence = await evidenceService.getEvidenceForUser(
+                id,
+                session.user.id,
+                session.user.role
             );
 
-            const isVerifier = userOrgs.some(org =>
-                ['ADMIN', 'ANALYST'].includes(org.role)
-            );
-
-            if (!hasOrgAccess && !isVerifier) {
+            if (!evidence) {
                 return NextResponse.json(
-                    { error: 'Forbidden: You do not have access to this evidence' },
+                    { error: 'Evidence not found' },
+                    { status: 404 }
+                );
+            }
+
+            return NextResponse.json(evidence);
+        } catch (error: any) {
+            if (error.message.includes('Forbidden')) {
+                return NextResponse.json(
+                    { error: error.message },
                     { status: 403 }
                 );
             }
+            throw error;
         }
-
-        return NextResponse.json(evidence);
     } catch (error) {
         logger.error('Failed to get evidence', error as Error);
         return NextResponse.json(

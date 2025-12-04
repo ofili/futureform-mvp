@@ -44,59 +44,91 @@ export class BillingService {
         // Get package details
         const pkg = await packageService.getPackageById(packageId);
 
-        // TODO: Process payment with payment provider
-        // For now, we'll assume payment is successful
-        const paymentSuccessful = true;
-
-        if (!paymentSuccessful) {
-            throw new PaymentError('Payment processing failed', paymentInfo.provider);
-        }
-
         const transactionIds: string[] = [];
         let rcCreditsAdded = 0;
         let ecCreditsAdded = 0;
-        let totalAmount = pkg.priceUSD;
+        const totalAmount = Number(pkg.priceUSD);
 
         // Add credits based on package type
         switch (pkg.type) {
-            case PackageType.RC:
+            case PackageType.RC_ONLY:
+                if (!pkg.creditAmount) {
+                    throw new Error('RC_ONLY package missing creditAmount');
+                }
                 const rcTx = await rcService.purchaseRC(
                     organizationId,
                     pkg.creditAmount,
                     packageId,
-                    `Purchased ${pkg.name}`
+                    `Purchased ${pkg.packageName}`
                 );
                 transactionIds.push(rcTx.id);
                 rcCreditsAdded = pkg.creditAmount;
                 break;
 
-            case PackageType.EC:
+            case PackageType.EC_ONLY:
+                if (!pkg.creditAmount) {
+                    throw new Error('EC_ONLY package missing creditAmount');
+                }
                 const ecTx = await ecService.purchaseEC(
                     organizationId,
                     pkg.creditAmount,
                     packageId,
-                    `Purchased ${pkg.name}`
+                    `Purchased ${pkg.packageName}`
                 );
                 transactionIds.push(ecTx.id);
                 ecCreditsAdded = pkg.creditAmount;
                 break;
 
             case PackageType.COMBINED:
-                // Combined packages would need additional fields in schema
-                // For now, treat as RC or EC based on creditAmount
-                logger.warn('Combined package type not fully implemented', {
+                if (!pkg.rcAmount || !pkg.ecAmount) {
+                    throw new Error('COMBINED package missing rcAmount or ecAmount');
+                }
+                
+                // Add RC credits
+                const combinedRcTx = await rcService.purchaseRC(
+                    organizationId,
+                    pkg.rcAmount,
+                    packageId,
+                    `Purchased ${pkg.packageName} - RC portion`
+                );
+                transactionIds.push(combinedRcTx.id);
+                rcCreditsAdded = pkg.rcAmount;
+                
+                // Add EC credits
+                const combinedEcTx = await ecService.purchaseEC(
+                    organizationId,
+                    pkg.ecAmount,
+                    packageId,
+                    `Purchased ${pkg.packageName} - EC portion`
+                );
+                transactionIds.push(combinedEcTx.id);
+                ecCreditsAdded = pkg.ecAmount;
+                
+                logger.info('Combined package processed', {
                     service: 'BillingService',
                     method: 'purchasePackage',
                     packageId,
+                    rcAmount: pkg.rcAmount,
+                    ecAmount: pkg.ecAmount,
                 });
                 break;
 
             case PackageType.SUBSCRIPTION:
-                // TODO: Handle subscription logic
-                logger.warn('Subscription purchases not yet implemented', {
+                if (!pkg.tierId) {
+                    throw new Error('SUBSCRIPTION package missing tierId');
+                }
+                
+                // Upgrade organization tier
+                await prisma.organization.update({
+                    where: { id: organizationId },
+                    data: { tierId: pkg.tierId }
+                });
+                
+                logger.info('Subscription activated', {
                     service: 'BillingService',
                     method: 'purchasePackage',
-                    packageId,
+                    organizationId,
+                    tierId: pkg.tierId,
                 });
                 break;
         }
@@ -236,6 +268,8 @@ export class BillingService {
                 });
 
                 logger.info('Tier upgraded successfully', {
+                    service: 'BillingService',
+                    method: 'processSuccessfulPayment',
                     organizationId: transaction.organizationId,
                     tierId: transaction.tierId,
                 });
@@ -260,6 +294,8 @@ export class BillingService {
                 );
 
                 logger.info('RC credits added successfully', {
+                    service: 'BillingService',
+                    method: 'processSuccessfulPayment',
                     organizationId: transaction.organizationId,
                     amount: rcAmount,
                 });
@@ -284,6 +320,8 @@ export class BillingService {
                 );
 
                 logger.info('EC credits added successfully', {
+                    service: 'BillingService',
+                    method: 'processSuccessfulPayment',
                     organizationId: transaction.organizationId,
                     amount: ecAmount,
                 });
@@ -299,6 +337,230 @@ export class BillingService {
             transactionId,
             type: transaction.type,
         });
+    }
+
+    /**
+     * Get active subscription tiers
+     */
+    async getSubscriptionTiers() {
+        logger.info('Fetching subscription tiers', {
+            service: 'BillingService',
+            method: 'getSubscriptionTiers',
+        });
+
+        const tiers = await prisma.subscriptionTier.findMany({
+            where: { isActive: true },
+            include: {
+                features: {
+                    orderBy: { displayOrder: 'asc' }
+                }
+            },
+            orderBy: { displayOrder: 'asc' }
+        });
+
+        return tiers.map(tier => ({
+            ...tier,
+            priceUSD: tier.priceUSD ? Number(tier.priceUSD) : null
+        }));
+    }
+
+    /**
+     * Get active credit packages (for UI display)
+     */
+    async getCreditPackages() {
+        logger.info('Fetching credit packages', {
+            service: 'BillingService',
+            method: 'getCreditPackages',
+        });
+
+        const packages = await prisma.creditPricing.findMany({
+            where: { isActive: true },
+            orderBy: { displayOrder: 'asc' }
+        });
+
+        return packages.map(pkg => ({
+            ...pkg,
+            priceUSD: Number(pkg.priceUSD)
+        }));
+    }
+
+    /**
+     * Get organization's credit balance
+     */
+    async getCreditBalance(organizationId: string) {
+        logger.info('Fetching credit balance', {
+            service: 'BillingService',
+            method: 'getCreditBalance',
+            organizationId,
+        });
+
+        const creditAccount = await prisma.credit.findFirst({
+            where: { organizationId }
+        });
+
+        return {
+            balance: creditAccount?.amount || 0
+        };
+    }
+
+    /**
+     * Get organization's billing history
+     */
+    async getBillingHistory(organizationId: string) {
+        logger.info('Fetching billing history', {
+            service: 'BillingService',
+            method: 'getBillingHistory',
+            organizationId,
+        });
+
+        const creditAccount = await prisma.credit.findFirst({
+            where: { organizationId }
+        });
+
+        if (!creditAccount) {
+            return { payments: [] };
+        }
+
+        const transactions = await prisma.creditTransaction.findMany({
+            where: { creditId: creditAccount.id },
+            orderBy: { createdAt: 'desc' },
+            include: {
+                user: {
+                    select: {
+                        firstName: true,
+                        lastName: true,
+                        email: true
+                    }
+                }
+            }
+        });
+
+        const payments = transactions.map(tx => ({
+            id: tx.id,
+            amount: tx.creditsChange,
+            status: 'COMPLETED',
+            createdAt: tx.createdAt,
+            type: tx.type,
+            user: `${tx.user.firstName} ${tx.user.lastName}`
+        }));
+
+        return { payments };
+    }
+
+    /**
+     * Initiate Flutterwave checkout
+     */
+    async initiateFlutterwaveCheckout(
+        credits: number | undefined,
+        tierId: string | undefined,
+        organizationId: string,
+        userId: string,
+        userEmail: string,
+        userName?: string
+    ) {
+        logger.info('Initiating Flutterwave checkout', {
+            service: 'BillingService',
+            method: 'initiateFlutterwaveCheckout',
+            organizationId,
+            userId,
+            credits,
+            tierId,
+        });
+
+        const tx_ref = `tx-${organizationId}-${Date.now()}`;
+
+        let amount = 0;
+        let currency = 'USD';
+        let paymentTitle = '';
+        let metaData: any = {
+            userId,
+            organizationId,
+        };
+
+        if (tierId) {
+            const tier = await prisma.subscriptionTier.findUnique({
+                where: { id: tierId }
+            });
+
+            if (!tier) {
+                throw new Error('Invalid subscription tier');
+            }
+
+            if (!tier.priceUSD) {
+                throw new Error('This tier requires contacting sales');
+            }
+
+            amount = Number(tier.priceUSD);
+            paymentTitle = `Upgrade to ${tier.displayName}`;
+            metaData.tierId = tierId;
+            metaData.type = 'SUBSCRIPTION_UPGRADE';
+
+        } else if (credits) {
+            const packageOption = await prisma.creditPricing.findFirst({
+                where: { creditAmount: credits, type: 'RESPONDENT_BUNDLE', isActive: true }
+            });
+
+            if (!packageOption) {
+                throw new Error('Invalid credit package');
+            }
+
+            amount = Number(packageOption.priceUSD);
+            paymentTitle = `FutureForm Credits (${credits})`;
+            metaData.credits = credits;
+            metaData.packageId = packageOption.id;
+            metaData.type = 'CREDIT_PURCHASE';
+        } else {
+            throw new Error('Invalid request parameters');
+        }
+
+        const flwPayload = {
+            tx_ref,
+            amount,
+            currency,
+            redirect_url: `${process.env.NEXTAUTH_URL}/dashboard/credits?success=true`,
+            customer: {
+                email: userEmail,
+                name: userName || 'FutureForm User',
+            },
+            customizations: {
+                title: paymentTitle,
+                logo: 'https://futureform.africa/logo.png'
+            },
+            meta: metaData
+        };
+
+        const flwResponse = await fetch('https://api.flutterwave.com/v3/payments', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${process.env.FLW_SECRET_KEY}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(flwPayload)
+        });
+
+        const flwData = await flwResponse.json();
+
+        if (flwData.status !== 'success') {
+            logger.error('Flutterwave error', flwData);
+            throw new Error('Payment initialization failed');
+        }
+
+        return {
+            success: true,
+            url: flwData.data.link,
+            message: 'Redirecting to payment gateway'
+        };
+    }
+
+    /**
+     * Verify user has permission to make purchases
+     */
+    verifyPurchasePermission(userRole: string, orgRole?: string): boolean {
+        const isGlobalAdmin = userRole === 'ADMIN';
+        const allowedOrgRoles = ['CREDIT_MANAGER', 'ADMIN', 'OWNER'];
+        const isAllowedOrgRole = orgRole && allowedOrgRoles.includes(orgRole);
+
+        return isGlobalAdmin || !!isAllowedOrgRole;
     }
 }
 

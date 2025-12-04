@@ -4,7 +4,6 @@ import { authOptions } from '@/lib/auth';
 import { evidenceService } from '@/services/evidence/evidence.service';
 import { logger } from '@/lib/logger';
 import { VerificationStatus } from '@prisma/client';
-import prisma from '@/lib/prisma';
 
 export async function POST(
     req: NextRequest,
@@ -14,27 +13,6 @@ export async function POST(
         const session = await getServerSession(authOptions);
         if (!session?.user?.id) {
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-        }
-
-        // Check if user has VERIFIER role (ADMIN or ANALYST in any organization)
-        const isAdmin = session.user.role === 'ADMIN';
-
-        if (!isAdmin) {
-            const userOrgs = await prisma.organizationMember.findMany({
-                where: {
-                    userId: session.user.id,
-                    deletedAt: null,
-                    role: { in: ['ADMIN', 'ANALYST'] }
-                },
-                select: { role: true }
-            });
-
-            if (userOrgs.length === 0) {
-                return NextResponse.json(
-                    { error: 'Forbidden: Only admins and analysts can validate evidence' },
-                    { status: 403 }
-                );
-            }
         }
 
         const body = await req.json();
@@ -48,14 +26,32 @@ export async function POST(
         }
 
         const { id } = await params;
-        const evidence = await evidenceService.validateEvidence({
-            evidenceId: id,
-            status: status as VerificationStatus,
-            verifiedBy: session.user.id,
-            notes,
-        });
 
-        return NextResponse.json(evidence);
+        try {
+            const evidence = await evidenceService.validateEvidenceWithAuth(
+                id,
+                session.user.id,
+                session.user.role,
+                status as VerificationStatus,
+                notes
+            );
+
+            return NextResponse.json(evidence);
+        } catch (error: any) {
+            if (error.message.includes('Forbidden')) {
+                return NextResponse.json(
+                    { error: error.message },
+                    { status: 403 }
+                );
+            }
+            if (error.message.includes('Evidence not found')) {
+                return NextResponse.json(
+                    { error: error.message },
+                    { status: 404 }
+                );
+            }
+            throw error;
+        }
     } catch (error) {
         logger.error('Failed to validate evidence', error as Error);
         return NextResponse.json(
