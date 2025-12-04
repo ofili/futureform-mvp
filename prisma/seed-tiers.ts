@@ -131,7 +131,7 @@ async function main() {
     const creditPackages = [
         {
             packageName: 'Small Project Pack',
-            type: 'RESPONDENT_BUNDLE',
+            type: 'RC_ONLY' as const,
             creditAmount: 10,
             priceUSD: 3500,
             displayOrder: 1,
@@ -139,7 +139,7 @@ async function main() {
         },
         {
             packageName: 'Standard Project Pack',
-            type: 'RESPONDENT_BUNDLE',
+            type: 'RC_ONLY' as const,
             creditAmount: 25,
             priceUSD: 6250,
             displayOrder: 2,
@@ -147,7 +147,7 @@ async function main() {
         },
         {
             packageName: 'Organizational Pack',
-            type: 'RESPONDENT_BUNDLE',
+            type: 'RC_ONLY' as const,
             creditAmount: 50,
             priceUSD: 11250,
             displayOrder: 3,
@@ -155,7 +155,7 @@ async function main() {
         },
         {
             packageName: 'High-Volume Pack',
-            type: 'RESPONDENT_BUNDLE',
+            type: 'RC_ONLY' as const,
             creditAmount: 100,
             priceUSD: 17500,
             displayOrder: 4,
