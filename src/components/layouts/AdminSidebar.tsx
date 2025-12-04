@@ -18,7 +18,8 @@ import {
     ChevronRight,
     Menu,
     X,
-    LogOut
+    LogOut,
+    ArrowLeftRight
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useState, useEffect } from 'react';
@@ -48,6 +49,7 @@ export default function AdminSidebar({ className, collapsed, setCollapsed }: Adm
         { href: '/admin/assessments', label: 'Assessments', icon: ClipboardList },
         { href: '/admin/tiers', label: 'Tiers', icon: Layers },
         { href: '/admin/credit-pricing', label: 'Credit Pricing', icon: DollarSign },
+        { href: '/admin/exchange-rates', label: 'Exchange Rates', icon: ArrowLeftRight },
         { href: '/admin/billing', label: 'Billing', icon: CreditCard },
         { href: '/admin/form-options', label: 'Form Options', icon: Settings2 },
         { href: '/admin/support', label: 'Support', icon: MessageSquare },

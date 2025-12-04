@@ -562,6 +562,76 @@ export class BillingService {
 
         return isGlobalAdmin || !!isAllowedOrgRole;
     }
+    /**
+     * Get all exchange rates
+     */
+    async getExchangeRates() {
+        return await prisma.currencyExchangeRate.findMany({
+            orderBy: { updatedAt: 'desc' },
+            include: {
+                updatedByUser: {
+                    select: {
+                        firstName: true,
+                        lastName: true,
+                        email: true,
+                    },
+                },
+            },
+        });
+    }
+
+    /**
+     * Create or update an exchange rate
+     */
+    async upsertExchangeRate(
+        fromCurrency: string,
+        toCurrency: string,
+        rate: number,
+        adminUserId: string
+    ) {
+        logger.info('Upserting exchange rate', {
+            service: 'BillingService',
+            method: 'upsertExchangeRate',
+            fromCurrency,
+            toCurrency,
+            rate,
+            adminUserId,
+        });
+
+        return await prisma.currencyExchangeRate.upsert({
+            where: {
+                fromCurrency_toCurrency: {
+                    fromCurrency,
+                    toCurrency,
+                },
+            },
+            update: {
+                rate,
+                updatedBy: adminUserId,
+            },
+            create: {
+                fromCurrency,
+                toCurrency,
+                rate,
+                updatedBy: adminUserId,
+            },
+        });
+    }
+
+    /**
+     * Delete an exchange rate
+     */
+    async deleteExchangeRate(id: string) {
+        logger.info('Deleting exchange rate', {
+            service: 'BillingService',
+            method: 'deleteExchangeRate',
+            id,
+        });
+
+        return await prisma.currencyExchangeRate.delete({
+            where: { id },
+        });
+    }
 }
 
 // Export singleton instance
