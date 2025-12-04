@@ -59,7 +59,7 @@ export async function POST(request: NextRequest) {
             tierId,
             packageId,
             customerEmail: session.user.email!,
-            customerName: `${session.user.firstName} ${session.user.lastName}`,
+            customerName: session.user.name || 'Customer',
         });
 
         return NextResponse.json(result);

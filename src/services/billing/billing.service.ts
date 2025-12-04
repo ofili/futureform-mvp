@@ -47,63 +47,63 @@ export class BillingService {
         const transactionIds: string[] = [];
         let rcCreditsAdded = 0;
         let ecCreditsAdded = 0;
-        const totalAmount = Number(pkg.priceUSD);
+        const totalAmount = Number(pkg.totalPrice || 0);
 
         // Add credits based on package type
         switch (pkg.type) {
             case PackageType.RC_ONLY:
-                if (!pkg.creditAmount) {
-                    throw new Error('RC_ONLY package missing creditAmount');
+                if (!pkg.rcAmount) {
+                    throw new Error('RC_ONLY package missing rcAmount');
                 }
                 const rcTx = await rcService.purchaseRC(
                     organizationId,
-                    pkg.creditAmount,
+                    pkg.rcAmount,
                     packageId,
-                    `Purchased ${pkg.packageName}`
+                    `Purchased ${pkg.displayName}`
                 );
                 transactionIds.push(rcTx.id);
-                rcCreditsAdded = pkg.creditAmount;
+                rcCreditsAdded = pkg.rcAmount;
                 break;
 
             case PackageType.EC_ONLY:
-                if (!pkg.creditAmount) {
-                    throw new Error('EC_ONLY package missing creditAmount');
+                if (!pkg.ecAmount) {
+                    throw new Error('EC_ONLY package missing ecAmount');
                 }
                 const ecTx = await ecService.purchaseEC(
                     organizationId,
-                    pkg.creditAmount,
+                    Number(pkg.ecAmount),
                     packageId,
-                    `Purchased ${pkg.packageName}`
+                    `Purchased ${pkg.displayName}`
                 );
                 transactionIds.push(ecTx.id);
-                ecCreditsAdded = pkg.creditAmount;
+                ecCreditsAdded = Number(pkg.ecAmount);
                 break;
 
             case PackageType.COMBINED:
                 if (!pkg.rcAmount || !pkg.ecAmount) {
                     throw new Error('COMBINED package missing rcAmount or ecAmount');
                 }
-                
+
                 // Add RC credits
                 const combinedRcTx = await rcService.purchaseRC(
                     organizationId,
                     pkg.rcAmount,
                     packageId,
-                    `Purchased ${pkg.packageName} - RC portion`
+                    `Purchased ${pkg.displayName} - RC portion`
                 );
                 transactionIds.push(combinedRcTx.id);
                 rcCreditsAdded = pkg.rcAmount;
-                
+
                 // Add EC credits
                 const combinedEcTx = await ecService.purchaseEC(
                     organizationId,
-                    pkg.ecAmount,
+                    Number(pkg.ecAmount),
                     packageId,
-                    `Purchased ${pkg.packageName} - EC portion`
+                    `Purchased ${pkg.displayName} - EC portion`
                 );
                 transactionIds.push(combinedEcTx.id);
-                ecCreditsAdded = pkg.ecAmount;
-                
+                ecCreditsAdded = Number(pkg.ecAmount);
+
                 logger.info('Combined package processed', {
                     service: 'BillingService',
                     method: 'purchasePackage',
@@ -115,21 +115,50 @@ export class BillingService {
 
             case PackageType.SUBSCRIPTION:
                 if (!pkg.tierId) {
-                    throw new Error('SUBSCRIPTION package missing tierId');
+                    throw new Error('SUBSCRIPTION package missing tierId - cannot upgrade tier');
                 }
-                
-                // Upgrade organization tier
+
+                // Get the tier details for included credits
+                const tier = await prisma.subscriptionTier.findUnique({
+                    where: { id: pkg.tierId }
+                });
+
+                if (!tier) {
+                    throw new Error(`Subscription tier not found: ${pkg.tierId}`);
+                }
+
+                // Upgrade organization to the new tier
                 await prisma.organization.update({
                     where: { id: organizationId },
                     data: { tierId: pkg.tierId }
                 });
-                
-                logger.info('Subscription activated', {
+
+                logger.info('Organization tier upgraded', {
                     service: 'BillingService',
                     method: 'purchasePackage',
                     organizationId,
                     tierId: pkg.tierId,
+                    tierName: tier.displayName,
                 });
+
+                // Add included RC credits if the tier provides them
+                if (tier.creditsIncluded > 0) {
+                    const subscriptionRcTx = await rcService.purchaseRC(
+                        organizationId,
+                        tier.creditsIncluded,
+                        packageId,
+                        `Subscription credits included with ${tier.displayName}`
+                    );
+                    transactionIds.push(subscriptionRcTx.id);
+                    rcCreditsAdded = tier.creditsIncluded;
+
+                    logger.info('Subscription credits added', {
+                        service: 'BillingService',
+                        method: 'purchasePackage',
+                        organizationId,
+                        creditsIncluded: tier.creditsIncluded,
+                    });
+                }
                 break;
         }
 
@@ -169,25 +198,38 @@ export class BillingService {
             pricePerCredit,
         });
 
-        // TODO: Process payment
-        const paymentSuccessful = true;
+        const totalAmount = amount * pricePerCredit;
 
-        if (!paymentSuccessful) {
-            throw new PaymentError('Payment processing failed', paymentInfo.provider);
+        // Validate payment info
+        if (!paymentInfo.transactionId) {
+            throw new PaymentError('Transaction ID required for custom purchases', paymentInfo.provider);
         }
+
+        // For Flutterwave payments, the transaction should already be verified
+        // via webhook or verification endpoint before calling this method
+        // This method is called after payment confirmation
 
         const rcTx = await rcService.purchaseRC(
             organizationId,
             amount,
             undefined,
-            'Custom RC purchase'
+            `Custom RC purchase (${paymentInfo.method})`
         );
+
+        logger.info('Custom RC purchase completed', {
+            service: 'BillingService',
+            method: 'purchaseCustomRC',
+            organizationId,
+            amount,
+            totalAmount,
+            transactionId: rcTx.id,
+        });
 
         return {
             success: true,
             rcCreditsAdded: amount,
             transactionIds: [rcTx.id],
-            totalAmount: amount * pricePerCredit,
+            totalAmount,
         };
     }
 
@@ -208,25 +250,38 @@ export class BillingService {
             pricePerCredit,
         });
 
-        // TODO: Process payment
-        const paymentSuccessful = true;
+        const totalAmount = amount * pricePerCredit;
 
-        if (!paymentSuccessful) {
-            throw new PaymentError('Payment processing failed', paymentInfo.provider);
+        // Validate payment info
+        if (!paymentInfo.transactionId) {
+            throw new PaymentError('Transaction ID required for custom purchases', paymentInfo.provider);
         }
+
+        // For Flutterwave payments, the transaction should already be verified
+        // via webhook or verification endpoint before calling this method
+        // This method is called after payment confirmation
 
         const ecTx = await ecService.purchaseEC(
             organizationId,
             amount,
             undefined,
-            'Custom EC purchase'
+            `Custom EC purchase (${paymentInfo.method})`
         );
+
+        logger.info('Custom EC purchase completed', {
+            service: 'BillingService',
+            method: 'purchaseCustomEC',
+            organizationId,
+            amount,
+            totalAmount,
+            transactionId: ecTx.id,
+        });
 
         return {
             success: true,
             ecCreditsAdded: amount,
             transactionIds: [ecTx.id],
-            totalAmount: amount * pricePerCredit,
+            totalAmount,
         };
     }
 
@@ -281,7 +336,7 @@ export class BillingService {
                 }
 
                 // Add RC credits
-                const rcAmount = transaction.package.rcAmount || transaction.package.creditAmount;
+                const rcAmount = transaction.package.rcAmount;
                 if (!rcAmount) {
                     throw new Error('RC amount not found in package');
                 }
@@ -307,7 +362,7 @@ export class BillingService {
                 }
 
                 // Add EC credits
-                const ecAmount = transaction.package.ecAmount || transaction.package.creditAmount;
+                const ecAmount = transaction.package.ecAmount;
                 if (!ecAmount) {
                     throw new Error('EC amount not found in package');
                 }

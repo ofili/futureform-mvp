@@ -17,7 +17,7 @@ export class FileValidator {
         }
 
         // Check file type
-        if (!EVIDENCE_CONSTRAINTS.ALLOWED_MIME_TYPES.includes(file.type)) {
+        if (!(EVIDENCE_CONSTRAINTS.ALLOWED_MIME_TYPES as readonly string[]).includes(file.type)) {
             return { valid: false, error: EVIDENCE_ERROR_MESSAGES.INVALID_FILE_TYPE };
         }
 

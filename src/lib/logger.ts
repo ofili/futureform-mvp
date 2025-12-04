@@ -26,7 +26,9 @@ class Logger {
     }
 
     error(message: string, error?: Error, context?: LogContext) {
-        const errorContext = error ? { ...context, error: error.message, stack: error.stack } : context;
+        const errorContext = error
+            ? { ...context, error: error.message, stack: error.stack } as LogContext
+            : context;
         console.error(this.formatMessage('error', message, errorContext));
     }
 

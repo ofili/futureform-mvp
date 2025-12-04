@@ -24,10 +24,9 @@ export async function GET(req: Request) {
 
         return NextResponse.json({ data: rates });
     } catch (error: any) {
-        logger.error('Failed to fetch exchange rates', {
+        logger.error('Failed to fetch exchange rates', error, {
             service: 'ExchangeRatesAPI',
             method: 'GET',
-            error: error.message,
         });
         return NextResponse.json(
             { error: 'Failed to fetch exchange rates' },
@@ -65,10 +64,9 @@ export async function POST(req: Request) {
 
         return NextResponse.json({ data: result });
     } catch (error: any) {
-        logger.error('Failed to upsert exchange rate', {
+        logger.error('Failed to upsert exchange rate', error, {
             service: 'ExchangeRatesAPI',
             method: 'POST',
-            error: error.message,
         });
         return NextResponse.json(
             { error: 'Failed to upsert exchange rate' },
@@ -96,10 +94,9 @@ export async function DELETE(req: Request) {
 
         return NextResponse.json({ success: true });
     } catch (error: any) {
-        logger.error('Failed to delete exchange rate', {
+        logger.error('Failed to delete exchange rate', error, {
             service: 'ExchangeRatesAPI',
             method: 'DELETE',
-            error: error.message,
         });
         return NextResponse.json(
             { error: 'Failed to delete exchange rate' },

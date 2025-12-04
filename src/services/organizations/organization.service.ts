@@ -34,6 +34,58 @@ export interface InviteMemberInput {
 
 export class OrganizationService {
     /**
+     * Get organization members
+     */
+    async getMembers(organizationId: string, userId: string) {
+        logger.info('Fetching organization members', {
+            service: 'OrganizationService',
+            method: 'getMembers',
+            organizationId,
+            userId,
+        });
+
+        // Verify membership
+        const member = await prisma.organizationMember.findFirst({
+            where: {
+                organizationId,
+                userId,
+                deletedAt: null
+            }
+        });
+
+        if (!member) {
+            throw new Error('Unauthorized access to organization members');
+        }
+
+        const members = await prisma.organizationMember.findMany({
+            where: {
+                organizationId,
+                deletedAt: null
+            },
+            include: {
+                user: {
+                    select: {
+                        id: true,
+                        email: true,
+                        firstName: true,
+                        lastName: true,
+                        jobTitle: true,
+                        department: true
+                    }
+                }
+            }
+        });
+
+        return members.map(m => ({
+            id: m.id,
+            userId: m.userId,
+            role: m.role,
+            user: m.user,
+            joinedAt: m.joinedAt.toISOString()
+        }));
+    }
+
+    /**
      * Get organization by ID with authorization
      */
     async getById(id: string, userId: string) {
@@ -62,8 +114,7 @@ export class OrganizationService {
                 },
                 _count: {
                     select: {
-                        projects: true,
-                        assessments: true
+                        projects: true
                     }
                 }
             }
@@ -100,7 +151,6 @@ export class OrganizationService {
                         _count: {
                             select: {
                                 projects: true,
-                                assessments: true,
                                 members: true
                             }
                         }
@@ -112,7 +162,7 @@ export class OrganizationService {
         return memberships.map(m => ({
             ...this.transformOrganization(m.organization),
             userRole: m.role,
-            joinedAt: m.createdAt.toISOString()
+            joinedAt: m.joinedAt.toISOString()
         }));
     }
 
@@ -130,10 +180,11 @@ export class OrganizationService {
             data: {
                 name: data.name,
                 description: data.description,
-                sector: data.sector,
-                region: data.region,
+                sectorFocus: data.sector,
+                region: data.region || 'Global', // Default if missing
                 country: data.country,
-                size: data.size,
+                type: 'Customer', // Default type
+                // size: data.size, // Size not in schema?
                 website: data.website,
                 members: {
                     create: {
@@ -391,20 +442,20 @@ export class OrganizationService {
             id: organization.id,
             name: organization.name,
             description: organization.description,
-            sector: organization.sector,
+            sector: organization.sectorFocus,
             region: organization.region,
             country: organization.country,
-            size: organization.size,
+            // size: organization.size,
             website: organization.website,
             members: organization.members?.map((m: any) => ({
                 id: m.id,
                 userId: m.userId,
                 role: m.role,
                 user: m.user,
-                joinedAt: m.createdAt?.toISOString()
+                joinedAt: m.joinedAt?.toISOString()
             })),
             projectCount: organization._count?.projects,
-            assessmentCount: organization._count?.assessments,
+            // assessmentCount: organization._count?.assessments,
             memberCount: organization._count?.members,
             createdAt: organization.createdAt?.toISOString(),
             updatedAt: organization.updatedAt?.toISOString(),

@@ -1076,6 +1076,7 @@ model SubscriptionTier {
   bands               CreditBand[]
   paymentTransactions PaymentTransaction[]
   creditPackages      CreditPricing[] // Back-relation for subscription packages
+  packages            CreditPackage[] @relation("PackageTier") // SUBSCRIPTION packages linked to this tier
 
   @@map("subscription_tiers")
 }
@@ -1464,6 +1465,8 @@ model CreditPackage {
 
   // Subscription details (for recurring packages)
   billingPeriod String? // "monthly", "annual", null for one-time
+  tierId        String? // Links SUBSCRIPTION packages to a tier
+  tier          SubscriptionTier? @relation("PackageTier", fields: [tierId], references: [id])
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

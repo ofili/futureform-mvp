@@ -24,6 +24,7 @@ export interface CreditPackageInfo {
     bestFor?: string;
     popular: boolean;
     billingPeriod?: string;
+    tierId?: string; // For SUBSCRIPTION package type
 }
 
 export class PackageService {
@@ -56,6 +57,7 @@ export class PackageService {
             bestFor: pkg.bestFor || undefined,
             popular: pkg.popular,
             billingPeriod: pkg.billingPeriod || undefined,
+            tierId: pkg.tierId || undefined,
         }));
     }
 
@@ -88,6 +90,7 @@ export class PackageService {
             bestFor: pkg.bestFor || undefined,
             popular: pkg.popular,
             billingPeriod: pkg.billingPeriod || undefined,
+            tierId: pkg.tierId || undefined,
         };
     }
 

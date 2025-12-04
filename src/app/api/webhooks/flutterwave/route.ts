@@ -10,7 +10,10 @@ export async function POST(request: NextRequest) {
         const signature = request.headers.get('verif-hash');
 
         if (!signature) {
-            logger.warn('Webhook received without signature');
+            logger.warn('Webhook received without signature', {
+                service: 'FlutterwaveWebhook',
+                method: 'POST',
+            });
             return NextResponse.json({ error: 'No signature provided' }, { status: 401 });
         }
 
@@ -21,7 +24,10 @@ export async function POST(request: NextRequest) {
         const isValid = flutterwaveService.verifyWebhookSignature(rawBody, signature);
 
         if (!isValid) {
-            logger.warn('Invalid webhook signature');
+            logger.warn('Invalid webhook signature', {
+                service: 'FlutterwaveWebhook',
+                method: 'POST',
+            });
             return NextResponse.json({ error: 'Invalid signature' }, { status: 401 });
         }
 
@@ -29,6 +35,8 @@ export async function POST(request: NextRequest) {
         const payload = JSON.parse(rawBody);
 
         logger.info('Webhook received', {
+            service: 'FlutterwaveWebhook',
+            method: 'POST',
             event: payload.event,
             txRef: payload.data?.tx_ref,
         });
@@ -38,7 +46,10 @@ export async function POST(request: NextRequest) {
 
         return NextResponse.json({ status: 'success' });
     } catch (error) {
-        logger.error('Webhook processing failed', error as Error);
+        logger.error('Webhook processing failed', error as Error, {
+            service: 'FlutterwaveWebhook',
+            method: 'POST',
+        });
 
         // Return 200 to prevent Flutterwave from retrying on our errors
         // Log the error for manual investigation
