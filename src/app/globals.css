@@ -4,73 +4,101 @@
 
 @layer base {
   :root {
-    /* FutureForm V1.0 Palette - Light Mode */
-    --background: 0 0% 100%; /* Pure White */
-    --foreground: 240 3% 6%; /* FF Black #0E0E0F */
-    
-    --card: 0 0% 100%; /* Pure White */
-    --card-foreground: 240 3% 6%; /* FF Black */
-    
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 3% 6%;
-    
-    --primary: 220 100% 55%; /* Insight Blue #1A66FF */
-    --primary-foreground: 0 0% 100%;
-    
-    --secondary: 240 9% 97%; /* FF Off-White #F7F7F9 */
-    --secondary-foreground: 240 5% 13%; /* FF Dark Gray #1F1F22 */
-    
-    --muted: 240 9% 97%; /* FF Off-White */
-    --muted-foreground: 240 5% 50%; /* FF Mid Gray #7A7A85 */
-    
-    --accent: 240 9% 97%; /* FF Off-White */
-    --accent-foreground: 240 5% 13%; /* FF Dark Gray */
-    
-    --destructive: 355 78% 56%; /* Critical Red #E63946 */
-    --destructive-foreground: 0 0% 100%;
-    
-    --warning: 36 100% 65%; /* Risk Amber #FFB84D */
-    --warning-foreground: 240 3% 6%;
+    /* Gitance Palette - Light Mode */
+    --background: 210 40% 98%;
+    /* Cloud White #F8FAFC */
+    --foreground: 0 0% 10%;
+    /* Graphite Black #1A1A1A */
 
-    --border: 240 9% 86%; /* FF Light Gray #D7D7DE */
-    --input: 240 9% 86%; /* FF Light Gray */
-    --ring: 220 100% 55%; /* Insight Blue */
-    
-    --radius: 0.5rem; /* 8px */
+    --card: 0 0% 100%;
+    /* Pure White */
+    --card-foreground: 0 0% 10%;
+    /* Graphite Black */
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 10%;
+
+    --primary: 216 60% 10%;
+    /* Gitance Midnight #0A1628 */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 40% 96%;
+    /* Cloud White Darker #F1F5F9 */
+    --secondary-foreground: 216 60% 10%;
+    /* Gitance Midnight */
+
+    --muted: 210 40% 96%;
+    /* #F1F5F9 */
+    --muted-foreground: 215 16% 47%;
+    /* Slate Grey #64748B */
+
+    --accent: 210 40% 96%;
+    /* #F1F5F9 */
+    --accent-foreground: 216 60% 10%;
+
+    --destructive: 0 84% 60%;
+    /* Error #EF4444 */
+    --destructive-foreground: 0 0% 100%;
+
+    --warning: 38 92% 50%;
+    /* Warning #F59E0B */
+    --warning-foreground: 0 0% 100%;
+
+    --border: 214 32% 91%;
+    /* #E2E8F0 */
+    --input: 214 32% 81%;
+    /* #CBD5E1 */
+    --ring: 189 100% 50%;
+    /* Signal Cyan #00D9FF */
+
+    --radius: 0.5rem;
+    /* 8px Base Unit */
   }
 
   .dark {
     /* FutureForm V1.0 Palette - Dark Mode (Inferred/Adapted) */
-    --background: 240 3% 6%; /* FF Black */
-    --foreground: 0 0% 100%; /* Pure White */
-    
-    --card: 240 5% 13%; /* FF Dark Gray */
+    --background: 240 3% 6%;
+    /* FF Black */
+    --foreground: 0 0% 100%;
+    /* Pure White */
+
+    --card: 240 5% 13%;
+    /* FF Dark Gray */
     --card-foreground: 0 0% 100%;
-    
+
     --popover: 240 5% 13%;
     --popover-foreground: 0 0% 100%;
-    
-    --primary: 220 100% 55%; /* Insight Blue */
+
+    --primary: 220 100% 55%;
+    /* Insight Blue */
     --primary-foreground: 0 0% 100%;
-    
-    --secondary: 240 5% 24%; /* FF Gray */
+
+    --secondary: 240 5% 24%;
+    /* FF Gray */
     --secondary-foreground: 0 0% 100%;
-    
-    --muted: 240 5% 24%; /* FF Gray */
+
+    --muted: 240 5% 24%;
+    /* FF Gray */
     --muted-foreground: 240 5% 60%;
-    
-    --accent: 240 5% 24%; /* FF Gray */
+
+    --accent: 240 5% 24%;
+    /* FF Gray */
     --accent-foreground: 0 0% 100%;
-    
-    --destructive: 355 78% 56%; /* Critical Red */
+
+    --destructive: 355 78% 56%;
+    /* Critical Red */
     --destructive-foreground: 0 0% 100%;
-    
-    --warning: 36 100% 65%; /* Risk Amber */
+
+    --warning: 36 100% 65%;
+    /* Risk Amber */
     --warning-foreground: 240 3% 6%;
-    
-    --border: 240 5% 24%; /* FF Gray */
-    --input: 240 5% 24%; /* FF Gray */
-    --ring: 220 100% 55%; /* Insight Blue */
+
+    --border: 240 5% 24%;
+    /* FF Gray */
+    --input: 240 5% 24%;
+    /* FF Gray */
+    --ring: 220 100% 55%;
+    /* Insight Blue */
   }
 }
 
@@ -78,6 +106,7 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }

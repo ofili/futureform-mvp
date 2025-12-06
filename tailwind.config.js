@@ -22,6 +22,12 @@ module.exports = {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        // Gitance Brand Colors
+        midnight: "#0A1628",
+        cyan: "#00D9FF",
+        graphite: "#1A1A1A",
+        slate: "#64748B",
+        cloud: "#F8FAFC",
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
