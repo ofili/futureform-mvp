@@ -1,29 +1,21 @@
 import { Navbar } from '@/components/landing/navbar';
 import { Hero } from '@/components/landing/hero';
-import { ProblemSection } from '@/components/landing/problem-section';
-import { TrustFramework } from '@/components/landing/trust-framework';
-import { HowItWorks } from '@/components/landing/how-it-works';
-import { ProofPoints } from '@/components/landing/proof-points';
-import { SampleQuestions } from '@/components/landing/sample-questions';
+import { ProductSuite } from '@/components/landing/product-suite';
+import { FeatureTaxonomy } from '@/components/landing/feature-taxonomy';
 import { AudienceSection } from '@/components/landing/audience-section';
-import { FrameworkOrigin } from '@/components/landing/framework-origin';
-import { Pricing } from '@/components/landing/pricing';
+import { DifferentiationSection } from '@/components/landing/differentiation-section';
 import { CTASection } from '@/components/landing/cta-section';
 import { Footer } from '@/components/landing/footer';
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 font-sans">
       <Navbar />
       <Hero />
-      <ProblemSection />
-      <TrustFramework />
-      <HowItWorks />
-      <ProofPoints />
-      <SampleQuestions />
+      <ProductSuite />
+      <FeatureTaxonomy />
       <AudienceSection />
-      <FrameworkOrigin />
-      {/* <Pricing /> */}
+      <DifferentiationSection />
       <CTASection />
       <Footer />
     </div>

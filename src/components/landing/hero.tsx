@@ -3,72 +3,79 @@ import { Button } from '@/components/ui/button';
 
 export function Hero() {
     return (
-        <section className="bg-white min-h-[75vh] flex items-center py-16 md:py-24 relative overflow-hidden">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-                <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <section className="bg-midnight min-h-[85vh] flex items-center py-20 relative overflow-hidden">
+            {/* Background Effects */}
+            <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10"></div>
+            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-900/20 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-cyan-900/10 rounded-full blur-3xl"></div>
+
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
+                <div className="grid lg:grid-cols-2 gap-16 items-center">
                     <div className="text-center lg:text-left">
-                        <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-                            Due Diligence Fails.
-                            <br />
-                            <span className="text-blue-600">We Fix It.</span>
+                        <div className="inline-block px-3 py-1 mb-6 border border-cyan-500/30 rounded-full bg-cyan-500/10 backdrop-blur-sm">
+                            <span className="text-green-400 text-xs font-mono tracking-widest uppercase flex items-center gap-2">
+                                <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                                System Status: Operational
+                            </span>
+                        </div>
+                        <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight leading-tight">
+                            Gitance <br />
+                            <span className="text-cyan-400">Intelligence.</span>
                         </h1>
-                        <p className="text-xl text-gray-600 mb-8">
-                            Gitance quantifies organizational trust before partnerships fail — helping DFIs, investors, and governments prevent the billion-dollar failures traditional due diligence misses.
+                        <p className="text-xl text-gray-200 mb-10 max-w-lg mx-auto lg:mx-0 leading-relaxed font-medium">
+                            The operating system for trust in frontier markets. We turn fragmented signals into structured, decision-ready intelligence.
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                            <Button size="lg" className="bg-blue-600 hover:bg-blue-700" asChild>
-                                <Link href="/auth/register">Run Free Assessment</Link>
+                            <Button size="lg" className="bg-cyan-500 hover:bg-cyan-400 text-white font-bold h-12 px-8 text-base transition-all hover:scale-105 shadow-[0_0_20px_rgba(0,217,255,0.3)]">
+                                Explore Products
                             </Button>
-                            <Button className="border border-gray-300 bg-white hover:bg-gray-50 h-11 px-8 text-gray-700" asChild>
-                                <Link href="/framework">See How It Works</Link>
+                            <Button size="lg" variant="outline" className="border-gray-700 text-gray-300 hover:text-white hover:bg-white/10 h-12 px-8 text-base">
+                                Talk to Sales
                             </Button>
                         </div>
-                        <div className="mt-12 pt-8 border-t border-gray-200">
-                            <p className="text-sm text-gray-500 font-semibold">
-                                VALIDATED ACROSS 200+ DEPLOYMENTS IN 35 EMERGING MARKETS
-                            </p>
-                            <p className="text-xs text-gray-400 mt-1">
-                                R² = 0.76 correlation | 82% predictive accuracy
-                            </p>
+
+                        <div className="mt-12 flex items-center justify-center lg:justify-start gap-8 text-gray-500 text-sm">
+                            <div className="flex items-center gap-2">
+                                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                                <span>Live Monitoring</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <span className="font-mono text-cyan-500/80">35</span>
+                                <span>Markets Covered</span>
+                            </div>
                         </div>
                     </div>
 
-                    {/* Trust Network Visualization */}
+                    {/* Trust Graph Visualization */}
                     <div className="hidden lg:block relative">
-                        <div className="w-full h-96 relative">
-                            {/* Network Nodes */}
-                            <div className="absolute top-8 left-8 w-4 h-4 bg-blue-500 rounded-full animate-pulse"></div>
-                            <div className="absolute top-16 right-12 w-3 h-3 bg-green-500 rounded-full"></div>
-                            <div className="absolute top-32 left-16 w-3 h-3 bg-red-400 rounded-full opacity-60"></div>
-                            <div className="absolute top-48 right-8 w-4 h-4 bg-blue-500 rounded-full"></div>
-                            <div className="absolute bottom-24 left-12 w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-                            <div className="absolute bottom-16 right-16 w-3 h-3 bg-red-400 rounded-full opacity-60"></div>
-                            <div className="absolute top-24 left-1/2 w-4 h-4 bg-blue-600 rounded-full"></div>
-                            <div className="absolute bottom-32 left-1/3 w-3 h-3 bg-yellow-500 rounded-full"></div>
+                        <div className="relative w-full aspect-square max-w-lg mx-auto">
+                            <div className="absolute inset-0 border border-gray-800 rounded-full animate-[spin_60s_linear_infinite] opacity-30"></div>
+                            <div className="absolute inset-12 border border-dashed border-gray-700 rounded-full animate-[spin_40s_linear_infinite_reverse] opacity-40"></div>
 
-                            {/* Connection Lines */}
-                            <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 384">
-                                {/* Strong connections */}
-                                <line x1="32" y1="32" x2="200" y2="96" stroke="#3B82F6" strokeWidth="2" className="animate-pulse" />
-                                <line x1="200" y1="96" x2="320" y2="192" stroke="#10B981" strokeWidth="2" />
-                                <line x1="48" y1="288" x2="200" y2="96" stroke="#3B82F6" strokeWidth="2" />
+                            {/* Central Intelligence Node */}
+                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 bg-midnight border-2 border-cyan-500/50 rounded-full flex items-center justify-center shadow-[0_0_50px_rgba(0,217,255,0.2)]">
+                                <div className="w-3 h-3 bg-cyan-400 rounded-full animate-pulse"></div>
+                            </div>
 
-                                {/* Weak/broken connections */}
-                                <line x1="64" y1="128" x2="133" y2="224" stroke="#EF4444" strokeWidth="1" strokeDasharray="4,4" className="opacity-40" />
-                                <line x1="320" y1="192" x2="256" y2="256" stroke="#EF4444" strokeWidth="1" strokeDasharray="4,4" className="opacity-40" />
-                                <line x1="133" y1="224" x2="256" y2="256" stroke="#F59E0B" strokeWidth="1" strokeDasharray="2,2" className="opacity-60" />
+                            {/* Orbiting Satellite Nodes */}
+                            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-4 w-12 h-12 bg-gray-900 border border-gray-700 rounded-lg flex items-center justify-center text-xs text-cyan-400 font-mono">
+                                98%
+                            </div>
+                            <div className="absolute bottom-1/4 right-0 w-auto px-3 py-1 bg-gray-900 border border-red-500/50 rounded text-xs text-red-400 font-mono flex items-center gap-2">
+                                <span className="w-1.5 h-1.5 bg-red-500 rounded-full"></span>
+                                RISK DETECTED
+                            </div>
+                            <div className="absolute top-1/3 left-0 -translate-x-4 w-auto px-3 py-1 bg-gray-900 border border-green-500/50 rounded text-xs text-green-400 font-mono flex items-center gap-2">
+                                <span className="w-1.5 h-1.5 bg-green-500 rounded-full"></span>
+                                VERIFIED
+                            </div>
+
+                            {/* Connecting Lines (SVG) */}
+                            <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-40">
+                                <line x1="50%" y1="50%" x2="50%" y2="0%" stroke="#00D9FF" strokeWidth="1" strokeDasharray="4 4" />
+                                <line x1="50%" y1="50%" x2="100%" y2="75%" stroke="#EF4444" strokeWidth="1" />
+                                <line x1="50%" y1="50%" x2="0%" y2="33%" stroke="#10B981" strokeWidth="1" />
                             </svg>
-
-                            {/* Floating elements */}
-                            <div className="absolute top-4 right-4 text-xs text-gray-400 bg-white px-2 py-1 rounded shadow-sm">
-                                Trust Score: 73
-                            </div>
-                            <div className="absolute bottom-8 left-4 text-xs text-red-500 bg-white px-2 py-1 rounded shadow-sm">
-                                Risk Detected
-                            </div>
-                            <div className="absolute top-1/2 right-1/4 text-xs text-green-600 bg-white px-2 py-1 rounded shadow-sm">
-                                Validated
-                            </div>
                         </div>
                     </div>
                 </div>

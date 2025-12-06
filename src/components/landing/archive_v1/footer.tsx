@@ -13,8 +13,7 @@ export function Footer() {
         {
             title: 'Company',
             links: [
-                { label: 'About', href: '/about' },
-                { label: 'Login', href: '/auth/login' }
+                { label: 'About', href: '/about' }
             ]
         }
     ];
