@@ -43,8 +43,8 @@ export class AdminService {
         ] = await Promise.all([
             prisma.user.count(),
             prisma.organization.count(),
-            prisma.project.count({ where: { deletedAt: null } }),
-            prisma.assessment.count({ where: { deletedAt: null } }),
+            prisma.project.count(),
+            prisma.assessment.count(),
             prisma.user.count({
                 where: {
                     lastLoginAt: {
@@ -376,8 +376,7 @@ export class AdminService {
                 _count: {
                     select: {
                         members: true,
-                        projects: true,
-                        assessments: true
+                        projects: true
                     }
                 }
             },
@@ -390,7 +389,6 @@ export class AdminService {
             tier: org.tier?.displayName || 'Free',
             memberCount: org._count.members,
             projectCount: org._count.projects,
-            assessmentCount: org._count.assessments,
             monthlyRevenue: org.tier?.priceUSD ? Number(org.tier.priceUSD) : 0,
             createdAt: org.createdAt.toISOString()
         }));
@@ -431,13 +429,6 @@ export class AdminService {
                         id: true,
                         name: true,
                         status: true
-                    }
-                },
-                assessments: {
-                    select: {
-                        id: true,
-                        status: true,
-                        createdAt: true
                     }
                 }
             }

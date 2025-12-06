@@ -184,7 +184,7 @@ export function ECDashboard({ organizationId }: ECDashboardProps) {
                         </div>
                         {balance?.autoReloadEnabled && (
                             <p className="text-xs text-muted-foreground mt-2">
-                                Adds {balance.autoReloadAmount} EC when below {balance.autoReloadThreshold} EC
+                                Adds {balance.autoReloadAmount?.toString()} EC when below {balance.autoReloadThreshold?.toString()} EC
                             </p>
                         )}
                     </CardContent>

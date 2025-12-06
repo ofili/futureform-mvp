@@ -1,0 +1,7 @@
+src/services/invitations/invitation.service.ts(30,6): error TS1005: '>' expected.
+src/services/invitations/invitation.service.ts(35,4): error TS1005: ';' expected.
+src/services/invitations/invitation.service.ts(35,5): error TS1109: Expression expected.
+src/services/invitations/invitation.service.ts(36,3): error TS1128: Declaration or statement expected.
+src/services/invitations/invitation.service.ts(37,1): error TS1128: Declaration or statement expected.
+src/services/invitations/invitation.service.ts(195,5): error TS1109: Expression expected.
+src/services/invitations/invitation.service.ts(197,1): error TS1128: Declaration or statement expected.

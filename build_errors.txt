@@ -1,7 +1,131 @@
-npm error code ENOSPC
-npm error syscall write
-npm error errno -4055
-npm error nospc ENOSPC: no space left on device, write
-npm error nospc There appears to be insufficient space on your system to finish.
-npm error nospc Clear up some disk space and try again.
-npm error A complete log of this run can be found in: C:\Users\ofili\AppData\Local\npm-cache\_logs\2025-12-02T14_07_04_586Z-debug-0.log
+src/services/agents/registry-agent.service.ts(78,51): error TS7006: Parameter 'd' implicitly has an 'any' type.
+src/services/assessments/assessment.service.ts(270,27): error TS18047: 'project.organization' is possibly 'null'.
+src/services/billing/billing.service.ts(555,49): error TS2322: Type '"RESPONDENT_BUNDLE"' is not assignable to type 'PackageType | EnumPackageTypeFilter<"CreditPricing"> | undefined'.
+src/services/copilot/report-generator.service.ts(44,80): error TS2345: Argument of type '{ service: string; error: string; }' is not assignable to parameter of type 'LogContext'.
+  Property 'method' is missing in type '{ service: string; error: string; }' but required in type 'LogContext'.
+src/services/copilot/report-generator.service.ts(169,76): error TS2345: Argument of type '{ service: string; assessmentId: string; }' is not assignable to parameter of type 'LogContext'.
+  Property 'method' is missing in type '{ service: string; assessmentId: string; }' but required in type 'LogContext'.
+src/services/copilot/report-generator.service.ts(207,36): error TS2802: Type 'Set<string>' can only be iterated through when using the '--downlevelIteration' flag or with a '--target' of 'es2015' or higher.
+src/services/copilot/report-generator.service.ts(239,36): error TS2802: Type 'Set<string>' can only be iterated through when using the '--downlevelIteration' flag or with a '--target' of 'es2015' or higher.
+src/services/copilot/report-generator.service.ts(333,62): error TS2345: Argument of type '{ service: string; error: string; }' is not assignable to parameter of type 'LogContext'.
+  Property 'method' is missing in type '{ service: string; error: string; }' but required in type 'LogContext'.
+src/services/copilot/summarizer.service.ts(74,50): error TS2339: Property 'content' does not exist on type '{ id: string; source: FactSource; questionId: string | null; partnerId: string | null; assessmentId: string; validatedAt: Date | null; confidence: number; factType: FactType; ... 5 more ...; validatedBy: string | null; }'.
+src/services/copilot/summarizer.service.ts(150,74): error TS2345: Argument of type '{ service: string; layerId: string; error: string; }' is not assignable to parameter of type 'LogContext'.
+  Property 'method' is missing in type '{ service: string; layerId: string; error: string; }' but required in type 'LogContext'.
+src/services/copilot/summarizer.service.ts(204,73): error TS2345: Argument of type '{ service: string; error: string; }' is not assignable to parameter of type 'LogContext'.
+  Property 'method' is missing in type '{ service: string; error: string; }' but required in type 'LogContext'.
+src/services/copilot/summarizer.service.ts(265,58): error TS2345: Argument of type '{ service: string; error: string; }' is not assignable to parameter of type 'LogContext'.
+  Property 'method' is missing in type '{ service: string; error: string; }' but required in type 'LogContext'.
+src/services/copilot/summarizer.service.ts(334,20): error TS2802: Type 'Set<string>' can only be iterated through when using the '--downlevelIteration' flag or with a '--target' of 'es2015' or higher.
+src/services/credits/ec.service.ts(11,21): error TS2749: 'Decimal' refers to a value, but is being used as a type here. Did you mean 'typeof Decimal'?
+src/services/credits/ec.service.ts(12,16): error TS2749: 'Decimal' refers to a value, but is being used as a type here. Did you mean 'typeof Decimal'?
+src/services/credits/ec.service.ts(13,21): error TS2749: 'Decimal' refers to a value, but is being used as a type here. Did you mean 'typeof Decimal'?
+src/services/credits/ec.service.ts(16,26): error TS2749: 'Decimal' refers to a value, but is being used as a type here. Did you mean 'typeof Decimal'?
+src/services/credits/ec.service.ts(17,23): error TS2749: 'Decimal' refers to a value, but is being used as a type here. Did you mean 'typeof Decimal'?
+src/services/credits/ec.service.ts(23,13): error TS2749: 'Decimal' refers to a value, but is being used as a type here. Did you mean 'typeof Decimal'?
+src/services/credits/ec.service.ts(24,14): error TS2749: 'Decimal' refers to a value, but is being used as a type here. Did you mean 'typeof Decimal'?
+src/services/credits/ec.service.ts(35,18): error TS2749: 'Decimal' refers to a value, but is being used as a type here. Did you mean 'typeof Decimal'?
+src/services/credits/ec.service.ts(42,16): error TS2749: 'Decimal' refers to a value, but is being used as a type here. Did you mean 'typeof Decimal'?
+src/services/credits/ec.service.ts(65,21): error TS2322: Type 'Decimal' is not assignable to type 'string | number | Decimal | DecimalJsLike | undefined'.
+  Type 'Decimal' is missing the following properties from type 'Decimal': d, clampedTo, clamp, cosine, and 35 more.
+src/services/credits/ec.service.ts(66,21): error TS2322: Type 'Decimal' is not assignable to type 'string | number | Decimal | DecimalJsLike | undefined'.
+  Type 'Decimal' is missing the following properties from type 'Decimal': d, clampedTo, clamp, cosine, and 35 more.
+src/services/credits/ec.service.ts(67,21): error TS2322: Type 'Decimal' is not assignable to type 'string | number | Decimal | DecimalJsLike | undefined'.
+  Type 'Decimal' is missing the following properties from type 'Decimal': d, clampedTo, clamp, cosine, and 35 more.
+src/services/credits/ec.service.ts(116,25): error TS2322: Type 'Decimal' is not assignable to type 'string | number | Decimal | DecimalJsLike | undefined'.
+  Type 'Decimal' is missing the following properties from type 'Decimal': d, clampedTo, clamp, cosine, and 35 more.
+src/services/credits/ec.service.ts(117,25): error TS2322: Type 'Decimal' is not assignable to type 'string | number | Decimal | DecimalJsLike | undefined'.
+  Type 'Decimal' is missing the following properties from type 'Decimal': d, clampedTo, clamp, cosine, and 35 more.
+src/services/credits/ec.service.ts(118,25): error TS2322: Type 'Decimal' is not assignable to type 'string | number | Decimal | DecimalJsLike | undefined'.
+  Type 'Decimal' is missing the following properties from type 'Decimal': d, clampedTo, clamp, cosine, and 35 more.
+src/services/credits/ec.service.ts(124,44): error TS2345: Argument of type 'Decimal' is not assignable to parameter of type 'string | number | Decimal'.
+  Type 'Decimal' is missing the following properties from type 'Decimal': exponential, toFormat, c
+src/services/credits/ec.service.ts(128,39): error TS2322: Type 'Decimal' is not assignable to type 'string | number | Decimal | DecimalJsLike | undefined'.
+  Type 'Decimal' is missing the following properties from type 'Decimal': d, clampedTo, clamp, cosine, and 35 more.
+src/services/credits/ec.service.ts(129,21): error TS2322: Type 'Decimal' is not assignable to type 'string | number | Decimal | DecimalJsLike | DecimalFieldUpdateOperationsInput | undefined'.
+  Type 'Decimal' is missing the following properties from type 'Decimal': d, clampedTo, clamp, cosine, and 35 more.
+src/services/credits/ec.service.ts(138,21): error TS2322: Type 'Decimal' is not assignable to type 'string | number | Decimal | DecimalJsLike'.
+  Type 'Decimal' is missing the following properties from type 'Decimal': d, clampedTo, clamp, cosine, and 35 more.
+src/services/credits/ec.service.ts(139,21): error TS2322: Type 'Decimal' is not assignable to type 'string | number | Decimal | DecimalJsLike'.
+  Type 'Decimal' is missing the following properties from type 'Decimal': d, clampedTo, clamp, cosine, and 35 more.
+src/services/credits/ec.service.ts(201,29): error TS2345: Argument of type 'Decimal' is not assignable to parameter of type 'string | number | Decimal'.
+  Type 'Decimal' is missing the following properties from type 'Decimal': exponential, toFormat, c
+src/services/credits/ec.service.ts(210,44): error TS2345: Argument of type 'Decimal' is not assignable to parameter of type 'string | number | Decimal'.
+  Type 'Decimal' is missing the following properties from type 'Decimal': exponential, toFormat, c
+src/services/credits/ec.service.ts(215,21): error TS2322: Type 'Decimal' is not assignable to type 'string | number | Decimal | DecimalJsLike | DecimalFieldUpdateOperationsInput | undefined'.
+  Type 'Decimal' is missing the following properties from type 'Decimal': d, clampedTo, clamp, cosine, and 35 more.
+src/services/credits/ec.service.ts(225,21): error TS2322: Type 'Decimal' is not assignable to type 'string | number | Decimal | DecimalJsLike'.
+  Type 'Decimal' is missing the following properties from type 'Decimal': d, clampedTo, clamp, cosine, and 35 more.
+src/services/credits/ec.service.ts(244,50): error TS2345: Argument of type 'Decimal' is not assignable to parameter of type 'string | number | Decimal'.
+  Type 'Decimal' is missing the following properties from type 'Decimal': exponential, toFormat, c
+src/services/credits/ec.service.ts(288,61): error TS2749: 'Decimal' refers to a value, but is being used as a type here. Did you mean 'typeof Decimal'?
+src/services/credits/ec.service.ts(342,17): error TS2322: Type 'Decimal' is not assignable to type 'string | number | Decimal | DecimalJsLike | undefined'.
+  Type 'Decimal' is missing the following properties from type 'Decimal': d, clampedTo, clamp, cosine, and 35 more.
+src/services/credits/ec.service.ts(343,17): error TS2322: Type 'Decimal' is not assignable to type 'string | number | Decimal | DecimalJsLike | undefined'.
+  Type 'Decimal' is missing the following properties from type 'Decimal': d, clampedTo, clamp, cosine, and 35 more.
+src/services/credits/ec.service.ts(344,17): error TS2322: Type 'Decimal' is not assignable to type 'string | number | Decimal | DecimalJsLike | undefined'.
+  Type 'Decimal' is missing the following properties from type 'Decimal': d, clampedTo, clamp, cosine, and 35 more.
+src/services/credits/ec.service.ts(346,17): error TS2322: Type 'Decimal' is not assignable to type 'string | number | Decimal | DecimalJsLike | null | undefined'.
+  Type 'Decimal' is missing the following properties from type 'Decimal': d, clampedTo, clamp, cosine, and 35 more.
+src/services/credits/ec.service.ts(347,17): error TS2322: Type 'Decimal' is not assignable to type 'string | number | Decimal | DecimalJsLike | null | undefined'.
+  Type 'Decimal' is missing the following properties from type 'Decimal': d, clampedTo, clamp, cosine, and 35 more.
+src/services/credits/ec.service.ts(351,17): error TS2322: Type 'Decimal' is not assignable to type 'string | number | Decimal | DecimalJsLike | NullableDecimalFieldUpdateOperationsInput | null | undefined'.
+  Type 'Decimal' is missing the following properties from type 'Decimal': d, clampedTo, clamp, cosine, and 35 more.
+src/services/credits/ec.service.ts(352,17): error TS2322: Type 'Decimal' is not assignable to type 'string | number | Decimal | DecimalJsLike | NullableDecimalFieldUpdateOperationsInput | null | undefined'.
+  Type 'Decimal' is missing the following properties from type 'Decimal': d, clampedTo, clamp, cosine, and 35 more.
+src/services/credits/ec.service.ts(464,70): error TS2749: 'Decimal' refers to a value, but is being used as a type here. Did you mean 'typeof Decimal'?
+src/services/evidence/evidence.service.ts(249,29): error TS18047: 'evidence.response' is possibly 'null'.
+src/services/evidence/evidence.service.ts(253,32): error TS18047: 'evidence.response' is possibly 'null'.
+src/services/evidence/evidence.service.ts(257,31): error TS18047: 'evidence.response' is possibly 'null'.
+src/services/evidence/evidence.service.ts(328,21): error TS2322: Type 'string | null' is not assignable to type 'string | StringFilter<"OrganizationMember"> | undefined'.
+  Type 'null' is not assignable to type 'string | StringFilter<"OrganizationMember"> | undefined'.
+src/services/evidence/evidence.service.ts(328,37): error TS18047: 'evidence.response' is possibly 'null'.
+src/services/invitations/invitation.service.ts(184,38): error TS2339: Property 'name' does not exist on type '{ project: { organization: { id: string; createdAt: Date; updatedAt: Date; type: string; tierId: string | null; name: string; region: string; source: string | null; website: string | null; ... 6 more ...; caseStudyApproval: boolean; } | null; } & { ...; }; } & { ...; }'.
+src/services/invitations/invitation.service.ts(187,9): error TS2322: Type '({ role: { id: string; createdAt: Date; updatedAt: Date; name: string; description: string | null; typicalSeniority: string | null; domain: string | null; active: boolean; } | null; question: { ...; }; } & { ...; })[]' is not assignable to type '{ id: string; assignedRoleId: string | null; question: { id: string; text: string; type: string; }; role: { id: string; name: string; } | null; }[]'.
+  Type '{ role: { id: string; createdAt: Date; updatedAt: Date; name: string; description: string | null; typicalSeniority: string | null; domain: string | null; active: boolean; } | null; question: { ...; }; } & { ...; }' is not assignable to type '{ id: string; assignedRoleId: string | null; question: { id: string; text: string; type: string; }; role: { id: string; name: string; } | null; }'.
+    Types of property 'question' are incompatible.
+      Property 'type' is missing in type '{ id: string; category: string; domain: string; weight: number; text: string; helpText: string | null; title: string | null; order: number; subDomain: string | null; sectorTags: string[]; evidenceTypes: JsonValue; baseScore: number; }' but required in type '{ id: string; text: string; type: string; }'.
+src/services/mono/mono.service.ts(35,59): error TS2345: Argument of type '{ service: string; }' is not assignable to parameter of type 'LogContext'.
+  Property 'method' is missing in type '{ service: string; }' but required in type 'LogContext'.
+src/services/mono/mono.service.ts(70,21): error TS2353: Object literal may only specify known properties, and 'service' does not exist in type 'Error'.
+src/services/mono/mono.service.ts(94,17): error TS2353: Object literal may only specify known properties, and 'service' does not exist in type 'Error'.
+src/services/mono/mono.service.ts(132,21): error TS2353: Object literal may only specify known properties, and 'service' does not exist in type 'Error'.
+src/services/mono/mono.service.ts(156,17): error TS2353: Object literal may only specify known properties, and 'service' does not exist in type 'Error'.
+src/services/mono/mono.service.ts(191,21): error TS2353: Object literal may only specify known properties, and 'service' does not exist in type 'Error'.
+src/services/mono/mono.service.ts(214,17): error TS2353: Object literal may only specify known properties, and 'service' does not exist in type 'Error'.
+src/services/notifications/notification.service.ts(34,17): error TS2353: Object literal may only specify known properties, and 'link' does not exist in type 'Without<NotificationCreateInput, NotificationUncheckedCreateInput> & NotificationUncheckedCreateInput'.
+src/services/notifications/notification.service.ts(73,33): error TS2561: Object literal may only specify known properties, but 'readAt' does not exist in type '(Without<NotificationUpdateInput, NotificationUncheckedUpdateInput> & NotificationUncheckedUpdateInput) | (Without<...> & NotificationUpdateInput)'. Did you mean to write 'read'?
+src/services/notifications/notification.service.ts(83,33): error TS2561: Object literal may only specify known properties, but 'readAt' does not exist in type '(Without<NotificationUpdateManyMutationInput, NotificationUncheckedUpdateManyInput> & NotificationUncheckedUpdateManyInput) | (Without<...> & NotificationUpdateManyMutationInput)'. Did you mean to write 'read'?
+src/services/partners/partner.service.ts(339,17): error TS2820: Type '"VERIFIED"' is not assignable to type 'PartnerVerification | EnumPartnerVerificationFieldUpdateOperationsInput | undefined'. Did you mean '"UNVERIFIED"'?
+src/services/partners/partner.service.ts(389,17): error TS2322: Type 'string | null' is not assignable to type 'string | StringFilter<"OrganizationMember"> | undefined'.
+  Type 'null' is not assignable to type 'string | StringFilter<"OrganizationMember"> | undefined'.
+src/services/payment/stripe.service.ts(30,61): error TS2345: Argument of type '{ service: string; }' is not assignable to parameter of type 'LogContext'.
+  Property 'method' is missing in type '{ service: string; }' but required in type 'LogContext'.
+src/services/payment/stripe.service.ts(35,17): error TS2322: Type '"2024-11-20.acacia"' is not assignable to type '"2025-11-17.clover"'.
+src/services/payment/stripe.service.ts(189,17): error TS2353: Object literal may only specify known properties, and 'service' does not exist in type 'Error'.
+src/services/payments/payment.service.ts(63,57): error TS2345: Argument of type '{ service: string; transactionId: any; transactionRef: any; }' is not assignable to parameter of type 'LogContext'.
+  Property 'method' is missing in type '{ service: string; transactionId: any; transactionRef: any; }' but required in type 'LogContext'.
+src/services/payments/payment.service.ts(219,59): error TS2345: Argument of type '{ service: string; transactionId: string; }' is not assignable to parameter of type 'LogContext'.
+  Property 'method' is missing in type '{ service: string; transactionId: string; }' but required in type 'LogContext'.
+src/services/payments/payment.service.ts(316,80): error TS2345: Argument of type '{ transactionId: string; webhookStatus: any; apiStatus: "pending" | "failed"; }' is not assignable to parameter of type 'LogContext'.
+  Type '{ transactionId: string; webhookStatus: any; apiStatus: "pending" | "failed"; }' is missing the following properties from type 'LogContext': service, method
+src/services/payments/payment.service.ts(343,51): error TS2345: Argument of type '{ transactionId: string; }' is not assignable to parameter of type 'LogContext'.
+  Type '{ transactionId: string; }' is missing the following properties from type 'LogContext': service, method
+src/services/payments/payment.service.ts(358,53): error TS2345: Argument of type '{ transactionId: string; }' is not assignable to parameter of type 'LogContext'.
+  Type '{ transactionId: string; }' is missing the following properties from type 'LogContext': service, method
+src/services/projects/project.service.ts(100,27): error TS18047: 'project.organization' is possibly 'null'.
+src/services/users/user.service.ts(34,17): error TS2353: Object literal may only specify known properties, and 'phone' does not exist in type 'UserSelect<DefaultArgs>'.
+src/services/users/user.service.ts(70,17): error TS2353: Object literal may only specify known properties, and 'phone' does not exist in type 'UserSelect<DefaultArgs>'.
+src/services/users/user.service.ts(102,25): error TS2339: Property 'createdAt' does not exist on type '{ organization: { id: string; name: string; description: string | null; }; } & { id: string; role: OrganizationRole; organizationId: string; userId: string; joinedAt: Date; deletedAt: Date | null; }'.
+src/services/users/user.service.ts(120,17): error TS2353: Object literal may only specify known properties, and 'deletedAt' does not exist in type 'ProjectWhereInput'.
+src/services/users/user.service.ts(156,21): error TS2353: Object literal may only specify known properties, and 'deletedAt' does not exist in type 'ProjectWhereInput'.
+src/services/users/user.service.ts(164,21): error TS2353: Object literal may only specify known properties, and 'deletedAt' does not exist in type 'AssessmentWhereInput'.
+tests/e2e/assessments/assessment-workflow.spec.ts(19,45): error TS2339: Property 'first' does not exist on type 'Promise<void>'.
+tests/e2e/assessments/assessment-workflow.spec.ts(59,47): error TS2339: Property 'first' does not exist on type 'Promise<void>'.
+tests/integration/api/marketing/pql.test.ts(104,28): error TS18048: 'response' is possibly 'undefined'.
+tests/integration/api/marketing/pql.test.ts(106,16): error TS18048: 'response' is possibly 'undefined'.
+tests/integration/api/marketing/pql.test.ts(177,16): error TS18048: 'response' is possibly 'undefined'.
+tests/integration/api/marketing/pql.test.ts(198,28): error TS18048: 'response' is possibly 'undefined'.
+tests/integration/api/marketing/pql.test.ts(200,16): error TS18048: 'response' is possibly 'undefined'.
+tests/integration/api/marketing/pql.test.ts(220,28): error TS18048: 'response' is possibly 'undefined'.
+tests/integration/api/marketing/pql.test.ts(222,16): error TS18048: 'response' is possibly 'undefined'.

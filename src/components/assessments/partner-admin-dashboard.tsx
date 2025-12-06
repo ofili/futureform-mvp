@@ -18,6 +18,8 @@ import {
 } from 'lucide-react';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
+import { CoPilotPanel } from '@/components/copilot/CoPilotPanel';
+
 
 interface PartnerAdminDashboardProps {
     assessmentId: string;
@@ -172,6 +174,14 @@ export default function PartnerAdminDashboard({
                         </div>
                     </CardContent>
                 </Card>
+            </div>
+
+            {/* AI Co-Pilot Panel */}
+            <div className="mb-8">
+                <CoPilotPanel 
+                    assessmentId={assessmentId} 
+                    assessmentName={assessment?.project?.name}
+                />
             </div>
 
             {/* Tabs */}

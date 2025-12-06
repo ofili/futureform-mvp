@@ -5,12 +5,14 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { ChevronDown, ChevronUp, Layers, HelpCircle } from 'lucide-react';
 import { Progress } from '@/components/ui/progress';
+import { EditLayerDialog } from './EditLayerDialog';
 
 interface TrustLayerCardProps {
     layer: TrustLayerWithSubDimensions;
+    onUpdate?: () => void;
 }
 
-export function TrustLayerCard({ layer }: TrustLayerCardProps) {
+export function TrustLayerCard({ layer, onUpdate }: TrustLayerCardProps) {
     const [isExpanded, setIsExpanded] = useState(false);
 
     return (
@@ -23,13 +25,16 @@ export function TrustLayerCard({ layer }: TrustLayerCardProps) {
                         </Badge>
                         <CardTitle className="text-xl">{layer.name}</CardTitle>
                     </div>
-                    <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => setIsExpanded(!isExpanded)}
-                    >
-                        {isExpanded ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
-                    </Button>
+                    <div className="flex items-center gap-1">
+                        <EditLayerDialog layer={layer} onUpdate={onUpdate} />
+                        <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => setIsExpanded(!isExpanded)}
+                        >
+                            {isExpanded ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+                        </Button>
+                    </div>
                 </div>
                 <CardDescription>{layer.description || 'No description available'}</CardDescription>
             </CardHeader>

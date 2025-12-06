@@ -28,12 +28,21 @@ interface MasterWeights {
     context_adjustments: Record<string, any>;
 }
 
+interface VetoCriterion {
+    veto_id: string;
+    layer: string;
+    sub_dimension: string;
+    threshold: string;
+    rationale: string;
+    action: string;
+}
+
 async function loadTrustOntology() {
-    console.log('🌱 Seeding Trust Intelligence Layer (Layers Only)...\n');
+    console.log('🌱 Seeding Trust Intelligence Layer...\\n');
 
     // Use local ontology_data folder in frontend directory  
     const ontologyPath = path.join(__dirname, '../ontology_data');
-    console.log(`Looking for ontology data at: ${ontologyPath}\n`);
+    console.log(`Looking for ontology data at: ${ontologyPath}\\n`);
 
     if (!fs.existsSync(ontologyPath)) {
         throw new Error(`Ontology data directory not found at: ${ontologyPath}`);
@@ -100,13 +109,16 @@ async function loadTrustOntology() {
 
             // Create questions
             for (const question of subDim.questions) {
+                // Map evidence weight to enum value (CRITICAL, HIGH, MEDIUM, LOW)
+                const evidenceWeight = (question.evidence_weight || 'MEDIUM').toUpperCase() as 'CRITICAL' | 'HIGH' | 'MEDIUM' | 'LOW';
+                
                 await prisma.trustQuestion.upsert({
                     where: { questionId: question.q_id },
                     update: {
                         text: question.text,
                         stakeholderTypes: question.stakeholder_types,
                         evidenceRequired: question.evidence_required,
-                        evidenceWeight: question.evidence_weight as any,
+                        evidenceWeight: evidenceWeight,
                         weightInLayer: 1.0 / layerData.total_questions,
                         scoringLogic: {},
                         redFlags: [],
@@ -117,7 +129,7 @@ async function loadTrustOntology() {
                         subDimensionId: subDimension.id,
                         stakeholderTypes: question.stakeholder_types,
                         evidenceRequired: question.evidence_required,
-                        evidenceWeight: question.evidence_weight as any,
+                        evidenceWeight: evidenceWeight,
                         weightInLayer: 1.0 / layerData.total_questions,
                         scoringLogic: {},
                         redFlags: [],
@@ -127,8 +139,88 @@ async function loadTrustOntology() {
         }
     }
 
-    console.log('\n✅ Trust layers loaded successfully!\n');
-    console.log('🎉 Trust Intelligence Layer seeded successfully (Partial)!\n');
+    console.log('\\n✅ Trust layers loaded successfully!\\n');
+
+    // 2. Seed Veto Criteria
+    console.log('🚫 Loading veto criteria...');
+    const vetoPath = path.join(ontologyPath, 'veto_criteria.json');
+    if (fs.existsSync(vetoPath)) {
+        const vetoData = JSON.parse(fs.readFileSync(vetoPath, 'utf-8'));
+        const vetoCriteria: VetoCriterion[] = vetoData.veto_criteria_list || [];
+
+        for (const veto of vetoCriteria) {
+            // Parse threshold to numeric if possible
+            const thresholdMatch = veto.threshold.match(/<([\d.]+)/);
+            const thresholdValue = thresholdMatch ? parseFloat(thresholdMatch[1]) : null;
+
+            await prisma.trustVetoCriterion.upsert({
+                where: { vetoId: veto.veto_id },
+                update: {
+                    name: veto.sub_dimension,
+                    description: veto.rationale,
+                    layer: veto.layer.split(':')[0].trim(),
+                    subDimension: veto.sub_dimension,
+                    thresholdValue: thresholdValue,
+                    thresholdDescription: veto.threshold,
+                    action: veto.action,
+                    severity: 'CRITICAL',
+                    isActive: true,
+                },
+                create: {
+                    vetoId: veto.veto_id,
+                    name: veto.sub_dimension,
+                    description: veto.rationale,
+                    layer: veto.layer.split(':')[0].trim(),
+                    subDimension: veto.sub_dimension,
+                    thresholdValue: thresholdValue,
+                    thresholdDescription: veto.threshold,
+                    action: veto.action,
+                    severity: 'CRITICAL',
+                    isActive: true,
+                },
+            });
+            console.log(`  ✓ ${veto.veto_id}`);
+        }
+        console.log(`\\n✅ ${vetoCriteria.length} veto criteria loaded!\\n`);
+    } else {
+        console.warn('⚠️ Veto criteria file not found, skipping...\\n');
+    }
+
+    // 3. Seed Sector Weight Adjustments
+    console.log('⚖️ Loading sector weight adjustments...');
+    if (masterWeights.context_adjustments) {
+        for (const [sectorName, adjustments] of Object.entries(masterWeights.context_adjustments)) {
+            // Build the layer weights object
+            const layerWeights: Record<string, number> = {};
+            let rationale = '';
+
+            for (const [layerKey, adjustment] of Object.entries(adjustments as Record<string, any>)) {
+                if (adjustment.new_weight !== undefined) {
+                    layerWeights[layerKey] = adjustment.new_weight;
+                }
+                if (adjustment.rationale) {
+                    rationale = adjustment.rationale;
+                }
+            }
+
+            await prisma.trustSectorWeight.upsert({
+                where: { sector: sectorName },
+                update: {
+                    layerWeights: layerWeights,
+                    rationale: rationale || `Weight adjustments for ${sectorName}`,
+                },
+                create: {
+                    sector: sectorName,
+                    layerWeights: layerWeights,
+                    rationale: rationale || `Weight adjustments for ${sectorName}`,
+                },
+            });
+            console.log(`  ✓ ${sectorName}`);
+        }
+        console.log(`\\n✅ Sector weight adjustments loaded!\\n`);
+    }
+
+    console.log('🎉 Trust Intelligence Layer seeded successfully!\\n');
 }
 
 async function main() {
@@ -150,3 +242,4 @@ main()
         }
         process.exit(1);
     });
+

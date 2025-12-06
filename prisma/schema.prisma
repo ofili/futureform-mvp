@@ -32,6 +32,7 @@ model User {
   resetToken        String?
   resetTokenExpiry  DateTime?
   passwordChangedAt DateTime?
+  lastLoginAt       DateTime? // Track last login for active user metrics
   createdAt         DateTime  @default(now())
   updatedAt         DateTime  @updatedAt
 
@@ -357,6 +358,8 @@ model Assessment {
   pdfExports          PdfExport[]
   trustProfile        TrustProfile?
   decline             AssessmentDecline?
+  facts               EvidenceFact[] // [NEW] Evidence facts for this assessment
+  researchJobs        ResearchJob[]  // [NEW] Research jobs for this assessment
   auditLogs           AssessmentAuditLog[]
   creditTransactions  CreditTransaction[]
   declinedAssessments AssessmentDecline[]  @relation("ReinvitedAssessments")
@@ -379,6 +382,9 @@ model Assessment {
   trustLayerScores       TrustLayerScore[]       @relation("TrustAssessmentLayerScores")
   trustScore             TrustScore?             @relation("TrustAssessmentScore")
   trustRedFlags          TrustRedFlag[]          @relation("TrustAssessmentRedFlags")
+
+  // CoPilot AI-generated content
+  coPilotDrafts          CoPilotDraft[]          @relation("AssessmentCoPilotDrafts")
 
   @@index([partnerGlobalId])
   @@index([partnerAliasId])
@@ -785,6 +791,7 @@ enum AssessmentStatus {
   IN_PROGRESS
   COMPLETED
   EXPIRED
+  DRAFT
 }
 
 enum InvitationStatus {
@@ -1294,6 +1301,76 @@ model Evidence {
   verifier User?              @relation("EvidenceVerifier", fields: [verifiedBy], references: [id])
 
   @@map("evidence")
+}
+
+model EvidenceFact {
+  id              String   @id @default(cuid())
+  assessmentId    String
+  questionId      String?
+  partnerId       String?
+  
+  // Core fact data
+  factType        FactType
+  source          FactSource
+  sourceUrl       String?
+  rawContent      String   @db.Text
+  normalizedValue String?
+  confidence      Float    @default(1.0)
+  
+  // Metadata
+  collectedAt     DateTime @default(now())
+  collectedBy     String?  // userId or "AGENT"
+  validatedAt     DateTime?
+  validatedBy     String?
+  
+  // Relations
+  assessment      Assessment @relation(fields: [assessmentId], references: [id])
+  
+  @@map("evidence_facts")
+}
+
+enum FactType {
+  RESPONSE        // From respondent answer
+  DOCUMENT        // From uploaded document
+  EXTERNAL_NEWS   // From news API
+  EXTERNAL_REGISTRY // From company registry
+  INTERNAL_NOTE   // From analyst
+}
+
+enum FactSource {
+  RESPONDENT
+  DOCUMENT_UPLOAD
+  NEWS_API
+  COMPANY_REGISTRY
+  ANALYST_INPUT
+  RESEARCH_AGENT
+}
+
+// Research Job Queue
+model ResearchJob {
+  id            String        @id @default(cuid())
+  assessmentId  String
+  partnerName   String
+  rcNumber      String?       // Optional RC number for CAC lookup
+  
+  status        JobStatus     @default(PENDING)
+  error         String?
+  
+  startedAt     DateTime?
+  completedAt   DateTime?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  
+  assessment    Assessment    @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
+  
+  @@map("research_jobs")
+}
+
+enum JobStatus {
+  PENDING
+  RUNNING
+  COMPLETED
+  FAILED
 }
 
 model SystemLog {
@@ -1893,22 +1970,32 @@ model TrustSectorWeight {
 
 // Veto criteria that can override scores
 model TrustVetoCriterion {
-  id             String            @id @default(cuid())
-  name           String
-  condition      String            @db.Text // Logical condition
-  severity       TrustFlagSeverity
-  message        String            @db.Text
-  overridesScore Boolean           @default(false)
-  sector         String? // Null = applies to all sectors
-  partnerType    String? // Null = applies to all partner types
-  isActive       Boolean           @default(true)
-  createdAt      DateTime          @default(now())
-  updatedAt      DateTime          @updatedAt
+  id                   String            @id @default(cuid())
+  vetoId               String            @unique // "L1_Veto_Availability", etc.
+  name                 String
+  description          String?           @db.Text // Rationale
+  condition            String?           @db.Text // Logical condition (legacy)
+  layer                String            @default("L1") // L1, L2, L3, etc.
+  subDimension         String? // Sub-dimension name
+  thresholdValue       Float? // Numeric threshold (e.g., 2.0)
+  thresholdDescription String? // Human-readable threshold
+  action               String            @default("DO NOT PROCEED") // Action to take
+  severity             TrustFlagSeverity @default(CRITICAL)
+  message              String?           @db.Text
+  overridesScore       Boolean           @default(true)
+  sector               String? // Null = applies to all sectors
+  partnerType          String? // Null = applies to all partner types
+  isActive             Boolean           @default(true)
+  createdAt            DateTime          @default(now())
+  updatedAt            DateTime          @updatedAt
 
+  @@index([vetoId])
   @@index([isActive])
+  @@index([layer])
   @@index([sector])
   @@map("trust_veto_criteria")
 }
+
 
 // ============================================================================
 // PAYMENT SYSTEM
@@ -1966,3 +2053,25 @@ enum PaymentStatus {
   CANCELLED
   REFUNDED
 }
+
+// ==========================================
+// AI CoPilot Models
+// ==========================================
+
+model CoPilotDraft {
+  id           String   @id @default(cuid())
+  assessmentId String
+  type         String   // 'summary', 'report', 'risk_analysis'
+  content      Json     // Structured output (Summary, DraftReport, or RiskAssessment)
+  confidence   Float    @default(0)
+  tokensUsed   Int      @default(0)
+  generatedAt  DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  assessment   Assessment @relation("AssessmentCoPilotDrafts", fields: [assessmentId], references: [id], onDelete: Cascade)
+
+  @@index([assessmentId])
+  @@index([type])
+  @@map("copilot_drafts")
+}
+

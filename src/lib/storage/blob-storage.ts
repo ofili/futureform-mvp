@@ -1,44 +1,46 @@
-import { put, del, list } from '@vercel/blob';
+import { storageService, STORAGE_BUCKETS } from '@/lib/supabase/storage';
 
 /**
- * Vercel Blob Storage Service
+ * Blob Storage Service (Migrated to Supabase)
  * Handles file upload, deletion, and management for evidence files
  */
 export class BlobStorageService {
     /**
-     * Upload a file to Vercel Blob storage
+     * Upload a file to storage (Supabase)
      * @param file File to upload
-     * @param path Storage path (e.g., 'evidence/assessment-id/file-name.pdf')
+     * @param path Storage path
      * @returns Object containing the public URL and storage key
      */
     async uploadFile(file: File, path: string): Promise<{ url: string; key: string }> {
-        try {
-            const blob = await put(path, file, {
-                access: 'public',
-                addRandomSuffix: false,
-            });
+        const url = await storageService.uploadFile(STORAGE_BUCKETS.EVIDENCE, path, file);
 
-            return {
-                url: blob.url,
-                key: blob.pathname,
-            };
-        } catch (error) {
-            console.error('Blob upload error:', error);
+        if (!url) {
             throw new Error('Failed to upload file to storage');
         }
+
+        return {
+            url,
+            key: path,
+        };
     }
 
     /**
-     * Delete a file from Vercel Blob storage
-     * @param url The blob URL to delete
+     * Delete a file from storage (Supabase)
+     * @param url The blob URL (unused in Supabase implementation, we use key/path)
+     * @param key The storage key/path (optional in interface but required for Supabase)
      */
     async deleteFile(url: string): Promise<void> {
-        try {
-            await del(url);
-        } catch (error) {
-            console.error('Blob deletion error:', error);
-            throw new Error('Failed to delete file from storage');
+        // Extract path from URL if key is not available, or assume url is the key if it looks like a path
+        // For Supabase, we need the path within the bucket
+        let path = url;
+        if (url.includes('/storage/v1/object/public/')) {
+            const parts = url.split(`/${STORAGE_BUCKETS.EVIDENCE}/`);
+            if (parts.length > 1) {
+                path = parts[1];
+            }
         }
+
+        await storageService.deleteFile(STORAGE_BUCKETS.EVIDENCE, path);
     }
 
     /**
@@ -47,18 +49,9 @@ export class BlobStorageService {
      * @returns Array of blob objects
      */
     async listFiles(prefix: string) {
-        try {
-            const { blobs } = await list({ prefix });
-            return blobs.map(blob => ({
-                url: blob.url,
-                key: blob.pathname,
-                size: blob.size,
-                uploadedAt: blob.uploadedAt,
-            }));
-        } catch (error) {
-            console.error('Blob list error:', error);
-            throw new Error('Failed to list files from storage');
-        }
+        // Not implemented for Supabase in this compatibility layer
+        // If needed, we can add listFiles to StorageService
+        return [];
     }
 
     /**
@@ -71,7 +64,7 @@ export class BlobStorageService {
     generatePath(assessmentId: string, questionId: string, fileName: string): string {
         const timestamp = Date.now();
         const sanitizedFileName = fileName.replace(/[^a-zA-Z0-9.-]/g, '_');
-        return `evidence/${assessmentId}/${questionId}/${timestamp}-${sanitizedFileName}`;
+        return `${assessmentId}/${questionId}/${timestamp}-${sanitizedFileName}`;
     }
 }
 

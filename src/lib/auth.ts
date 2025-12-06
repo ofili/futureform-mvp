@@ -64,6 +64,12 @@ export const authOptions: NextAuthOptions = {
                     return null;
                 }
 
+                // Update lastLoginAt for analytics
+                await prisma.user.update({
+                    where: { id: user.id },
+                    data: { lastLoginAt: new Date() }
+                });
+
                 const org = user.organizations[0];
 
                 console.log('✅ Login successful for:', user.email);

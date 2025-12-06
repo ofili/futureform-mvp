@@ -5,11 +5,13 @@ import { useTrustOntology } from '@/hooks/use-trust-ontology';
 import { TrustLayerCard } from '@/components/admin/trust/TrustLayerCard';
 import { QuestionList } from '@/components/admin/trust/QuestionList';
 import { PartnerTypeCard } from '@/components/admin/trust/PartnerTypeCard';
+import { VetoCriteriaManager } from '@/components/admin/trust/VetoCriteriaManager';
+import { SectorWeightManager } from '@/components/admin/trust/SectorWeightManager';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Breadcrumbs } from '@/components/ui/breadcrumbs';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { AlertCircle, Loader2, Database, Shield, Users } from 'lucide-react';
+import { AlertCircle, Loader2, Database, Shield, Users, ShieldAlert, Scale } from 'lucide-react';
 
 export default function TrustOntologyPage() {
     const {
@@ -113,6 +115,14 @@ export default function TrustOntologyPage() {
                     <TabsTrigger value="layers">Trust Layers</TabsTrigger>
                     <TabsTrigger value="questions">Question Bank</TabsTrigger>
                     <TabsTrigger value="partners">Partner Types</TabsTrigger>
+                    <TabsTrigger value="veto" className="flex items-center gap-1">
+                        <ShieldAlert className="h-3 w-3" />
+                        Veto Criteria
+                    </TabsTrigger>
+                    <TabsTrigger value="weights" className="flex items-center gap-1">
+                        <Scale className="h-3 w-3" />
+                        Sector Weights
+                    </TabsTrigger>
                 </TabsList>
 
                 <TabsContent value="layers" className="space-y-4">
@@ -134,7 +144,16 @@ export default function TrustOntologyPage() {
                         ))}
                     </div>
                 </TabsContent>
+
+                <TabsContent value="veto">
+                    <VetoCriteriaManager />
+                </TabsContent>
+
+                <TabsContent value="weights">
+                    <SectorWeightManager />
+                </TabsContent>
             </Tabs>
         </div>
     );
 }
+

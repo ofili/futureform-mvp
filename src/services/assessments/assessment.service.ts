@@ -71,9 +71,9 @@ export class AssessmentService {
         }
 
         // Authorization check
-        const hasAccess = assessment.project.organization.members.some(
+        const hasAccess = assessment.project.organization?.members.some(
             m => m.userId === userId && m.deletedAt === null
-        );
+        ) ?? false;
 
         if (!hasAccess) {
             throw new Error('Unauthorized access to assessment');
@@ -122,9 +122,9 @@ export class AssessmentService {
         }
 
         // Check if user is a member of the project's organization
-        const isOrgMember = assessment.project.organization.members.some(
+        const isOrgMember = assessment.project.organization?.members.some(
             m => m.userId === userId && m.deletedAt === null
-        );
+        ) ?? false;
 
         if (!isOrgMember) {
             throw new Error('Forbidden: You do not have access to this assessment');
@@ -155,9 +155,9 @@ export class AssessmentService {
             throw new Error('Assessment not found');
         }
 
-        const isOrgMember = assessment.project.organization.members.some(
+        const isOrgMember = assessment.project.organization?.members.some(
             m => m.userId === userId && m.deletedAt === null
-        );
+        ) ?? false;
 
         if (!isOrgMember) {
             throw new Error('Forbidden: You do not have access to this assessment');
@@ -267,9 +267,9 @@ export class AssessmentService {
             throw new Error('Project not found');
         }
 
-        const hasAccess = project.organization.members.some(
+        const hasAccess = project.organization?.members.some(
             m => m.userId === userId && m.deletedAt === null
-        );
+        ) ?? false;
 
         if (!hasAccess) {
             throw new Error('Unauthorized access to project');

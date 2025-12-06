@@ -29,10 +29,11 @@ export class StripeService {
         if (!secretKey) {
             logger.warn('STRIPE_SECRET_KEY not configured', {
                 service: 'StripeService',
+                method: 'constructor'
             });
         } else {
             this.stripe = new Stripe(secretKey, {
-                apiVersion: '2024-11-20.acacia',
+                apiVersion: '2025-11-17.clover' as any,
             });
         }
     }
@@ -185,10 +186,9 @@ export class StripeService {
             );
             return event;
         } catch (err: any) {
-            logger.error('Webhook signature verification failed', {
+            logger.error('Webhook signature verification failed', err, {
                 service: 'StripeService',
                 method: 'verifyWebhookSignature',
-                error: err.message,
             });
             throw new Error(`Webhook signature verification failed: ${err.message}`);
         }

@@ -7,7 +7,6 @@ import { logger } from '@/lib/logger';
 export interface UpdateProfileInput {
     firstName?: string;
     lastName?: string;
-    phone?: string;
     title?: string;
     department?: string;
     bio?: string;
@@ -31,10 +30,9 @@ export class UserService {
                 email: true,
                 firstName: true,
                 lastName: true,
-                phone: true,
-                title: true,
+                jobTitle: true,
                 department: true,
-                bio: true,
+                // bio: true,
                 role: true,
                 emailVerified: true,
                 createdAt: true,
@@ -67,10 +65,9 @@ export class UserService {
                 email: true,
                 firstName: true,
                 lastName: true,
-                phone: true,
-                title: true,
+                jobTitle: true,
                 department: true,
-                bio: true,
+                // bio: true,
                 role: true,
                 updatedAt: true,
             }
@@ -98,8 +95,8 @@ export class UserService {
 
         return memberships.map(m => ({
             ...m.organization,
-            role: m.role,
-            joinedAt: m.createdAt.toISOString()
+            role: m.role
+            // joinedAt: m.createdAt.toISOString()
         }));
     }
 
@@ -116,8 +113,7 @@ export class UserService {
 
         const projects = await prisma.project.findMany({
             where: {
-                organizationId: { in: orgIds },
-                deletedAt: null
+                organizationId: { in: orgIds }
             },
             select: {
                 id: true,
@@ -152,16 +148,14 @@ export class UserService {
         const [projectCount, assessmentCount, organizationCount] = await Promise.all([
             prisma.project.count({
                 where: {
-                    organizationId: { in: orgIds },
-                    deletedAt: null
+                    organizationId: { in: orgIds }
                 }
             }),
             prisma.assessment.count({
                 where: {
                     project: {
                         organizationId: { in: orgIds }
-                    },
-                    deletedAt: null
+                    }
                 }
             }),
             orgs.length

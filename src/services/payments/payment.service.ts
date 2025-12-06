@@ -62,6 +62,7 @@ export class PaymentService {
 
         logger.info('Payment initialized successfully', {
             service: 'PaymentService',
+            method: 'initializePayment',
             transactionId: transaction.id,
             transactionRef: transaction.transactionRef,
         });
@@ -218,6 +219,7 @@ export class PaymentService {
 
             logger.info('Payment completed successfully', {
                 service: 'PaymentService',
+                method: 'processVerifiedPayment',
                 transactionId,
             });
 
@@ -314,6 +316,8 @@ export class PaymentService {
 
         if (verification.data.status !== 'successful') {
             logger.warn('Webhook says successful but API verification failed', {
+                service: 'PaymentService',
+                method: 'handleSuccessfulCharge',
                 transactionId,
                 webhookStatus: data.status,
                 apiStatus: verification.data.status,
@@ -340,7 +344,11 @@ export class PaymentService {
             },
         });
 
-        logger.info('Payment failed via webhook', { transactionId });
+        logger.info('Payment failed via webhook', {
+            service: 'PaymentService',
+            method: 'handleFailedCharge',
+            transactionId
+        });
     }
 
     /**
@@ -355,7 +363,11 @@ export class PaymentService {
             },
         });
 
-        logger.info('Refund completed via webhook', { transactionId });
+        logger.info('Refund completed via webhook', {
+            service: 'PaymentService',
+            method: 'handleRefund',
+            transactionId
+        });
     }
 
     /**

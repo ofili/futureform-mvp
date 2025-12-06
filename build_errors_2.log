@@ -1,0 +1,19 @@
+src/services/invitations/invitation.service.ts(29,4): error TS1005: ';' expected.
+src/services/invitations/invitation.service.ts(29,5): error TS1131: Property or signature expected.
+src/services/invitations/invitation.service.ts(31,6): error TS1003: Identifier expected.
+src/services/invitations/invitation.service.ts(31,19): error TS1005: ';' expected.
+src/services/invitations/invitation.service.ts(40,3): error TS1128: Declaration or statement expected.
+src/services/invitations/invitation.service.ts(45,3): error TS1434: Unexpected keyword or identifier.
+src/services/invitations/invitation.service.ts(45,31): error TS1005: ',' expected.
+src/services/invitations/invitation.service.ts(45,55): error TS1005: ';' expected.
+src/services/invitations/invitation.service.ts(46,9): error TS1005: ':' expected.
+src/services/invitations/invitation.service.ts(46,36): error TS1005: ',' expected.
+src/services/invitations/invitation.service.ts(49,9): error TS1005: ':' expected.
+src/services/invitations/invitation.service.ts(61,5): error TS1005: ',' expected.
+src/services/invitations/invitation.service.ts(63,6): error TS1003: Identifier expected.
+src/services/invitations/invitation.service.ts(67,5): error TS1005: ',' expected.
+src/services/invitations/invitation.service.ts(67,8): error TS1359: Identifier expected. 'new' is a reserved word that cannot be used here.
+src/services/invitations/invitation.service.ts(67,16): error TS1005: ',' expected.
+src/services/invitations/invitation.service.ts(67,41): error TS1005: ';' expected.
+src/services/invitations/invitation.service.ts(170,3): error TS1128: Declaration or statement expected.
+src/services/invitations/invitation.service.ts(171,1): error TS1128: Declaration or statement expected.

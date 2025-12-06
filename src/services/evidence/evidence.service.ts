@@ -221,22 +221,19 @@ export class EvidenceService {
         const evidence = await prisma.enhancedEvidence.findUnique({
             where: { id: evidenceId },
             include: {
-                response: {
+                assessment: {
                     include: {
-                        assessment: {
+                        project: {
                             include: {
-                                project: {
-                                    include: {
-                                        organization: {
-                                            include: { members: true },
-                                        },
-                                    },
+                                organization: {
+                                    include: { members: true },
                                 },
-                                invitations: true,
                             },
                         },
+                        invitations: true,
                     },
                 },
+                response: true,
             },
         });
 
@@ -246,15 +243,15 @@ export class EvidenceService {
 
         // Check if user is authorized to verify evidence
         // Only organization members or partner admins can verify
-        const isOrgMember = evidence.response.assessment.project.organization?.members.some(
+        const isOrgMember = evidence.assessment.project.organization?.members.some(
             (member) => member.userId === userId
         ) ?? false;
 
-        const isPartnerAdmin = evidence.response.assessment.invitations.some(
+        const isPartnerAdmin = evidence.assessment.invitations.some(
             (inv) =>
                 inv.email === userEmail &&
                 inv.status === 'ACCEPTED' &&
-                inv.email === evidence.response.assessment.partnerAdminEmail
+                inv.email === evidence.assessment.partnerAdminEmail
         );
 
         if (!isOrgMember && !isPartnerAdmin) {

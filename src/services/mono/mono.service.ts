@@ -34,6 +34,7 @@ export class MonoService {
         if (!this.apiKey) {
             logger.warn('MONO_SECRET_KEY not configured', {
                 service: 'MonoService',
+                method: 'constructor'
             });
         }
     }
@@ -66,11 +67,11 @@ export class MonoService {
 
             if (!response.ok) {
                 const errorData = await response.json().catch(() => ({}));
-                logger.error('Mono API error', {
+                logger.warn('Mono API error', {
                     service: 'MonoService',
                     method: 'lookupCompanyByRC',
                     status: response.status,
-                    error: errorData,
+                    error: JSON.stringify(errorData),
                 });
                 throw new Error(`CAC lookup failed: ${response.statusText}`);
             }
@@ -90,11 +91,10 @@ export class MonoService {
 
             return data.data;
         } catch (error) {
-            logger.error('Error looking up company', {
+            logger.error('Error looking up company', error as Error, {
                 service: 'MonoService',
                 method: 'lookupCompanyByRC',
                 rcNumber,
-                error,
             });
             throw error;
         }
@@ -128,11 +128,11 @@ export class MonoService {
 
             if (!response.ok) {
                 const errorData = await response.json().catch(() => ({}));
-                logger.error('Mono API error', {
+                logger.warn('Mono API error', {
                     service: 'MonoService',
                     method: 'lookupCompanyByName',
                     status: response.status,
-                    error: errorData,
+                    error: JSON.stringify(errorData),
                 });
                 throw new Error(`CAC search failed: ${response.statusText}`);
             }
@@ -152,11 +152,10 @@ export class MonoService {
 
             return data.data;
         } catch (error) {
-            logger.error('Error searching company', {
+            logger.error('Error searching company', error as Error, {
                 service: 'MonoService',
                 method: 'lookupCompanyByName',
                 companyName,
-                error,
             });
             throw error;
         }
@@ -187,11 +186,11 @@ export class MonoService {
 
             if (!response.ok) {
                 const errorData = await response.json().catch(() => ({}));
-                logger.error('Mono API error', {
+                logger.warn('Mono API error', {
                     service: 'MonoService',
                     method: 'getCompanyDetails',
                     status: response.status,
-                    error: errorData,
+                    error: JSON.stringify(errorData),
                 });
                 throw new Error(`Failed to get company details: ${response.statusText}`);
             }
@@ -210,11 +209,10 @@ export class MonoService {
 
             return data.data;
         } catch (error) {
-            logger.error('Error getting company details', {
+            logger.error('Error getting company details', error as Error, {
                 service: 'MonoService',
                 method: 'getCompanyDetails',
                 rcNumber,
-                error,
             });
             throw error;
         }
