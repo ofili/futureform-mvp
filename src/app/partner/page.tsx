@@ -49,7 +49,7 @@ export default function PartnerDashboard() {
             <nav className="bg-white border-b border-gray-200">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center h-16">
-                        <div className="text-xl font-semibold text-gray-900">FutureForm™</div>
+                        <div className="text-xl font-semibold text-gray-900">Gitance™</div>
                         <div className="flex items-center gap-4">
                             <Link href="/support" className="text-sm text-gray-600 hover:text-gray-900">
                                 Help
@@ -197,7 +197,7 @@ export default function PartnerDashboard() {
                         Trust Intelligence for High-Stakes Deployments
                     </h3>
                     <p className="text-gray-700 mb-4">
-                        Organizations use FutureForm to anticipate deployment risks, strengthen vendor due diligence,
+                        Organizations use Gitance to anticipate deployment risks, strengthen vendor due diligence,
                         and improve cross-functional alignment.
                     </p>
                     <ul className="space-y-2 text-sm text-gray-700 mb-4">
@@ -213,9 +213,9 @@ export default function PartnerDashboard() {
                 {/* FOOTER */}
                 <footer className="border-t border-gray-200 pt-8 mt-12">
                     <div className="text-center text-xs text-gray-500 space-y-2">
-                        <p>© 2025 FutureForm™. All rights reserved.</p>
+                        <p>© 2025 Gitance™. All rights reserved.</p>
                         <p>
-                            FutureForm Trust Diagnostic™, Trust Intelligence Engine™, and Role-Mapped Assessment Flow™
+                            Gitance Trust Diagnostic™, Trust Intelligence Engine™, and Role-Mapped Assessment Flow™
                             are proprietary tools.
                         </p>
                         <div className="flex justify-center gap-4 pt-2">

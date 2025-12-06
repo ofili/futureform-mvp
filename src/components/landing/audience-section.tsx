@@ -68,7 +68,7 @@ export function AudienceSection() {
                                             <p className="text-gray-600">{audience.challenge}</p>
                                         </div>
                                         <div>
-                                            <p className="font-semibold text-gray-900 mb-2">How FutureForm Helps:</p>
+                                            <p className="font-semibold text-gray-900 mb-2">How Gitance Helps:</p>
                                             <p className="text-gray-600">{audience.solution}</p>
                                         </div>
                                         <div className="bg-blue-50 rounded-lg p-6">

@@ -1,0 +1,45 @@
+src/services/billing/billing.service.ts(126,27): error TS1005: ';' expected.
+src/services/billing/billing.service.ts(127,17): error TS1109: Expression expected.
+src/services/billing/billing.service.ts(127,18): error TS1128: Declaration or statement expected.
+src/services/billing/billing.service.ts(130,13): error TS1128: Declaration or statement expected.
+src/services/billing/billing.service.ts(130,31): error TS1005: ';' expected.
+src/services/billing/billing.service.ts(156,13): error TS1128: Declaration or statement expected.
+src/services/billing/billing.service.ts(156,31): error TS1005: ';' expected.
+src/services/billing/billing.service.ts(182,13): error TS1128: Declaration or statement expected.
+src/services/billing/billing.service.ts(183,15): error TS1442: Expected '=' for property initializer.
+src/services/billing/billing.service.ts(184,9): error TS1128: Declaration or statement expected.
+src/services/billing/billing.service.ts(192,5): error TS1128: Declaration or statement expected.
+src/services/billing/billing.service.ts(197,5): error TS1434: Unexpected keyword or identifier.
+src/services/billing/billing.service.ts(197,34): error TS1005: ';' expected.
+src/services/billing/billing.service.ts(222,5): error TS1434: Unexpected keyword or identifier.
+src/services/billing/billing.service.ts(222,31): error TS1005: ';' expected.
+src/services/billing/billing.service.ts(242,5): error TS1434: Unexpected keyword or identifier.
+src/services/billing/billing.service.ts(242,42): error TS1005: ',' expected.
+src/services/billing/billing.service.ts(242,52): error TS1005: ';' expected.
+src/services/billing/billing.service.ts(261,5): error TS1434: Unexpected keyword or identifier.
+src/services/billing/billing.service.ts(261,43): error TS1005: ',' expected.
+src/services/billing/billing.service.ts(261,53): error TS1005: ';' expected.
+src/services/billing/billing.service.ts(305,5): error TS1434: Unexpected keyword or identifier.
+src/services/billing/billing.service.ts(306,12): error TS1005: ',' expected.
+src/services/billing/billing.service.ts(307,11): error TS1005: ',' expected.
+src/services/billing/billing.service.ts(308,19): error TS1005: ',' expected.
+src/services/billing/billing.service.ts(309,11): error TS1005: ',' expected.
+src/services/billing/billing.service.ts(310,14): error TS1005: ',' expected.
+src/services/billing/billing.service.ts(311,15): error TS1109: Expression expected.
+src/services/billing/billing.service.ts(312,3): error TS1005: ';' expected.
+src/services/billing/billing.service.ts(410,34): error TS1005: ',' expected.
+src/services/billing/billing.service.ts(410,53): error TS1109: Expression expected.
+src/services/billing/billing.service.ts(410,62): error TS1005: ';' expected.
+src/services/billing/billing.service.ts(410,64): error TS1434: Unexpected keyword or identifier.
+src/services/billing/billing.service.ts(420,5): error TS1434: Unexpected keyword or identifier.
+src/services/billing/billing.service.ts(420,30): error TS1005: ';' expected.
+src/services/billing/billing.service.ts(438,5): error TS1434: Unexpected keyword or identifier.
+src/services/billing/billing.service.ts(439,17): error TS1005: ',' expected.
+src/services/billing/billing.service.ts(440,15): error TS1005: ',' expected.
+src/services/billing/billing.service.ts(441,9): error TS1005: ',' expected.
+src/services/billing/billing.service.ts(442,16): error TS1005: ',' expected.
+src/services/billing/billing.service.ts(443,3): error TS1005: ';' expected.
+src/services/billing/billing.service.ts(476,5): error TS1434: Unexpected keyword or identifier.
+src/services/billing/billing.service.ts(476,32): error TS1005: ',' expected.
+src/services/billing/billing.service.ts(476,42): error TS1005: ';' expected.
+src/services/billing/billing.service.ts(487,1): error TS1128: Declaration or statement expected.

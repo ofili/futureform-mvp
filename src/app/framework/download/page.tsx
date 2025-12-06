@@ -23,7 +23,7 @@ function FrameworkDownloadContent() {
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'FutureForm-Trust-Framework.pdf';
+      a.download = 'Gitance-Trust-Framework.pdf';
       document.body.appendChild(a);
       a.click();
       window.URL.revokeObjectURL(url);
@@ -128,7 +128,7 @@ function FrameworkDownloadContent() {
       {/* Social Proof & Benefits */}
       <div className="grid md:grid-cols-2 gap-8 mb-12">
         <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">What You Get with FutureForm</h3>
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">What You Get with Gitance</h3>
           <ul className="space-y-3">
             <li className="flex items-start">
               <svg className="w-5 h-5 text-green-600 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -206,7 +206,7 @@ function FrameworkDownloadContent() {
           Turn Insights into Action Today
         </h2>
         <p className="text-lg text-gray-300 mb-6 max-w-2xl mx-auto">
-          Join organizations using FutureForm to make smarter, faster decisions about technology investments in emerging markets.
+          Join organizations using Gitance to make smarter, faster decisions about technology investments in emerging markets.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <Link href="/auth/register">

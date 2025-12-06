@@ -1,0 +1,26 @@
+src/services/billing/billing.service.ts(555,49): error TS2322: Type '"RESPONDENT_BUNDLE"' is not assignable to type 'PackageType | EnumPackageTypeFilter<"CreditPricing"> | undefined'.
+src/services/evidence/evidence.service.ts(224,17): error TS2353: Object literal may only specify known properties, and 'assessment' does not exist in type 'EnhancedEvidenceInclude<DefaultArgs>'.
+src/services/evidence/evidence.service.ts(246,38): error TS2339: Property 'assessment' does not exist on type '{ metadata: JsonValue; id: string; type: string; createdAt: Date; updatedAt: Date; category: string | null; responseId: string | null; fileName: string | null; fileType: string | null; ... 14 more ...; verifiedBy: string | null; }'.
+src/services/evidence/evidence.service.ts(247,14): error TS7006: Parameter 'member' implicitly has an 'any' type.
+src/services/evidence/evidence.service.ts(250,41): error TS2339: Property 'assessment' does not exist on type '{ metadata: JsonValue; id: string; type: string; createdAt: Date; updatedAt: Date; category: string | null; responseId: string | null; fileName: string | null; fileType: string | null; ... 14 more ...; verifiedBy: string | null; }'.
+src/services/evidence/evidence.service.ts(251,14): error TS7006: Parameter 'inv' implicitly has an 'any' type.
+src/services/evidence/evidence.service.ts(254,40): error TS2339: Property 'assessment' does not exist on type '{ metadata: JsonValue; id: string; type: string; createdAt: Date; updatedAt: Date; category: string | null; responseId: string | null; fileName: string | null; fileType: string | null; ... 14 more ...; verifiedBy: string | null; }'.
+src/services/evidence/evidence.service.ts(325,21): error TS2322: Type 'string | null' is not assignable to type 'string | StringFilter<"OrganizationMember"> | undefined'.
+  Type 'null' is not assignable to type 'string | StringFilter<"OrganizationMember"> | undefined'.
+src/services/evidence/evidence.service.ts(325,37): error TS18047: 'evidence.response' is possibly 'null'.
+src/services/notifications/notification.service.ts(34,17): error TS2353: Object literal may only specify known properties, and 'link' does not exist in type 'Without<NotificationCreateInput, NotificationUncheckedCreateInput> & NotificationUncheckedCreateInput'.
+src/services/notifications/notification.service.ts(73,33): error TS2561: Object literal may only specify known properties, but 'readAt' does not exist in type '(Without<NotificationUpdateInput, NotificationUncheckedUpdateInput> & NotificationUncheckedUpdateInput) | (Without<...> & NotificationUpdateInput)'. Did you mean to write 'read'?
+src/services/notifications/notification.service.ts(83,33): error TS2561: Object literal may only specify known properties, but 'readAt' does not exist in type '(Without<NotificationUpdateManyMutationInput, NotificationUncheckedUpdateManyInput> & NotificationUncheckedUpdateManyInput) | (Without<...> & NotificationUpdateManyMutationInput)'. Did you mean to write 'read'?
+src/services/partners/partner.service.ts(339,17): error TS2820: Type '"VERIFIED"' is not assignable to type 'PartnerVerification | EnumPartnerVerificationFieldUpdateOperationsInput | undefined'. Did you mean '"UNVERIFIED"'?
+src/services/partners/partner.service.ts(389,17): error TS2322: Type 'string | null' is not assignable to type 'string | StringFilter<"OrganizationMember"> | undefined'.
+  Type 'null' is not assignable to type 'string | StringFilter<"OrganizationMember"> | undefined'.
+src/services/projects/project.service.ts(100,27): error TS18047: 'project.organization' is possibly 'null'.
+tests/e2e/assessments/assessment-workflow.spec.ts(19,45): error TS2339: Property 'first' does not exist on type 'Promise<void>'.
+tests/e2e/assessments/assessment-workflow.spec.ts(59,47): error TS2339: Property 'first' does not exist on type 'Promise<void>'.
+tests/integration/api/marketing/pql.test.ts(104,28): error TS18048: 'response' is possibly 'undefined'.
+tests/integration/api/marketing/pql.test.ts(106,16): error TS18048: 'response' is possibly 'undefined'.
+tests/integration/api/marketing/pql.test.ts(177,16): error TS18048: 'response' is possibly 'undefined'.
+tests/integration/api/marketing/pql.test.ts(198,28): error TS18048: 'response' is possibly 'undefined'.
+tests/integration/api/marketing/pql.test.ts(200,16): error TS18048: 'response' is possibly 'undefined'.
+tests/integration/api/marketing/pql.test.ts(220,28): error TS18048: 'response' is possibly 'undefined'.
+tests/integration/api/marketing/pql.test.ts(222,16): error TS18048: 'response' is possibly 'undefined'.

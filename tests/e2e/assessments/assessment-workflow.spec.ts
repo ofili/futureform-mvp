@@ -16,7 +16,7 @@ test.describe('Assessment Workflow', () => {
 
         // Select project
         await page.click('[name="projectId"]');
-        await page.click('[role="option"]').first();
+        await page.locator('[role="option"]').first().click();
 
         // Fill partner information
         await page.fill('[name="partnerName"]', 'Tech Solutions Ltd');
@@ -56,7 +56,7 @@ test.describe('Assessment Workflow', () => {
         await expect(page.locator('text=/Question|Domain/i')).toBeVisible();
 
         // Answer first question
-        await page.click('[name="response"]').first();
+        await page.locator('[name="response"]').first().click();
         await page.click('text=Yes');
 
         // Upload evidence (if file input exists)

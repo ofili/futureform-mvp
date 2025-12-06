@@ -115,7 +115,7 @@ export function CTASection() {
 
                 <div className="mt-12 text-center">
                     <p className="text-gray-600">
-                        Have questions? <strong className="text-gray-900">Email us:</strong> hello@futureform.africa
+                        Have questions? <strong className="text-gray-900">Email us:</strong> hello@gitance.com
                     </p>
                     <p className="text-sm text-gray-500 mt-2">
                         <strong>Response time:</strong> &lt;24 hours for all inquiries

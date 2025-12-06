@@ -101,9 +101,9 @@ describe('POST /api/marketing/pql', () => {
         } as unknown as NextRequest;
 
         const response = await POST(request);
-        const data = await response.json();
+        const data = await response!.json();
 
-        expect(response.status).toBe(200);
+        expect(response!.status).toBe(200);
         expect(data.message).toBe('PQL received');
         expect(data.downloadToken).toBeDefined();
         expect(data.leadId).toBe(mockCreatedLead.id);
@@ -174,7 +174,7 @@ describe('POST /api/marketing/pql', () => {
 
         const response = await POST(request);
 
-        expect(response.status).toBe(200); // Should still succeed
+        expect(response!.status).toBe(200); // Should still succeed
         expect(prisma.marketingLead.update).toHaveBeenCalledWith(
             expect.objectContaining({
                 data: expect.objectContaining({
@@ -195,9 +195,9 @@ describe('POST /api/marketing/pql', () => {
         } as unknown as NextRequest;
 
         const response = await POST(request);
-        const data = await response.json();
+        const data = await response!.json();
 
-        expect(response.status).toBe(400);
+        expect(response!.status).toBe(400);
         expect(data.error).toBe('Missing required fields');
     });
 
@@ -217,9 +217,9 @@ describe('POST /api/marketing/pql', () => {
         } as unknown as NextRequest;
 
         const response = await POST(request);
-        const data = await response.json();
+        const data = await response!.json();
 
-        expect(response.status).toBe(500);
+        expect(response!.status).toBe(500);
         expect(data.error).toBe('Failed to process request');
     });
 });

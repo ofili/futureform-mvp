@@ -28,7 +28,7 @@ export async function sendAssessmentInvitation({
   try {
     // TODO: Uncomment when Resend is installed
     // await resend.emails.send({
-    //   from: 'FutureForm <noreply@futureform.africa>',
+    //   from: 'Gitance <noreply@gitance.com>',
     //   to,
     //   subject: `You've been invited to complete a Trust Assessment for ${projectName}`,
     //   html: getAssessmentInvitationTemplate({
@@ -73,9 +73,9 @@ export async function sendTeamInvitation({
   try {
     // TODO: Uncomment when Resend is installed
     // await resend.emails.send({
-    //   from: 'FutureForm <noreply@futureform.africa>',
+    //   from: 'Gitance <noreply@gitance.com>',
     //   to,
-    //   subject: `${inviterName} invited you to collaborate on FutureForm`,
+    //   subject: `${inviterName} invited you to collaborate on Gitance`,
     //   html: getTeamInvitationTemplate({
     //     inviterName,
     //     projectName,
@@ -103,7 +103,7 @@ function getEmailFooter(userId: string, notificationType: string, email: string)
   return `
     <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e5e7eb;">
       <p style="font-size: 12px; color: #6b7280; text-align: center;">
-        You're receiving this email because you're a member of FutureForm.<br>
+        You're receiving this email because you're a member of Gitance.<br>
         <a href="${unsubscribeUrl}" style="color: #6b7280;">Unsubscribe from ${notificationType} notifications</a> | 
         <a href="${process.env.NEXTAUTH_URL}/settings/notifications" style="color: #6b7280;">Manage all notifications</a>
       </p>
@@ -194,7 +194,7 @@ export async function sendEmail({
   try {
     // TODO: Uncomment when Resend is installed
     // await resend.emails.send({
-    //   from: 'FutureForm <noreply@futureform.africa>',
+    //   from: 'Gitance <noreply@gitance.com>',
     //   to,
     //   subject,
     //   html

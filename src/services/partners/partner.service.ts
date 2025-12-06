@@ -336,7 +336,7 @@ export class PartnerService {
                 registeredAddress: cacData.registeredAddress,
                 incorporationDate: cacData.incorporationDate ? new Date(cacData.incorporationDate) : null,
                 companyType: cacData.companyType,
-                verification: 'VERIFIED',
+                verification: 'FUTUREFORM_VERIFIED',
             },
         });
 
@@ -386,7 +386,7 @@ export class PartnerService {
         const userOrg = await prisma.organizationMember.findFirst({
             where: {
                 userId,
-                organizationId: assessment.project.organizationId,
+                organizationId: assessment.project.organizationId ?? undefined,
                 deletedAt: null,
             },
         });

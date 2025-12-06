@@ -13,7 +13,7 @@ export function Hero() {
                             <span className="text-blue-600">We Fix It.</span>
                         </h1>
                         <p className="text-xl text-gray-600 mb-8">
-                            FutureForm quantifies organizational trust before partnerships fail — helping DFIs, investors, and governments prevent the billion-dollar failures traditional due diligence misses.
+                            Gitance quantifies organizational trust before partnerships fail — helping DFIs, investors, and governments prevent the billion-dollar failures traditional due diligence misses.
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                             <Button size="lg" className="bg-blue-600 hover:bg-blue-700" asChild>

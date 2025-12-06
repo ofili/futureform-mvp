@@ -80,7 +80,7 @@ export function TrustFramework() {
                         Trust Intelligence: What Due Diligence Misses
                     </h2>
                     <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-                        FutureForm is the trust intelligence company redefining how organizations assess partnership readiness in emerging markets.
+                        Gitance is the trust intelligence company redefining how organizations assess partnership readiness in emerging markets.
                     </p>
                     <div className="max-w-4xl mx-auto space-y-4 text-gray-600">
                         <p>
@@ -134,7 +134,7 @@ export function TrustFramework() {
                                     Traditional due diligence checks Layer 1 compliance.
                                 </p>
                                 <p className="font-semibold text-blue-600 mt-2">
-                                    FutureForm measures all six layers — with evidence, not promises.
+                                    Gitance measures all six layers — with evidence, not promises.
                                 </p>
                             </div>
                         </div>

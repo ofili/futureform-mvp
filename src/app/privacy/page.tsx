@@ -63,7 +63,7 @@ export default function PrivacyPage() {
           <section>
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">Contact Us</h2>
             <p className="text-gray-700">
-              For privacy-related questions, contact us at: <strong>privacy@futureform.africa</strong>
+              For privacy-related questions, contact us at: <strong>privacy@gitance.com</strong>
             </p>
           </section>
         </div>

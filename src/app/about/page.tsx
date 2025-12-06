@@ -75,7 +75,7 @@ export default function AboutPage() {
                     <h2 className="text-3xl font-bold text-gray-900 mb-8">Our Story</h2>
                     <div className="space-y-6 text-lg text-gray-600">
                         <p>
-                            FutureForm was born from a decade of frustration. We watched as well-intentioned development projects and ambitious tech deployments crumbled, wasting billions of dollars and eroding public trust.
+                            Gitance was born from a decade of frustration. We watched as well-intentioned development projects and ambitious tech deployments crumbled, wasting billions of dollars and eroding public trust.
                         </p>
                         <p>
                             The problem wasn't the software. It was the "soft" infrastructure—the governance, the operational capacity, the vendor integrity—that no one was measuring effectively.
@@ -128,7 +128,7 @@ export default function AboutPage() {
                 <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                     <h2 className="text-3xl font-bold mb-6">Ready to Build on Solid Ground?</h2>
                     <p className="text-xl text-blue-100 mb-8">
-                        Join the organizations using FutureForm to de-risk their most critical technology investments.
+                        Join the organizations using Gitance to de-risk their most critical technology investments.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                         <Link href="/auth/register">

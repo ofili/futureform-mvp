@@ -97,9 +97,9 @@ export class ProjectService {
         }
 
         // Authorization check
-        const hasAccess = project.organization.members.some(
+        const hasAccess = project.organization?.members.some(
             m => m.userId === userId && m.deletedAt === null
-        );
+        ) ?? false;
 
         if (!hasAccess) {
             throw new Error('Unauthorized access to project');

@@ -72,7 +72,7 @@ export default function SecurityPage() {
           <section>
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">Security Contact</h2>
             <p className="text-gray-700">
-              Report security issues to: <strong>security@futureform.africa</strong>
+              Report security issues to: <strong>security@gitance.com</strong>
             </p>
           </section>
         </div>

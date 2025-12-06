@@ -1,0 +1,9 @@
+tests/e2e/assessments/assessment-workflow.spec.ts(19,45): error TS2339: Property 'first' does not exist on type 'Promise<void>'.
+tests/e2e/assessments/assessment-workflow.spec.ts(59,47): error TS2339: Property 'first' does not exist on type 'Promise<void>'.
+tests/integration/api/marketing/pql.test.ts(104,28): error TS18048: 'response' is possibly 'undefined'.
+tests/integration/api/marketing/pql.test.ts(106,16): error TS18048: 'response' is possibly 'undefined'.
+tests/integration/api/marketing/pql.test.ts(177,16): error TS18048: 'response' is possibly 'undefined'.
+tests/integration/api/marketing/pql.test.ts(198,28): error TS18048: 'response' is possibly 'undefined'.
+tests/integration/api/marketing/pql.test.ts(200,16): error TS18048: 'response' is possibly 'undefined'.
+tests/integration/api/marketing/pql.test.ts(220,28): error TS18048: 'response' is possibly 'undefined'.
+tests/integration/api/marketing/pql.test.ts(222,16): error TS18048: 'response' is possibly 'undefined'.

@@ -221,19 +221,22 @@ export class EvidenceService {
         const evidence = await prisma.enhancedEvidence.findUnique({
             where: { id: evidenceId },
             include: {
-                assessment: {
+                response: {
                     include: {
-                        project: {
+                        assessment: {
                             include: {
-                                organization: {
-                                    include: { members: true },
+                                project: {
+                                    include: {
+                                        organization: {
+                                            include: { members: true },
+                                        },
+                                    },
                                 },
+                                invitations: true,
                             },
                         },
-                        invitations: true,
                     },
                 },
-                response: true,
             },
         });
 
@@ -243,16 +246,16 @@ export class EvidenceService {
 
         // Check if user is authorized to verify evidence
         // Only organization members or partner admins can verify
-        const isOrgMember = evidence.assessment.project.organization?.members.some(
+        const isOrgMember = evidence.response?.assessment?.project?.organization?.members.some(
             (member) => member.userId === userId
         ) ?? false;
 
-        const isPartnerAdmin = evidence.assessment.invitations.some(
+        const isPartnerAdmin = evidence.response?.assessment?.invitations.some(
             (inv) =>
                 inv.email === userEmail &&
                 inv.status === 'ACCEPTED' &&
-                inv.email === evidence.assessment.partnerAdminEmail
-        );
+                inv.email === evidence.response?.assessment?.partnerAdminEmail
+        ) ?? false;
 
         if (!isOrgMember && !isPartnerAdmin) {
             throw new Error('Forbidden: You are not authorized to verify this evidence');
@@ -322,7 +325,7 @@ export class EvidenceService {
         if (userRole !== 'ADMIN') {
             const org = await prisma.organizationMember.findFirst({
                 where: {
-                    organizationId: evidence.response.assessment.project.organizationId,
+                    organizationId: evidence.response?.assessment?.project?.organizationId ?? undefined,
                     userId,
                     deletedAt: null,
                     role: { in: ['ADMIN', 'REVIEWER'] }

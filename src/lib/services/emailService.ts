@@ -29,7 +29,7 @@ export const sendEmail = async ({ to, subject, html }: SendEmailParams) => {
 
     try {
         await transporter.sendMail({
-            from: process.env.SMTP_FROM || '"FutureForm" <noreply@futureform.com>',
+            from: process.env.SMTP_FROM || '"Gitance" <noreply@gitance.com>',
             to,
             subject,
             html,

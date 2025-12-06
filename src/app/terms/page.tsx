@@ -17,7 +17,7 @@ export default function TermsPage() {
           <section>
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">Service Description</h2>
             <p className="text-gray-700">
-              FutureForm provides trust intelligence assessment services through our platform,
+              Gitance provides trust intelligence assessment services through our platform,
               including The Five-Layer Trust Framework™ and related analytical tools.
             </p>
           </section>
@@ -45,14 +45,14 @@ export default function TermsPage() {
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">Intellectual Property</h2>
             <p className="text-gray-700">
               The Five-Layer Trust Framework™, assessment methodology, and platform technology
-              are proprietary to FutureForm Ltd. Users retain ownership of their submitted data.
+              are proprietary to Gitance Ltd. Users retain ownership of their submitted data.
             </p>
           </section>
 
           <section>
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">Limitation of Liability</h2>
             <p className="text-gray-700">
-              FutureForm provides assessment tools and analysis. Users are responsible for
+              Gitance provides assessment tools and analysis. Users are responsible for
               their own business decisions based on assessment results.
             </p>
           </section>
@@ -68,7 +68,7 @@ export default function TermsPage() {
           <section>
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">Contact</h2>
             <p className="text-gray-700">
-              For terms-related questions, contact: <strong>legal@futureform.africa</strong>
+              For terms-related questions, contact: <strong>legal@gitance.com</strong>
             </p>
           </section>
         </div>

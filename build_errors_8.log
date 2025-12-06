@@ -1,0 +1,14 @@
+src/services/evidence/evidence.service.ts(328,21): error TS2322: Type 'string | null' is not assignable to type 'string | StringFilter<"OrganizationMember"> | undefined'.
+  Type 'null' is not assignable to type 'string | StringFilter<"OrganizationMember"> | undefined'.
+src/services/evidence/evidence.service.ts(328,37): error TS18047: 'evidence.response' is possibly 'null'.
+src/services/partners/partner.service.ts(389,17): error TS2322: Type 'string | null' is not assignable to type 'string | StringFilter<"OrganizationMember"> | undefined'.
+  Type 'null' is not assignable to type 'string | StringFilter<"OrganizationMember"> | undefined'.
+tests/e2e/assessments/assessment-workflow.spec.ts(19,45): error TS2339: Property 'first' does not exist on type 'Promise<void>'.
+tests/e2e/assessments/assessment-workflow.spec.ts(59,47): error TS2339: Property 'first' does not exist on type 'Promise<void>'.
+tests/integration/api/marketing/pql.test.ts(104,28): error TS18048: 'response' is possibly 'undefined'.
+tests/integration/api/marketing/pql.test.ts(106,16): error TS18048: 'response' is possibly 'undefined'.
+tests/integration/api/marketing/pql.test.ts(177,16): error TS18048: 'response' is possibly 'undefined'.
+tests/integration/api/marketing/pql.test.ts(198,28): error TS18048: 'response' is possibly 'undefined'.
+tests/integration/api/marketing/pql.test.ts(200,16): error TS18048: 'response' is possibly 'undefined'.
+tests/integration/api/marketing/pql.test.ts(220,28): error TS18048: 'response' is possibly 'undefined'.
+tests/integration/api/marketing/pql.test.ts(222,16): error TS18048: 'response' is possibly 'undefined'.

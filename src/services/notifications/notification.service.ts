@@ -31,8 +31,8 @@ export class NotificationService {
                 type: data.type,
                 title: data.title,
                 message: data.message,
-                link: data.link,
-                metadata: data.metadata,
+                actionUrl: data.link,
+                // metadata: data.metadata, // Metadata not supported in Notification model
                 read: false,
             }
         });
@@ -70,7 +70,7 @@ export class NotificationService {
 
         return await prisma.notification.update({
             where: { id: notificationId },
-            data: { read: true, readAt: new Date() }
+            data: { read: true }
         });
     }
 
@@ -80,7 +80,7 @@ export class NotificationService {
     async markAllAsRead(userId: string) {
         await prisma.notification.updateMany({
             where: { userId, read: false },
-            data: { read: true, readAt: new Date() }
+            data: { read: true }
         });
 
         return { success: true };

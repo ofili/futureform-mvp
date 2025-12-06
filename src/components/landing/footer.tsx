@@ -30,7 +30,7 @@ export function Footer() {
                 <div className="grid md:grid-cols-5 gap-8 mb-12">
                     {/* Company Info */}
                     <div className="md:col-span-2">
-                        <h3 className="text-2xl font-bold mb-4">FutureForm</h3>
+                        <h3 className="text-2xl font-bold mb-4">Gitance</h3>
                         <p className="text-gray-400 mb-4">
                             Trust intelligence for emerging market partnerships.
                         </p>
@@ -39,7 +39,7 @@ export function Footer() {
                         </p>
                         <div className="space-y-2">
                             <p className="text-gray-400 text-sm">
-                                <strong className="text-white">Email:</strong> hello@futureform.africa
+                                <strong className="text-white">Email:</strong> hello@gitance.com
                             </p>
                             <p className="text-gray-400 text-sm">
                                 <strong className="text-white">Headquarters:</strong> Lagos, Nigeria
@@ -72,10 +72,10 @@ export function Footer() {
                     <div className="flex flex-col md:flex-row justify-between items-center gap-4">
                         <div className="text-center md:text-left">
                             <p className="text-gray-400 text-sm">
-                                © 2025 FutureForm Ltd. All rights reserved.
+                                © 2025 Gitance Ltd. All rights reserved.
                             </p>
                             <p className="text-gray-500 text-xs mt-1">
-                                Trust Diagnostic Toolkit™ and TrustOS™ are trademarks of FutureForm Ltd.
+                                Trust Diagnostic Toolkit™ and TrustOS™ are trademarks of Gitance Ltd.
                             </p>
                         </div>
                         <div className="flex gap-6 text-sm text-gray-400">

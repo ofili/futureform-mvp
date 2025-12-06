@@ -12,7 +12,7 @@ export default function ValueDiscoverySection() {
                     </h3>
 
                     <p className="text-gray-700 max-w-2xl mx-auto">
-                        Organizations use FutureForm to anticipate deployment risks, strengthen vendor due diligence,
+                        Organizations use Gitance to anticipate deployment risks, strengthen vendor due diligence,
                         and improve cross-functional alignment.
                     </p>
 
