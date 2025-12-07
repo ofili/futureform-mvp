@@ -1,81 +1,136 @@
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
+import { ArrowRight, Globe, Shield, Activity, CheckCircle, Cpu, TrendingUp, Eye } from 'lucide-react';
 
 export function Hero() {
     return (
-        <section className="bg-midnight min-h-[85vh] flex items-center py-20 relative overflow-hidden">
+        <section className="bg-midnight min-h-[90vh] flex items-center pt-24 pb-16 relative overflow-hidden">
             {/* Background Effects */}
-            <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10"></div>
-            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-900/20 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-cyan-900/10 rounded-full blur-3xl"></div>
+            <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5"></div>
+            <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-cyan-500/10 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-cyan-600/5 rounded-full blur-3xl"></div>
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
                 <div className="grid lg:grid-cols-2 gap-16 items-center">
-                    <div className="text-center lg:text-left">
-                        <div className="inline-block px-3 py-1 mb-6 border border-cyan-500/30 rounded-full bg-cyan-500/10 backdrop-blur-sm">
-                            <span className="text-green-400 text-xs font-mono tracking-widest uppercase flex items-center gap-2">
-                                <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-                                System Status: Operational
-                            </span>
-                        </div>
-                        <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight leading-tight">
-                            Gitance <br />
-                            <span className="text-cyan-400">Intelligence.</span>
-                        </h1>
-                        <p className="text-xl text-gray-200 mb-10 max-w-lg mx-auto lg:mx-0 leading-relaxed font-medium">
-                            The operating system for trust in frontier markets. We turn fragmented signals into structured, decision-ready intelligence.
-                        </p>
-                        <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                            <Button size="lg" className="bg-cyan-500 hover:bg-cyan-400 text-white font-bold h-12 px-8 text-base transition-all hover:scale-105 shadow-[0_0_20px_rgba(0,217,255,0.3)]">
-                                Explore Products
-                            </Button>
-                            <Button size="lg" variant="outline" className="border-gray-700 text-black-300 hover:text-white hover:bg-white/10 h-12 px-8 text-base">
-                                Talk to Sales
-                            </Button>
+                    {/* Left Content */}
+                    <div>
+                        <div className="inline-flex items-center space-x-2 mb-6 bg-cyan-500/10 border border-cyan-500/30 rounded-full px-4 py-2">
+                            <Cpu size={16} className="text-cyan-400" />
+                            <span className="text-cyan-400 text-sm font-semibold tracking-wide">Gitance Intelligence</span>
                         </div>
 
-                        <div className="mt-12 flex items-center justify-center lg:justify-start gap-8 text-gray-500 text-sm">
-                            <div className="flex items-center gap-2">
-                                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                                <span>Live Monitoring</span>
+                        <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+                            The Operating System
+                            <br />
+                            <span className="text-cyan-400">For Trust.</span>
+                        </h1>
+
+                        <p className="text-xl text-gray-300 mb-10 leading-relaxed max-w-lg">
+                            Turn fragmented signals into structured, decision-ready intelligence. AI-powered partner vetting, deployment monitoring, and trust verification for frontier markets.
+                        </p>
+
+                        <div className="flex flex-col sm:flex-row gap-4 mb-12">
+                            <Link
+                                href="/auth/signup"
+                                className="px-8 py-4 bg-cyan-500 text-white rounded-lg hover:bg-cyan-400 transition-all font-bold flex items-center justify-center space-x-2 shadow-[0_0_30px_rgba(6,182,212,0.3)] hover:shadow-[0_0_40px_rgba(6,182,212,0.4)] hover:scale-105"
+                            >
+                                <span>Start Free</span>
+                                <ArrowRight size={18} />
+                            </Link>
+                            <Link
+                                href="/products/partner-intelligence"
+                                className="px-8 py-4 bg-transparent border border-gray-700 text-gray-300 rounded-lg hover:border-gray-600 hover:text-white hover:bg-white/5 transition-all font-semibold"
+                            >
+                                Explore Products
+                            </Link>
+                        </div>
+
+                        {/* Stats Row */}
+                        <div className="grid grid-cols-3 gap-6 p-6 bg-gray-900/50 rounded-xl border border-gray-800">
+                            <div className="text-center sm:text-left">
+                                <div className="flex items-center justify-center sm:justify-start gap-2 text-3xl font-bold text-white">
+                                    <Globe size={24} className="text-cyan-400" />
+                                    <span>35+</span>
+                                </div>
+                                <p className="text-cyan-400 text-sm mt-1">Markets Covered</p>
                             </div>
-                            <div className="flex items-center gap-2">
-                                <span className="font-mono text-cyan-500/80">35</span>
-                                <span>Markets Covered</span>
+                            <div className="text-center sm:text-left border-l border-gray-800 pl-6">
+                                <div className="text-3xl font-bold text-white">6</div>
+                                <p className="text-cyan-400 text-sm mt-1">Trust Layers</p>
+                            </div>
+                            <div className="text-center sm:text-left border-l border-gray-800 pl-6">
+                                <div className="text-3xl font-bold text-white">24/7</div>
+                                <p className="text-cyan-400 text-sm mt-1">Monitoring</p>
                             </div>
                         </div>
                     </div>
 
-                    {/* Trust Graph Visualization */}
-                    <div className="hidden lg:block relative">
-                        <div className="relative w-full aspect-square max-w-lg mx-auto">
-                            <div className="absolute inset-0 border border-gray-800 rounded-full animate-[spin_60s_linear_infinite] opacity-30"></div>
-                            <div className="absolute inset-12 border border-dashed border-gray-700 rounded-full animate-[spin_40s_linear_infinite_reverse] opacity-40"></div>
+                    {/* Right - Trust Intelligence Dashboard */}
+                    <div className="hidden lg:block">
+                        <div className="relative">
+                            {/* Main Dashboard Visual */}
+                            <div className="bg-gray-900/80 border border-gray-800 rounded-2xl p-6 backdrop-blur-sm shadow-2xl">
+                                {/* Header */}
+                                <div className="flex items-center justify-between mb-6">
+                                    <div className="flex items-center gap-3">
+                                        <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                                        <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                        <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                                    </div>
+                                    <div className="flex items-center gap-2">
+                                        <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                                        <span className="text-green-400 text-xs font-mono">Live</span>
+                                    </div>
+                                </div>
 
-                            {/* Central Intelligence Node */}
-                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 bg-midnight border-2 border-cyan-500/50 rounded-full flex items-center justify-center shadow-[0_0_50px_rgba(0,217,255,0.2)]">
-                                <div className="w-3 h-3 bg-cyan-400 rounded-full animate-pulse"></div>
+                                {/* Trust Score Display */}
+                                <div className="text-center mb-6">
+                                    <div className="inline-flex items-center justify-center w-32 h-32 rounded-full bg-gradient-to-br from-cyan-500/20 to-cyan-500/5 border-4 border-cyan-500/50 shadow-[0_0_40px_rgba(6,182,212,0.2)]">
+                                        <div>
+                                            <div className="text-4xl font-bold text-white">87</div>
+                                            <div className="text-xs text-cyan-400 uppercase tracking-wider">Trust Score</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Trust Layers */}
+                                <div className="space-y-3 mb-6">
+                                    {[
+                                        { name: 'Reliability', score: 92, color: 'bg-green-500' },
+                                        { name: 'Governance', score: 85, color: 'bg-cyan-500' },
+                                        { name: 'Competence', score: 88, color: 'bg-blue-500' },
+                                        { name: 'Integrity', score: 78, color: 'bg-amber-500' },
+                                    ].map((layer) => (
+                                        <div key={layer.name} className="flex items-center gap-3">
+                                            <span className="text-gray-400 text-sm w-24">{layer.name}</span>
+                                            <div className="flex-1 h-2 bg-gray-800 rounded-full overflow-hidden">
+                                                <div className={`h-full ${layer.color} rounded-full`} style={{ width: `${layer.score}%` }}></div>
+                                            </div>
+                                            <span className="text-white text-sm font-mono w-8">{layer.score}</span>
+                                        </div>
+                                    ))}
+                                </div>
+
+                                {/* Verification Status */}
+                                <div className="flex items-center gap-2 p-3 bg-green-500/10 border border-green-500/30 rounded-lg">
+                                    <CheckCircle size={18} className="text-green-400" />
+                                    <span className="text-green-300 text-sm">All 36 evidence items verified</span>
+                                </div>
                             </div>
 
-                            {/* Orbiting Satellite Nodes */}
-                            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-4 w-12 h-12 bg-gray-900 border border-gray-700 rounded-lg flex items-center justify-center text-xs text-yellow-400 font-mono">
-                                98%
-                            </div>
-                            <div className="absolute bottom-1/4 right-0 w-auto px-3 py-1 bg-gray-900 border border-red-500/50 rounded text-xs text-red-400 font-mono flex items-center gap-2">
-                                <span className="w-1.5 h-1.5 bg-red-500 rounded-full"></span>
-                                RISK DETECTED
-                            </div>
-                            <div className="absolute top-1/3 left-0 -translate-x-4 w-auto px-3 py-1 bg-gray-900 border border-green-500/50 rounded text-xs text-green-400 font-mono flex items-center gap-2">
-                                <span className="w-1.5 h-1.5 bg-green-500 rounded-full"></span>
-                                VERIFIED
+                            {/* Floating Cards */}
+                            <div className="absolute -top-4 -right-4 bg-gray-900 border border-gray-800 rounded-lg p-3 shadow-lg">
+                                <div className="flex items-center gap-2">
+                                    <Activity size={16} className="text-blue-400" />
+                                    <span className="text-white text-xs font-semibold">Live Sync</span>
+                                </div>
                             </div>
 
-                            {/* Connecting Lines (SVG) */}
-                            <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-40">
-                                <line x1="50%" y1="50%" x2="50%" y2="0%" stroke="#00D9FF" strokeWidth="1" strokeDasharray="4 4" />
-                                <line x1="50%" y1="50%" x2="100%" y2="75%" stroke="#EF4444" strokeWidth="1" />
-                                <line x1="50%" y1="50%" x2="0%" y2="33%" stroke="#10B981" strokeWidth="1" />
-                            </svg>
+                            <div className="absolute -bottom-4 -left-4 bg-gray-900 border border-gray-800 rounded-lg p-3 shadow-lg">
+                                <div className="flex items-center gap-2">
+                                    <Shield size={16} className="text-amber-400" />
+                                    <span className="text-white text-xs font-semibold">6 Layers Active</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
