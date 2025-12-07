@@ -12,10 +12,10 @@ export function CTASection() {
                     Deploy capital with the confidence of structured intelligence.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <Button size="lg" className="bg-cyan-500 hover:bg-cyan-600 text-black font-semibold h-12 px-8">
+                    <Button size="lg" className="bg-white-500 hover:bg-cyan-600 text-white font-semibold h-12 px-8">
                         Start Your Assessment
                     </Button>
-                    <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 h-12 px-8">
+                    <Button size="lg" variant="outline" className="border-white text-black hover:bg-white/10 h-12 px-8">
                         Talk to Sales
                     </Button>
                 </div>

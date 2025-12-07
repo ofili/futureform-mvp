@@ -62,7 +62,7 @@ export function Navbar() {
                             Login
                         </Link>
                         <Link href="/auth/register">
-                            <Button className="bg-blue-600 hover:bg-blue-700">
+                            <Button className="cyan-500 hover:bg-cyan-700">
                                 Get Started
                             </Button>
                         </Link>

@@ -29,7 +29,7 @@ export function Hero() {
                             <Button size="lg" className="bg-cyan-500 hover:bg-cyan-400 text-white font-bold h-12 px-8 text-base transition-all hover:scale-105 shadow-[0_0_20px_rgba(0,217,255,0.3)]">
                                 Explore Products
                             </Button>
-                            <Button size="lg" variant="outline" className="border-gray-700 text-gray-300 hover:text-white hover:bg-white/10 h-12 px-8 text-base">
+                            <Button size="lg" variant="outline" className="border-gray-700 text-black-300 hover:text-white hover:bg-white/10 h-12 px-8 text-base">
                                 Talk to Sales
                             </Button>
                         </div>
@@ -58,7 +58,7 @@ export function Hero() {
                             </div>
 
                             {/* Orbiting Satellite Nodes */}
-                            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-4 w-12 h-12 bg-gray-900 border border-gray-700 rounded-lg flex items-center justify-center text-xs text-cyan-400 font-mono">
+                            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-4 w-12 h-12 bg-gray-900 border border-gray-700 rounded-lg flex items-center justify-center text-xs text-yellow-400 font-mono">
                                 98%
                             </div>
                             <div className="absolute bottom-1/4 right-0 w-auto px-3 py-1 bg-gray-900 border border-red-500/50 rounded text-xs text-red-400 font-mono flex items-center gap-2">
