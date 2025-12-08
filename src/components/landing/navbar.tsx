@@ -185,7 +185,7 @@ export function Navbar() {
                         </div>
 
                         <Link href="/pricing" className="text-gray-300 hover:text-white transition-colors">Pricing</Link>
-                        <Link href="/docs" className="text-gray-300 hover:text-white transition-colors">Docs</Link>
+                        <Link href="/methodology" className="text-gray-300 hover:text-white transition-colors">Methodology</Link>
                     </div>
 
                     <div className="hidden md:flex items-center space-x-4">
@@ -242,8 +242,8 @@ export function Navbar() {
 
                         <div className="pt-2 border-t border-gray-800 space-y-2">
                             <Link href="/pricing" className="block px-2 py-2 text-gray-300 hover:text-white" onClick={() => setIsMobileMenuOpen(false)}>Pricing</Link>
-                            <Link href="/docs" className="block px-2 py-2 text-gray-300 hover:text-white" onClick={() => setIsMobileMenuOpen(false)}>Docs</Link>
-                            <Link href="/auth/register" className="block px-2 py-2 text-cyan-400 font-medium" onClick={() => setIsMobileMenuOpen(false)}>Get Started</Link>
+                            <Link href="/methodology" className="block px-2 py-2 text-gray-300 hover:text-white" onClick={() => setIsMobileMenuOpen(false)}>Methodology</Link>
+                            <Link href="/auth/register" className="block px-2 py-2 text-white font-medium" onClick={() => setIsMobileMenuOpen(false)}>Get Started</Link>
                         </div>
                     </div>
                 </div>
