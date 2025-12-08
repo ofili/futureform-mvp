@@ -4,7 +4,7 @@ import { LLMRequest, LLMResponse } from './types';
 
 /**
  * LLM Client Service
- * Unified interface for OpenAI GPT-4o (primary)
+ * Unified interface for OpenAI GPT-5 Pro (primary)
  * Handles rate limiting, retries, and token tracking
  */
 class LLMClientService {
@@ -27,7 +27,7 @@ class LLMClientService {
             apiKey: apiKey || 'sk-placeholder'
         });
 
-        this.model = process.env.LLM_MODEL || 'gpt-4o';
+        this.model = process.env.LLM_MODEL || 'gpt-5-pro';
     }
 
     /**
