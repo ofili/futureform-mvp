@@ -2,14 +2,15 @@ import { PRODUCTS } from '@/lib/constants/products';
 import { NextResponse } from 'next/server';
 
 interface RouteParams {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export async function GET(request: Request, { params }: RouteParams) {
   try {
-    const product = PRODUCTS[params.slug as keyof typeof PRODUCTS];
+    const { slug } = await params;
+    const product = PRODUCTS[slug as keyof typeof PRODUCTS];
 
     if (!product) {
       return NextResponse.json(

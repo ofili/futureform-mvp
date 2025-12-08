@@ -245,7 +245,11 @@ export class BillingService {
     }
 
     async getExchangeRates() {
-        return prisma.currencyExchangeRate.findMany({ orderBy: { updatedAt: 'desc' } });
+        const rates = await prisma.currencyExchangeRate.findMany({ orderBy: { updatedAt: 'desc' } });
+        return rates.map(r => ({
+            ...r,
+            rate: r.rate.toNumber()
+        }));
     }
 
     async upsertExchangeRate(

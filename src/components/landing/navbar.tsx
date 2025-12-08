@@ -186,7 +186,7 @@ export function Navbar() {
                     </div>
 
                     <div className="flex items-center space-x-4">
-                        <Link href="/auth/signup" className="px-6 py-2 bg-cyan-500 text-white rounded-lg hover:bg-cyan-600 transition-colors font-medium">
+                        <Link href="/auth/register" className="px-6 py-2 bg-cyan-500 text-white rounded-lg hover:bg-cyan-600 transition-colors font-medium">
                             Get Started
                         </Link>
                     </div>

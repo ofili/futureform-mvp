@@ -2072,6 +2072,9 @@ model CoPilotDraft {
 
   @@index([assessmentId])
   @@index([type])
+
   @@map("copilot_drafts")
 }
+
+
 

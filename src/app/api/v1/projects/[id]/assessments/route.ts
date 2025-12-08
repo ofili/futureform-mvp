@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import prisma from '@/lib/prisma';
-import { selectQuestions } from '@/lib/services/ai-question-selector';
+import { selectQuestions, saveSelectionToAssessment } from '@/lib/services/ai-question-selector';
 import { trustOntologyService } from '@/lib/services/trust-ontology.service';
 
 /**
@@ -130,7 +130,7 @@ export async function POST(
         }
 
         // Call AI service to select questions
-        const selectedQuestions = await selectQuestions({
+        const selectionResult = await selectQuestions({
             sector,
             region: project.region || 'Global',
             assessmentType: type,
@@ -139,16 +139,9 @@ export async function POST(
             attachedDocs: aiConfig?.attachedDocs || [],
         });
 
-        // Fetch actual question IDs from database
-        // For now, we'll get questions from the database based on domain
-        const questions = await prisma.question.findMany({
-            take: selectedQuestions.length,
-            orderBy: { order: 'asc' },
-        });
-
-        if (questions.length === 0) {
+        if (selectionResult.questions.length === 0) {
             return NextResponse.json(
-                { error: 'No questions available in the database' },
+                { error: 'No questions available matching criteria' },
                 { status: 500 }
             );
         }
@@ -174,35 +167,10 @@ export async function POST(
             },
         });
 
-        // Create AssessmentQuestion records
-        const assessmentQuestions = await Promise.all(
-            selectedQuestions.map(async (sq, index) => {
-                // Map the mock question ID to actual question from DB
-                const question = questions[index % questions.length];
-
-                // Find role by name
-                const role = await prisma.role.findFirst({
-                    where: { name: sq.suggestedRole },
-                });
-
-                return prisma.assessmentQuestion.create({
-                    data: {
-                        assessmentId: assessment.id,
-                        questionId: question.id,
-                        assignedRoleId: role?.id || null,
-                        assignedSeniority: sq.suggestedSeniority,
-                        evidenceRequirements: sq.suggestedEvidence,
-                        order: index + 1,
-                        aiConfidence: sq.confidence,
-                        aiRationale: sq.rationale,
-                        customized: false,
-                    },
-                    include: {
-                        question: true,
-                        role: true,
-                    },
-                });
-            })
+        // Save selected questions to assessment using service layer
+        const assessmentQuestions = await saveSelectionToAssessment(
+            assessment.id,
+            selectionResult
         );
 
         return NextResponse.json(

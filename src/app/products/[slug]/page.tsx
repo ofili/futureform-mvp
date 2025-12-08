@@ -14,9 +14,9 @@ import { TrustSignalsUseCases } from '@/components/products/trust-signals/use-ca
 import { TrustSignalsCTA } from '@/components/products/trust-signals/cta-section';
 
 interface ProductPageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 const productComponents: Record<string, React.ComponentType> = {
@@ -53,7 +53,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: ProductPageProps) {
-  const product = PRODUCTS[params.slug as keyof typeof PRODUCTS];
+  const { slug } = await params;
+  const product = PRODUCTS[slug as keyof typeof PRODUCTS];
 
   if (!product) {
     return {
@@ -73,8 +74,9 @@ export async function generateMetadata({ params }: ProductPageProps) {
   };
 }
 
-export default function ProductPage({ params }: ProductPageProps) {
-  const product = PRODUCTS[params.slug as keyof typeof PRODUCTS];
+export default async function ProductPage({ params }: ProductPageProps) {
+  const { slug } = await params;
+  const product = PRODUCTS[slug as keyof typeof PRODUCTS];
 
   if (!product) {
     notFound();
