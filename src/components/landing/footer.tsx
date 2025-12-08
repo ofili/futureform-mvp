@@ -3,17 +3,29 @@ import Link from 'next/link';
 export function Footer() {
     const footerSections = [
         {
-            title: 'Product',
+            title: 'Platform',
             links: [
-                { label: 'Platform', href: '#framework' },
-                { label: 'Framework', href: '#framework' },
-                { label: 'Pricing', href: '/pricing' }
+                { label: 'ASSESS Partners', href: '/auth/register' },
+                { label: 'MONITOR Deployments', href: '/contact' },
+                { label: 'VERIFY Intent', href: '/expert-analysis' },
+                { label: 'Methodology', href: '/methodology' }
+            ]
+        },
+        {
+            title: 'Solutions',
+            links: [
+                { label: 'For Investors', href: '/solutions/investors' },
+                { label: 'For Governments', href: '/solutions/governments' },
+                { label: 'For Development Finance', href: '/solutions/development-finance' },
+                { label: 'For Enterprises', href: '/solutions/enterprises' }
             ]
         },
         {
             title: 'Company',
             links: [
                 { label: 'About', href: '/about' },
+                { label: 'Pricing', href: '/pricing' },
+                { label: 'Contact', href: '/contact' },
                 { label: 'Login', href: '/auth/login' }
             ]
         }
@@ -26,17 +38,17 @@ export function Footer() {
     ];
 
     return (
-        <footer className="bg-gray-900 text-white py-16 border-t-4 border-blue-600">
+        <footer className="bg-gray-900 text-white py-16 border-t border-gray-800">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid md:grid-cols-5 gap-8 mb-12">
                     {/* Company Info */}
                     <div className="md:col-span-2">
                         <h3 className="text-2xl font-bold mb-4">Gitance</h3>
-                        <p className="text-gray-400 mb-4">
-                            Trust intelligence for emerging market partnerships.
+                        <p className="text-gray-400 mb-2">
+                            Trust Intelligence for Emerging Markets
                         </p>
-                        <p className="text-gray-400 text-sm mb-6">
-                            Preventing billion-dollar failures, one assessment at a time.
+                        <p className="text-gray-500 text-sm mb-6">
+                            Predict vendor reliability and deployment outcomes before you commit capital.
                         </p>
                         <div className="space-y-2">
                             <p className="text-gray-400 text-sm">
@@ -76,7 +88,7 @@ export function Footer() {
                                 © 2025 Gitance Ltd. All rights reserved.
                             </p>
                             <p className="text-gray-500 text-xs mt-1">
-                                Trust Diagnostic Toolkit™ and TrustOS™ are trademarks of Gitance Ltd.
+                                DTRI™ and the 7-Layer Trust Diagnostic are trademarks of Gitance Ltd.
                             </p>
                         </div>
                         <div className="flex gap-6 text-sm text-gray-400">

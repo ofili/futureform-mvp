@@ -4,93 +4,83 @@ import { Shield, Activity, Zap, Cpu, ArrowRight } from 'lucide-react';
 export function ProductSuite() {
     const products = [
         {
-            id: "partner-intelligence",
-            title: "Partner Intelligence",
-            description: "Evaluate before you commit. The industry standard for pre-investment partner vetting.",
-            features: ["Partner Trust Report", "Risk Score", "6 Trust Layers"],
+            id: "assess",
+            title: "1. ASSESS Partners",
+            description: "Run comprehensive 6-layer assessments on vendors, suppliers, and partners before committing capital.",
+            features: ["DTRI Score (0-100)", "Red Flag Detection", "Market Benchmarking"],
             icon: Shield,
-            color: 'amber',
-            href: "/products/partner-intelligence"
+            color: 'cyan',
+            href: "/auth/register"
         },
         {
-            id: "deployment-insights",
-            title: "Deployment Insights",
-            description: "Track real-world performance. Monitoring that doesn't sleep when the contract is signed.",
-            features: ["Deployment File", "Activity Graph", "Real-Time Alerts"],
+            id: "monitor",
+            title: "2. MONITOR Deployments",
+            description: "Track deployment health, partner performance, and trust signal evolution across all your projects.",
+            features: ["Live Trust Scores", "Degradation Alerts", "Portfolio Dashboards"],
             icon: Activity,
             color: 'blue',
-            href: "/products/deployment-insights"
+            href: "/contact"
         },
         {
-            id: "trust-signals",
-            title: "Trust Signals",
-            description: "Raw data, structured. Access the underlying indices and nodes powering our intelligence.",
-            features: ["Market Index", "Raw Nodes", "Evidence Vault"],
+            id: "verify",
+            title: "3. VERIFY Intent",
+            description: "Expert forensic investigation for high-stakes deployments. Includes Strategic Intent analysis.",
+            features: ["Strategic Intent Forensics", "Incentive Analysis", "Reference Verification"],
             icon: Zap,
-            color: 'green',
-            href: "/products/trust-signals"
-        },
-        {
-            id: "gitance-engine",
-            title: "Gitance Engine",
-            description: "The core processing power. Automated extraction, parsing, and scoring at scale.",
-            features: ["Document Parser", "Signal Extractor", "API Access"],
-            icon: Cpu,
-            color: 'cyan',
-            href: "/platform"
+            color: 'purple',
+            href: "/expert-analysis"
         }
     ];
 
-    const colorMap: Record<string, { bg: string; border: string; icon: string; iconHover: string }> = {
-        amber: { bg: 'bg-amber-500/10', border: 'hover:border-amber-500/50', icon: 'text-amber-400', iconHover: 'group-hover:text-amber-300' },
+    const colors: Record<string, { bg: string; border: string; icon: string; iconHover: string }> = {
+        cyan: { bg: 'bg-cyan-500/10', border: 'hover:border-cyan-500/50', icon: 'text-cyan-400', iconHover: 'group-hover:text-cyan-300' },
         blue: { bg: 'bg-blue-500/10', border: 'hover:border-blue-500/50', icon: 'text-blue-400', iconHover: 'group-hover:text-blue-300' },
-        green: { bg: 'bg-green-500/10', border: 'hover:border-green-500/50', icon: 'text-green-400', iconHover: 'group-hover:text-green-300' },
-        cyan: { bg: 'bg-cyan-500/10', border: 'hover:border-cyan-500/50', icon: 'text-cyan-400', iconHover: 'group-hover:text-cyan-300' }
+        purple: { bg: 'bg-purple-500/10', border: 'hover:border-purple-500/50', icon: 'text-purple-400', iconHover: 'group-hover:text-purple-300' }
     };
 
     return (
-        <section className="py-24 bg-gray-950 border-t border-gray-800/50" aria-labelledby="product-suite-heading">
+        <section id="products" className="py-24 bg-midnight relative overflow-hidden">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyan-500/5 rounded-full blur-3xl"></div>
+
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-16">
                     <div className="inline-flex items-center space-x-2 mb-4 bg-cyan-500/20 border border-cyan-500/40 rounded-full px-4 py-1.5">
-                        <Cpu size={14} className="text-cyan-300" />
-                        <span className="text-white text-xs font-semibold uppercase tracking-wider">Product Suite</span>
+                        <Cpu size={14} className="text-white" />
+                        <span className="text-white text-xs font-semibold uppercase tracking-wider">Platform Overview</span>
                     </div>
                     <h2 id="product-suite-heading" className="text-4xl font-bold text-white mb-4">
-                        The Trust Operating System
+                        One Platform. Three Intelligence Workflows.
                     </h2>
                     <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-                        Four specialized modules working in concert to de-risk your deployment lifecycle.
+                        Complete deployment risk visibility from vetting to continuous oversight.
                     </p>
                 </div>
 
-                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="grid md:grid-cols-3 gap-8">
                     {products.map((product) => {
-                        const colors = colorMap[product.color];
                         const Icon = product.icon;
+                        const colorSet = colors[product.color];
                         return (
-                            <Link key={product.id} href={product.href} className="group" aria-label={`Learn more about ${product.title}`}>
-                                <div className={`bg-gray-900/50 h-full p-8 rounded-xl border border-gray-800 ${colors.border} transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:bg-gray-900/80`}>
-                                    <div className={`mb-6 ${colors.bg} w-12 h-12 rounded-lg flex items-center justify-center group-hover:scale-110 transition-all duration-300`}>
-                                        <Icon size={24} className={`${colors.icon} ${colors.iconHover} transition-colors`} />
-                                    </div>
-                                    <h3 className="text-xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors">
-                                        {product.title}
-                                    </h3>
-                                    <p className="text-sm text-gray-400 mb-6 leading-relaxed">
-                                        {product.description}
-                                    </p>
-                                    <div className="flex flex-wrap gap-2">
-                                        {product.features.map((feature, idx) => (
-                                            <span key={idx} className="text-xs text-gray-300 bg-gray-800/50 px-2 py-1 rounded">
-                                                {feature}
-                                            </span>
-                                        ))}
-                                    </div>
-                                    <div className="mt-6 flex items-center gap-2 text-sm text-gray-400 group-hover:text-cyan-400 transition-colors">
-                                        <span>Learn more</span>
-                                        <ArrowRight size={14} />
-                                    </div>
+                            <Link
+                                key={product.id}
+                                href={product.href}
+                                className={`group block bg-gray-900/50 rounded-2xl p-8 border border-gray-800 ${colorSet.border} hover:bg-gray-900 transition-all duration-300`}
+                            >
+                                <div className={`w-14 h-14 ${colorSet.bg} rounded-xl flex items-center justify-center mb-6`}>
+                                    <Icon className={`${colorSet.icon} ${colorSet.iconHover} transition-colors`} size={28} />
+                                </div>
+                                <h3 className="text-xl font-bold text-white mb-3">{product.title}</h3>
+                                <p className="text-gray-400 text-sm mb-6 leading-relaxed">{product.description}</p>
+                                <ul className="space-y-2 mb-6">
+                                    {product.features.map((feature) => (
+                                        <li key={feature} className="flex items-center text-gray-300 text-sm">
+                                            <div className={`w-1.5 h-1.5 rounded-full ${colorSet.icon.replace('text-', 'bg-')} mr-2`}></div>
+                                            {feature}
+                                        </li>
+                                    ))}
+                                </ul>
+                                <div className="flex items-center text-sm font-semibold text-gray-400 group-hover:text-cyan-400 transition-colors">
+                                    Learn More <ArrowRight size={16} className="ml-1 group-hover:translate-x-1 transition-transform" />
                                 </div>
                             </Link>
                         );

@@ -1,7 +1,7 @@
 "use client";
 import Link from 'next/link';
 import Logo from '@/components/Logo';
-import { ChevronDown, Zap, Eye, Shield, Cpu, Briefcase, Landmark, Globe, Building2 } from 'lucide-react';
+import { ChevronDown, Zap, Eye, Shield, Cpu, Briefcase, Landmark, Globe, Building2, Menu, X } from 'lucide-react';
 import { useState, useRef } from 'react';
 
 export function Navbar() {
@@ -92,7 +92,7 @@ export function Navbar() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     return (
-        <nav className="bg-gray-950 border-b border-gray-800 sticky top-0 z-50">
+        <nav className="bg-midnight/95 backdrop-blur-md border-b border-gray-800 sticky top-0 z-50">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16">
                     <Link href="/">
@@ -115,7 +115,7 @@ export function Navbar() {
                             </button>
 
                             <div className={`absolute left-0 mt-0 pt-2 w-96 transition-all duration-200 ${isProductsOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'}`}>
-                                <div className="bg-gray-900/95 backdrop-blur-xl border border-gray-700/50 rounded-xl shadow-2xl p-6 space-y-4">
+                                <div className="bg-gray-900 border border-gray-800 rounded-xl shadow-2xl p-6 space-y-4">
                                     {products.map((product) => {
                                         const Icon = product.icon;
                                         return (
@@ -133,7 +133,7 @@ export function Navbar() {
                                         );
                                     })}
 
-                                    <div className="border-t border-gray-700/50 pt-4">
+                                    <div className="border-t border-gray-800 pt-4">
                                         <Link
                                             href="/platform"
                                             className="flex items-center space-x-2 p-3 rounded-lg hover:bg-gray-800/50 transition-colors group/item"
@@ -163,7 +163,7 @@ export function Navbar() {
                             </button>
 
                             <div className={`absolute left-0 mt-0 pt-2 w-96 transition-all duration-200 ${isSolutionsOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'}`}>
-                                <div className="bg-gray-900/95 backdrop-blur-xl border border-gray-700/50 rounded-xl shadow-2xl p-6 space-y-4">
+                                <div className="bg-gray-900 border border-gray-800 rounded-xl shadow-2xl p-6 space-y-4">
                                     {solutions.map((solution) => {
                                         const Icon = solution.icon;
                                         return (
@@ -189,7 +189,7 @@ export function Navbar() {
                     </div>
 
                     <div className="hidden md:flex items-center space-x-4">
-                        <Link href="/auth/register" className="px-6 py-2 bg-cyan-500 text-white rounded-lg hover:bg-cyan-600 transition-colors font-medium">
+                        <Link href="/auth/register" className="px-6 py-2 bg-cyan-500 text-white rounded-lg hover:bg-cyan-400 transition-colors font-medium">
                             Get Started
                         </Link>
                     </div>
@@ -200,7 +200,7 @@ export function Navbar() {
                             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                             className="text-gray-300 hover:text-white p-2"
                         >
-                            <ChevronDown size={24} className={`transition-transform duration-200 ${isMobileMenuOpen ? 'rotate-180' : ''}`} />
+                            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
                         </button>
                     </div>
                 </div>
@@ -208,7 +208,7 @@ export function Navbar() {
 
             {/* Mobile Menu */}
             {isMobileMenuOpen && (
-                <div className="md:hidden bg-gray-900/95 backdrop-blur-xl border-b border-gray-800">
+                <div className="md:hidden bg-gray-900 border-b border-gray-800">
                     <div className="px-4 pt-2 pb-6 space-y-4">
                         <div className="space-y-4">
                             <div className="font-semibold text-white px-2">Products</div>

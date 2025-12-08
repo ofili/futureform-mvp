@@ -32,7 +32,7 @@ export function AudienceSection() {
         amber: { bg: 'bg-amber-500/10', icon: 'text-amber-400', border: 'hover:border-amber-500/30' },
         blue: { bg: 'bg-blue-500/10', icon: 'text-blue-400', border: 'hover:border-blue-500/30' },
         green: { bg: 'bg-green-500/10', icon: 'text-green-400', border: 'hover:border-green-500/30' },
-        cyan: { bg: 'bg-cyan-500/10', icon: 'text-cyan-400', border: 'hover:border-cyan-500/30' }
+        cyan: { bg: 'bg-white/10', icon: 'text-white', border: 'hover:border-cyan-500/30' }
     };
 
     return (
@@ -40,7 +40,7 @@ export function AudienceSection() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-16">
                     <div className="inline-flex items-center space-x-2 mb-4 bg-cyan-500/20 border border-cyan-500/40 rounded-full px-4 py-1.5">
-                        <Users size={14} className="text-cyan-300" />
+                        <Users size={14} className="text-white" />
                         <span className="text-white text-xs font-semibold uppercase tracking-wider">Who We Serve</span>
                     </div>
                     <h2 className="text-4xl font-bold text-white mb-4">
