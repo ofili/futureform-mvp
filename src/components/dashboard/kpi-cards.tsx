@@ -1,7 +1,4 @@
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { TrendingUp, FileText, Activity, AlertTriangle } from 'lucide-react';
+import { TrendingUp, FileText, Activity, Coins, ArrowUpRight, ArrowDownRight } from 'lucide-react';
 
 interface KPICardsProps {
     avgTrustScore: number;
@@ -11,71 +8,97 @@ interface KPICardsProps {
 }
 
 export function KPICards({ avgTrustScore, totalProjects, activeAssessments, creditsRemaining }: KPICardsProps) {
+    const cards = [
+        {
+            label: 'Avg Trust Score',
+            value: `${avgTrustScore}%`,
+            change: '+3%',
+            changeType: 'positive' as const,
+            icon: TrendingUp,
+            iconBg: 'bg-blue-100',
+            iconColor: 'text-blue-600',
+            accent: 'border-l-blue-500'
+        },
+        {
+            label: 'Total Projects',
+            value: totalProjects.toString(),
+            subtitle: 'Assessment projects',
+            icon: FileText,
+            iconBg: 'bg-gray-100',
+            iconColor: 'text-gray-600',
+            accent: 'border-l-gray-400'
+        },
+        {
+            label: 'Active Assessments',
+            value: activeAssessments.toString(),
+            subtitle: 'In progress',
+            icon: Activity,
+            iconBg: 'bg-orange-100',
+            iconColor: 'text-orange-600',
+            accent: 'border-l-orange-500'
+        },
+        {
+            label: 'Credits Remaining',
+            value: creditsRemaining.toString(),
+            change: creditsRemaining < 5 ? 'Low balance' : undefined,
+            changeType: creditsRemaining < 5 ? 'negative' as const : undefined,
+            icon: Coins,
+            iconBg: creditsRemaining < 5 ? 'bg-red-100' : 'bg-green-100',
+            iconColor: creditsRemaining < 5 ? 'text-red-600' : 'text-green-600',
+            accent: creditsRemaining < 5 ? 'border-l-red-500' : 'border-l-green-500',
+            action: creditsRemaining < 5 ? { label: 'Top up', href: '/dashboard/credits' } : undefined
+        }
+    ];
+
     return (
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            {/* Average Trust Score */}
-            <Card className="border-2 border-blue-200 dark:border-blue-900 bg-gradient-to-br from-blue-50 to-white dark:from-blue-950 dark:to-gray-900">
-                <CardHeader className="pb-3">
-                    <div className="flex justify-between items-start">
-                        <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400">Avg Trust Score</CardTitle>
-                        <TrendingUp className="h-5 w-5 text-blue-600" />
-                    </div>
-                </CardHeader>
-                <CardContent>
-                    <div className="text-4xl font-bold text-blue-600 mb-2">{avgTrustScore}%</div>
-                    <div className="flex items-center gap-2">
-                        <Badge variant="secondary" className="text-xs">+3% vs last month</Badge>
-                    </div>
-                </CardContent>
-            </Card>
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+            {cards.map((card, index) => {
+                const Icon = card.icon;
+                return (
+                    <div
+                        key={index}
+                        className={`bg-white rounded-xl border border-l-4 ${card.accent} shadow-sm hover:shadow-md transition-all p-5`}
+                    >
+                        <div className="flex items-start justify-between">
+                            <div className="flex-1">
+                                <p className="text-sm font-medium text-gray-500 mb-1">{card.label}</p>
+                                <p className="text-3xl font-bold text-gray-900">{card.value}</p>
 
-            {/* Total Projects */}
-            <Card className="hover:shadow-lg transition-shadow">
-                <CardHeader className="pb-3">
-                    <div className="flex justify-between items-start">
-                        <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400">Total Projects</CardTitle>
-                        <FileText className="h-5 w-5 text-gray-600" />
-                    </div>
-                </CardHeader>
-                <CardContent>
-                    <div className="text-4xl font-bold text-gray-900 dark:text-white mb-2">{totalProjects}</div>
-                    <p className="text-xs text-gray-500">Assessment projects</p>
-                </CardContent>
-            </Card>
+                                {/* Change indicator or subtitle */}
+                                <div className="mt-2 flex items-center gap-2">
+                                    {card.change && (
+                                        <span className={`inline-flex items-center text-xs font-medium ${card.changeType === 'positive' ? 'text-green-600' : 'text-red-600'
+                                            }`}>
+                                            {card.changeType === 'positive' ? (
+                                                <ArrowUpRight className="w-3 h-3 mr-0.5" />
+                                            ) : (
+                                                <ArrowDownRight className="w-3 h-3 mr-0.5" />
+                                            )}
+                                            {card.change}
+                                        </span>
+                                    )}
+                                    {card.subtitle && !card.change && (
+                                        <span className="text-xs text-gray-400">{card.subtitle}</span>
+                                    )}
+                                    {card.action && (
+                                        <a
+                                            href={card.action.href}
+                                            className="text-xs font-medium text-blue-600 hover:text-blue-700 hover:underline"
+                                        >
+                                            {card.action.label} →
+                                        </a>
+                                    )}
+                                </div>
+                            </div>
 
-            {/* Active Assessments */}
-            <Card className="hover:shadow-lg transition-shadow">
-                <CardHeader className="pb-3">
-                    <div className="flex justify-between items-start">
-                        <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400">Active Assessments</CardTitle>
-                        <Activity className="h-5 w-5 text-orange-500" />
+                            {/* Icon */}
+                            <div className={`p-3 rounded-lg ${card.iconBg}`}>
+                                <Icon className={`w-5 h-5 ${card.iconColor}`} />
+                            </div>
+                        </div>
                     </div>
-                </CardHeader>
-                <CardContent>
-                    <div className="text-4xl font-bold text-orange-600 mb-2">{activeAssessments}</div>
-                    <p className="text-xs text-gray-500">In progress</p>
-                </CardContent>
-            </Card>
-
-            {/* Credits */}
-            <Card className={`hover:shadow-lg transition-shadow ${creditsRemaining < 5 ? 'border-2 border-red-300 dark:border-red-800' : ''}`}>
-                <CardHeader className="pb-3">
-                    <div className="flex justify-between items-start">
-                        <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400">Credits</CardTitle>
-                        <AlertTriangle className={`h-5 w-5 ${creditsRemaining < 5 ? 'text-red-500' : 'text-blue-500'}`} />
-                    </div>
-                </CardHeader>
-                <CardContent>
-                    <div className={`text-4xl font-bold mb-2 ${creditsRemaining < 5 ? 'text-red-600' : 'text-blue-600'}`}>
-                        {creditsRemaining}
-                    </div>
-                    {creditsRemaining < 5 && (
-                        <Button variant="link" className="text-xs text-red-600 p-0 h-auto">
-                            Purchase more →
-                        </Button>
-                    )}
-                </CardContent>
-            </Card>
+                );
+            })}
         </div>
     );
 }

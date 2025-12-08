@@ -10,7 +10,8 @@ import { TrustLayerChart } from '@/components/dashboard/trust-layer-chart';
 import { TrustTrendChart } from '@/components/dashboard/trust-trend-chart';
 import { RecentActivity } from '@/components/dashboard/recent-activity';
 import { AnalyticsTabs } from '@/components/dashboard/analytics-tabs';
-import { TrendingUp, Activity, Calendar, ShieldCheck } from 'lucide-react';
+import { QuickAccessPanel } from '@/components/dashboard/quick-access-panel';
+import { TrendingUp, Activity, Calendar, ShieldCheck, MoreHorizontal } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import MonitoringDashboard from '@/components/monitoring/MonitoringDashboard';
 
@@ -22,9 +23,10 @@ const mockStats = {
   avgTrustScore: 78,
   creditsRemaining: 3,
   recentActivity: [
-    { id: '1', type: 'assessment_completed' as const, description: 'Partner Alpha completed security assessment', timestamp: '2025-11-18T10:30:00Z', impact: 'high' as const },
-    { id: '2', type: 'project_created' as const, description: 'New project: Q4 Vendor Compliance', timestamp: '2025-11-18T09:15:00Z', impact: 'medium' as const },
-    { id: '3', type: 'partner_invited' as const, description: 'Invited 3 partners to Beta Project', timestamp: '2025-11-17T16:45:00Z', impact: 'low' as const }
+    { id: '1', type: 'assessment_completed' as const, description: 'completed security assessment for Partner Alpha', timestamp: new Date().toISOString(), impact: 'high' as const, user: { name: 'Sarah Chen' } },
+    { id: '2', type: 'project_created' as const, description: 'created new project: Q4 Vendor Compliance', timestamp: new Date(Date.now() - 3600000).toISOString(), impact: 'medium' as const, user: { name: 'Marcus Johnson' } },
+    { id: '3', type: 'partner_invited' as const, description: 'invited 3 partners to Beta Project', timestamp: new Date(Date.now() - 86400000).toISOString(), impact: 'low' as const, user: { name: 'Emily Rodriguez' } },
+    { id: '4', type: 'alert' as const, description: 'Trust score dropped below threshold for Vendor XYZ', timestamp: new Date(Date.now() - 90000000).toISOString(), impact: 'high' as const }
   ],
   trustScoreDistribution: [
     { layer: 'Reliability', score: 85, benchmark: 75 },
@@ -45,6 +47,43 @@ const mockStats = {
   inactivePartners: 2
 };
 
+// Card wrapper component for consistent styling
+function DashboardCard({
+  children,
+  title,
+  icon: Icon,
+  action,
+  className = ''
+}: {
+  children: React.ReactNode;
+  title?: string;
+  icon?: React.ElementType;
+  action?: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <div className={`bg-white rounded-xl border shadow-sm hover:shadow-md transition-shadow ${className}`}>
+      {title && (
+        <div className="flex items-center justify-between px-6 py-4 border-b bg-gray-50/30">
+          <h2 className="text-base font-semibold text-gray-900 flex items-center gap-2">
+            {Icon && <Icon className="w-5 h-5 text-blue-600" />}
+            {title}
+          </h2>
+          <div className="flex items-center gap-2">
+            {action}
+            <Button variant="ghost" size="icon" className="h-8 w-8">
+              <MoreHorizontal className="w-4 h-4 text-gray-400" />
+            </Button>
+          </div>
+        </div>
+      )}
+      <div className="p-6">
+        {children}
+      </div>
+    </div>
+  );
+}
+
 export default function Dashboard() {
   const stats = mockStats;
 
@@ -58,81 +97,73 @@ export default function Dashboard() {
 
   return (
     <DashboardLayout>
-      <div className="space-y-8">
-        {/* Header Section */}
-        <DashboardHeader />
+      {/* Subtle Background Pattern */}
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-gray-50 to-blue-50/30">
+        <div className="space-y-6 p-6">
+          {/* Header Section */}
+          <DashboardHeader />
 
-        {/* KPI Cards - Top Row */}
-        <KPICards
-          avgTrustScore={stats.avgTrustScore}
-          totalProjects={stats.totalProjects}
-          activeAssessments={stats.activeAssessments}
-          creditsRemaining={stats.creditsRemaining}
-        />
+          {/* Quick Access Section */}
+          <QuickAccessPanel />
 
-        {/* Main Grid Layout */}
-        <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
+          {/* KPI Cards - Top Row */}
+          <KPICards
+            avgTrustScore={stats.avgTrustScore}
+            totalProjects={stats.totalProjects}
+            activeAssessments={stats.activeAssessments}
+            creditsRemaining={stats.creditsRemaining}
+          />
 
-          {/* Left Column (2/3 width) */}
-          <div className="xl:col-span-2 space-y-8">
+          {/* Main Grid Layout */}
+          <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
 
-            {/* Trust Intelligence */}
-            <div className="bg-white p-6 rounded-xl border shadow-sm">
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-lg font-semibold flex items-center gap-2">
-                  <TrendingUp className="w-5 h-5 text-primary" />
-                  Trust Intelligence
-                </h2>
-                <Button variant="ghost" size="sm">View Full Report</Button>
-              </div>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <TrustLayerChart data={stats.trustScoreDistribution} />
-                <TrustTrendChart data={stats.monthlyActivity} />
-              </div>
+            {/* Left Column (2/3 width) */}
+            <div className="xl:col-span-2 space-y-6">
+
+              {/* Trust Intelligence */}
+              <DashboardCard
+                title="Trust Intelligence"
+                icon={TrendingUp}
+                action={<Button variant="ghost" size="sm">View Full Report</Button>}
+              >
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                  <TrustLayerChart data={stats.trustScoreDistribution} />
+                  <TrustTrendChart data={stats.monthlyActivity} />
+                </div>
+              </DashboardCard>
+
+              {/* Continuous Monitoring */}
+              <DashboardCard
+                title="Continuous Monitoring"
+                icon={ShieldCheck}
+                action={<Button variant="ghost" size="sm">Manage Partners</Button>}
+              >
+                <MonitoringDashboard />
+              </DashboardCard>
+
+              {/* Advanced Analytics */}
+              <DashboardCard title="Advanced Analytics" icon={Calendar}>
+                <AnalyticsTabs />
+              </DashboardCard>
             </div>
 
-            {/* Continuous Monitoring */}
-            <div className="bg-white p-6 rounded-xl border shadow-sm">
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-lg font-semibold flex items-center gap-2">
-                  <ShieldCheck className="w-5 h-5 text-primary" />
-                  Continuous Monitoring
-                </h2>
-                <Button variant="ghost" size="sm">Manage Partners</Button>
-              </div>
-              <MonitoringDashboard />
-            </div>
+            {/* Right Column (1/3 width) */}
+            <div className="space-y-6">
 
-            {/* Advanced Analytics */}
-            <div className="bg-white p-6 rounded-xl border shadow-sm">
-              <h2 className="text-lg font-semibold flex items-center gap-2 mb-6">
-                <Calendar className="w-5 h-5 text-primary" />
-                Advanced Analytics
-              </h2>
-              <AnalyticsTabs />
-            </div>
-          </div>
+              {/* System Health */}
+              <SystemHealthPanel
+                avgTrustScore={stats.avgTrustScore}
+                activeRisks={stats.activeRisks}
+                nextActionsCount={nextActions.length}
+              />
 
-          {/* Right Column (1/3 width) */}
-          <div className="space-y-8">
+              {/* Next Actions */}
+              <NextActionsPanel actions={nextActions} />
 
-            {/* System Health */}
-            <SystemHealthPanel
-              avgTrustScore={stats.avgTrustScore}
-              activeRisks={stats.activeRisks}
-              nextActionsCount={nextActions.length}
-            />
-
-            {/* Next Actions */}
-            <NextActionsPanel actions={nextActions} />
-
-            {/* Recent Activity */}
-            <div className="bg-white p-6 rounded-xl border shadow-sm">
-              <h2 className="text-lg font-semibold flex items-center gap-2 mb-4">
-                <Activity className="w-5 h-5 text-primary" />
-                Recent Activity
-              </h2>
-              <RecentActivity activities={stats.recentActivity} />
+              {/* Recent Activity */}
+              <DashboardCard title="Recent Activity" icon={Activity}>
+                <RecentActivity activities={stats.recentActivity} />
+              </DashboardCard>
             </div>
           </div>
         </div>
