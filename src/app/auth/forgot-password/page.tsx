@@ -1,107 +1,123 @@
-'use client';
 
-import { useState } from 'react';
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Label } from '@/components/ui/label';
-import { toast } from 'sonner';
-import { Loader2, ArrowLeft, Mail } from 'lucide-react';
+'use client'
+
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import * as z from 'zod'
+import Link from 'next/link'
+import { ArrowLeft, Loader2, Mail } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form'
+import { useToast } from '@/components/ui/use-toast'
+
+const formSchema = z.object({
+  email: z.string().email('Please enter a valid email address'),
+})
 
 export default function ForgotPasswordPage() {
-  const [email, setEmail] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
+  const [isSuccess, setIsSuccess] = useState(false)
+  const { toast } = useToast()
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      email: '',
+    },
+  })
 
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    setIsLoading(true)
     try {
-      const res = await fetch('/api/auth/forgot-password', {
+      const response = await fetch('/api/v1/auth/forgot-password', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
-      });
+        body: JSON.stringify(values),
+      })
 
-      if (!res.ok) {
-        throw new Error('Failed to send reset email');
-      }
+      if (!response.ok) throw new Error('Something went wrong')
 
-      setIsSubmitted(true);
-      toast.success('Reset link sent to your email');
+      setIsSuccess(true)
     } catch (error) {
-      toast.error('Something went wrong. Please try again.');
+      toast({
+        variant: 'destructive',
+        title: 'Error',
+        description: 'Something went wrong. Please try again.',
+      })
     } finally {
-      setIsLoading(false);
+      setIsLoading(false)
     }
-  };
+  }
 
-  if (isSubmitted) {
+  if (isSuccess) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
-        <Card className="w-full max-w-md">
-          <CardHeader className="text-center">
-            <div className="mx-auto w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-4">
-              <Mail className="w-6 h-6 text-green-600" />
-            </div>
-            <CardTitle className="text-2xl">Check your email</CardTitle>
-            <CardDescription>
-              We have sent a password reset link to <strong>{email}</strong>.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="text-center text-sm text-muted-foreground">
-            Didn't receive the email? Check your spam folder or try again.
-          </CardContent>
-          <CardFooter className="flex justify-center">
-            <Link href="/auth/login">
-              <Button variant="ghost">
-                <ArrowLeft className="mr-2 h-4 w-4" />
-                Back to Login
-              </Button>
-            </Link>
-          </CardFooter>
-        </Card>
+      <div className="container flex h-screen w-screen flex-col items-center justify-center">
+        <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
+          <div className="flex flex-col space-y-2 text-center">
+            <Mail className="mx-auto h-12 w-12 text-blue-600" />
+            <h1 className="text-2xl font-semibold tracking-tight">Check your email</h1>
+            <p className="text-sm text-muted-foreground">
+              We&apos;ve sent a password reset link to {form.getValues('email')}.
+            </p>
+          </div>
+          <Link href="/auth/login">
+            <Button variant="outline" className="w-full">
+              Back to Login
+            </Button>
+          </Link>
+        </div>
       </div>
-    );
+    )
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
-      <Card className="w-full max-w-md">
-        <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl font-bold">Forgot password</CardTitle>
-          <CardDescription>
-            Enter your email address and we will send you a link to reset your password.
-          </CardDescription>
-        </CardHeader>
-        <form onSubmit={handleSubmit}>
-          <CardContent className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="name@example.com"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-          </CardContent>
-          <CardFooter className="flex flex-col space-y-4">
+    <div className="container flex h-screen w-screen flex-col items-center justify-center">
+      <Link
+        href="/auth/login"
+        className="absolute left-4 top-4 md:left-8 md:top-8 flex items-center text-sm font-medium text-muted-foreground hover:text-primary"
+      >
+        <ArrowLeft className="mr-2 h-4 w-4" />
+        Back to Login
+      </Link>
+      <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
+        <div className="flex flex-col space-y-2 text-center">
+          <h1 className="text-2xl font-semibold tracking-tight">Forgot Password</h1>
+          <p className="text-sm text-muted-foreground">
+            Enter your email to receive a password reset link.
+          </p>
+        </div>
+
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Email</FormLabel>
+                  <FormControl>
+                    <Input placeholder="name@example.com" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             <Button className="w-full" type="submit" disabled={isLoading}>
               {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               Send Reset Link
             </Button>
-            <Link href="/auth/login" className="text-sm text-muted-foreground hover:text-primary flex items-center">
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to Login
-            </Link>
-          </CardFooter>
-        </form>
-      </Card>
+          </form>
+        </Form>
+      </div>
     </div>
-  );
+  )
 }

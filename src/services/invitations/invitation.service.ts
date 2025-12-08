@@ -6,6 +6,12 @@ import { InsufficientCreditsError, CreditExpiredError } from '@/lib/errors/credi
 export interface AcceptInvitationInput {
 	token: string;
 	password?: string;
+	userDetails?: {
+		firstName: string;
+		lastName: string;
+		jobTitle?: string;
+		department?: string;
+	};
 }
 
 export interface AcceptInvitationResult {
@@ -120,8 +126,10 @@ export class InvitationService {
 				data: {
 					email: invitation.email,
 					password: hashedPassword,
-					firstName: invitation.name?.split(' ')[0] || 'User',
-					lastName: invitation.name?.split(' ').slice(1).join(' ') || '',
+					firstName: input.userDetails?.firstName || invitation.name?.split(' ')[0] || 'User',
+					lastName: input.userDetails?.lastName || invitation.name?.split(' ').slice(1).join(' ') || '',
+                    jobTitle: input.userDetails?.jobTitle,
+                    department: input.userDetails?.department,
 					role: 'USER',
 					verified: true,
 					emailVerified: true,

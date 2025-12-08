@@ -30,7 +30,7 @@ export function DeploymentInsightsHero() {
 
                         <div className="flex flex-col sm:flex-row gap-4 mb-12">
                             <Link
-                                href="/auth/signup?product=deployment-insights"
+                                href="/auth/register?product=deployment-insights"
                                 className="px-8 py-4 bg-blue-500 text-white rounded-lg hover:bg-blue-400 transition-all font-bold flex items-center justify-center space-x-2 shadow-[0_0_30px_rgba(59,130,246,0.3)] hover:shadow-[0_0_40px_rgba(59,130,246,0.4)] hover:scale-105"
                             >
                                 <span>Start Monitoring</span>
@@ -99,8 +99,8 @@ export function DeploymentInsightsHero() {
                                     <div
                                         key={item.market}
                                         className={`p-2 rounded text-center text-xs font-mono ${item.status === 'active' ? 'bg-green-500/10 text-green-400 border border-green-500/20' :
-                                                item.status === 'warning' ? 'bg-yellow-500/10 text-yellow-400 border border-yellow-500/20' :
-                                                    'bg-gray-800 text-gray-500 border border-gray-700'
+                                            item.status === 'warning' ? 'bg-yellow-500/10 text-yellow-400 border border-yellow-500/20' :
+                                                'bg-gray-800 text-gray-500 border border-gray-700'
                                             }`}
                                     >
                                         {item.market}

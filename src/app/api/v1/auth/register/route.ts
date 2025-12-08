@@ -1,6 +1,8 @@
+
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 import bcrypt from 'bcryptjs';
+import { userService } from '@/services/users/user.service';
 
 export async function POST(req: Request) {
     try {
@@ -11,18 +13,6 @@ export async function POST(req: Request) {
             return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
         }
 
-        // Check if user already exists
-        const existingUser = await prisma.user.findUnique({
-            where: { email }
-        });
-
-        if (existingUser) {
-            return NextResponse.json({ error: 'User already exists' }, { status: 400 });
-        }
-
-        // Hash password
-        const hashedPassword = await bcrypt.hash(user.password, 12);
-
         // Determine tier based on plan
         const tierName = plan === 'guided' ? 'Guided' : 'Free';
 
@@ -31,57 +21,33 @@ export async function POST(req: Request) {
             where: { name: tierName }
         });
 
-        // Create organization, user, and organization member in a transaction
-        const result = await prisma.$transaction(async (tx) => {
-            // Create organization
-            const newOrg = await tx.organization.create({
-                data: {
-                    name: organization.name,
-                    type: organization.type || 'Other',
-                    sectorFocus: organization.sectorFocus,
-                    region: organization.region,
-                    country: organization.country,
-                    relationshipStage: organization.relationshipStage || 'Discovery',
-                    source: organization.source,
-                    referralSource: organization.referralSource,
-                    pilotAgreementSigned: organization.pilotAgreementSigned || false,
-                    caseStudyApproval: organization.caseStudyApproval || false,
-                    tierId: selectedTier?.id
-                }
+        // Hash password
+        const hashedPassword = await bcrypt.hash(user.password, 12);
+
+        try {
+            const result = await userService.register({
+                email,
+                passwordHash: hashedPassword,
+                user,
+                organization,
+                plan,
+                tierId: selectedTier?.id
             });
 
-            // Create user with USER role (global role)
-            const newUser = await tx.user.create({
-                data: {
-                    email,
-                    password: hashedPassword,
-                    firstName: user.firstName,
-                    lastName: user.lastName,
-                    jobTitle: user.jobTitle,
-                    department: user.department,
-                    role: 'USER', // Global role is USER
-                    emailVerified: true // Auto-verify for now
-                }
+            return NextResponse.json({
+                message: 'Registration successful. Please log in.',
+                userId: result.user.id
             });
+        } catch (error: any) {
+             if (error.message === 'User already exists') {
+                return NextResponse.json({ error: 'User already exists' }, { status: 400 });
+             }
+             throw error;
+        }
 
-            // Create organization member relationship
-            await tx.organizationMember.create({
-                data: {
-                    userId: newUser.id,
-                    organizationId: newOrg.id,
-                    role: 'OWNER' // Creator is the owner in OrganizationMember
-                }
-            });
-
-            return { user: newUser, organization: newOrg };
-        });
-
-        return NextResponse.json({
-            message: 'Registration successful. Please log in.',
-            userId: result.user.id
-        });
     } catch (error) {
         console.error('Registration error:', error);
         return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
     }
 }
+

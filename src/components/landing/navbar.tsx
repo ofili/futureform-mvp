@@ -89,6 +89,8 @@ export function Navbar() {
         }, 150);
     };
 
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
     return (
         <nav className="bg-gray-950 border-b border-gray-800 sticky top-0 z-50">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -97,7 +99,8 @@ export function Navbar() {
                         <Logo />
                     </Link>
 
-                    <div className="flex items-center space-x-8">
+                    {/* Desktop Navigation */}
+                    <div className="hidden md:flex items-center space-x-8">
                         {/* Products Dropdown - Hover */}
                         <div
                             className="relative"
@@ -185,13 +188,66 @@ export function Navbar() {
                         <Link href="/docs" className="text-gray-300 hover:text-white transition-colors">Docs</Link>
                     </div>
 
-                    <div className="flex items-center space-x-4">
+                    <div className="hidden md:flex items-center space-x-4">
                         <Link href="/auth/register" className="px-6 py-2 bg-cyan-500 text-white rounded-lg hover:bg-cyan-600 transition-colors font-medium">
                             Get Started
                         </Link>
                     </div>
+
+                    {/* Mobile Menu Button */}
+                    <div className="md:hidden flex items-center">
+                        <button
+                            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                            className="text-gray-300 hover:text-white p-2"
+                        >
+                            <ChevronDown size={24} className={`transition-transform duration-200 ${isMobileMenuOpen ? 'rotate-180' : ''}`} />
+                        </button>
+                    </div>
                 </div>
             </div>
+
+            {/* Mobile Menu */}
+            {isMobileMenuOpen && (
+                <div className="md:hidden bg-gray-900/95 backdrop-blur-xl border-b border-gray-800">
+                    <div className="px-4 pt-2 pb-6 space-y-4">
+                        <div className="space-y-4">
+                            <div className="font-semibold text-white px-2">Products</div>
+                            <div className="grid gap-2 pl-4">
+                                {products.map((product) => {
+                                    const Icon = product.icon;
+                                    return (
+                                        <Link key={product.title} href={product.href} className="flex items-center space-x-3 text-gray-300 hover:text-white py-2" onClick={() => setIsMobileMenuOpen(false)}>
+                                            <Icon size={16} />
+                                            <span>{product.title}</span>
+                                        </Link>
+                                    );
+                                })}
+                            </div>
+                        </div>
+
+                        <div className="space-y-4">
+                            <div className="font-semibold text-white px-2">Solutions</div>
+                            <div className="grid gap-2 pl-4">
+                                {solutions.map((solution) => {
+                                    const Icon = solution.icon;
+                                    return (
+                                        <Link key={solution.title} href={solution.href} className="flex items-center space-x-3 text-gray-300 hover:text-white py-2" onClick={() => setIsMobileMenuOpen(false)}>
+                                            <Icon size={16} />
+                                            <span>{solution.title}</span>
+                                        </Link>
+                                    );
+                                })}
+                            </div>
+                        </div>
+
+                        <div className="pt-2 border-t border-gray-800 space-y-2">
+                            <Link href="/pricing" className="block px-2 py-2 text-gray-300 hover:text-white" onClick={() => setIsMobileMenuOpen(false)}>Pricing</Link>
+                            <Link href="/docs" className="block px-2 py-2 text-gray-300 hover:text-white" onClick={() => setIsMobileMenuOpen(false)}>Docs</Link>
+                            <Link href="/auth/register" className="block px-2 py-2 text-cyan-400 font-medium" onClick={() => setIsMobileMenuOpen(false)}>Get Started</Link>
+                        </div>
+                    </div>
+                </div>
+            )}
         </nav>
     );
 }

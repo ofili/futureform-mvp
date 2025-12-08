@@ -76,7 +76,7 @@ export default function DevelopmentFinancePage() {
 
                             <div className="flex flex-col sm:flex-row gap-4 mb-12">
                                 <Link
-                                    href="/auth/signup?solution=development-finance"
+                                    href="/auth/register?solution=development-finance"
                                     className="px-8 py-4 bg-green-500 text-white rounded-lg hover:bg-green-400 transition-all font-bold flex items-center justify-center space-x-2 shadow-[0_0_30px_rgba(34,197,94,0.3)] hover:shadow-[0_0_40px_rgba(34,197,94,0.4)] hover:scale-105"
                                 >
                                     <span>Request Demo</span>
@@ -229,7 +229,7 @@ export default function DevelopmentFinancePage() {
 
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                         <Link
-                            href="/auth/signup?solution=development-finance"
+                            href="/auth/register?solution=development-finance"
                             className="px-8 py-4 bg-green-500 text-white rounded-lg hover:bg-green-400 transition-all font-bold flex items-center justify-center space-x-2 shadow-[0_0_30px_rgba(34,197,94,0.3)] hover:shadow-[0_0_40px_rgba(34,197,94,0.4)] hover:scale-105"
                         >
                             <span>Request Demo</span>

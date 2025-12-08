@@ -421,6 +421,47 @@ export class AssessmentService {
             updatedAt: assessment.updatedAt?.toISOString(),
         };
     }
+
+    /**
+     * Save assessment draft
+     */
+    async saveDraft(assessmentId: string, questionId: string, draftData: any) {
+        // Validation handled by caller or schema
+        const draft = await prisma.assessmentDraft.upsert({
+            where: {
+                assessmentId_questionId: {
+                    assessmentId,
+                    questionId,
+                },
+            },
+            update: {
+                draftData: JSON.stringify(draftData),
+                lastSaved: new Date(),
+            },
+            create: {
+                assessmentId,
+                questionId,
+                draftData: JSON.stringify(draftData),
+                lastSaved: new Date(),
+                isSubmitted: false, // Default
+            },
+        });
+        return draft;
+    }
+
+    /**
+     * Get assessment drafts
+     */
+    async getDrafts(assessmentId: string) {
+        return prisma.assessmentDraft.findMany({
+            where: { assessmentId },
+            select: {
+                questionId: true,
+                draftData: true,
+                lastSaved: true
+            }
+        });
+    }
 }
 
 // Export singleton instance

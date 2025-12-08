@@ -30,7 +30,7 @@ export function PlatformHero() {
 
             <div className="flex flex-col sm:flex-row gap-4 mb-12">
               <Link
-                href="/auth/signup?product=platform"
+                href="/auth/register?product=platform"
                 className="px-8 py-4 bg-cyan-500 text-white rounded-lg hover:bg-cyan-400 transition-all font-bold flex items-center justify-center space-x-2 shadow-[0_0_30px_rgba(6,182,212,0.3)] hover:shadow-[0_0_40px_rgba(6,182,212,0.4)] hover:scale-105"
               >
                 <span>Get Started</span>

@@ -4,6 +4,7 @@
 import prisma from '@/lib/prisma';
 import { logger } from '@/lib/logger';
 import { OrganizationRole, Prisma } from '@prisma/client';
+import bcrypt from 'bcryptjs';
 
 export interface CreateOrganizationInput {
     name: string;
@@ -432,6 +433,77 @@ export class OrganizationService {
         }
 
         return member;
+    }
+
+    async acceptInvitation(data: {
+        token: string;
+        password?: string;
+        firstName: string;
+        lastName: string;
+        jobTitle?: string;
+        department?: string;
+    }) {
+        const { token, password, firstName, lastName, jobTitle, department } = data;
+
+        // Validate token
+        const invitation = await prisma.organizationInvitation.findUnique({
+            where: { token },
+            include: { organization: true }
+        });
+
+        if (!invitation) {
+            throw new Error('INVALID_INVITATION');
+        }
+
+        if (invitation.status !== 'PENDING') {
+            throw new Error('ALREADY_ACCEPTED');
+        }
+
+        if (new Date() > invitation.expiresAt) {
+            throw new Error('INVITATION_EXPIRED');
+        }
+
+        if (!password) {
+            throw new Error('PASSWORD_REQUIRED');
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 12);
+
+        // Transaction: Create User + Update Invitation + (Auto-add member via nested creates or separate?)
+        // The original route had:
+        // User create with nested organizations: { create: ... }
+        // Invitation update
+
+        return await prisma.$transaction(async (tx) => {
+            const user = await tx.user.create({
+                data: {
+                    email: invitation.email,
+                    password: hashedPassword,
+                    firstName,
+                    lastName,
+                    jobTitle,
+                    department,
+                    role: 'USER',
+                    organizations: {
+                        create: {
+                            organizationId: invitation.organizationId,
+                            role: invitation.role
+                        }
+                    },
+                    emailVerified: true // Assuming accepted invite verifies email
+                }
+            });
+
+            await tx.organizationInvitation.update({
+                where: { id: invitation.id },
+                data: {
+                    status: 'ACCEPTED',
+                    acceptedAt: new Date()
+                }
+            });
+
+            return user;
+        });
     }
 
     /**

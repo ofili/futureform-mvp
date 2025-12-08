@@ -61,6 +61,7 @@ model User {
   adminAuditLogs          AdminAuditLog[]
 
   // New relations for role-based assessment flow
+  passwordResetTokens PasswordResetToken[]
   assessmentInvitations     AssessmentInvitation[] @relation("AssessmentRespondent")
   sentAssessmentInvitations AssessmentInvitation[] @relation("AssessmentInviter")
   uploadedEvidence          Evidence[]             @relation("EvidenceUploader")
@@ -2078,3 +2079,17 @@ model CoPilotDraft {
 
 
 
+
+model PasswordResetToken {
+  id        String   @id @default(cuid())
+  userId    String
+  token     String   @unique
+  expiresAt DateTime
+  used      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@index([token])
+  @@map("password_reset_tokens")
+}

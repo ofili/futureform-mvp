@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useParams, useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
@@ -13,7 +14,17 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
-import { ArrowLeft, Building, User, Calendar, FileText, CheckCircle } from 'lucide-react';
+import {
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+    DialogFooter,
+} from '@/components/ui/dialog';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import { Input } from '@/components/ui/input';
+import { ArrowLeft, Building, User, Calendar, FileText, CheckCircle, MessageSquare } from 'lucide-react';
 import { format } from 'date-fns';
 import Link from 'next/link';
 
@@ -61,6 +72,46 @@ export default function AssessmentDetailPage() {
     const params = useParams();
     const router = useRouter();
     const assessmentId = params.id as string;
+
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const [selectedResponseId, setSelectedResponseId] = useState<string | null>(null);
+    const [clarificationMessage, setClarificationMessage] = useState('');
+    const [clarificationDeadline, setClarificationDeadline] = useState('');
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    const openClarificationDialog = (responseId: string) => {
+        setSelectedResponseId(responseId);
+        setClarificationMessage('');
+        setClarificationDeadline('');
+        setIsDialogOpen(true);
+    };
+
+    const submitClarificationRequest = async () => {
+        if (!selectedResponseId || !clarificationMessage || !clarificationDeadline) return;
+
+        try {
+            setIsSubmitting(true);
+            const res = await fetch(`/api/v1/assessments/${assessmentId}/responses/${selectedResponseId}/clarify`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    message: clarificationMessage,
+                    deadline: clarificationDeadline
+                })
+            });
+
+            if (!res.ok) throw new Error('Failed to submit clarification request');
+
+            // Ideally invalidate query or update local state
+            setIsDialogOpen(false);
+            window.location.reload(); // Simple refresh for MVP to show status update if we tracked it
+        } catch (error) {
+            console.error(error);
+            alert('Failed to submit request');
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
 
     const { data: response, isLoading } = useQuery({
         queryKey: ['admin-assessment-detail', assessmentId],
@@ -271,10 +322,11 @@ export default function AssessmentDetailPage() {
                                     <Table>
                                         <TableHeader>
                                             <TableRow>
-                                                <TableHead className="w-[50%]">Question</TableHead>
+                                                <TableHead className="w-[40%]">Question</TableHead>
                                                 <TableHead>Response</TableHead>
                                                 <TableHead>Weight</TableHead>
                                                 <TableHead>Date</TableHead>
+                                                <TableHead>Actions</TableHead>
                                             </TableRow>
                                         </TableHeader>
                                         <TableBody>
@@ -294,6 +346,16 @@ export default function AssessmentDetailPage() {
                                                     <TableCell>
                                                         {format(new Date(response.createdAt), 'PP')}
                                                     </TableCell>
+                                                    <TableCell>
+                                                        <Button
+                                                            variant="ghost"
+                                                            size="sm"
+                                                            onClick={() => openClarificationDialog(response.id)}
+                                                        >
+                                                            <MessageSquare className="h-4 w-4 mr-1" />
+                                                            Request Clarification
+                                                        </Button>
+                                                    </TableCell>
                                                 </TableRow>
                                             ))}
                                         </TableBody>
@@ -304,6 +366,40 @@ export default function AssessmentDetailPage() {
                     )}
                 </CardContent>
             </Card>
+
+            <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+                <DialogContent>
+                    <DialogHeader>
+                        <DialogTitle>Request Clarification</DialogTitle>
+                    </DialogHeader>
+                    <div className="space-y-4 py-4">
+                        <div className="space-y-2">
+                            <Label>Message to Partner</Label>
+                            <Textarea
+                                placeholder="Please explain..."
+                                value={clarificationMessage}
+                                onChange={(e) => setClarificationMessage(e.target.value)}
+                            />
+                        </div>
+                        <div className="space-y-2">
+                            <Label>Response Deadline</Label>
+                            <Input
+                                type="date"
+                                value={clarificationDeadline}
+                                onChange={(e) => setClarificationDeadline(e.target.value)}
+                            />
+                        </div>
+                    </div>
+                    <DialogFooter>
+                        <Button variant="outline" onClick={() => setIsDialogOpen(false)}>
+                            Cancel
+                        </Button>
+                        <Button onClick={submitClarificationRequest} disabled={isSubmitting}>
+                            {isSubmitting ? 'Sending...' : 'Send Request'}
+                        </Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
         </div>
     );
 }

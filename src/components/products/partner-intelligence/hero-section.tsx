@@ -30,7 +30,7 @@ export function PartnerIntelligenceHero() {
 
             <div className="flex flex-col sm:flex-row gap-4 mb-12">
               <Link
-                href="/auth/signup?product=partner-intelligence"
+                href="/auth/register?product=partner-intelligence"
                 className="px-8 py-4 bg-amber-500 text-white rounded-lg hover:bg-amber-400 transition-all font-bold flex items-center justify-center space-x-2 shadow-[0_0_30px_rgba(245,158,11,0.3)] hover:shadow-[0_0_40px_rgba(245,158,11,0.4)] hover:scale-105"
               >
                 <span>Start Assessment</span>
@@ -65,7 +65,7 @@ export function PartnerIntelligenceHero() {
               <div className="absolute inset-0 border-2 border-amber-500/20 rounded-full"></div>
               <div className="absolute inset-8 border border-amber-500/15 rounded-full"></div>
               <div className="absolute inset-16 border border-dashed border-amber-500/10 rounded-full"></div>
-              
+
               {/* Center Hub */}
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-midnight border-2 border-amber-500/50 rounded-full flex items-center justify-center shadow-[0_0_40px_rgba(245,158,11,0.2)]">
                 <div className="text-2xl font-bold text-amber-400">87</div>
@@ -78,21 +78,21 @@ export function PartnerIntelligenceHero() {
                   <span className="text-xs text-gray-400">Reliability</span>
                 </div>
               </div>
-              
+
               <div className="absolute top-1/4 right-0 translate-x-2">
                 <div className="bg-gray-900 border border-amber-500/30 rounded-lg px-3 py-2 text-center">
                   <TrendingUp size={16} className="text-amber-400 mx-auto mb-1" />
                   <span className="text-xs text-gray-400">Competence</span>
                 </div>
               </div>
-              
+
               <div className="absolute bottom-1/4 right-0 translate-x-2">
                 <div className="bg-gray-900 border border-green-500/30 rounded-lg px-3 py-2 text-center">
                   <Users size={16} className="text-green-400 mx-auto mb-1" />
                   <span className="text-xs text-gray-400">Governance</span>
                 </div>
               </div>
-              
+
               <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-2">
                 <div className="bg-gray-900 border border-amber-500/30 rounded-lg px-3 py-2 text-center">
                   <Globe size={16} className="text-amber-400 mx-auto mb-1" />

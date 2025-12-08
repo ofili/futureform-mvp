@@ -6,7 +6,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Textarea } from '@/components/ui/textarea';
-import { Upload, Save, Send, ArrowLeft, ArrowRight } from 'lucide-react';
+import { Upload, Save, Send, ArrowLeft, ArrowRight, AlertCircle } from 'lucide-react';
+import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 
 interface Question {
   id: string;
@@ -20,7 +21,7 @@ export default function PartnerAssessmentInterface() {
   const params = useParams();
   const router = useRouter();
   const token = params.token as string;
-  
+
   const [assessment, setAssessment] = useState<any>(null);
   const [questions, setQuestions] = useState<Question[]>([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -51,13 +52,16 @@ export default function PartnerAssessmentInterface() {
       // Load existing responses
       const responsesRes = await fetch(`/api/v1/assessments/${assessmentData.assessment.id}/responses`);
       const responsesData = await responsesRes.json();
-      
+
       const responseMap: Record<string, any> = {};
       responsesData.responses?.forEach((r: any) => {
         responseMap[r.questionId] = {
+          responseId: r.responseId, // Important for clarification
           response: r.response,
           evidence: r.evidence,
-          files: r.files || []
+          files: r.files || [],
+          validationStatus: r.validationStatus,
+          latestClarification: r.latestClarification
         };
       });
       setResponses(responseMap);
@@ -70,10 +74,10 @@ export default function PartnerAssessmentInterface() {
 
   const autoSave = async () => {
     if (!questions[currentQuestionIndex] || saving) return;
-    
+
     const questionId = questions[currentQuestionIndex].id;
     const response = responses[questionId];
-    
+
     if (response) {
       setSaving(true);
       try {
@@ -113,7 +117,7 @@ export default function PartnerAssessmentInterface() {
         method: 'POST',
         body: formData
       });
-      
+
       const data = await response.json();
       updateResponse(questionId, 'files', [
         ...(responses[questionId]?.files || []),
@@ -136,6 +140,41 @@ export default function PartnerAssessmentInterface() {
       });
     } catch (error) {
       console.error('Submit response failed:', error);
+    }
+  };
+
+  const submitClarification = async (questionId: string) => {
+    try {
+      const responseData = responses[questionId];
+      // 1. First save the updated response/files
+      await submitResponse(questionId);
+
+      // 2. Then notify reviewer via clarification reply endpoint
+      // Use the responseId returned from backend or available in state
+      // Current state structure needs to track responseId
+      const currentResponseData = responses[questionId];
+      const responseId = currentResponseData?.responseId;
+
+      if (!responseId) {
+        console.error('Missing responseId for clarification');
+        return;
+      }
+
+      await fetch(`/api/v1/assessments/${assessment.id}/responses/${responseId}/clarify/reply`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          responseText: currentResponseData.response, // Using main response as reply text for now
+          files: currentResponseData.files?.map((f: any) => f.url || f.name) // Simplified file handling
+        })
+      });
+
+      // Optimistically update status
+      updateResponse(questionId, 'validationStatus', 'PENDING');
+      updateResponse(questionId, 'latestClarification', null);
+
+    } catch (error) {
+      console.error('Submit clarification failed:', error);
     }
   };
 
@@ -224,7 +263,7 @@ export default function PartnerAssessmentInterface() {
           <CardContent className="space-y-6">
             <div>
               <h3 className="font-medium mb-2">{currentQuestion.text}</h3>
-              
+
               {currentQuestion.evidenceRequired?.length > 0 && (
                 <div className="bg-blue-50 p-4 rounded-lg">
                   <h4 className="font-medium text-blue-900 mb-2">Required Evidence:</h4>
@@ -236,6 +275,22 @@ export default function PartnerAssessmentInterface() {
                 </div>
               )}
             </div>
+
+            {/* Clarification Request Alert */}
+            {currentResponse.validationStatus === 'CLARIFICATION_REQUESTED' && (
+              <Alert variant="destructive" className="bg-red-50 border-red-200 text-red-900">
+                <AlertCircle className="h-4 w-4" />
+                <AlertTitle>Clarification Requested</AlertTitle>
+                <AlertDescription>
+                  {currentResponse.latestClarification?.clarificationMessage || 'Please review your response and provide additional information.'}
+                  {currentResponse.latestClarification?.responseDeadline && (
+                    <div className="mt-1 font-medium">
+                      Deadline: {new Date(currentResponse.latestClarification.responseDeadline).toLocaleDateString()}
+                    </div>
+                  )}
+                </AlertDescription>
+              </Alert>
+            )}
 
             {/* Response Input */}
             <div>
@@ -270,7 +325,7 @@ export default function PartnerAssessmentInterface() {
                   Choose Files
                 </Button>
               </div>
-              
+
               {currentResponse.files?.length > 0 && (
                 <div className="mt-2">
                   <p className="text-sm font-medium mb-1">Uploaded Files:</p>
@@ -307,6 +362,7 @@ export default function PartnerAssessmentInterface() {
             Previous
           </Button>
 
+
           <div className="flex items-center gap-2">
             {saving && (
               <span className="text-sm text-gray-500 flex items-center gap-1">
@@ -316,17 +372,27 @@ export default function PartnerAssessmentInterface() {
             )}
           </div>
 
-          {currentQuestionIndex === questions.length - 1 ? (
-            <Button onClick={submitAssessment}>
-              <Send className="h-4 w-4 mr-2" />
-              Submit Assessment
-            </Button>
-          ) : (
-            <Button onClick={nextQuestion}>
-              Next
-              <ArrowRight className="h-4 w-4 ml-2" />
-            </Button>
-          )}
+          <div className="flex items-center gap-2">
+            {currentResponse.validationStatus === 'CLARIFICATION_REQUESTED' ? (
+              <Button
+                onClick={() => submitClarification(currentQuestion.id)}
+                className="bg-amber-600 hover:bg-amber-700"
+              >
+                <Send className="h-4 w-4 mr-2" />
+                Resubmit for Review
+              </Button>
+            ) : currentQuestionIndex === questions.length - 1 ? (
+              <Button onClick={submitAssessment}>
+                <Send className="h-4 w-4 mr-2" />
+                Submit Assessment
+              </Button>
+            ) : (
+              <Button onClick={nextQuestion}>
+                Next
+                <ArrowRight className="h-4 w-4 ml-2" />
+              </Button>
+            )}
+          </div>
         </div>
       </div>
     </div>
