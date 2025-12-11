@@ -36,38 +36,7 @@ export default function AssessmentBasicsStep({
 }: AssessmentBasicsStepProps) {
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Assessment Depth */}
-            <div className="space-y-2">
-                <Label htmlFor="depth">Assessment Depth *</Label>
-                <Select
-                    value={data.depth}
-                    onValueChange={(value: any) => onUpdate({ depth: value })}
-                >
-                    <SelectTrigger id="depth">
-                        <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                        <SelectItem value="quick">
-                            <div>
-                                <div className="font-medium">Quick (15 questions)</div>
-                                <div className="text-xs text-muted-foreground">~30 minutes</div>
-                            </div>
-                        </SelectItem>
-                        <SelectItem value="standard">
-                            <div>
-                                <div className="font-medium">Standard (30 questions)</div>
-                                <div className="text-xs text-muted-foreground">~1 hour</div>
-                            </div>
-                        </SelectItem>
-                        <SelectItem value="deep">
-                            <div>
-                                <div className="font-medium">Deep (50 questions)</div>
-                                <div className="text-xs text-muted-foreground">~2 hours</div>
-                            </div>
-                        </SelectItem>
-                    </SelectContent>
-                </Select>
-            </div>
+            {/* Assessment Depth - Removed (Defaulted to Deep) */}
 
             {/* Sector */}
             <div className="space-y-2">

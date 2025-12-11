@@ -7,9 +7,13 @@ import { z } from 'zod';
 // Schema for creating a partner
 const createPartnerSchema = z.object({
     legalName: z.string().min(2),
+    rcNumber: z.string().optional(),
     website: z.string().url().optional().or(z.literal('')),
     sector: z.string().optional(),
     country: z.string().optional(),
+    // Organization specific contact
+    adminName: z.string().optional(),
+    adminEmail: z.string().email().optional().or(z.literal('')),
     // If linking to an existing global partner
     partnerGlobalId: z.string().optional(),
 });
@@ -31,7 +35,7 @@ export async function GET(req: Request) {
 
         return NextResponse.json({ partners });
     } catch (error) {
-        logger.error('Error fetching partners', error as Error);
+        logger.error('Error fetching partners', error as Error, { service: 'PartnerAPI', method: 'listPartners' });
         return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
     }
 }
@@ -68,7 +72,7 @@ export async function POST(req: Request) {
         return NextResponse.json({ partner: result.partner }, { status: 201 });
 
     } catch (error) {
-        logger.error('Error creating partner', error as Error);
+        logger.error('Error creating partner', error as Error, { service: 'PartnerAPI', method: 'createPartner' });
         return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
     }
 }

@@ -10,6 +10,8 @@ import { UserPlus, Mail, Building2, Send, Loader2, CreditCard, AlertCircle } fro
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { RespondentPricingCalculator } from '@/components/pricing/RespondentPricingCalculator';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { PartnerSelector } from '@/components/partners/partner-selector';
+import { Partner } from '@/hooks/use-partners';
 
 interface CreateAssessmentWizardProps {
     projectId: string;
@@ -21,6 +23,7 @@ export default function CreateAssessmentWizard({ projectId, onClose }: CreateAss
     const [formData, setFormData] = useState({
         partnerName: '',
         partnerEmail: '',
+        partnerAliasId: undefined as string | undefined,
         method: 'SELF_ASSESS'
     });
     const [sending, setSending] = useState(false);
@@ -62,7 +65,7 @@ export default function CreateAssessmentWizard({ projectId, onClose }: CreateAss
     });
 
     const handleInvite = async () => {
-        if (!formData.partnerName) return toast.error('Partner name is required');
+        if (!formData.partnerAliasId && !formData.partnerName) return toast.error('Partner is required');
         if (formData.method === 'SELF_ASSESS' && !formData.partnerEmail) return toast.error('Email is required for self-assessment');
 
         setSending(true);
@@ -152,14 +155,18 @@ export default function CreateAssessmentWizard({ projectId, onClose }: CreateAss
                         <div className="space-y-2">
                             <Label htmlFor="name" className="text-sm font-medium flex items-center gap-2">
                                 <Building2 className="h-4 w-4 text-muted-foreground" />
-                                Partner Organization Name
+                                Partner Organization
                             </Label>
-                            <Input
-                                id="name"
-                                placeholder="e.g. GridTech Solutions"
-                                value={formData.partnerName}
-                                onChange={(e) => setFormData(prev => ({ ...prev, partnerName: e.target.value }))}
-                                className="h-11"
+                            <PartnerSelector
+                                value={formData.partnerAliasId}
+                                onChange={(aliasId) => setFormData(prev => ({ ...prev, partnerAliasId: aliasId }))}
+                                onPartnerSelect={(partner) => {
+                                    setFormData(prev => ({
+                                        ...prev,
+                                        partnerName: partner.displayName,
+                                        partnerAliasId: partner.id
+                                    }));
+                                }}
                             />
                         </div>
 

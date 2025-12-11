@@ -1,9 +1,8 @@
 import { generateUnsubscribeUrl } from '@/lib/jwt'
+import { getEmailService } from '@/lib/services/email/email.factory'
 
 // Email service configuration
-// Note: Install Resend with: npm install resend
-import { Resend } from 'resend'
-export const resend = new Resend(process.env.RESEND_API_KEY)
+// Use getEmailService() to get the appropriate provider (Resend or MailerSend)
 
 /**
  * Send assessment invitation email
@@ -26,22 +25,21 @@ export async function sendAssessmentInvitation({
   const assessmentUrl = `${process.env.NEXTAUTH_URL}/assessment/${assessmentToken}`
 
   try {
-    // TODO: Uncomment when Resend is installed
-    // await resend.emails.send({
-    //   from: 'Gitance <noreply@gitance.com>',
-    //   to,
-    //   subject: `You've been invited to complete a Trust Assessment for ${projectName}`,
-    //   html: getAssessmentInvitationTemplate({
-    //     partnerName,
-    //     inviterName,
-    //     projectName,
-    //     assessmentUrl,
-    //     inviterUserId,
-    //     to
-    //   })
-    // })
+    await getEmailService().sendEmail({
+      to,
+      subject: `You've been invited to complete a Trust Assessment for ${projectName}`,
+      html: getAssessmentInvitationTemplate({
+        partnerName,
+        inviterName,
+        projectName,
+        assessmentUrl,
+        inviterUserId,
+        to
+      }),
+      from: 'Gitance <noreply@gitance.com>' // Adjust domain as needed
+    })
 
-    console.log('Assessment invitation email would be sent to:', to)
+    console.log('Assessment invitation email sent to:', to)
   } catch (error) {
     console.error('Assessment invitation email error:', error)
     throw error
@@ -71,23 +69,22 @@ export async function sendTeamInvitation({
   const acceptUrl = `${process.env.NEXTAUTH_URL}/api/team/accept?token=${invitationToken}`
 
   try {
-    // TODO: Uncomment when Resend is installed
-    // await resend.emails.send({
-    //   from: 'Gitance <noreply@gitance.com>',
-    //   to,
-    //   subject: `${inviterName} invited you to collaborate on Gitance`,
-    //   html: getTeamInvitationTemplate({
-    //     inviterName,
-    //     projectName,
-    //     role,
-    //     acceptUrl,
-    //     personalMessage,
-    //     inviterUserId,
-    //     to
-    //   })
-    // })
+    await getEmailService().sendEmail({
+      to,
+      subject: `${inviterName} invited you to collaborate on Gitance`,
+      html: getTeamInvitationTemplate({
+        inviterName,
+        projectName,
+        role,
+        acceptUrl,
+        personalMessage,
+        inviterUserId,
+        to
+      }),
+      from: 'Gitance <noreply@gitance.com>'
+    })
 
-    console.log('Team invitation email would be sent to:', to)
+    console.log('Team invitation email sent to:', to)
   } catch (error) {
     console.error('Team invitation email error:', error)
     throw error
@@ -159,6 +156,7 @@ function getTeamInvitationTemplate(data: any) {
     </div>
   `
 }
+
 /**
  * Send verification email
  */
@@ -192,48 +190,47 @@ export async function sendEmail({
   html: string;
 }) {
   try {
-    // TODO: Uncomment when Resend is installed
-    await resend.emails.send({
-      from: 'Gitance <noreply@gitance.com>',
+    await getEmailService().sendEmail({
       to,
       subject,
-      html
+      html,
+      from: 'Gitance <noreply@gitance.com>'
     })
 
-    console.log('Email would be sent to:', to, 'with subject:', subject);
+    console.log('Email sent to:', to, 'with subject:', subject);
   } catch (error) {
     console.error('Email sending error:', error);
     throw error;
-  }}
+  }
+}
 
 /**
  * Send password reset email
  */
 export async function sendPasswordResetEmail(to: string, resetLink: string) {
   try {
-    // TODO: Uncomment when Resend is installed
-    // await resend.emails.send({
-    //   from: 'FutureForm <noreply@futureform.com>',
-    //   to,
-    //   subject: 'Reset your FutureForm password',
-    //   html: `
-    //     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-    //       <h2>Reset Your Password</h2>
-    //       <p>You requested a password reset for your FutureForm account.</p>
-    //       <p>Click the button below to set a new password. This link expires in 1 hour.</p>
-    //       <div style="text-align: center; margin: 30px 0;">
-    //         <a href="${resetLink}" style="background: #2563eb; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; display: inline-block;">
-    //           Reset Password
-    //         </a>
-    //       </div>
-    //       <p style="color: #6b7280; font-size: 14px;">
-    //         If you didn't request this, you can safely ignore this email.
-    //       </p>
-    //     </div>
-    //   `
-    // })
+    await getEmailService().sendEmail({
+      to,
+      subject: 'Reset your FutureForm password',
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <h2>Reset Your Password</h2>
+          <p>You requested a password reset for your FutureForm account.</p>
+          <p>Click the button below to set a new password. This link expires in 1 hour.</p>
+          <div style="text-align: center; margin: 30px 0;">
+            <a href="${resetLink}" style="background: #2563eb; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; display: inline-block;">
+              Reset Password
+            </a>
+          </div>
+          <p style="color: #6b7280; font-size: 14px;">
+            If you didn't request this, you can safely ignore this email.
+          </p>
+        </div>
+      `,
+      from: 'FutureForm <noreply@futureform.com>'
+    })
 
-    console.log('Password reset email would be sent to:', to, 'with link:', resetLink)
+    console.log('Password reset email sent to:', to)
   } catch (error) {
     console.error('Password reset email error:', error)
     throw error

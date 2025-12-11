@@ -203,6 +203,11 @@ model PartnerAlias {
   createdAt          DateTime @default(now())
   updatedAt          DateTime @updatedAt
 
+  // Organization-specific contact person for this partner
+  adminName  String?
+  adminEmail String?
+  adminPhone String?
+
   // Cached fields for performance (denormalized from Partner)
   cachedWebsite String?
   cachedCountry String?

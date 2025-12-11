@@ -10,6 +10,10 @@ export interface Partner {
         legalName: string;
         website?: string;
         verification: string;
+        contacts?: Array<{
+            name?: string;
+            email?: string;
+        }>;
     };
 }
 

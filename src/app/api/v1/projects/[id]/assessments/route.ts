@@ -62,6 +62,10 @@ export async function POST(
             }
         }
 
+        // Force Depth to 'deep' as per new requirements
+        const forcedDepth = 'deep';
+        const estimatedDuration = calculateEstimatedDuration(forcedDepth);
+
         // Check if this is a Trust Assessment
         if (body.trustPartnerTypeId) {
             // Fetch partner type to derive partnerType
@@ -70,8 +74,24 @@ export async function POST(
                 return NextResponse.json({ error: 'Partner type not found' }, { status: 404 });
             }
 
-            // Fetch questions for the selected partner type
-            const trustQuestions = await trustOntologyService.getQuestionsForPartnerType(body.trustPartnerTypeId);
+            // Fetch questions for the selected partner type (Template)
+            // functionality getQuestionsForPartnerType returns TrustQuestion array.
+            // We need mapping info (assignedRole) from TrustPartnerTypeQuestion.
+            // trustOntologyService.getQuestionsForPartnerType returns questions, but we lose the Relation info.
+            // We should update the service or fetch raw here.
+            // For now, let's assume we update the service or fetch broadly.
+
+            // NOTE: To get assignedRole, we really need the intermediate definition. 
+            // Let's modify logic to fetch TrustPartnerTypeQuestion directly.
+            const partnerTypeQuestions = await prisma.trustPartnerTypeQuestion.findMany({
+                where: { partnerTypeId: body.trustPartnerTypeId },
+                include: {
+                    question: {
+                        include: { subDimension: true }
+                    }
+                },
+                orderBy: { question: { questionId: 'asc' } }
+            });
 
             // Derive partnerType from ontology
             const derivedPartnerType = partnerTypeDetails.name;
@@ -89,52 +109,85 @@ export async function POST(
                     status: 'PENDING',
                     token: generateToken(),
                     type,
-                    depth,
+                    depth: forcedDepth,
                     deadline: deadline ? new Date(deadline) : null,
                     aiConfig: aiConfig || {},
                     partnerAdminEmail,
                     estimatedRespondents: 0,
-                    estimatedDuration: calculateEstimatedDuration(depth),
+                    estimatedDuration,
+                    trustDeploymentContext: { sector }, // Save sector context
                 },
             });
 
-            // Map trust questions to the format expected by the frontend
-            // We do NOT create AssessmentQuestion records for Trust Assessments as they use a different schema
-            const mappedQuestions = trustQuestions.map((q, index) => ({
-                id: q.id, // Use trust question ID
-                questionId: q.id,
+            // Map trust questions + assignedRole
+            const mappedQuestions = partnerTypeQuestions.map((ptq, index) => ({
+                id: ptq.question.id,
+                questionId: ptq.question.id, // Using TrustQuestion ID
                 assessmentId: assessment.id,
                 question: {
-                    id: q.id,
-                    text: q.text,
-                    domain: q.subDimension?.name || 'Trust',
+                    id: ptq.question.id,
+                    text: ptq.question.text,
+                    domain: ptq.question.subDimension?.name || 'Trust',
                 },
-                assignedRoleId: null, // To be mapped in wizard
+                assignedRoleId: ptq.assignedRole || 'Manager', // Auto-assign role from Template
                 assignedSeniority: 'Manager',
-                evidenceRequirements: q.evidenceRequired ? [q.evidenceRequired] : [],
+                evidenceRequirements: ptq.question.evidenceRequired ? [ptq.question.evidenceRequired] : [],
                 order: index + 1,
                 aiConfidence: 1.0,
-                aiRationale: 'Selected based on partner type',
+                aiRationale: 'Selected based on partner type template',
                 customized: false,
             }));
+
+            // Fetch Sector-Based Questions
+            let allQuestions = [...mappedQuestions];
+
+            if (sector) {
+                const sectorQs = await trustOntologyService.getQuestionsBySector(sector);
+                const mappedSectorQs = sectorQs.map((q, index) => ({
+                    id: q.id,
+                    questionId: q.id,
+                    assessmentId: assessment.id,
+                    question: {
+                        id: q.id,
+                        text: q.text,
+                        domain: q.subDimension?.name || 'Trust',
+                    },
+                    assignedRoleId: 'Manager', // Default role for sector questions
+                    assignedSeniority: 'Manager',
+                    evidenceRequirements: q.evidenceRequired ? [q.evidenceRequired] : [],
+                    order: mappedQuestions.length + index + 1,
+                    aiConfidence: 1.0,
+                    aiRationale: `Selected based on sector: ${sector}`,
+                    customized: false,
+                }));
+
+                // Merge unique questions (avoid duplicates if question is already in template)
+                // Use a map or filter
+                const existingIds = new Set(allQuestions.map(q => q.questionId));
+                for (const q of mappedSectorQs) {
+                    if (!existingIds.has(q.questionId)) {
+                        allQuestions.push(q);
+                    }
+                }
+            }
 
             return NextResponse.json(
                 {
                     assessment: {
                         ...assessment,
-                        questions: mappedQuestions,
+                        questions: allQuestions,
                     },
                 },
                 { status: 201 }
             );
         }
 
-        // Call AI service to select questions
+        // Generic Assessment Flow (Fallback) with forced depth
         const selectionResult = await selectQuestions({
             sector,
             region: project.region || 'Global',
             assessmentType: type,
-            depth,
+            depth: forcedDepth,
             organizationSize: project.orgSize || 'Unknown',
             attachedDocs: aiConfig?.attachedDocs || [],
         });
@@ -158,12 +211,12 @@ export async function POST(
                 status: 'PENDING',
                 token: generateToken(),
                 type,
-                depth,
+                depth: forcedDepth,
                 deadline: deadline ? new Date(deadline) : null,
                 aiConfig: aiConfig || {},
                 partnerAdminEmail,
                 estimatedRespondents: 0, // Will be updated when invitations are sent
-                estimatedDuration: calculateEstimatedDuration(depth),
+                estimatedDuration: calculateEstimatedDuration(forcedDepth),
             },
         });
 

@@ -275,12 +275,29 @@ export class AssessmentService {
             throw new Error('Unauthorized access to project');
         }
 
+        // Resolve Partner IDs
+        let partnerGlobalId = data.partnerGlobalId;
+        let partnerName = data.partnerName;
+
+        if (data.partnerAliasId) {
+            const alias = await prisma.partnerAlias.findUnique({
+                where: { id: data.partnerAliasId },
+                include: { partner: true }
+            });
+
+            if (alias) {
+                partnerGlobalId = alias.partnerId;
+                // Prefer alias display name, fallback to global legal name
+                partnerName = alias.displayName || alias.partner.legalName;
+            }
+        }
+
         const assessment = await prisma.assessment.create({
             data: {
                 projectId: data.projectId,
-                partnerName: data.partnerName,
+                partnerName: partnerName,
                 partnerAdminEmail: data.partnerAdminEmail,
-                partnerGlobalId: data.partnerGlobalId,
+                partnerGlobalId: partnerGlobalId,
                 partnerAliasId: data.partnerAliasId,
                 type: data.type,
                 depth: data.depth,

@@ -9,6 +9,7 @@ import {
     FileText,
     Settings,
     Users,
+    Building2,
     ShieldCheck,
     LogOut,
     Menu,
@@ -63,6 +64,12 @@ export default function Sidebar({ className, collapsed, setCollapsed }: SidebarP
             title: 'Team',
             href: '/dashboard/team',
             icon: Users,
+            variant: 'ghost',
+        },
+        {
+            title: 'Partners',
+            href: '/dashboard/partners',
+            icon: Building2,
             variant: 'ghost',
         },
         {

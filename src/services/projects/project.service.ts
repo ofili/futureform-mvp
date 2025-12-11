@@ -80,7 +80,18 @@ export class ProjectService {
                         id: true,
                         partnerName: true,
                         status: true,
-                        createdAt: true
+                        createdAt: true,
+                        scores: {
+                            select: {
+                                domain: true,
+                                score: true
+                            }
+                        },
+                        trustPartnerType: {
+                            select: {
+                                name: true
+                            }
+                        }
                     }
                 },
                 teamMembers: {
@@ -376,7 +387,11 @@ export class ProjectService {
             objectives: project.objectives,
             longDescription: project.longDescription,
             stakeholders: project.stakeholders,
-            assessments: project.assessments,
+            assessments: project.assessments?.map((a: any) => ({
+                ...a,
+                partnerType: a.trustPartnerType?.name || a.partnerType,
+                domainScores: a.scores || []
+            })),
             teamMembers: project.teamMembers,
             assessmentCount: project._count?.assessments,
             createdAt: project.createdAt?.toISOString(),

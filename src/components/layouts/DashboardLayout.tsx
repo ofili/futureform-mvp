@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Sidebar from './Sidebar';
-import { Bell, Search, User, Settings, LogOut } from 'lucide-react';
+import { Bell, Search, User, Settings, LogOut, HelpCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -35,17 +35,18 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         {/* Top Header */}
         <header className="h-16 border-b bg-white/80 backdrop-blur-sm px-6 flex items-center justify-between sticky top-0 z-30">
           <div className="flex items-center gap-4 w-full max-w-md">
-            <div className="relative w-full">
-              <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-              <Input
-                type="search"
-                placeholder="Search projects, partners..."
-                className="w-full bg-gray-50 pl-9 border-none focus-visible:ring-1"
-              />
-            </div>
+            <h1 className="text-xl font-semibold text-gray-800">
+              Gitance Admin Center
+            </h1>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
+            <Button variant="ghost" size="icon" asChild>
+              <Link href="mailto:support@gitance.com">
+                <HelpCircle className="w-5 h-5 text-muted-foreground" />
+              </Link>
+            </Button>
+
             <Button variant="ghost" size="icon" className="relative">
               <Bell className="w-5 h-5 text-muted-foreground" />
               <span className="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full" />

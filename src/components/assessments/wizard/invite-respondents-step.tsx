@@ -82,11 +82,15 @@ export default function InviteRespondentsStep({
                             value={newPartner.partnerAliasId}
                             onChange={(value) => setNewPartner({ ...newPartner, partnerAliasId: value })}
                             onPartnerSelect={(partner: Partner) => {
+                                // Get primary contact if available
+                                const primaryContact = partner.partner.contacts?.[0];
                                 setNewPartner({
                                     ...newPartner,
                                     partnerAliasId: partner.id,
                                     partnerGlobalId: partner.partner.id,
                                     partnerName: partner.displayName,
+                                    adminName: primaryContact?.name || '',
+                                    adminEmail: primaryContact?.email || '',
                                 });
                             }}
                         />

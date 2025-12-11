@@ -28,7 +28,7 @@ export async function POST(req: Request) {
         return NextResponse.json({ matches });
 
     } catch (error) {
-        logger.error('Error searching partners', error as Error);
+        logger.error('Error searching partners', error as Error, { service: 'PartnerAPI', method: 'searchPartners' });
         return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
     }
 }

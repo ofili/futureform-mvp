@@ -7,9 +7,13 @@ import { PartnerVerification } from '@prisma/client';
 
 export interface CreatePartnerInput {
     legalName: string;
+    rcNumber?: string;
     website?: string;
     sector?: string;
     country?: string;
+    adminName?: string;
+    adminEmail?: string;
+    adminPhone?: string;
     partnerGlobalId?: string;
 }
 
@@ -43,6 +47,14 @@ export class PartnerService {
                         sector: true,
                         country: true,
                         verification: true,
+                        partnerContacts: {
+                            take: 1, // Get primary contact
+                            orderBy: { createdAt: 'asc' },
+                            select: {
+                                name: true,
+                                email: true,
+                            }
+                        }
                     }
                 }
             },
@@ -51,7 +63,15 @@ export class PartnerService {
             },
         });
 
-        return partners;
+        // Map partnerContacts to contacts for frontend compatibility
+        return partners.map(p => ({
+            ...p,
+            partner: {
+                ...p.partner,
+                contacts: p.partner.partnerContacts || [],
+                partnerContacts: undefined // Optional: clean up the raw field
+            }
+        }));
     }
 
     /**
@@ -83,6 +103,7 @@ export class PartnerService {
                 const newPartner = await prisma.partner.create({
                     data: {
                         legalName: data.legalName,
+                        rcNumber: data.rcNumber,
                         website: data.website,
                         sector: data.sector,
                         country: data.country,
@@ -118,10 +139,16 @@ export class PartnerService {
                 partnerId: globalId,
                 organizationId,
                 displayName: data.legalName, // Default to legal name
+                adminName: data.adminName,
+                adminEmail: data.adminEmail,
+                adminPhone: data.adminPhone,
                 cachedWebsite: data.website,
                 cachedSector: data.sector,
                 cachedCountry: data.country,
                 relationshipStatus: 'Active',
+            },
+            include: {
+                partner: true
             }
         });
 
@@ -361,7 +388,7 @@ export class PartnerService {
             userId,
         });
 
-        // Get assessment with partner
+        // Get assessment with partner (check both partnerAlias and partnerGlobal)
         const assessment = await prisma.assessment.findUnique({
             where: { id: assessmentId },
             include: {
@@ -370,6 +397,7 @@ export class PartnerService {
                         partner: true,
                     },
                 },
+                partnerGlobal: true,
                 project: {
                     select: {
                         organizationId: true,
@@ -395,11 +423,14 @@ export class PartnerService {
             throw new Error('Forbidden: No access to this assessment');
         }
 
-        if (!assessment.partnerAlias?.partner) {
+        // Try partnerAlias first, then partnerGlobal
+        const partner = assessment.partnerAlias?.partner || assessment.partnerGlobal;
+
+        if (!partner) {
             throw new Error('No partner associated with this assessment');
         }
 
-        return assessment.partnerAlias.partner;
+        return partner;
     }
 
     /**
@@ -442,6 +473,41 @@ export class PartnerService {
         }
 
         return partner;
+    }
+
+    /**
+     * Add contact to partner
+     */
+    async addPartnerContact(partnerAliasId: string, data: { name: string; email?: string; phone?: string; role?: string }) {
+        logger.info('Adding partner contact', {
+            service: 'PartnerService',
+            method: 'addPartnerContact',
+            partnerAliasId,
+            contactName: data.name,
+        });
+
+        // Get partner alias to find global partner ID
+        const alias = await prisma.partnerAlias.findUnique({
+            where: { id: partnerAliasId },
+            select: { partnerId: true }
+        });
+
+        if (!alias) {
+            throw new Error('Partner alias not found');
+        }
+
+        // Create contact linked to global partner
+        const contact = await prisma.partnerContact.create({
+            data: {
+                partnerId: alias.partnerId,
+                name: data.name,
+                email: data.email,
+                phone: data.phone,
+                role: data.role,
+            }
+        });
+
+        return contact;
     }
 }
 

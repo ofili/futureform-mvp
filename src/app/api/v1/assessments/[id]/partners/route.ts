@@ -26,14 +26,20 @@ export async function POST(
         // Verify Assessment exists and user has access
         const assessment = await prisma.assessment.findUnique({
             where: { id: assessmentId },
-            include: { project: true }
+            include: {
+                project: {
+                    include: {
+                        organization: true
+                    }
+                }
+            }
         });
 
         if (!assessment) {
             return NextResponse.json({ error: 'Assessment not found' }, { status: 404 });
         }
 
-        // TODO: Check if user has permission to edit this assessment (Owner or Org Member)
+        const organizationId = assessment.project.organizationId;
 
         const createdPartners = [];
         const errors = [];
@@ -43,13 +49,65 @@ export async function POST(
                 // Generate secure token
                 const token = crypto.randomBytes(32).toString('hex');
 
-                // Check if already invited? (Optional logic)
+                let partnerAliasId = p.partnerAliasId;
+                let partnerGlobalId = p.partnerGlobalId;
+
+                // If no partnerAliasId, we need to create one
+                if (!partnerAliasId && organizationId) {
+                    // First, check or create global partner
+                    if (!partnerGlobalId) {
+                        // Create a new global partner
+                        const newPartner = await prisma.partner.create({
+                            data: {
+                                legalName: p.partnerName,
+                                verification: 'UNVERIFIED',
+                            }
+                        });
+                        partnerGlobalId = newPartner.id;
+
+                        // Also save the admin contact
+                        if (p.adminEmail || p.adminName) {
+                            await prisma.partnerContact.create({
+                                data: {
+                                    partnerId: partnerGlobalId,
+                                    name: p.adminName,
+                                    email: p.adminEmail,
+                                }
+                            });
+                        }
+                    }
+
+                    // Check if alias already exists for this org
+                    const existingAlias = await prisma.partnerAlias.findFirst({
+                        where: {
+                            partnerId: partnerGlobalId,
+                            organizationId: organizationId,
+                        }
+                    });
+
+                    if (existingAlias) {
+                        partnerAliasId = existingAlias.id;
+                    } else {
+                        // Create new alias
+                        const newAlias = await prisma.partnerAlias.create({
+                            data: {
+                                partnerId: partnerGlobalId,
+                                organizationId: organizationId,
+                                displayName: p.partnerName,
+                                relationshipStatus: 'Pending',
+                                visibility: true,
+                            }
+                        });
+                        partnerAliasId = newAlias.id;
+                        logger.info(`Created new PartnerAlias: ${partnerAliasId} for partner ${p.partnerName}`);
+                    }
+                }
 
                 const assessmentPartner = await prisma.assessmentPartner.create({
                     data: {
                         assessmentId,
-                        partnerId: p.partnerGlobalId,
-                        partnerAliasId: p.partnerAliasId || null,
+                        partnerId: partnerGlobalId,
+                        partnerAliasId: partnerAliasId || null,
                         adminName: p.adminName,
                         adminEmail: p.adminEmail,
                         invitationToken: token,
@@ -59,8 +117,6 @@ export async function POST(
                 });
 
                 // Send Invitation Email
-                // In a real implementation, call emailService here.
-                // For now, we assume the email service picks up pending invitations or we log it.
                 logger.info(`AssessmentPartner created: ${assessmentPartner.id}. Token: ${token}`);
 
                 createdPartners.push(assessmentPartner);

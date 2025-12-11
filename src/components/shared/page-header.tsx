@@ -7,7 +7,7 @@ import { Search, Plus, Grid, List, MoreHorizontal, ChevronRight } from 'lucide-r
 
 interface PageHeaderProps {
     title: string;
-    description: string;
+    description?: string;
     breadcrumbs?: { label: string; href?: string }[];
     actions?: React.ReactNode;
     searchPlaceholder?: string;
@@ -54,7 +54,7 @@ export function PageHeader({
                 {/* Left: Title & Description */}
                 <div className="flex-1">
                     <h1 className="text-2xl font-semibold text-gray-900">{title}</h1>
-                    <p className="text-sm text-gray-500 mt-0.5">{description}</p>
+                    {description && <p className="text-sm text-gray-500 mt-0.5">{description}</p>}
                 </div>
 
                 {/* Center: Search (if enabled) */}

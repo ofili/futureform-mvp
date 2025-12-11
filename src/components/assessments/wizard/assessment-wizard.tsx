@@ -14,12 +14,15 @@ import InviteRespondentsStep from '@/components/assessments/wizard/invite-respon
 import ReviewStep from '@/components/assessments/wizard/review-step';
 
 interface AssessmentWizardProps {
-    projectId: string;
+    projectId?: string; // Made optional
     templateId?: string;
 }
 
 
 export interface WizardData {
+    // Project Selection (if not passed as prop)
+    selectedProjectId?: string;
+
     // Step 1: Basics
     type: string;
     templateId?: string;
@@ -52,22 +55,25 @@ export interface WizardData {
 }
 
 const STEPS = [
-    { id: 1, name: 'Assessment Basics', description: 'Depth and context' },
-    { id: 2, name: 'Question Selection', description: 'Review questions' },
-    { id: 3, name: 'Role Mapping', description: 'Assign roles to questions' },
-    { id: 4, name: 'Invite Partners', description: 'Add partner organizations' },
-    { id: 5, name: 'Review & Send', description: 'Finalize and send' },
+    { id: 1, name: 'Assessment Basics', description: 'Context' },
+    { id: 2, name: 'Invite Partners', description: 'Add partner organizations' },
+    { id: 3, name: 'Review & Send', description: 'Finalize and send' },
 ];
 
-export default function AssessmentWizard({ projectId, templateId }: AssessmentWizardProps) {
+export default function AssessmentWizard({ projectId: initialProjectId, templateId }: AssessmentWizardProps) {
     const router = useRouter();
     const [currentStep, setCurrentStep] = useState(1);
     const [isLoading, setIsLoading] = useState(false);
+
+    // Use internal state for projectId if not passed as prop
+    const [internalProjectId, setInternalProjectId] = useState<string | undefined>(initialProjectId);
+
     const [wizardData, setWizardData] = useState<WizardData>({
+        selectedProjectId: initialProjectId,
         type: templateId || '',
         templateId: templateId,
         typeSubcategory: '',
-        depth: 'standard',
+        depth: 'deep', // Default to deep
         sector: '',
         deadline: null,
         partnerAdminEmail: '',
@@ -79,7 +85,8 @@ export default function AssessmentWizard({ projectId, templateId }: AssessmentWi
         partners: [],
     });
 
-
+    // The effective projectId is either from prop or internal state
+    const projectId = internalProjectId || wizardData.selectedProjectId;
 
     const updateWizardData = (data: Partial<WizardData>) => {
         setWizardData((prev) => ({ ...prev, ...data }));
@@ -87,7 +94,7 @@ export default function AssessmentWizard({ projectId, templateId }: AssessmentWi
 
     const handleNext = async () => {
         if (currentStep === 1) {
-            // After step 1, call AI to get questions
+            // After step 1, call AI to AUTO-SELECT questions and roles
             await fetchAIQuestions();
         }
 
@@ -110,7 +117,7 @@ export default function AssessmentWizard({ projectId, templateId }: AssessmentWi
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     type: wizardData.type,
-                    depth: wizardData.depth,
+                    depth: 'deep', // Force deep
                     sector: wizardData.sector,
                     deadline: wizardData.deadline,
                     partnerAdminEmail: wizardData.partnerAdminEmail,
@@ -125,6 +132,7 @@ export default function AssessmentWizard({ projectId, templateId }: AssessmentWi
             const data = await response.json();
             updateWizardData({
                 selectedQuestions: data.assessment.questions,
+                // data.assessment.questions should come with roles assigned by backend
             });
         } catch (error) {
             console.error('Error fetching AI questions:', error);
@@ -177,27 +185,12 @@ export default function AssessmentWizard({ projectId, templateId }: AssessmentWi
                 );
             case 2:
                 return (
-                    <QuestionSelectionStep
-                        data={wizardData}
-                        onUpdate={updateWizardData}
-                        isLoading={isLoading}
-                    />
-                );
-            case 3:
-                return (
-                    <RoleMappingStep
-                        data={wizardData}
-                        onUpdate={updateWizardData}
-                    />
-                );
-            case 4:
-                return (
                     <InviteRespondentsStep
                         data={wizardData}
                         onUpdate={updateWizardData}
                     />
                 );
-            case 5:
+            case 3:
                 return (
                     <ReviewStep
                         data={wizardData}
@@ -214,12 +207,8 @@ export default function AssessmentWizard({ projectId, templateId }: AssessmentWi
         switch (currentStep) {
             case 1:
                 // Removed wizardData.trustPartnerTypeId from validation as it's inferred or hidden
-                return wizardData.type && wizardData.depth && wizardData.sector;
+                return wizardData.type && wizardData.sector; // Depth is defaulted
             case 2:
-                return wizardData.selectedQuestions.length > 0;
-            case 3:
-                return Object.keys(wizardData.questionRoleMapping).length > 0;
-            case 4:
                 return wizardData.partners.length > 0;
             default:
                 return true;

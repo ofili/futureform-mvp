@@ -15,7 +15,6 @@ import DocumentManager from '@/components/documents/DocumentManager';
 import WorkflowAutomation from '@/components/workflow/WorkflowAutomation';
 import CalendarIntegration from '@/components/calendar/CalendarIntegration';
 import InviteTeamMemberModal from '@/components/projects/InviteTeamMemberModal';
-import CreateAssessmentWizard from '@/components/assessments/CreateAssessmentWizard';
 import ComparePartnersModal from '@/components/projects/ComparePartnersModal';
 import { Plus, BarChart3, Users, TrendingUp, MessageCircle, FileText, Workflow, Calendar, UserPlus, Info, ChevronRight, MoreHorizontal, CheckCircle, Clock } from 'lucide-react';
 import Link from 'next/link';

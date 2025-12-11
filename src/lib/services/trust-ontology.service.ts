@@ -121,21 +121,61 @@ export class TrustOntologyService {
         const partnerTypeQuestions = await prisma.trustPartnerTypeQuestion.findMany({
             where: { partnerTypeId },
             include: {
-            question: {
-                include: {
-                subDimension: true, // ✅ This loads the full subDimension object!
+                question: {
+                    include: {
+                        subDimension: true, // ✅ This loads the full subDimension object!
+                    },
                 },
             },
-            },
             orderBy: {
-            question: {
-                questionId: 'asc',
-            },
+                question: {
+                    questionId: 'asc',
+                },
             },
         });
 
         // Return the questions WITH subDimension
         return partnerTypeQuestions.map((ptq) => ptq.question);
+    }
+
+    /**
+     * Get questions specific to a sector
+     */
+    async getQuestionsBySector(sector: string) {
+        // Find questions where contextModifiers JSON contains the sector
+        // We assume contextModifiers might have a structure like { "sectors": ["Agriculture"] }
+        // For MVP, we'll try a flexible check. 
+        // Note: Raw query might be better if Json structure is unknown, but using Prisma's JSON filter:
+
+        try {
+            const sectorQuestions = await prisma.trustQuestion.findMany({
+                where: {
+                    OR: [
+                        {
+                            contextModifiers: {
+                                path: ['sectors'],
+                                array_contains: sector
+                            }
+                        },
+                        {
+                            // Fallback if it's a single string
+                            contextModifiers: {
+                                path: ['sector'],
+                                equals: sector
+                            }
+                        }
+                    ]
+                },
+                include: {
+                    subDimension: true,
+                },
+                orderBy: { questionId: 'asc' },
+            });
+            return sectorQuestions;
+        } catch (error) {
+            console.warn('Error fetching sector questions:', error);
+            return [];
+        }
     }
 
     /**
