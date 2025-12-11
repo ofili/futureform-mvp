@@ -19,6 +19,7 @@ import ComparePartnersModal from '@/components/projects/ComparePartnersModal';
 import { Plus, BarChart3, Users, TrendingUp, MessageCircle, FileText, Workflow, Calendar, UserPlus, Info, ChevronRight, MoreHorizontal, CheckCircle, Clock } from 'lucide-react';
 import Link from 'next/link';
 import AlignmentDashboard from '@/components/projects/AlignmentDashboard';
+import CreateAssessmentWizard from '@/components/assessments/CreateAssessmentWizard';
 
 interface Project {
   id: string;

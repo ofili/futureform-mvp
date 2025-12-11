@@ -7,7 +7,7 @@ import { CheckCircle2, Users, FileText, Calendar, Mail } from 'lucide-react';
 
 interface ReviewStepProps {
     data: WizardData;
-    projectId: string;
+    projectId?: string;
 }
 
 export default function ReviewStep({ data, projectId }: ReviewStepProps) {

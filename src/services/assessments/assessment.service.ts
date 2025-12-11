@@ -479,6 +479,247 @@ export class AssessmentService {
             }
         });
     }
+
+    /**
+     * Create project assessment with AI-selected questions
+     * Handles both Trust Assessment and Generic Assessment flows
+     */
+    async createProjectAssessmentWithQuestions(
+        projectId: string,
+        userId: string,
+        input: {
+            type: string;
+            depth: string;
+            sector: string;
+            deadline?: Date | string;
+            aiConfig?: any;
+            partnerAdminEmail?: string;
+            partnerAliasId?: string;
+            partnerGlobalId?: string;
+            trustPartnerTypeId?: string;
+        }
+    ) {
+        logger.info('Creating project assessment with questions', {
+            service: 'AssessmentService',
+            method: 'createProjectAssessmentWithQuestions',
+            userId,
+            projectId,
+            type: input.type,
+        });
+
+        // Import required services dynamically to avoid circular deps
+        const { selectQuestions, saveSelectionToAssessment } = await import('@/lib/services/ai-question-selector');
+        const { trustOntologyService } = await import('@/lib/services/trust-ontology.service');
+
+        // Verify project ownership
+        const project = await prisma.project.findUnique({
+            where: { id: projectId },
+            include: { organization: { include: { members: true } } },
+        });
+
+        if (!project) {
+            throw new Error('Project not found');
+        }
+
+        // Check if user has access to this project
+        const isMember = project.organization?.members.some(
+            (member) => member.userId === userId && member.deletedAt === null
+        ) ?? false;
+        if (!isMember && project.createdById !== userId) {
+            throw new Error('Forbidden');
+        }
+
+        // Resolve Partner Name for backward compatibility
+        let partnerName = 'Unknown Partner';
+        if (input.partnerAliasId) {
+            const alias = await prisma.partnerAlias.findUnique({
+                where: { id: input.partnerAliasId },
+                select: { displayName: true }
+            });
+            if (alias) {
+                partnerName = alias.displayName;
+            }
+        }
+
+        // Force Depth to 'deep' as per requirements
+        const forcedDepth = 'deep';
+        const estimatedDuration = this.calculateEstimatedDuration(forcedDepth);
+
+        // Generate unique token
+        const token = this.generateToken();
+
+        // Trust Assessment Flow
+        if (input.trustPartnerTypeId) {
+            const partnerTypeDetails = await trustOntologyService.getPartnerTypeById(input.trustPartnerTypeId);
+            if (!partnerTypeDetails) {
+                throw new Error('Partner type not found');
+            }
+
+            // Fetch questions for the partner type
+            const partnerTypeQuestions = await prisma.trustPartnerTypeQuestion.findMany({
+                where: { partnerTypeId: input.trustPartnerTypeId },
+                include: {
+                    question: {
+                        include: { subDimension: true }
+                    }
+                },
+                orderBy: { question: { questionId: 'asc' } }
+            });
+
+            const derivedPartnerType = partnerTypeDetails.name;
+
+            // Create assessment
+            const assessment = await prisma.assessment.create({
+                data: {
+                    projectId,
+                    partnerId: userId,
+                    partnerName,
+                    partnerType: derivedPartnerType,
+                    partnerAliasId: input.partnerAliasId,
+                    partnerGlobalId: input.partnerGlobalId,
+                    trustPartnerTypeId: input.trustPartnerTypeId,
+                    status: 'PENDING',
+                    token,
+                    type: input.type,
+                    depth: forcedDepth,
+                    deadline: input.deadline ? new Date(input.deadline as string) : null,
+                    aiConfig: input.aiConfig || {},
+                    partnerAdminEmail: input.partnerAdminEmail,
+                    estimatedRespondents: 0,
+                    estimatedDuration,
+                    trustDeploymentContext: { sector: input.sector },
+                },
+            });
+
+            // Map trust questions + assignedRole
+            const mappedQuestions = partnerTypeQuestions.map((ptq, index) => ({
+                id: ptq.question.id,
+                questionId: ptq.question.id,
+                assessmentId: assessment.id,
+                question: {
+                    id: ptq.question.id,
+                    text: ptq.question.text,
+                    domain: ptq.question.subDimension?.name || 'Trust',
+                },
+                assignedRoleId: ptq.assignedRole || 'Manager',
+                assignedSeniority: 'Manager',
+                evidenceRequirements: ptq.question.evidenceRequired ? [ptq.question.evidenceRequired] : [],
+                order: index + 1,
+                aiConfidence: 1.0,
+                aiRationale: 'Selected based on partner type template',
+                customized: false,
+            }));
+
+            // Fetch Sector-Based Questions
+            let allQuestions = [...mappedQuestions];
+
+            if (input.sector) {
+                const sectorQs = await trustOntologyService.getQuestionsBySector(input.sector);
+                const mappedSectorQs = sectorQs.map((q, index) => ({
+                    id: q.id,
+                    questionId: q.id,
+                    assessmentId: assessment.id,
+                    question: {
+                        id: q.id,
+                        text: q.text,
+                        domain: q.subDimension?.name || 'Trust',
+                    },
+                    assignedRoleId: 'Manager',
+                    assignedSeniority: 'Manager',
+                    evidenceRequirements: q.evidenceRequired ? [q.evidenceRequired] : [],
+                    order: mappedQuestions.length + index + 1,
+                    aiConfidence: 1.0,
+                    aiRationale: `Selected based on sector: ${input.sector}`,
+                    customized: false,
+                }));
+
+                // Merge unique questions
+                const existingIds = new Set(allQuestions.map(q => q.questionId));
+                for (const q of mappedSectorQs) {
+                    if (!existingIds.has(q.questionId)) {
+                        allQuestions.push(q);
+                    }
+                }
+            }
+
+            return {
+                assessment: {
+                    ...assessment,
+                    questions: allQuestions,
+                },
+            };
+        }
+
+        // Generic Assessment Flow (Fallback) with forced depth
+        const selectionResult = await selectQuestions({
+            sector: input.sector,
+            region: project.region || 'Global',
+            assessmentType: input.type,
+            depth: forcedDepth,
+            organizationSize: project.orgSize || 'Unknown',
+            attachedDocs: input.aiConfig?.attachedDocs || [],
+        });
+
+        if (selectionResult.questions.length === 0) {
+            throw new Error('No questions available matching criteria');
+        }
+
+        // Create assessment
+        const assessment = await prisma.assessment.create({
+            data: {
+                projectId,
+                partnerId: userId,
+                partnerName,
+                partnerType: 'Organization',
+                partnerAliasId: input.partnerAliasId,
+                partnerGlobalId: input.partnerGlobalId,
+                status: 'PENDING',
+                token,
+                type: input.type,
+                depth: forcedDepth,
+                deadline: input.deadline ? new Date(input.deadline as string) : null,
+                aiConfig: input.aiConfig || {},
+                partnerAdminEmail: input.partnerAdminEmail,
+                estimatedRespondents: 0,
+                estimatedDuration,
+            },
+        });
+
+        // Save selected questions to assessment
+        const assessmentQuestions = await saveSelectionToAssessment(
+            assessment.id,
+            selectionResult
+        );
+
+        return {
+            assessment: {
+                ...assessment,
+                questions: assessmentQuestions,
+            },
+        };
+    }
+
+    /**
+     * Generate a unique token for assessment invitation
+     */
+    private generateToken(): string {
+        return (
+            Math.random().toString(36).substring(2, 15) +
+            Math.random().toString(36).substring(2, 15)
+        );
+    }
+
+    /**
+     * Calculate estimated duration based on depth
+     */
+    private calculateEstimatedDuration(depth: string): number {
+        const durations: Record<string, number> = {
+            quick: 30,
+            standard: 60,
+            deep: 120,
+        };
+        return durations[depth] || 60;
+    }
 }
 
 // Export singleton instance
