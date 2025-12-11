@@ -61,7 +61,7 @@ export function Navbar() {
             title: 'For Enterprises',
             description: 'Verify suppliers and protect supply chains',
             href: '/solutions/enterprises',
-            iconColor: 'text-cyan-400 group-hover/item:text-cyan-300'
+            iconColor: 'text-cyan group-hover/item:text-cyan-300'
         }
     ];
 
@@ -138,7 +138,7 @@ export function Navbar() {
                                             href="/platform"
                                             className="flex items-center space-x-2 p-3 rounded-lg hover:bg-gray-800/50 transition-colors group/item"
                                         >
-                                            <Cpu className="text-cyan-400 group-hover/item:text-cyan-300 transition-colors" size={20} />
+                                            <Cpu className="text-cyan group-hover/item:text-cyan transition-colors" size={20} />
                                             <div>
                                                 <h3 className="text-white font-semibold text-sm">Gitance Engine</h3>
                                                 <p className="text-gray-400 text-xs">Core platform infrastructure</p>

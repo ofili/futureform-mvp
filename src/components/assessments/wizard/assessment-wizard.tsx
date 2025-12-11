@@ -15,11 +15,14 @@ import ReviewStep from '@/components/assessments/wizard/review-step';
 
 interface AssessmentWizardProps {
     projectId: string;
+    templateId?: string;
 }
+
 
 export interface WizardData {
     // Step 1: Basics
     type: string;
+    templateId?: string;
     typeSubcategory?: string;
     depth: 'quick' | 'standard' | 'deep';
     sector: string;
@@ -35,30 +38,34 @@ export interface WizardData {
     // Step 3: Role Mapping
     questionRoleMapping: Record<string, { roleId: string; seniority: string; evidenceRequirements: string[] }>;
 
-    // Step 4: Invitations
-    invitations: Array<{
-        email: string;
-        name: string;
-        roleId: string;
-        seniority: string;
+    // Step 4: Partners
+    partners: Array<{
+        partnerAliasId: string;
+        partnerGlobalId?: string;
+        // partnerName is not needed for logic, just UI, but good to keep if shared. 
+        // InvitePartnersStep uses { partnerAliasId, partnerName, adminName, adminEmail, notes }
+        partnerName: string;
+        adminName: string;
+        adminEmail: string;
         notes?: string;
     }>;
 }
 
 const STEPS = [
-    { id: 1, name: 'Assessment Basics', description: 'Type, depth, and deadline' },
-    { id: 2, name: 'Question Selection', description: 'AI-selected questions' },
+    { id: 1, name: 'Assessment Basics', description: 'Depth and context' },
+    { id: 2, name: 'Question Selection', description: 'Review questions' },
     { id: 3, name: 'Role Mapping', description: 'Assign roles to questions' },
-    { id: 4, name: 'Invite Respondents', description: 'Add team members' },
+    { id: 4, name: 'Invite Partners', description: 'Add partner organizations' },
     { id: 5, name: 'Review & Send', description: 'Finalize and send' },
 ];
 
-export default function AssessmentWizard({ projectId }: AssessmentWizardProps) {
+export default function AssessmentWizard({ projectId, templateId }: AssessmentWizardProps) {
     const router = useRouter();
     const [currentStep, setCurrentStep] = useState(1);
     const [isLoading, setIsLoading] = useState(false);
     const [wizardData, setWizardData] = useState<WizardData>({
-        type: '',
+        type: templateId || '',
+        templateId: templateId,
         typeSubcategory: '',
         depth: 'standard',
         sector: '',
@@ -69,8 +76,10 @@ export default function AssessmentWizard({ projectId }: AssessmentWizardProps) {
         trustPartnerTypeId: undefined,
         selectedQuestions: [],
         questionRoleMapping: {},
-        invitations: [],
+        partners: [],
     });
+
+
 
     const updateWizardData = (data: Partial<WizardData>) => {
         setWizardData((prev) => ({ ...prev, ...data }));
@@ -128,22 +137,22 @@ export default function AssessmentWizard({ projectId }: AssessmentWizardProps) {
     const handleFinish = async () => {
         setIsLoading(true);
         try {
-            // Send invitations
+            // Send invitations to partners
             const assessmentId = wizardData.selectedQuestions[0]?.assessmentId;
 
             if (!assessmentId) {
                 throw new Error('Assessment ID not found');
             }
 
-            const response = await fetch(`/api/v1/assessments/${assessmentId}/invitations`, {
+            const response = await fetch(`/api/v1/assessments/${assessmentId}/partners`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    invitations: wizardData.invitations,
+                    partners: wizardData.partners,
                 }),
             });
 
-            if (!response.ok) throw new Error('Failed to send invitations');
+            if (!response.ok) throw new Error('Failed to send partner invitations');
 
             // Redirect to project page
             router.push(`/projects/${projectId}`);
@@ -200,16 +209,18 @@ export default function AssessmentWizard({ projectId }: AssessmentWizardProps) {
         }
     };
 
+
     const canProceed = () => {
         switch (currentStep) {
             case 1:
-                return wizardData.type && wizardData.depth && wizardData.sector && wizardData.trustPartnerTypeId;
+                // Removed wizardData.trustPartnerTypeId from validation as it's inferred or hidden
+                return wizardData.type && wizardData.depth && wizardData.sector;
             case 2:
                 return wizardData.selectedQuestions.length > 0;
             case 3:
                 return Object.keys(wizardData.questionRoleMapping).length > 0;
             case 4:
-                return wizardData.invitations.length > 0;
+                return wizardData.partners.length > 0;
             default:
                 return true;
         }

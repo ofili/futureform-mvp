@@ -6,16 +6,16 @@ export function PlatformHero() {
     <section className="bg-midnight min-h-[85vh] flex items-center pt-24 pb-16 relative overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5"></div>
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-cyan-500/10 rounded-full blur-3xl"></div>
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-cyan/10 rounded-full blur-3xl"></div>
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-purple-600/5 rounded-full blur-3xl"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left Content */}
           <div>
-            <div className="inline-flex items-center space-x-2 mb-6 bg-cyan-500/10 border border-cyan-500/30 rounded-full px-4 py-2">
-              <Cpu size={16} className="text-cyan-400" />
-              <span className="text-cyan-400 text-sm font-semibold tracking-wide">Core Platform</span>
+            <div className="inline-flex items-center space-x-2 mb-6 bg-cyan/10 border border-cyan/30 rounded-full px-4 py-2">
+              <Cpu size={16} className="text-cyan" />
+              <span className="text-cyan text-sm font-semibold tracking-wide">Core Platform</span>
             </div>
 
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
@@ -48,15 +48,15 @@ export function PlatformHero() {
             <div className="grid grid-cols-3 gap-6 p-6 bg-gray-900/50 rounded-xl border border-gray-800">
               <div className="text-center sm:text-left">
                 <div className="text-3xl font-bold text-white">99.99%</div>
-                <p className="text-cyan-400 text-sm mt-1">Uptime SLA</p>
+                <p className="text-cyan text-sm mt-1">Uptime SLA</p>
               </div>
               <div className="text-center sm:text-left border-l border-gray-800 pl-6">
                 <div className="text-3xl font-bold text-white">&lt;100ms</div>
-                <p className="text-cyan-400 text-sm mt-1">Latency</p>
+                <p className="text-cyan text-sm mt-1">Latency</p>
               </div>
               <div className="text-center sm:text-left border-l border-gray-800 pl-6">
                 <div className="text-3xl font-bold text-white">SOC 2</div>
-                <p className="text-cyan-400 text-sm mt-1">Compliant</p>
+                <p className="text-cyan text-sm mt-1">Compliant</p>
               </div>
             </div>
           </div>
@@ -81,9 +81,9 @@ export function PlatformHero() {
                 {/* Architecture Layers */}
                 <div className="space-y-4">
                   {/* Data Ingestion Layer */}
-                  <div className="bg-gray-800/50 border border-cyan-500/20 rounded-lg p-4">
+                  <div className="bg-gray-800/50 border border-cyan/20 rounded-lg p-4">
                     <div className="flex items-center gap-3 mb-2">
-                      <Database size={18} className="text-cyan-400" />
+                      <Database size={18} className="text-cyan" />
                       <span className="text-white text-sm font-medium">Data Ingestion</span>
                     </div>
                     <div className="flex gap-2">
@@ -96,9 +96,9 @@ export function PlatformHero() {
                   </div>
 
                   {/* Processing Layer */}
-                  <div className="bg-gray-800/50 border border-cyan-500/20 rounded-lg p-4">
+                  <div className="bg-gray-800/50 border border-cyan/20 rounded-lg p-4">
                     <div className="flex items-center gap-3 mb-2">
-                      <Zap size={18} className="text-cyan-400" />
+                      <Zap size={18} className="text-cyan" />
                       <span className="text-white text-sm font-medium">AI Processing</span>
                     </div>
                     <div className="flex gap-2">
@@ -111,9 +111,9 @@ export function PlatformHero() {
                   </div>
 
                   {/* Output Layer */}
-                  <div className="bg-gray-800/50 border border-cyan-500/20 rounded-lg p-4">
+                  <div className="bg-gray-800/50 border border-cyan/20 rounded-lg p-4">
                     <div className="flex items-center gap-3 mb-2">
-                      <Globe size={18} className="text-cyan-400" />
+                      <Globe size={18} className="text-cyan" />
                       <span className="text-white text-sm font-medium">Intelligence Output</span>
                     </div>
                     <div className="flex gap-2">
@@ -129,7 +129,7 @@ export function PlatformHero() {
                 {/* Processing Indicator */}
                 <div className="mt-6 flex items-center justify-between text-xs text-gray-500">
                   <span>Processing: 2.4K requests/sec</span>
-                  <span className="text-cyan-400">Healthy</span>
+                  <span className="text-cyan">Healthy</span>
                 </div>
               </div>
             </div>

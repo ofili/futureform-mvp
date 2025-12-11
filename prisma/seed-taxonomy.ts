@@ -229,13 +229,11 @@ export async function seedTrustTaxonomy() {
 }
 
 // Run if executed directly
-if (require.main === module) {
-    seedTrustTaxonomy()
-        .catch((e) => {
-            console.error(e);
-            process.exit(1);
-        })
-        .finally(async () => {
-            await prisma.$disconnect();
-        });
-}
+seedTrustTaxonomy()
+    .catch((e) => {
+        console.error(e);
+        process.exit(1);
+    })
+    .finally(async () => {
+        await prisma.$disconnect();
+    });

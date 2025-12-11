@@ -12,9 +12,9 @@ export async function POST(
   try {
     const { token } = await params;
     const body = await request.json();
-    const { password } = body;
+    const { password, linkedInUrl } = body;
 
-    const result = await invitationService.acceptInvitation({ token, password });
+    const result = await invitationService.acceptInvitation({ token, password, linkedInUrl });
 
     return NextResponse.json(result, { status: 200 });
   } catch (error: any) {
@@ -29,6 +29,8 @@ export async function POST(
         return NextResponse.json({ error: 'Invitation already accepted' }, { status: 400 });
       case 'PASSWORD_REQUIRED':
         return NextResponse.json({ error: 'Password required for new users' }, { status: 400 });
+      case 'LINKEDIN_REQUIRED':
+        return NextResponse.json({ error: 'LinkedIn Profile URL is required' }, { status: 400 });
       case 'ORGANIZATION_NOT_FOUND':
         return NextResponse.json({ error: 'Organization not found' }, { status: 400 });
       case 'INSUFFICIENT_CREDITS':

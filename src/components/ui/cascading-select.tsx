@@ -36,11 +36,14 @@ export function CascadingSelect({
     const [selectedParent, setSelectedParent] = useState<string>(value || '');
     const [selectedChild, setSelectedChild] = useState<string>(subValue || '');
 
+    // Normalize category to lowercase for API (database stores as lowercase)
+    const normalizedCategory = category.toLowerCase();
+
     // Fetch parent options
     const { data: parentOptions = [] } = useQuery<FormOption[]>({
-        queryKey: ['form-options', category, 'parent'],
+        queryKey: ['form-options', normalizedCategory, 'parent'],
         queryFn: async () => {
-            const res = await fetch(`/api/v1/admin/form-options?category=${category}&parentId=null`);
+            const res = await fetch(`/api/v1/admin/form-options?category=${normalizedCategory}&parentId=null`);
             if (!res.ok) return [];
             return res.json();
         },
@@ -48,12 +51,12 @@ export function CascadingSelect({
 
     // Fetch child options based on selected parent
     const { data: childOptions = [] } = useQuery<FormOption[]>({
-        queryKey: ['form-options', `${category}_SUB`, selectedParent],
+        queryKey: ['form-options', `${normalizedCategory}_sub`, selectedParent],
         queryFn: async () => {
             if (!selectedParent) return [];
             const parent = parentOptions.find(p => p.value === selectedParent);
             if (!parent) return [];
-            const res = await fetch(`/api/v1/admin/form-options?category=${category}_SUB&parentId=${parent.id}`);
+            const res = await fetch(`/api/v1/admin/form-options?category=${normalizedCategory}_sub&parentId=${parent.id}`);
             if (!res.ok) return [];
             return res.json();
         },

@@ -11,7 +11,7 @@ import { Input } from '@/components/ui/input';
 export function DashboardHeader() {
     const user = useAuthStore((s) => s.user);
     const tier = user?.tier || 'Free';
-    const firstName = user?.name?.split(' ')[0] || 'there';
+    const firstName = user?.firstName || 'there';
 
     // Get greeting based on time of day
     const getGreeting = () => {
@@ -83,7 +83,7 @@ export function DashboardHeader() {
                                 {firstName.charAt(0).toUpperCase()}
                             </div>
                             <div className="hidden sm:block">
-                                <p className="text-sm font-medium text-gray-700">{user?.name || 'User'}</p>
+                                <p className="text-sm font-medium text-gray-700">{user?.firstName} {user?.lastName}</p>
                                 <p className="text-xs text-gray-500">{user?.email}</p>
                             </div>
                         </div>

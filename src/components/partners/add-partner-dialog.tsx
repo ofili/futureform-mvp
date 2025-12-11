@@ -92,7 +92,7 @@ export function AddPartnerDialog({ onPartnerCreated }: AddPartnerDialogProps) {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     ...values,
-                    partnerGlobalId: selectedGlobalPartner,
+                    partnerGlobalId: selectedGlobalPartner || undefined,
                 }),
             });
 

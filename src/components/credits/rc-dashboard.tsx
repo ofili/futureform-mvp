@@ -103,7 +103,7 @@ export function RCDashboard({ organizationId }: RCDashboardProps) {
 
             {/* Actions */}
             <div className="flex justify-end space-x-4">
-                <Button onClick={() => window.location.href = '/pricing'}>
+                <Button onClick={() => window.location.href = '/dashboard/credits/checkout?type=RC'}>
                     <Plus className="mr-2 h-4 w-4" />
                     Purchase Credits
                 </Button>

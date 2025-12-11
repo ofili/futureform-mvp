@@ -38,8 +38,8 @@ export function PlatformCapabilities() {
     <section className="bg-gray-950 py-24 border-t border-gray-800/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <div className="inline-flex items-center space-x-2 mb-4 bg-cyan-500/20 border border-cyan-500/40 rounded-full px-4 py-1.5">
-            <Cpu size={14} className="text-cyan-300" />
+          <div className="inline-flex items-center space-x-2 mb-4 bg-cyan/20 border border-cyan/40 rounded-full px-4 py-1.5">
+            <Cpu size={14} className="text-cyan" />
             <span className="text-white text-xs font-semibold uppercase tracking-wider">Capabilities</span>
           </div>
           <h2 className="text-4xl font-bold text-white mb-4">Built for Scale & Performance</h2>
@@ -54,7 +54,7 @@ export function PlatformCapabilities() {
               key={cap.title}
               className="bg-gray-900 border border-gray-800 rounded-lg p-8 hover:border-cyan-500/30 transition-colors group"
             >
-              <cap.icon className="text-cyan-400 group-hover:text-cyan-300 transition-colors mb-4" size={32} />
+              <cap.icon className="text-cyan group-hover:text-cyan transition-colors mb-4" size={32} />
               <h3 className="text-white font-bold text-lg mb-2">{cap.title}</h3>
               <p className="text-gray-400 text-sm leading-relaxed">{cap.description}</p>
             </div>

@@ -7,7 +7,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
-import { Loader2, Upload, FileText, CheckCircle2, AlertCircle } from 'lucide-react';
+import { Loader2, Upload, FileText, CheckCircle2, AlertCircle, Info } from 'lucide-react';
 import { toast } from 'sonner';
 
 interface RespondentWorkspaceProps {
@@ -176,6 +176,17 @@ export default function RespondentWorkspace({ assessmentId }: RespondentWorkspac
                             <p className="text-sm text-muted-foreground mt-2">
                                 {currentQuestion.question.helpText}
                             </p>
+                        )}
+                        {currentQuestion.question.detailedExplanation && (
+                            <div className="mt-4 p-4 bg-muted/30 rounded-md text-sm border">
+                                <div className="flex items-center gap-2 mb-2 font-medium">
+                                    <Info className="w-4 h-4" />
+                                    <span>Explanation</span>
+                                </div>
+                                <div className="text-muted-foreground whitespace-pre-wrap">
+                                    {currentQuestion.question.detailedExplanation}
+                                </div>
+                            </div>
                         )}
                     </CardHeader>
                     <CardContent className="space-y-4">

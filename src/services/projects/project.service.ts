@@ -63,6 +63,12 @@ export class ProjectService {
             userId,
         });
 
+        // Check if user is admin
+        const user = await prisma.user.findUnique({
+            where: { id: userId },
+            select: { role: true }
+        });
+
         const project = await prisma.project.findUnique({
             where: { id },
             include: {
@@ -96,7 +102,17 @@ export class ProjectService {
             throw new Error('Project not found');
         }
 
-        // Authorization check
+        // Admin can access any project
+        if (user?.role === 'ADMIN') {
+            return this.transformProject(project);
+        }
+
+        // Project creator always has access
+        if ((project as any).createdById === userId) {
+            return this.transformProject(project);
+        }
+
+        // Authorization check - user must be org member
         const hasAccess = project.organization?.members.some(
             m => m.userId === userId && m.deletedAt === null
         ) ?? false;
@@ -119,6 +135,12 @@ export class ProjectService {
             filters,
         });
 
+        // Check if user is admin
+        const user = await prisma.user.findUnique({
+            where: { id: userId },
+            select: { role: true }
+        });
+
         // Get user's organizations
         const userOrgs = await prisma.organizationMember.findMany({
             where: { userId, deletedAt: null },
@@ -127,21 +149,48 @@ export class ProjectService {
 
         const orgIds = userOrgs.map(o => o.organizationId);
 
-        const where: Prisma.ProjectWhereInput = {
-            organizationId: { in: orgIds },
-            ...(filters.organizationId && { organizationId: filters.organizationId }),
-            ...(filters.status && { status: filters.status }),
-            ...(filters.type && { type: filters.type }),
-            ...(filters.sector && { sector: filters.sector }),
-            ...(filters.region && { region: filters.region }),
-            ...(filters.budgetRange && { budgetRange: filters.budgetRange }),
-            ...(filters.search && {
+        // Build where clause based on user role
+        let where: Prisma.ProjectWhereInput;
+
+        if (user?.role === 'ADMIN') {
+            // Admin can see all projects
+            where = {
+                ...(filters.organizationId && { organizationId: filters.organizationId }),
+                ...(filters.status && { status: filters.status }),
+                ...(filters.type && { type: filters.type }),
+                ...(filters.sector && { sector: filters.sector }),
+                ...(filters.region && { region: filters.region }),
+                ...(filters.budgetRange && { budgetRange: filters.budgetRange }),
+                ...(filters.search && {
+                    OR: [
+                        { name: { contains: filters.search, mode: 'insensitive' } },
+                        { description: { contains: filters.search, mode: 'insensitive' } }
+                    ]
+                }),
+            };
+        } else {
+            // Regular user: see projects from their orgs OR projects they created
+            where = {
                 OR: [
-                    { name: { contains: filters.search, mode: 'insensitive' } },
-                    { description: { contains: filters.search, mode: 'insensitive' } }
-                ]
-            }),
-        };
+                    { organizationId: { in: orgIds } },
+                    { createdById: userId }
+                ],
+                ...(filters.organizationId && { organizationId: filters.organizationId }),
+                ...(filters.status && { status: filters.status }),
+                ...(filters.type && { type: filters.type }),
+                ...(filters.sector && { sector: filters.sector }),
+                ...(filters.region && { region: filters.region }),
+                ...(filters.budgetRange && { budgetRange: filters.budgetRange }),
+                ...(filters.search && {
+                    AND: [{
+                        OR: [
+                            { name: { contains: filters.search, mode: 'insensitive' } },
+                            { description: { contains: filters.search, mode: 'insensitive' } }
+                        ]
+                    }]
+                }),
+            };
+        }
 
         const projects = await prisma.project.findMany({
             where,

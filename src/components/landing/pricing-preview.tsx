@@ -30,8 +30,8 @@ export function PricingPreview() {
                     </div>
 
                     {/* Professional */}
-                    <div className="bg-gray-900/60 rounded-xl p-8 border border-cyan-500/30 relative">
-                        <div className="absolute top-0 right-0 bg-cyan-500 text-black text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg">POPULAR</div>
+                    <div className="bg-gray-900/60 rounded-xl p-8 border border-cyan/30 relative">
+                        <div className="absolute top-0 right-0 bg-cyan text-black text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg">POPULAR</div>
                         <h3 className="text-xl font-semibold text-white mb-2">Professional</h3>
                         <div className="text-3xl font-bold text-white mb-4">$6,250<span className="text-sm font-normal text-gray-500">/assessment</span></div>
                         <ul className="space-y-3 mb-8 text-gray-400 text-sm">
@@ -40,7 +40,7 @@ export function PricingPreview() {
                             <li className="flex items-center gap-2"><Check size={16} className="text-cyan-500" /> Priority support</li>
                             <li className="flex items-center gap-2"><Check size={16} className="text-cyan-500" /> Interactive dashboards</li>
                         </ul>
-                        <Link href="/auth/register" className="block w-full text-center py-2.5 rounded-lg bg-cyan-500 text-white hover:bg-cyan-400 transition-colors font-bold">Start Assessment</Link>
+                        <Link href="/auth/register" className="block w-full text-center py-2.5 rounded-lg bg-cyan text-white hover:bg-cyan-400 transition-colors font-bold">Start Assessment</Link>
                     </div>
 
                     {/* Expert Services */}

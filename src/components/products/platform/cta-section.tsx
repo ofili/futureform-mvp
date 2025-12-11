@@ -5,8 +5,8 @@ export function PlatformCTA() {
   return (
     <section className="bg-gradient-to-b from-gray-950 to-midnight py-24 border-t border-gray-800/50">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div className="inline-flex items-center space-x-2 mb-6 bg-cyan-500/20 border border-cyan-500/40 rounded-full px-4 py-1.5">
-          <Sparkles size={14} className="text-cyan-300" />
+        <div className="inline-flex items-center space-x-2 mb-6 bg-cyan/20 border border-cyan/40 rounded-full px-4 py-1.5">
+          <Sparkles size={14} className="text-cyan" />
           <span className="text-white text-xs font-semibold uppercase tracking-wider">Get Started</span>
         </div>
 
@@ -23,7 +23,7 @@ export function PlatformCTA() {
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link
             href="/auth/register?product=platform"
-            className="px-8 py-4 bg-cyan-500 text-white rounded-lg hover:bg-cyan-400 transition-all font-bold flex items-center justify-center space-x-2 shadow-[0_0_30px_rgba(6,182,212,0.3)] hover:shadow-[0_0_40px_rgba(6,182,212,0.4)] hover:scale-105"
+            className="px-8 py-4 bg-cyan-500 text-white rounded-lg hover:bg-cyan transition-all font-bold flex items-center justify-center space-x-2 shadow-[0_0_30px_rgba(6,182,212,0.3)] hover:shadow-[0_0_40px_rgba(6,182,212,0.4)] hover:scale-105"
           >
             <span>Start Building</span>
             <ArrowRight size={18} />

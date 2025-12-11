@@ -19,6 +19,7 @@ export default function AcceptInvitation({ token }: AcceptInvitationProps) {
     const [error, setError] = useState<string | null>(null);
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [linkedInUrl, setLinkedInUrl] = useState('');
     const [isAccepting, setIsAccepting] = useState(false);
 
     useEffect(() => {
@@ -54,6 +55,11 @@ export default function AcceptInvitation({ token }: AcceptInvitationProps) {
             return;
         }
 
+        if (!linkedInUrl) {
+            setError('LinkedIn Profile URL is required');
+            return;
+        }
+
         setIsAccepting(true);
         setError(null);
 
@@ -61,7 +67,7 @@ export default function AcceptInvitation({ token }: AcceptInvitationProps) {
             const response = await fetch(`/api/v1/invitations/${token}/accept`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ password }),
+                body: JSON.stringify({ password, linkedInUrl }),
             });
 
             if (!response.ok) {
@@ -70,8 +76,6 @@ export default function AcceptInvitation({ token }: AcceptInvitationProps) {
             }
 
             const data = await response.json();
-
-            // Redirect to respondent workspace
             router.push(`/assessments/${data.assessment.id}/respond`);
         } catch (err: any) {
             setError(err.message);
@@ -188,11 +192,25 @@ export default function AcceptInvitation({ token }: AcceptInvitationProps) {
                     </div>
 
                     {/* Password Setup */}
+
                     <div className="space-y-4">
                         <div>
                             <h3 className="font-semibold mb-2">Create Your Account</h3>
                             <p className="text-sm text-muted-foreground">
                                 Set a password to access your assessment workspace
+                            </p>
+                        </div>
+
+                        <div className="space-y-2">
+                            <Label htmlFor="linkedInUrl">LinkedIn Profile URL *</Label>
+                            <Input
+                                id="linkedInUrl"
+                                placeholder="https://linkedin.com/in/your-profile"
+                                value={linkedInUrl}
+                                onChange={(e) => setLinkedInUrl(e.target.value)}
+                            />
+                            <p className="text-xs text-muted-foreground">
+                                We verify all qualified respondents to ensure data integrity.
                             </p>
                         </div>
 
@@ -218,6 +236,7 @@ export default function AcceptInvitation({ token }: AcceptInvitationProps) {
                             />
                         </div>
 
+
                         {error && (
                             <div className="bg-destructive/10 text-destructive p-3 rounded text-sm">
                                 {error}
@@ -229,7 +248,7 @@ export default function AcceptInvitation({ token }: AcceptInvitationProps) {
                     <div className="flex gap-3">
                         <Button
                             onClick={handleAccept}
-                            disabled={!password || !confirmPassword || isAccepting}
+                            disabled={!password || !confirmPassword || !linkedInUrl || isAccepting}
                             className="flex-1"
                         >
                             {isAccepting ? (

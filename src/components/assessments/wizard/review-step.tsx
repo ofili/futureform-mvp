@@ -98,27 +98,24 @@ export default function ReviewStep({ data, projectId }: ReviewStepProps) {
                 </div>
             </Card>
 
-            {/* Respondents Summary */}
+            {/* Partners Summary */}
             <Card className="p-4">
                 <h4 className="font-medium mb-3 flex items-center gap-2">
                     <Users className="w-4 h-4" />
-                    Respondents ({data.invitations.length})
+                    Partners ({data.partners.length})
                 </h4>
                 <div className="space-y-2 max-h-[200px] overflow-y-auto">
-                    {data.invitations.map((invitation, index) => (
+                    {data.partners.map((partner, index) => (
                         <div
                             key={index}
                             className="flex items-center justify-between text-sm p-2 bg-muted/50 rounded"
                         >
                             <div>
-                                <div className="font-medium">{invitation.name}</div>
+                                <div className="font-medium">{partner.partnerName}</div>
                                 <div className="text-muted-foreground text-xs">
-                                    {invitation.email}
+                                    Admin: {partner.adminName} ({partner.adminEmail})
                                 </div>
                             </div>
-                            <Badge variant="outline" className="text-xs">
-                                {invitation.seniority}
-                            </Badge>
                         </div>
                     ))}
                 </div>
@@ -131,8 +128,14 @@ export default function ReviewStep({ data, projectId }: ReviewStepProps) {
                     <li className="flex items-start gap-2">
                         <CheckCircle2 className="w-4 h-4 mt-0.5 text-primary shrink-0" />
                         <span>
-                            Invitation emails will be sent to all {data.invitations.length}{' '}
-                            respondents
+                            Invitation emails will be sent to {data.partners.length}{' '}
+                            partner admins
+                        </span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                        <CheckCircle2 className="w-4 h-4 mt-0.5 text-primary shrink-0" />
+                        <span>
+                            Partner admins will assign respondents to specific roles
                         </span>
                     </li>
                     <li className="flex items-start gap-2">

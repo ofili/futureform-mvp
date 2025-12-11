@@ -12,8 +12,8 @@ export function PlatformArchitecture() {
     },
     {
       name: 'Trust Framework',
-      description: '6-layer trust assessment framework with sector-specific weights and veto criteria.',
-      features: ['6 trust layers', 'Sector weights', 'Risk indicators']
+      description: '7-layer trust assessment framework with sector-specific weights and veto criteria.',
+      features: ['7 trust layers', 'Sector weights', 'Risk indicators']
     },
     {
       name: 'Data Orchestration',

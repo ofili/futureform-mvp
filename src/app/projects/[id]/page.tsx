@@ -180,12 +180,28 @@ export default function ProjectDetail() {
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <Button className="bg-blue-600 hover:bg-blue-700" onClick={() => setShowPartnerInviteModal(true)}>
-                        <Plus className="w-4 h-4 mr-2" />
-                        Invite Partner
-                      </Button>
+                      <Link href={`/assessments/new?projectId=${project.id}`}>
+                        <Button className="bg-green-600 hover:bg-green-700">
+                          <Plus className="w-4 h-4 mr-2" />
+                          New Assessment
+                        </Button>
+                      </Link>
                     </TooltipTrigger>
-                    <TooltipContent>Send assessment invitation</TooltipContent>
+                    <TooltipContent>Create a new assessment for this project</TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Link href={`/assessments/new?projectId=${project.id}`}>
+                        <Button className="bg-blue-600 hover:bg-blue-700">
+                          <Plus className="w-4 h-4 mr-2" />
+                          Invite Partner
+                        </Button>
+                      </Link>
+                    </TooltipTrigger>
+                    <TooltipContent>Create assessment and invite partner</TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
 

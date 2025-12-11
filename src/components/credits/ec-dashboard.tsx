@@ -197,7 +197,7 @@ export function ECDashboard({ organizationId }: ECDashboardProps) {
                     <Settings className="mr-2 h-4 w-4" />
                     Configure Auto-Reload
                 </Button>
-                <Button onClick={() => window.location.href = '/pricing'}>
+                <Button onClick={() => window.location.href = '/dashboard/credits/checkout?type=EC'}>
                     <Plus className="mr-2 h-4 w-4" />
                     Purchase Credits
                 </Button>

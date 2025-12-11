@@ -20,53 +20,113 @@ export async function GET(
 
         const { id: assessmentId } = await params;
 
-        // Find user's invitation
-        const invitation = await prisma.assessmentInvitation.findFirst({
+        // 1. Try finding AssessmentRespondent (NEW Flow)
+        const respondent = await prisma.assessmentRespondent.findFirst({
             where: {
-                assessmentId,
-                userId: session.user.id,
-                status: 'ACCEPTED',
+                assessmentPartner: { assessmentId },
+                userId: session.user.id
             },
             include: {
-                role: true,
-            },
+                assessmentPartner: {
+                    include: { assessment: true }
+                }
+            }
         });
 
-        if (!invitation) {
-            return NextResponse.json(
-                { error: 'No invitation found for this assessment' },
-                { status: 404 }
-            );
-        }
+        let assessment;
+        let questions = [];
+        let invitation = null;
 
-        // Get assessment details
-        const assessment = await prisma.assessment.findUnique({
-            where: { id: assessmentId },
-            include: {
-                project: {
-                    select: {
-                        name: true,
-                        description: true,
+        if (respondent) {
+            assessment = respondent.assessmentPartner.assessment;
+
+            if (assessment.trustPartnerTypeId) {
+                // Trust Flow: Fetch from TrustPartnerTypeQuestion
+                const trustQuestions = await prisma.trustPartnerTypeQuestion.findMany({
+                    where: {
+                        partnerTypeId: assessment.trustPartnerTypeId,
+                        assignedRole: respondent.role
                     },
-                },
-            },
-        });
+                    include: {
+                        question: { include: { subDimension: true } }
+                    },
+                    // orderBy: { question: { questionId: 'asc' } } // Optional ordering
+                });
 
-        // Get questions assigned to user's role
-        const questions = await prisma.assessmentQuestion.findMany({
-            where: {
-                assessmentId,
-                OR: [
-                    { assignedRoleId: invitation.roleId },
-                    { assignedRoleId: null }, // Questions without role assignment
-                ],
-            },
-            include: {
-                question: true,
-                role: true,
-            },
-            orderBy: { order: 'asc' },
-        });
+                questions = trustQuestions.map(tq => ({
+                    id: tq.id,
+                    questionId: tq.questionId, // TrustQuestion ID
+                    role: { name: tq.assignedRole },
+                    question: {
+                        id: tq.question.id,
+                        text: tq.question.text,
+                        domain: tq.question.subDimension.name,
+                        // evidenceGuidance can be complex, map as needed. 
+                        // Assuming evidenceGuidance has a 'types' array or similar, or mapping evidenceRequired text.
+                        evidenceRequirements: (tq.question.evidenceGuidance as any)?.types || [],
+                        detailedExplanation: tq.question.detailedExplanation,
+                        evidenceGuidance: tq.question.evidenceGuidance,
+                        helpText: tq.question.evidenceRequired // Mapping evidenceRequired text to helpText for visibility
+                    }
+                }));
+            } else {
+                // Standard Flow (using AssessmentQuestion but with string role logic if needed)
+                // For now, if no trustPartnerTypeId, we might not have questions if using string roles on AssessmentQuestion.
+                // Fallback to fetching all questions or based on some mapping?
+                // Existing AssessmentQuestion uses assignedRoleId (String ID). Respondent has role (String Name).
+                // We might skip for now or fetch all.
+                const assessmentQuestions = await prisma.assessmentQuestion.findMany({
+                    where: { assessmentId }, // Fetch all for now if mapping is unclear, or filter client side
+                    include: { question: true, role: true },
+                    orderBy: { order: 'asc' }
+                });
+                // Filter by role name if possible
+                questions = assessmentQuestions.filter(aq => !aq.assignedRoleId || aq.role?.name === respondent.role)
+                    .map(aq => ({
+                        ...aq,
+                        question: {
+                            ...aq.question,
+                            type: 'LIKERT' // Default
+                        }
+                    }));
+            }
+
+        } else {
+            // 2. Fallback to Legacy Invitation (OLD Flow)
+            invitation = await prisma.assessmentInvitation.findFirst({
+                where: {
+                    assessmentId,
+                    userId: session.user.id,
+                    status: 'ACCEPTED',
+                },
+                include: { role: true },
+            });
+
+            if (!invitation) {
+                return NextResponse.json({ error: 'No invitation found' }, { status: 404 });
+            }
+
+            assessment = await prisma.assessment.findUnique({
+                where: { id: assessmentId },
+                include: { project: { select: { name: true, description: true } } }
+            });
+
+            // Get questions assigned to user's role
+            questions = await prisma.assessmentQuestion.findMany({
+                where: {
+                    assessmentId,
+                    OR: [
+                        { assignedRoleId: invitation.roleId },
+                        { assignedRoleId: null },
+                    ],
+                },
+                include: {
+                    question: true,
+                    role: true,
+                },
+                orderBy: { order: 'asc' },
+            });
+        }
 
         return NextResponse.json(
             {

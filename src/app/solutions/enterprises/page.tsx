@@ -163,7 +163,7 @@ export default function EnterprisesPage() {
 
                                     <div className="flex items-center gap-2 p-3 bg-cyan-500/10 border border-cyan-500/30 rounded-lg">
                                         <CheckCircle size={18} className="text-cyan-400" />
-                                        <span className="text-cyan-300 text-sm">All Tier-1 suppliers verified</span>
+                                        <span className="text-cyan text-sm">All Tier-1 suppliers verified</span>
                                     </div>
                                 </div>
                             </div>
@@ -177,7 +177,7 @@ export default function EnterprisesPage() {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-16">
                         <div className="inline-flex items-center space-x-2 mb-4 bg-cyan-500/20 border border-cyan-500/40 rounded-full px-4 py-1.5">
-                            <Shield size={14} className="text-cyan-300" />
+                            <Shield size={14} className="text-cyan" />
                             <span className="text-white text-xs font-semibold uppercase tracking-wider">Capabilities</span>
                         </div>
                         <h2 className="text-4xl font-bold text-white mb-4">Enterprise Trust Tools</h2>
@@ -191,7 +191,7 @@ export default function EnterprisesPage() {
                             const Icon = feature.icon;
                             return (
                                 <div key={feature.title} className="bg-gray-900/50 border border-gray-800 rounded-xl p-8 hover:border-cyan-500/30 transition-all duration-300 group">
-                                    <Icon className="text-cyan-400 group-hover:text-cyan-300 transition-colors mb-4" size={32} />
+                                    <Icon className="text-cyan group-hover:text-cyan transition-colors mb-4" size={32} />
                                     <h3 className="text-white font-bold text-lg mb-2">{feature.title}</h3>
                                     <p className="text-gray-400 text-sm leading-relaxed">{feature.description}</p>
                                 </div>
@@ -219,7 +219,7 @@ export default function EnterprisesPage() {
                                 <div className="space-y-2">
                                     {useCase.benefits.map((benefit) => (
                                         <div key={benefit} className="flex items-center gap-2">
-                                            <CheckCircle size={14} className="text-cyan-400 flex-shrink-0" />
+                                            <CheckCircle size={14} className="text-cyan flex-shrink-0" />
                                             <span className="text-gray-300 text-sm">{benefit}</span>
                                         </div>
                                     ))}
@@ -234,14 +234,14 @@ export default function EnterprisesPage() {
             <section className="bg-gradient-to-b from-gray-950 to-midnight py-24 border-t border-gray-800/50">
                 <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                     <div className="inline-flex items-center space-x-2 mb-6 bg-cyan-500/20 border border-cyan-500/40 rounded-full px-4 py-1.5">
-                        <Sparkles size={14} className="text-cyan-300" />
+                        <Sparkles size={14} className="text-cyan" />
                         <span className="text-white text-xs font-semibold uppercase tracking-wider">Get Started</span>
                     </div>
 
                     <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
                         Ready to Protect Your
                         <br />
-                        <span className="text-cyan-400">Supply Chain?</span>
+                        <span className="text-cyan">Supply Chain?</span>
                     </h2>
 
                     <p className="text-xl text-gray-400 mb-12 max-w-2xl mx-auto">

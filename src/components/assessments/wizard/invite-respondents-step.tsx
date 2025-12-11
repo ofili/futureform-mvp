@@ -1,265 +1,172 @@
+
 import { useState } from 'react';
 import { toast } from 'sonner';
-import { Upload, Plus, Trash2 } from 'lucide-react';
+import { Upload, Plus, Trash2, Building2 } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
+import { PartnerSelector } from '@/components/partners/partner-selector';
+import { Partner } from '@/hooks/use-partners';
 
-interface Invitation {
-    email: string;
-    name: string;
-    roleId: string;
-    seniority: string;
+interface PartnerInvitation {
+    partnerAliasId: string;
+    partnerGlobalId?: string;
+    partnerName: string; // Display only
+    adminName: string;
+    adminEmail: string;
     notes?: string;
 }
 
-interface InviteRespondentsStepProps {
+interface InvitePartnersStepProps {
     data: {
-        invitations: Invitation[];
+        partners: PartnerInvitation[];
     };
-    onUpdate: (data: { invitations: Invitation[] }) => void;
+    onUpdate: (data: { partners: PartnerInvitation[] }) => void;
 }
 
 export default function InviteRespondentsStep({
     data,
     onUpdate,
-}: InviteRespondentsStepProps) {
-    const [roles, setRoles] = useState<any[]>([]);
-    const [newInvitation, setNewInvitation] = useState({
-        email: '',
-        name: '',
-        roleId: '',
-        seniority: 'Manager',
+}: InvitePartnersStepProps) {
+    const [newPartner, setNewPartner] = useState<Partial<PartnerInvitation>>({
+        partnerAliasId: '',
+        partnerName: '',
+        adminName: '',
+        adminEmail: '',
         notes: '',
     });
 
-    // Fetch roles on mount
-    useState(() => {
-        fetch('/api/v1/roles')
-            .then((res) => res.json())
-            .then((data) => setRoles(data.roles || []))
-            .catch((err) => console.error('Error fetching roles:', err));
-    });
-
-    const addInvitation = () => {
-        if (!newInvitation.email || !newInvitation.name) {
-            toast.error('Email and name are required');
+    const addPartner = () => {
+        if (!newPartner.partnerAliasId || !newPartner.adminEmail || !newPartner.adminName) {
+            toast.error('Partner, Admin Name, and Email are required');
             return;
         }
 
         onUpdate({
-            invitations: [...data.invitations, newInvitation],
+            partners: [...(data.partners || []), newPartner as PartnerInvitation],
         });
 
-        setNewInvitation({
-            email: '',
-            name: '',
-            roleId: '',
-            seniority: 'Manager',
+        setNewPartner({
+            partnerAliasId: '',
+            partnerName: '',
+            adminName: '',
+            adminEmail: '',
             notes: '',
         });
     };
 
-    const removeInvitation = (index: number) => {
+    const removePartner = (index: number) => {
         onUpdate({
-            invitations: data.invitations.filter((_, i) => i !== index),
+            partners: (data.partners || []).filter((_, i) => i !== index),
         });
-    };
-
-    const handleCSVUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files?.[0];
-        if (!file) return;
-
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            const text = e.target?.result as string;
-            const lines = text.split('\n').slice(1); // Skip header
-            const newInvitations = lines
-                .filter((line) => line.trim())
-                .map((line) => {
-                    const [email, name, roleId, seniority, notes] = line.split(',');
-                    return {
-                        email: email?.trim() || '',
-                        name: name?.trim() || '',
-                        roleId: roleId?.trim() || '',
-                        seniority: seniority?.trim() || 'Manager',
-                        notes: notes?.trim() || '',
-                    };
-                })
-                .filter((inv) => inv.email && inv.name);
-
-            onUpdate({
-                invitations: [...data.invitations, ...newInvitations],
-            });
-        };
-        reader.readAsText(file);
     };
 
     return (
         <div className="space-y-6">
             <div>
-                <h3 className="text-lg font-semibold mb-2">Invite Respondents</h3>
+                <h3 className="text-lg font-semibold mb-2">Invite Partners</h3>
                 <p className="text-sm text-muted-foreground">
-                    Add team members who will complete the assessment. Each respondent will receive
-                    an email invitation with their assigned questions.
+                    Add partner organizations to this assessment. We will send an invitation to the Partner Admin you specify below.
                 </p>
             </div>
 
-            {/* CSV Upload */}
-            <Card className="p-4 bg-muted/50">
-                <div className="flex items-center justify-between">
-                    <div>
-                        <h4 className="font-medium mb-1">Bulk Upload</h4>
-                        <p className="text-sm text-muted-foreground">
-                            Upload a CSV file with columns: email, name, roleId, seniority, notes
-                        </p>
-                    </div>
-                    <Button variant="outline" asChild>
-                        <label className="cursor-pointer">
-                            <Upload className="w-4 h-4 mr-2" />
-                            Upload CSV
-                            <input
-                                type="file"
-                                accept=".csv"
-                                className="hidden"
-                                onChange={handleCSVUpload}
-                            />
-                        </label>
-                    </Button>
-                </div>
-            </Card>
-
-            {/* Manual Entry */}
+            {/* Add Partner Form */}
             <Card className="p-4">
-                <h4 className="font-medium mb-4">Add Respondent</h4>
-                <div className="grid grid-cols-2 gap-4">
+                <h4 className="font-medium mb-4">Add Partner Organization</h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="col-span-2 space-y-2">
+                        <Label>Partner Organization *</Label>
+                        <PartnerSelector
+                            value={newPartner.partnerAliasId}
+                            onChange={(value) => setNewPartner({ ...newPartner, partnerAliasId: value })}
+                            onPartnerSelect={(partner: Partner) => {
+                                setNewPartner({
+                                    ...newPartner,
+                                    partnerAliasId: partner.id,
+                                    partnerGlobalId: partner.partner.id,
+                                    partnerName: partner.displayName,
+                                });
+                            }}
+                        />
+                    </div>
+
                     <div className="space-y-2">
-                        <Label htmlFor="email">Email *</Label>
+                        <Label htmlFor="adminName">Partner Admin Name *</Label>
                         <Input
-                            id="email"
+                            id="adminName"
+                            placeholder="Jane Doe"
+                            value={newPartner.adminName}
+                            onChange={(e) =>
+                                setNewPartner({ ...newPartner, adminName: e.target.value })
+                            }
+                        />
+                    </div>
+
+                    <div className="space-y-2">
+                        <Label htmlFor="adminEmail">Partner Admin Email *</Label>
+                        <Input
+                            id="adminEmail"
                             type="email"
-                            placeholder="respondent@partner.org"
-                            value={newInvitation.email}
+                            placeholder="admin@partner.org"
+                            value={newPartner.adminEmail}
                             onChange={(e) =>
-                                setNewInvitation({ ...newInvitation, email: e.target.value })
+                                setNewPartner({ ...newPartner, adminEmail: e.target.value })
                             }
                         />
-                    </div>
-
-                    <div className="space-y-2">
-                        <Label htmlFor="name">Full Name *</Label>
-                        <Input
-                            id="name"
-                            placeholder="John Doe"
-                            value={newInvitation.name}
-                            onChange={(e) =>
-                                setNewInvitation({ ...newInvitation, name: e.target.value })
-                            }
-                        />
-                    </div>
-
-                    <div className="space-y-2">
-                        <Label htmlFor="roleId">Role</Label>
-                        <Select
-                            value={newInvitation.roleId}
-                            onValueChange={(value) =>
-                                setNewInvitation({ ...newInvitation, roleId: value })
-                            }
-                        >
-                            <SelectTrigger id="roleId">
-                                <SelectValue placeholder="Select role" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                {roles.map((role) => (
-                                    <SelectItem key={role.id} value={role.id}>
-                                        {role.name}
-                                    </SelectItem>
-                                ))}
-                            </SelectContent>
-                        </Select>
-                    </div>
-
-                    <div className="space-y-2">
-                        <Label htmlFor="seniority">Seniority</Label>
-                        <Select
-                            value={newInvitation.seniority}
-                            onValueChange={(value) =>
-                                setNewInvitation({ ...newInvitation, seniority: value })
-                            }
-                        >
-                            <SelectTrigger id="seniority">
-                                <SelectValue />
-                            </SelectTrigger>
-                            <SelectContent>
-                                <SelectItem value="Junior">Junior</SelectItem>
-                                <SelectItem value="Senior">Senior</SelectItem>
-                                <SelectItem value="Manager">Manager</SelectItem>
-                                <SelectItem value="Director">Director</SelectItem>
-                                <SelectItem value="C-Level">C-Level</SelectItem>
-                            </SelectContent>
-                        </Select>
                     </div>
 
                     <div className="col-span-2 space-y-2">
-                        <Label htmlFor="notes">Notes (Optional)</Label>
+                        <Label htmlFor="notes">Invitation Message (Optional)</Label>
                         <Textarea
                             id="notes"
-                            placeholder="Any special instructions for this respondent..."
-                            value={newInvitation.notes}
+                            placeholder="Message to include in the invitation email..."
+                            value={newPartner.notes}
                             onChange={(e) =>
-                                setNewInvitation({ ...newInvitation, notes: e.target.value })
+                                setNewPartner({ ...newPartner, notes: e.target.value })
                             }
                             rows={2}
                         />
                     </div>
                 </div>
 
-                <Button onClick={addInvitation} className="mt-4 w-full">
+                <Button onClick={addPartner} className="mt-4 w-full" disabled={!newPartner.partnerAliasId}>
                     <Plus className="w-4 h-4 mr-2" />
-                    Add Respondent
+                    Add Partner
                 </Button>
             </Card>
 
-            {/* Invitations List */}
-            {data.invitations.length > 0 && (
+            {/* Partners List */}
+            {data.partners && data.partners.length > 0 && (
                 <div className="space-y-2">
                     <h4 className="font-medium">
-                        Respondents ({data.invitations.length})
+                        Invited Partners ({data.partners.length})
                     </h4>
                     <div className="space-y-2 max-h-[300px] overflow-y-auto">
-                        {data.invitations.map((invitation, index) => (
-                            <Card key={index} className="p-3">
+                        {data.partners.map((partner, index) => (
+                            <Card key={index} className="p-4">
                                 <div className="flex items-start justify-between">
-                                    <div className="flex-1">
-                                        <div className="font-medium">{invitation.name}</div>
-                                        <div className="text-sm text-muted-foreground">
-                                            {invitation.email}
+                                    <div className="flex items-start gap-3">
+                                        <div className="p-2 bg-blue-100 rounded-lg">
+                                            <Building2 className="w-5 h-5 text-blue-600" />
                                         </div>
-                                        <div className="flex gap-2 mt-2">
-                                            {invitation.roleId && (
-                                                <Badge variant="outline" className="text-xs">
-                                                    {roles.find((r) => r.id === invitation.roleId)?.name ||
-                                                        'Role'}
-                                                </Badge>
+                                        <div>
+                                            <div className="font-medium text-lg">{partner.partnerName}</div>
+                                            <div className="text-sm text-muted-foreground">
+                                                Admin: {partner.adminName} ({partner.adminEmail})
+                                            </div>
+                                            {partner.notes && (
+                                                <p className="text-xs text-muted-foreground mt-1 italic">
+                                                    "{partner.notes}"
+                                                </p>
                                             )}
-                                            <Badge variant="outline" className="text-xs">
-                                                {invitation.seniority}
-                                            </Badge>
                                         </div>
-                                        {invitation.notes && (
-                                            <p className="text-xs text-muted-foreground mt-1">
-                                                {invitation.notes}
-                                            </p>
-                                        )}
                                     </div>
                                     <Button
                                         variant="ghost"
                                         size="sm"
-                                        onClick={() => removeInvitation(index)}
+                                        onClick={() => removePartner(index)}
                                     >
                                         <Trash2 className="w-4 h-4 text-destructive" />
                                     </Button>
@@ -272,3 +179,4 @@ export default function InviteRespondentsStep({
         </div>
     );
 }
+

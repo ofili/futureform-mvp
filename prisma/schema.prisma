@@ -81,6 +81,7 @@ model User {
 
   // Payment transactions
   paymentTransactions PaymentTransaction[]
+  assessmentRespondents AssessmentRespondent[]
 
   @@map("users")
 }
@@ -181,6 +182,7 @@ model Partner {
   aliases         PartnerAlias[]
   partnerContacts PartnerContact[]
   assessments     Assessment[]
+  assessmentPartners AssessmentPartner[] // [NEW]
 
   @@index([legalName])
   @@index([sector, country])
@@ -209,6 +211,7 @@ model PartnerAlias {
   partner      Partner      @relation(fields: [partnerId], references: [id], onDelete: Cascade)
   organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
   assessments  Assessment[]
+  assessmentPartners AssessmentPartner[] // [NEW]
 
   @@unique([partnerId, organizationId])
   @@index([organizationId])
@@ -384,6 +387,9 @@ model Assessment {
   trustScore             TrustScore?             @relation("TrustAssessmentScore")
   trustRedFlags          TrustRedFlag[]          @relation("TrustAssessmentRedFlags")
 
+  // [NEW] Multi-Partner Support
+  assessmentPartners     AssessmentPartner[]
+
   // CoPilot AI-generated content
   coPilotDrafts          CoPilotDraft[]          @relation("AssessmentCoPilotDrafts")
 
@@ -391,6 +397,62 @@ model Assessment {
   @@index([partnerAliasId])
   @@index([trustPartnerTypeId])
   @@map("assessments")
+}
+
+// [NEW] Intermediate model for an Organization participating in an Assessment
+model AssessmentPartner {
+  id               String   @id @default(cuid())
+  assessmentId     String
+  assessment       Assessment @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
+
+  // The Partner Entity (Global)
+  partnerId        String
+  partner          Partner    @relation(fields: [partnerId], references: [id])
+  
+  // The Partner Alias (Contextual to Project Owner)
+  partnerAliasId   String?
+  partnerAlias     PartnerAlias? @relation(fields: [partnerAliasId], references: [id])
+
+  // Partner Admin (The person invited to assign respondents)
+  adminName        String?
+  adminEmail       String?
+  invitationToken  String?   @unique
+  invitationStatus String    @default("PENDING") // PENDING, ACCEPTED, DECLINED
+
+  status           String    @default("ACTIVE") // ACTIVE, COMPLETED, ARCHIVED
+  
+  respondents      AssessmentRespondent[]
+  
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@map("assessment_partners")
+}
+
+// [NEW] Individual respondent within a Partner Organization
+model AssessmentRespondent {
+  id                  String   @id @default(cuid())
+  assessmentPartnerId String
+  assessmentPartner   AssessmentPartner @relation(fields: [assessmentPartnerId], references: [id], onDelete: Cascade)
+
+  // Identity
+  userId            String?  // Optional, if they have a registered account
+  user              User?    @relation(fields: [userId], references: [id]) 
+  
+  name              String
+  email             String
+  role              String   // Assigned Role (e.g. "CISO", "Legal") - mapped from Template
+  linkedInUrl       String?  // Mandatory upon registration/submission
+
+  // Access & Status
+  invitationToken   String?  @unique
+  invitationStatus  String   @default("PENDING") // PENDING, VIEWED, REGISTERED
+  accessCode        String?  // Short code if needed
+
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@map("assessment_respondents")
 }
 
 model Question {
@@ -1696,6 +1758,8 @@ model TrustQuestion {
   subDimension     TrustSubDimension   @relation(fields: [subDimensionId], references: [id], onDelete: Cascade)
   stakeholderTypes String[] // ["Vendor", "Technical Team"]
   evidenceRequired String              @db.Text
+  evidenceGuidance Json?               // [NEW] Structured guidance for evidence (types, examples, invalid types)
+  detailedExplanation String?          @db.Text // [NEW] Rich text explanation of the question
   evidenceWeight   TrustEvidenceWeight // CRITICAL, HIGH, MEDIUM, LOW
   weightInLayer    Float
   scoringLogic     Json // Scoring criteria for 1-5
@@ -1769,6 +1833,7 @@ model TrustPartnerTypeQuestion {
   questionId    String
   question      TrustQuestion    @relation(fields: [questionId], references: [id], onDelete: Cascade)
   isRequired    Boolean          @default(true)
+  assignedRole  String?          // [NEW] Role responsible for this question (e.g. "CISO")
   customWeight  Float? // Override default weight for this partner type
 
   @@unique([partnerTypeId, questionId])

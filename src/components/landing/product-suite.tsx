@@ -33,7 +33,7 @@ export function ProductSuite() {
     ];
 
     const colors: Record<string, { bg: string; border: string; icon: string; iconHover: string }> = {
-        cyan: { bg: 'bg-cyan-500/10', border: 'hover:border-cyan-500/50', icon: 'text-cyan-400', iconHover: 'group-hover:text-cyan-300' },
+        cyan: { bg: 'bg-cyan/10', border: 'hover:border-cyan/50', icon: 'text-cyan', iconHover: 'group-hover:text-cyan-300' },
         blue: { bg: 'bg-blue-500/10', border: 'hover:border-blue-500/50', icon: 'text-blue-400', iconHover: 'group-hover:text-blue-300' },
         purple: { bg: 'bg-purple-500/10', border: 'hover:border-purple-500/50', icon: 'text-purple-400', iconHover: 'group-hover:text-purple-300' }
     };
