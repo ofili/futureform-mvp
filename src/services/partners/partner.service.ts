@@ -391,7 +391,11 @@ export class PartnerService {
         // Get assessment with partner (check both partnerAlias and partnerGlobal)
         const assessment = await prisma.assessment.findUnique({
             where: { id: assessmentId },
-            include: {
+            select: {
+                id: true,
+                partnerName: true,
+                partnerAliasId: true,
+                partnerGlobalId: true,
                 partnerAlias: {
                     include: {
                         partner: true,
@@ -407,8 +411,24 @@ export class PartnerService {
         });
 
         if (!assessment) {
+            logger.warn('Assessment not found', {
+                service: 'PartnerService',
+                method: 'getPartnerForAssessment',
+                assessmentId,
+            });
             throw new Error('Assessment not found');
         }
+
+        logger.info('Assessment found', {
+            service: 'PartnerService',
+            method: 'getPartnerForAssessment',
+            assessmentId,
+            partnerName: assessment.partnerName,
+            partnerAliasId: assessment.partnerAliasId,
+            partnerGlobalId: assessment.partnerGlobalId,
+            hasPartnerAlias: !!assessment.partnerAlias,
+            hasPartnerGlobal: !!assessment.partnerGlobal,
+        });
 
         // Check user has access to this assessment's organization
         const userOrg = await prisma.organizationMember.findFirst({
@@ -420,6 +440,12 @@ export class PartnerService {
         });
 
         if (!userOrg) {
+            logger.warn('User has no access to assessment', {
+                service: 'PartnerService',
+                method: 'getPartnerForAssessment',
+                userId,
+                assessmentId,
+            });
             throw new Error('Forbidden: No access to this assessment');
         }
 
@@ -428,6 +454,11 @@ export class PartnerService {
 
         // If no linked partner, return assessment-level partner info as fallback
         if (!partner) {
+            logger.info('No linked partner, returning fallback data from assessment', {
+                service: 'PartnerService',
+                method: 'getPartnerForAssessment',
+                assessmentId,
+            });
             return {
                 id: assessmentId, // Use assessment ID as fallback
                 legalName: assessment.partnerName || 'Unknown Partner',
