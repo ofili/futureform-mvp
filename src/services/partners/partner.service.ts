@@ -426,8 +426,26 @@ export class PartnerService {
         // Try partnerAlias first, then partnerGlobal
         const partner = assessment.partnerAlias?.partner || assessment.partnerGlobal;
 
+        // If no linked partner, return assessment-level partner info as fallback
         if (!partner) {
-            throw new Error('No partner associated with this assessment');
+            return {
+                id: assessmentId, // Use assessment ID as fallback
+                legalName: assessment.partnerName || 'Unknown Partner',
+                tradeName: assessment.partnerName,
+                verification: 'UNVERIFIED',
+                country: null,
+                sector: null,
+                website: null,
+                headquarters: null,
+                cacNumber: null,
+                rcNumber: null,
+                cacVerifiedName: null,
+                cacVerifiedAt: null,
+                directors: null,
+                registeredAddress: null,
+                incorporationDate: null,
+                companyType: null,
+            };
         }
 
         return partner;

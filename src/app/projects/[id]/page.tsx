@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useParams } from 'next/navigation';
 import DashboardLayout from '@/components/layouts/DashboardLayout';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -16,10 +16,12 @@ import WorkflowAutomation from '@/components/workflow/WorkflowAutomation';
 import CalendarIntegration from '@/components/calendar/CalendarIntegration';
 import InviteTeamMemberModal from '@/components/projects/InviteTeamMemberModal';
 import ComparePartnersModal from '@/components/projects/ComparePartnersModal';
-import { Plus, BarChart3, Users, TrendingUp, MessageCircle, FileText, Workflow, Calendar, UserPlus, Info, ChevronRight, MoreHorizontal, CheckCircle, Clock } from 'lucide-react';
+import { ConfirmDialog } from '@/components/ui/confirm-dialog';
+import { Plus, BarChart3, Users, TrendingUp, MessageCircle, FileText, Workflow, Calendar, UserPlus, Info, ChevronRight, MoreHorizontal, CheckCircle, Clock, Trash2, Mail } from 'lucide-react';
 import Link from 'next/link';
 import AlignmentDashboard from '@/components/projects/AlignmentDashboard';
 import CreateAssessmentWizard from '@/components/assessments/CreateAssessmentWizard';
+import { toast } from 'sonner';
 
 interface Project {
   id: string;
@@ -89,6 +91,9 @@ export default function ProjectDetail() {
   const [showTeamInviteModal, setShowTeamInviteModal] = useState(false);
   const [showPartnerInviteModal, setShowPartnerInviteModal] = useState(false);
   const [showCompareModal, setShowCompareModal] = useState(false);
+  const [removeConfirmOpen, setRemoveConfirmOpen] = useState(false);
+  const [selectedAssessment, setSelectedAssessment] = useState<{ id: string; partnerName: string; status: string } | null>(null);
+  const queryClient = useQueryClient();
 
   const { data, isLoading, isError } = useQuery<{ project: Project }>({
     queryKey: ['project', id],
@@ -100,6 +105,57 @@ export default function ProjectDetail() {
       return res.json();
     },
   });
+
+  const removePartnerMutation = useMutation({
+    mutationFn: async (assessmentId: string) => {
+      const res = await fetch(`/api/v1/assessments/${assessmentId}`, {
+        method: 'DELETE',
+        credentials: 'include',
+      });
+      if (!res.ok) {
+        const error = await res.json();
+        throw new Error(error.error || 'Failed to remove partner');
+      }
+      return res.json();
+    },
+    onSuccess: (data) => {
+      toast.success('Partner removed successfully');
+      if (data.emailSent) {
+        toast.info('Partner has been notified via email');
+      }
+      queryClient.invalidateQueries({ queryKey: ['project', id] });
+      setRemoveConfirmOpen(false);
+      setSelectedAssessment(null);
+    },
+    onError: (error: Error) => {
+      toast.error(error.message || 'Failed to remove partner');
+    },
+  });
+
+  const resendInviteMutation = useMutation({
+    mutationFn: async (assessmentId: string) => {
+      const res = await fetch(`/api/v1/assessments/${assessmentId}/resend-invite`, {
+        method: 'POST',
+        credentials: 'include',
+      });
+      if (!res.ok) {
+        const error = await res.json();
+        throw new Error(error.error || 'Failed to resend invitation');
+      }
+      return res.json();
+    },
+    onSuccess: (data) => {
+      toast.success(`Invitation resent to ${data.sentTo}`);
+    },
+    onError: (error: Error) => {
+      toast.error(error.message || 'Failed to resend invitation');
+    },
+  });
+
+  const handleRemovePartner = (assessment: { id: string; partnerName: string; status: string }) => {
+    setSelectedAssessment(assessment);
+    setRemoveConfirmOpen(true);
+  };
 
   const project = data?.project;
 
@@ -347,6 +403,28 @@ export default function ProjectDetail() {
           />
         )}
 
+        <ConfirmDialog
+          open={removeConfirmOpen}
+          onOpenChange={setRemoveConfirmOpen}
+          title="Remove Partner from Assessment"
+          description={
+            selectedAssessment
+              ? `Are you sure you want to remove "${selectedAssessment.partnerName}" from this assessment? ${selectedAssessment.status !== 'PENDING'
+                ? 'They will be notified via email.'
+                : 'This action cannot be undone.'
+              }`
+              : 'Are you sure you want to remove this partner?'
+          }
+          confirmLabel="Remove Partner"
+          onConfirm={() => {
+            if (selectedAssessment) {
+              removePartnerMutation.mutate(selectedAssessment.id);
+            }
+          }}
+          variant="destructive"
+          isLoading={removePartnerMutation.isPending}
+        />
+
         <div className="space-y-6">
           {(project.assessments?.length || 0) === 0 ? (
             <Card className="text-center py-12">
@@ -459,6 +537,45 @@ export default function ProjectDetail() {
                                 View Details
                               </Button>
                             </Link>
+
+                            {assessment.status === 'PENDING' && (
+                              <TooltipProvider>
+                                <Tooltip>
+                                  <TooltipTrigger asChild>
+                                    <Button
+                                      variant="outline"
+                                      size="sm"
+                                      className="text-blue-600 hover:text-blue-700 hover:bg-blue-50"
+                                      onClick={() => resendInviteMutation.mutate(assessment.id)}
+                                      disabled={resendInviteMutation.isPending}
+                                    >
+                                      <Mail className="w-4 h-4" />
+                                    </Button>
+                                  </TooltipTrigger>
+                                  <TooltipContent>Resend invitation email</TooltipContent>
+                                </Tooltip>
+                              </TooltipProvider>
+                            )}
+
+                            <TooltipProvider>
+                              <Tooltip>
+                                <TooltipTrigger asChild>
+                                  <Button
+                                    variant="ghost"
+                                    size="sm"
+                                    className="text-red-600 hover:text-red-700 hover:bg-red-50"
+                                    onClick={() => handleRemovePartner({
+                                      id: assessment.id,
+                                      partnerName: assessment.partnerName,
+                                      status: assessment.status,
+                                    })}
+                                  >
+                                    <Trash2 className="w-4 h-4" />
+                                  </Button>
+                                </TooltipTrigger>
+                                <TooltipContent>Remove partner from assessment</TooltipContent>
+                              </Tooltip>
+                            </TooltipProvider>
                           </div>
                         </div>
                       </CardContent>

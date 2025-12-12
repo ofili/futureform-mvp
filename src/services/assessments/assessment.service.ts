@@ -344,24 +344,108 @@ export class AssessmentService {
     }
 
     /**
-     * Delete assessment
+     * Delete/remove partner from assessment
+     * Only org admin or assessment creator can remove
+     * Sends email notification if partner had accepted the invite
      */
-    async delete(id: string, userId: string) {
-        logger.info('Deleting assessment', {
+    async removePartnerFromAssessment(
+        assessmentId: string,
+        userId: string,
+        userOrgRole?: string
+    ): Promise<{ success: boolean; emailSent: boolean }> {
+        logger.info('Removing partner from assessment', {
             service: 'AssessmentService',
-            method: 'delete',
-            assessmentId: id,
+            method: 'removePartnerFromAssessment',
+            assessmentId,
             userId,
         });
 
-        // Verify access
-        await this.getById(id, userId);
-
-        await prisma.assessment.delete({
-            where: { id }
+        // Fetch assessment with project and organization details
+        const assessment = await prisma.assessment.findUnique({
+            where: { id: assessmentId },
+            include: {
+                project: {
+                    include: {
+                        organization: {
+                            include: { members: true }
+                        },
+                        createdBy: true
+                    }
+                }
+            }
         });
 
-        return { success: true };
+        if (!assessment) {
+            throw new Error('Assessment not found');
+        }
+
+        // Authorization: Check if user is org admin or assessment/project creator
+        const membership = assessment.project.organization?.members.find(
+            m => m.userId === userId && m.deletedAt === null
+        );
+
+        const isOrgAdmin = membership?.role === 'ADMIN' || membership?.role === 'OWNER';
+        const isProjectCreator = assessment.project.createdById === userId;
+        const isAssessmentCreator = assessment.partnerId === userId; // partnerId might be the creator
+
+        if (!isOrgAdmin && !isProjectCreator && !isAssessmentCreator) {
+            throw new Error('Forbidden: Only organization admins or the assessment creator can remove partners');
+        }
+
+        // Check if partner has accepted (status is not PENDING)
+        const partnerHasAccepted = assessment.status !== 'PENDING';
+        let emailSent = false;
+
+        // If partner accepted, send notification email
+        if (partnerHasAccepted && assessment.partnerAdminEmail) {
+            try {
+                const { sendEmail } = await import('@/lib/email');
+                await sendEmail({
+                    to: assessment.partnerAdminEmail,
+                    subject: `Assessment Invitation Cancelled - ${assessment.project.name}`,
+                    html: `
+                        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+                            <h2>Assessment Invitation Cancelled</h2>
+                            <p>Dear ${assessment.partnerName || 'Partner'},</p>
+                            <p>We regret to inform you that your assessment invitation for the project <strong>${assessment.project.name}</strong> has been cancelled.</p>
+                            <p>If you have any questions, please contact the project team.</p>
+                            <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e5e7eb;">
+                                <p style="font-size: 12px; color: #6b7280; text-align: center;">
+                                    This email was sent by Gitance.
+                                </p>
+                            </div>
+                        </div>
+                    `,
+                });
+                emailSent = true;
+                logger.info('Removal notification email sent', {
+                    service: 'AssessmentService',
+                    method: 'removePartnerFromAssessment',
+                    assessmentId,
+                    partnerEmail: assessment.partnerAdminEmail,
+                });
+            } catch (emailError) {
+                logger.error('Failed to send removal notification email', emailError as Error, {
+                    service: 'AssessmentService',
+                    method: 'removePartnerFromAssessment',
+                });
+                // Don't fail the delete operation if email fails
+            }
+        }
+
+        // Delete the assessment
+        await prisma.assessment.delete({
+            where: { id: assessmentId }
+        });
+
+        return { success: true, emailSent };
+    }
+
+    /**
+     * Delete assessment (legacy method - delegates to removePartnerFromAssessment)
+     */
+    async delete(id: string, userId: string) {
+        return this.removePartnerFromAssessment(id, userId);
     }
 
     /**
@@ -412,13 +496,19 @@ export class AssessmentService {
             id: assessment.id,
             projectId: assessment.projectId,
             project: assessment.project,
+            // Convenience field for list views
+            projectName: assessment.project?.name || 'Unknown Project',
             partnerName: assessment.partnerName || 'Unknown Partner',
             partnerAdminEmail: assessment.partnerAdminEmail,
+            partnerAliasId: assessment.partnerAliasId,
+            partnerGlobalId: assessment.partnerGlobalId,
             type: assessment.type,
             depth: assessment.depth,
             deadline: assessment.deadline?.toISOString(),
-            status: assessment.status,
+            status: assessment.status?.toLowerCase() || 'pending',
             overallScore: assessment.overallScore,
+            // Alias for list views
+            trustScore: assessment.overallScore,
             confidenceLevel: assessment.confidenceLevel,
             domainScores: assessment.scores?.map((s: any) => ({
                 domain: s.domain,
