@@ -41,7 +41,7 @@ export default function SettingsPage() {
   return (
     <DashboardLayout>
       <div className="container mx-auto px-6 py-8 max-w-3xl space-y-8">
-        <SettingsHeader />
+        <SettingsHeader userId={user?.id} />
         <ProfileSettings
           initialFirstName={user?.firstName}
           initialLastName={user?.lastName}

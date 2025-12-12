@@ -54,6 +54,9 @@ export class AssessmentService {
                         }
                     }
                 },
+                trustPartnerType: {
+                    select: { name: true }
+                },
                 scores: true,
                 redFlags: true,
                 responses: {
@@ -232,6 +235,9 @@ export class AssessmentService {
                 project: {
                     select: { id: true, name: true }
                 },
+                trustPartnerType: {
+                    select: { name: true }
+                },
                 scores: true
             },
             orderBy: { createdAt: 'desc' },
@@ -335,6 +341,9 @@ export class AssessmentService {
             include: {
                 project: {
                     select: { id: true, name: true }
+                },
+                trustPartnerType: {
+                    select: { name: true }
                 },
                 scores: true
             }
@@ -502,7 +511,9 @@ export class AssessmentService {
             partnerAdminEmail: assessment.partnerAdminEmail,
             partnerAliasId: assessment.partnerAliasId,
             partnerGlobalId: assessment.partnerGlobalId,
-            type: assessment.type,
+
+            type: assessment.trustPartnerType?.name || assessment.type,
+            originalType: assessment.type,
             depth: assessment.depth,
             deadline: assessment.deadline?.toISOString(),
             status: assessment.status?.toLowerCase() || 'pending',

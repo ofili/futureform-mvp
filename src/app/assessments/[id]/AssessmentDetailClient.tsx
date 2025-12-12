@@ -6,18 +6,22 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Breadcrumb } from '@/components/ui/breadcrumb';
 import { Tooltip, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, Download, Share2, AlertTriangle, CheckCircle } from 'lucide-react';
+import { EntityIdDisplay } from '@/components/ui/entity-id-display';
+import { ArrowLeft, Download, Share2, AlertTriangle, CheckCircle, Building2, Mail, Calendar } from 'lucide-react';
 import Link from 'next/link';
 
 interface Assessment {
     id: string;
     partnerName: string;
+    partnerAdminEmail?: string;
+    type: string;
     status: string;
     project: { id: string; name: string };
     domainScores: Array<{ domain: string; score: number; confidence: number }>;
     responses: Array<{ question: { text: string; domain: string }; response: string }>;
     redFlags: Array<{ description: string; severity: string }>;
     completedAt?: string;
+    deadline?: string;
 }
 
 interface AssessmentDetailClientProps {
@@ -34,13 +38,13 @@ export default function AssessmentDetailClient({ assessment }: AssessmentDetailC
             <Breadcrumb items={[
                 { label: 'Projects', href: '/projects' },
                 { label: assessment.project?.name || 'Project', href: `/projects/${assessment.project?.id}` },
-                { label: assessment.partnerName, current: true }
+                { label: assessment.type, current: true }
             ]} />
 
             <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-6 mb-8">
                 <div className="flex-1">
                     <div className="flex items-center gap-3 mb-3">
-                        <h1 className="text-3xl font-bold">{assessment.partnerName}</h1>
+                        <h1 className="text-3xl font-bold">{assessment.type}</h1>
                         <Badge variant={assessment.status === 'COMPLETED' ? 'default' : 'secondary'} className="text-sm px-3 py-1">
                             {assessment.status === 'COMPLETED' && <CheckCircle className="w-3 h-3 mr-1" />}
                             {assessment.status.replace('_', ' ')}
@@ -54,12 +58,15 @@ export default function AssessmentDetailClient({ assessment }: AssessmentDetailC
                             })}
                         </p>
                     )}
+                    <div className="mt-2">
+                        <EntityIdDisplay entityType="Assessment" entityId={assessment.id} />
+                    </div>
                 </div>
 
                 <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
                     {assessment.status === 'COMPLETED' && (
                         <div className="text-center">
-                            <div className="text-4xl font-bold text-primary mb-1">{avgScore}%</div>
+                            <div className="text-4xl font-bold text-green-600 mb-1">{avgScore}%</div>
                             <p className="text-sm text-muted-foreground">Overall Trust Score</p>
                         </div>
                     )}
@@ -116,6 +123,44 @@ export default function AssessmentDetailClient({ assessment }: AssessmentDetailC
                 </TabsList>
 
                 <TabsContent value="overview" className="space-y-6">
+                    {/* Partner Information Card */}
+                    <Card>
+                        <CardHeader className="pb-3">
+                            <CardTitle className="text-lg font-medium flex items-center gap-2">
+                                <Building2 className="w-5 h-5 text-muted-foreground" />
+                                Assessment Partner
+                            </CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                <div>
+                                    <p className="text-sm text-muted-foreground mb-1">Partner Name</p>
+                                    <p className="font-medium">{assessment.partnerName}</p>
+                                </div>
+                                {assessment.partnerAdminEmail && (
+                                    <div>
+                                        <p className="text-sm text-muted-foreground mb-1">Contact Email</p>
+                                        <div className="flex items-center gap-2">
+                                            <Mail className="w-4 h-4 text-muted-foreground" />
+                                            <a href={`mailto:${assessment.partnerAdminEmail}`} className="text-blue-600 hover:underline">
+                                                {assessment.partnerAdminEmail}
+                                            </a>
+                                        </div>
+                                    </div>
+                                )}
+                                {assessment.deadline && (
+                                    <div>
+                                        <p className="text-sm text-muted-foreground mb-1">Deadline</p>
+                                        <div className="flex items-center gap-2">
+                                            <Calendar className="w-4 h-4 text-muted-foreground" />
+                                            <span>{new Date(assessment.deadline).toLocaleDateString()}</span>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        </CardContent>
+                    </Card>
+
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
                         {assessment.domainScores.map((score) => {
                             const getScoreColor = (score: number) => {

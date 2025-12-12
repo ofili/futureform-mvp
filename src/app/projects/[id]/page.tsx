@@ -17,7 +17,8 @@ import CalendarIntegration from '@/components/calendar/CalendarIntegration';
 import InviteTeamMemberModal from '@/components/projects/InviteTeamMemberModal';
 import ComparePartnersModal from '@/components/projects/ComparePartnersModal';
 import { ConfirmDialog } from '@/components/ui/confirm-dialog';
-import { Plus, BarChart3, Users, TrendingUp, MessageCircle, FileText, Workflow, Calendar, UserPlus, Info, ChevronRight, MoreHorizontal, CheckCircle, Clock, Trash2, Mail } from 'lucide-react';
+import { EntityIdDisplay } from '@/components/ui/entity-id-display';
+import { Plus, BarChart3, Users, TrendingUp, MessageCircle, FileText, Workflow, Calendar, UserPlus, Info, ChevronRight, MoreHorizontal, CheckCircle, Clock, Trash2, Mail, HelpCircle } from 'lucide-react';
 import Link from 'next/link';
 import AlignmentDashboard from '@/components/projects/AlignmentDashboard';
 import CreateAssessmentWizard from '@/components/assessments/CreateAssessmentWizard';
@@ -291,7 +292,7 @@ export default function ProjectDetail() {
                 </div>
                 <div>
                   <p className="text-lg font-bold text-gray-900">{project.assessments?.length || 0}</p>
-                  <p className="text-xs text-gray-500">Partners</p>
+                  <p className="text-xs text-gray-500">Assessments</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
@@ -444,7 +445,7 @@ export default function ProjectDetail() {
             <Tabs defaultValue="assessments" className="space-y-6">
               <TabsList className="grid w-full grid-cols-7">
                 <TabsTrigger value="assessments" className="flex items-center gap-2">
-                  <Users className="w-4 h-4" />
+                  <FileText className="w-4 h-4" />
                   Assessments
                 </TabsTrigger>
                 {project.type === 'MULTI_STAKEHOLDER_ALIGNMENT' && (
@@ -490,10 +491,15 @@ export default function ProjectDetail() {
                         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                           <div className="flex-1">
                             <div className="flex items-center gap-3 mb-2">
-                              <h3 className="text-lg font-semibold">{assessment.partnerName}</h3>
+                              <h3 className="text-lg font-semibold">{assessment.partnerType}</h3>
                               <Badge variant={assessment.status === 'COMPLETED' ? 'default' : 'secondary'}>
                                 {assessment.status.replace('_', ' ')}
                               </Badge>
+                            </div>
+
+                            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                              <Users className="w-4 h-4" />
+                              <span>{assessment.partnerName || 'No Partner Assigned'}</span>
                             </div>
 
                             {assessment.status === 'COMPLETED' && assessment.domainScores.length > 0 && (
@@ -740,6 +746,18 @@ export default function ProjectDetail() {
                           </div>
                         )}
                       </div>
+                    </div>
+
+                    {/* Support Info */}
+                    <div className="pt-6 border-t">
+                      <div className="flex items-center gap-2 mb-3">
+                        <HelpCircle className="w-4 h-4 text-muted-foreground" />
+                        <h3 className="font-semibold text-lg">Support Info</h3>
+                      </div>
+                      <p className="text-xs text-muted-foreground mb-2">
+                        Use this ID when contacting support about this project
+                      </p>
+                      <EntityIdDisplay entityType="Project" entityId={project.id} size="md" />
                     </div>
                   </CardContent>
                 </Card>
