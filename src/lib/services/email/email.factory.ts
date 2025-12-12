@@ -8,8 +8,8 @@ export const getEmailService = (): IEmailService => {
     const provider = process.env.EMAIL_PROVIDER || 'resend';
 
     if (provider === 'mailtrap') {
-        if (!process.env.MAILTRAP_USER || !process.env.MAILTRAP_PASS) {
-            logger.warn('EMAIL_PROVIDER is mailtrap but MAILTRAP_USER/PASS is missing. Emails may fail.', {
+        if (!process.env.MAILTRAP_API_TOKEN) {
+            logger.warn('EMAIL_PROVIDER is mailtrap but MAILTRAP_API_TOKEN is missing. Emails may fail.', {
                 service: 'EmailFactory',
                 method: 'getEmailService',
             });

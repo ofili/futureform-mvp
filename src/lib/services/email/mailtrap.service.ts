@@ -1,34 +1,30 @@
-import nodemailer from 'nodemailer';
+import { MailtrapClient } from 'mailtrap';
 import { IEmailService, EmailPayload } from './types';
 import { logger } from '@/lib/logger';
 
 /**
- * Mailtrap Email Service for Development/Testing
- * Uses SMTP transport with Mailtrap credentials
+ * Mailtrap Email Service using the official Mailtrap SDK
+ * Uses API token authentication (no username/password needed)
  */
 export class MailtrapService implements IEmailService {
-    private transporter: nodemailer.Transporter;
+    private client: MailtrapClient;
+    private sandbox: boolean;
+    private inboxId?: number;
 
     constructor() {
-        const host = process.env.MAILTRAP_HOST || 'sandbox.smtp.mailtrap.io';
-        const port = parseInt(process.env.MAILTRAP_PORT || '2525', 10);
-        const user = process.env.MAILTRAP_USER;
-        const pass = process.env.MAILTRAP_PASS;
+        const token = process.env.MAILTRAP_API_TOKEN;
+        this.sandbox = process.env.MAILTRAP_SANDBOX === 'true';
+        this.inboxId = process.env.MAILTRAP_INBOX_ID ? parseInt(process.env.MAILTRAP_INBOX_ID, 10) : undefined;
 
-        if (!user || !pass) {
-            logger.warn('MAILTRAP_USER or MAILTRAP_PASS is not set. Emails may fail.', {
+        if (!token) {
+            logger.warn('MAILTRAP_API_TOKEN is not set. Emails may fail.', {
                 service: 'MailtrapService',
                 method: 'constructor',
             });
         }
 
-        this.transporter = nodemailer.createTransport({
-            host,
-            port,
-            auth: {
-                user: user || '',
-                pass: pass || '',
-            },
+        this.client = new MailtrapClient({
+            token: token || '',
         });
     }
 
@@ -36,17 +32,29 @@ export class MailtrapService implements IEmailService {
         const fromAddress = from || 'hello@demomailtrap.co';
 
         try {
-            const info = await this.transporter.sendMail({
-                from: `"FutureForm" <${fromAddress}>`,
-                to,
-                subject,
-                html,
-            });
+            if (this.sandbox && this.inboxId) {
+                // Sandbox/Testing mode - sends to Mailtrap inbox for preview
+                await this.client.testing.send({
+                    inboxId: this.inboxId,
+                    from: { email: fromAddress, name: 'Gitance' },
+                    to: [{ email: to }],
+                    subject,
+                    html,
+                });
+            } else {
+                // Production/Sending mode
+                await this.client.send({
+                    from: { email: fromAddress, name: 'Gitance' },
+                    to: [{ email: to }],
+                    subject,
+                    html,
+                });
+            }
 
             logger.info(`Email sent via Mailtrap to ${to}`, {
                 service: 'MailtrapService',
                 method: 'sendEmail',
-                messageId: info.messageId,
+                sandbox: this.sandbox,
             });
         } catch (error) {
             logger.error('Failed to send email via Mailtrap', error as Error, {

@@ -1,14 +1,4 @@
-import nodemailer from 'nodemailer';
-
-const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port: Number(process.env.SMTP_PORT),
-    secure: process.env.SMTP_SECURE === 'true',
-    auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-    },
-});
+import { getEmailService } from './email/email.factory';
 
 interface SendEmailParams {
     to: string;
@@ -16,26 +6,11 @@ interface SendEmailParams {
     html: string;
 }
 
+/**
+ * Legacy email function - now delegates to the email factory
+ * This ensures all emails go through the configured provider (Mailtrap, Resend, etc.)
+ */
 export const sendEmail = async ({ to, subject, html }: SendEmailParams) => {
-    // In development, if no SMTP credentials, log the email
-    if (!process.env.SMTP_HOST) {
-        console.log('---------------------------------------------------');
-        console.log(`[DEV EMAIL] To: ${to}`);
-        console.log(`[DEV EMAIL] Subject: ${subject}`);
-        console.log(`[DEV EMAIL] Body: ${html}`);
-        console.log('---------------------------------------------------');
-        return;
-    }
-
-    try {
-        await transporter.sendMail({
-            from: process.env.SMTP_FROM || '"Gitance" <noreply@gitance.com>',
-            to,
-            subject,
-            html,
-        });
-    } catch (error) {
-        console.error('Error sending email:', error);
-        throw new Error('Failed to send email');
-    }
+    const emailService = getEmailService();
+    await emailService.sendEmail({ to, subject, html });
 };
