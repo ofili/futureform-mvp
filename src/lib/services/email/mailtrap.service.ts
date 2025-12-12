@@ -25,6 +25,7 @@ export class MailtrapService implements IEmailService {
 
         this.client = new MailtrapClient({
             token: token || '',
+            sandbox: this.sandbox,
         });
     }
 
@@ -32,24 +33,14 @@ export class MailtrapService implements IEmailService {
         const fromAddress = from || 'hello@demomailtrap.co';
 
         try {
-            if (this.sandbox && this.inboxId) {
-                // Sandbox/Testing mode - sends to Mailtrap inbox for preview
-                await this.client.testing.send({
-                    inboxId: this.inboxId,
-                    from: { email: fromAddress, name: 'Gitance' },
-                    to: [{ email: to }],
-                    subject,
-                    html,
-                });
-            } else {
-                // Production/Sending mode
-                await this.client.send({
-                    from: { email: fromAddress, name: 'Gitance' },
-                    to: [{ email: to }],
-                    subject,
-                    html,
-                });
-            }
+            // Both sandbox and production use the same send method
+            // The sandbox flag in the constructor determines the endpoint
+            await this.client.send({
+                from: { email: fromAddress, name: 'Gitance' },
+                to: [{ email: to }],
+                subject,
+                html,
+            });
 
             logger.info(`Email sent via Mailtrap to ${to}`, {
                 service: 'MailtrapService',
