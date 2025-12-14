@@ -51,6 +51,9 @@ export class AssessmentService {
                     include: {
                         organization: {
                             include: { members: true }
+                        },
+                        teamMembers: {
+                            where: { userId, removedAt: null }
                         }
                     }
                 },
@@ -59,6 +62,12 @@ export class AssessmentService {
                 },
                 scores: true,
                 redFlags: true,
+                assessmentPartners: {
+                    include: {
+                        partner: true,
+                        partnerAlias: true
+                    }
+                },
                 responses: {
                     include: {
                         question: {
@@ -74,11 +83,23 @@ export class AssessmentService {
         }
 
         // Authorization check
-        const hasAccess = assessment.project.organization?.members.some(
+        // First check if user is global admin
+        const user = await prisma.user.findUnique({
+            where: { id: userId },
+            select: { role: true }
+        });
+
+        if (user?.role === 'ADMIN') {
+            return this.transformAssessment(assessment);
+        }
+
+        const isCreator = assessment.project.createdById === userId;
+        const isOrgMember = assessment.project.organization?.members.some(
             m => m.userId === userId && m.deletedAt === null
         ) ?? false;
+        const isTeamMember = assessment.project.teamMembers.length > 0;
 
-        if (!hasAccess) {
+        if (!isCreator && !isOrgMember && !isTeamMember) {
             throw new Error('Unauthorized access to assessment');
         }
 
@@ -215,22 +236,41 @@ export class AssessmentService {
             filters,
         });
 
-        // Get user's organizations
-        const userOrgs = await prisma.organizationMember.findMany({
-            where: { userId, deletedAt: null },
-            select: { organizationId: true }
+        // Check if user is global admin
+        const user = await prisma.user.findUnique({
+            where: { id: userId },
+            select: { role: true }
         });
 
-        const orgIds = userOrgs.map(o => o.organizationId);
+        console.log(`AssessmentService.list: User ${userId} has role ${user?.role}`);
+
+        let whereClause: any = {
+            ...(filters.projectId && { projectId: filters.projectId }),
+            ...(filters.status && { status: filters.status }),
+        };
+
+        // If not global admin, restrict to user's organizations
+        if (user?.role !== 'ADMIN') {
+            const userOrgs = await prisma.organizationMember.findMany({
+                where: { userId, deletedAt: null },
+                select: { organizationId: true }
+            });
+            const orgIds = userOrgs.map(o => o.organizationId);
+
+            // Allow access if user is in the org OR if user created the project OR if user is a team member
+            whereClause.OR = [
+                { project: { organizationId: { in: orgIds } } },
+                { project: { createdById: userId } },
+                { project: { teamMembers: { some: { userId, removedAt: null } } } }
+            ];
+
+            console.log('AssessmentService.list: User restricted to orgs/created/team:', orgIds);
+        }
+
+        console.log('AssessmentService.list: Querying with whereClause:', JSON.stringify(whereClause, null, 2));
 
         const assessments = await prisma.assessment.findMany({
-            where: {
-                project: {
-                    organizationId: { in: orgIds }
-                },
-                ...(filters.projectId && { projectId: filters.projectId }),
-                ...(filters.status && { status: filters.status }),
-            },
+            where: whereClause,
             include: {
                 project: {
                     select: { id: true, name: true }
@@ -238,12 +278,20 @@ export class AssessmentService {
                 trustPartnerType: {
                     select: { name: true }
                 },
+                assessmentPartners: {
+                    include: {
+                        partner: true,
+                        partnerAlias: true
+                    }
+                },
                 scores: true
             },
             orderBy: { createdAt: 'desc' },
             take: filters.limit || 50,
             skip: filters.offset || 0,
         });
+
+        console.log(`AssessmentService.list: Found ${assessments.length} assessments`);
 
         return assessments.map(a => this.transformAssessment(a));
     }
@@ -265,6 +313,9 @@ export class AssessmentService {
             include: {
                 organization: {
                     include: { members: true }
+                },
+                teamMembers: {
+                    where: { userId, removedAt: null }
                 }
             }
         });
@@ -273,11 +324,13 @@ export class AssessmentService {
             throw new Error('Project not found');
         }
 
-        const hasAccess = project.organization?.members.some(
+        const isCreator = project.createdById === userId;
+        const isOrgMember = project.organization?.members.some(
             m => m.userId === userId && m.deletedAt === null
         ) ?? false;
+        const isTeamMember = project.teamMembers.length > 0;
 
-        if (!hasAccess) {
+        if (!isCreator && !isOrgMember && !isTeamMember) {
             throw new Error('Unauthorized access to project');
         }
 
@@ -507,7 +560,7 @@ export class AssessmentService {
             project: assessment.project,
             // Convenience field for list views
             projectName: assessment.project?.name || 'Unknown Project',
-            partnerName: assessment.partnerName || 'Unknown Partner',
+            partnerName: assessment.trustPartnerType?.name || assessment.partnerName || assessment.assessmentPartners?.[0]?.partnerAlias?.displayName || assessment.assessmentPartners?.[0]?.partner?.legalName || 'Unknown Assessment',
             partnerAdminEmail: assessment.partnerAdminEmail,
             partnerAliasId: assessment.partnerAliasId,
             partnerGlobalId: assessment.partnerGlobalId,
@@ -533,6 +586,13 @@ export class AssessmentService {
             redFlags: assessment.redFlags?.map((f: any) => ({
                 description: f.description,
                 severity: f.severity
+            })) || [],
+            partners: assessment.assessmentPartners?.map((ap: any) => ({
+                id: ap.id,
+                partnerName: ap.partnerAlias?.displayName || ap.partner?.legalName || 'Unknown Partner',
+                status: ap.status,
+                adminEmail: ap.adminEmail || ap.partnerAlias?.adminEmail,
+                invitationStatus: ap.invitationStatus
             })) || [],
             createdAt: assessment.createdAt?.toISOString(),
             completedAt: assessment.completedAt?.toISOString(),

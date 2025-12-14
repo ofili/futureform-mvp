@@ -22,6 +22,13 @@ interface Assessment {
     redFlags: Array<{ description: string; severity: string }>;
     completedAt?: string;
     deadline?: string;
+    partners: Array<{
+        id: string;
+        partnerName: string;
+        status: string;
+        adminEmail?: string;
+        invitationStatus: string;
+    }>;
 }
 
 interface AssessmentDetailClientProps {
@@ -123,38 +130,43 @@ export default function AssessmentDetailClient({ assessment }: AssessmentDetailC
                 </TabsList>
 
                 <TabsContent value="overview" className="space-y-6">
-                    {/* Partner Information Card */}
+                    {/* Partners Information Card */}
                     <Card>
                         <CardHeader className="pb-3">
                             <CardTitle className="text-lg font-medium flex items-center gap-2">
                                 <Building2 className="w-5 h-5 text-muted-foreground" />
-                                Assessment Partner
+                                Participating Partners
                             </CardTitle>
                         </CardHeader>
                         <CardContent>
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                <div>
-                                    <p className="text-sm text-muted-foreground mb-1">Partner Name</p>
-                                    <p className="font-medium">{assessment.partnerName}</p>
-                                </div>
-                                {assessment.partnerAdminEmail && (
-                                    <div>
-                                        <p className="text-sm text-muted-foreground mb-1">Contact Email</p>
-                                        <div className="flex items-center gap-2">
-                                            <Mail className="w-4 h-4 text-muted-foreground" />
-                                            <a href={`mailto:${assessment.partnerAdminEmail}`} className="text-blue-600 hover:underline">
-                                                {assessment.partnerAdminEmail}
-                                            </a>
+                            <div className="space-y-4">
+                                {assessment.partners && assessment.partners.length > 0 ? (
+                                    assessment.partners.map((partner) => (
+                                        <div key={partner.id} className="flex items-center justify-between p-3 bg-muted/30 rounded-lg border">
+                                            <div>
+                                                <p className="font-medium">{partner.partnerName}</p>
+                                                {partner.adminEmail && (
+                                                    <div className="flex items-center gap-2 mt-1">
+                                                        <Mail className="w-3 h-3 text-muted-foreground" />
+                                                        <a href={`mailto:${partner.adminEmail}`} className="text-xs text-blue-600 hover:underline">
+                                                            {partner.adminEmail}
+                                                        </a>
+                                                    </div>
+                                                )}
+                                            </div>
+                                            <div className="flex flex-col items-end gap-1">
+                                                <Badge variant={partner.status === 'COMPLETED' ? 'default' : 'secondary'}>
+                                                    {partner.status.replace('_', ' ')}
+                                                </Badge>
+                                                {partner.invitationStatus === 'PENDING' && (
+                                                    <span className="text-[10px] text-muted-foreground">Invite Pending</span>
+                                                )}
+                                            </div>
                                         </div>
-                                    </div>
-                                )}
-                                {assessment.deadline && (
-                                    <div>
-                                        <p className="text-sm text-muted-foreground mb-1">Deadline</p>
-                                        <div className="flex items-center gap-2">
-                                            <Calendar className="w-4 h-4 text-muted-foreground" />
-                                            <span>{new Date(assessment.deadline).toLocaleDateString()}</span>
-                                        </div>
+                                    ))
+                                ) : (
+                                    <div className="text-center py-4 text-muted-foreground italic">
+                                        No partners invited yet.
                                     </div>
                                 )}
                             </div>

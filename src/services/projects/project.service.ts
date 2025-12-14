@@ -80,6 +80,7 @@ export class ProjectService {
                         id: true,
                         partnerName: true,
                         status: true,
+                        type: true,
                         createdAt: true,
                         scores: {
                             select: {
@@ -90,6 +91,12 @@ export class ProjectService {
                         trustPartnerType: {
                             select: {
                                 name: true
+                            }
+                        },
+                        assessmentPartners: {
+                            select: {
+                                id: true,
+                                status: true
                             }
                         }
                     }
@@ -387,11 +394,20 @@ export class ProjectService {
             objectives: project.objectives,
             longDescription: project.longDescription,
             stakeholders: project.stakeholders,
-            assessments: project.assessments?.map((a: any) => ({
-                ...a,
-                partnerType: a.trustPartnerType?.name || a.partnerType,
-                domainScores: a.scores || []
-            })),
+            assessments: project.assessments?.map((a: any) => {
+                const totalPartners = a.assessmentPartners?.length || 0;
+                const completedPartners = a.assessmentPartners?.filter((p: any) => p.status === 'COMPLETED').length || 0;
+                const completionPercentage = totalPartners > 0 ? Math.round((completedPartners / totalPartners) * 100) : 0;
+
+                return {
+                    ...a,
+                    name: a.trustPartnerType?.name || a.type || 'Assessment',
+                    partnerType: a.trustPartnerType?.name || a.partnerType, // Keep for backward compat if needed
+                    domainScores: a.scores || [],
+                    partnerCount: totalPartners,
+                    completionPercentage
+                };
+            }),
             teamMembers: project.teamMembers,
             assessmentCount: project._count?.assessments,
             createdAt: project.createdAt?.toISOString(),

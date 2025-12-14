@@ -5,6 +5,14 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useParams } from 'next/navigation';
 import DashboardLayout from '@/components/layouts/DashboardLayout';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
@@ -18,11 +26,12 @@ import InviteTeamMemberModal from '@/components/projects/InviteTeamMemberModal';
 import ComparePartnersModal from '@/components/projects/ComparePartnersModal';
 import { ConfirmDialog } from '@/components/ui/confirm-dialog';
 import { EntityIdDisplay } from '@/components/ui/entity-id-display';
-import { Plus, BarChart3, Users, TrendingUp, MessageCircle, FileText, Workflow, Calendar, UserPlus, Info, ChevronRight, MoreHorizontal, CheckCircle, Clock, Trash2, Mail, HelpCircle } from 'lucide-react';
+import { Plus, BarChart3, Users, TrendingUp, MessageCircle, FileText, Workflow, Calendar, UserPlus, Info, ChevronRight, MoreHorizontal, CheckCircle, Clock, Trash2, Mail, HelpCircle, Edit2 } from 'lucide-react';
 import Link from 'next/link';
 import AlignmentDashboard from '@/components/projects/AlignmentDashboard';
 import CreateAssessmentWizard from '@/components/assessments/CreateAssessmentWizard';
 import { toast } from 'sonner';
+import EditProjectModal from '@/components/projects/EditProjectModal';
 
 interface Project {
   id: string;
@@ -79,10 +88,12 @@ interface Project {
 
   assessments: Array<{
     id: string;
-    partnerName: string;
-    partnerType: string;
+    name: string;
+    partnerCount: number;
+    completionPercentage: number;
     status: string;
-    domainScores: Array<{ domain: string; score: number }>;
+    partnerType?: string; // Added to fix type error
+    domainScores: Array<{ domain: string; score: number }>; // Kept for types but unused in list
   }>;
 }
 
@@ -92,6 +103,7 @@ export default function ProjectDetail() {
   const [showTeamInviteModal, setShowTeamInviteModal] = useState(false);
   const [showPartnerInviteModal, setShowPartnerInviteModal] = useState(false);
   const [showCompareModal, setShowCompareModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
   const [removeConfirmOpen, setRemoveConfirmOpen] = useState(false);
   const [selectedAssessment, setSelectedAssessment] = useState<{ id: string; partnerName: string; status: string } | null>(null);
   const queryClient = useQueryClient();
@@ -187,7 +199,7 @@ export default function ProjectDetail() {
 
   // Transform data for Alignment Dashboard
   const alignmentStakeholders = completedAssessments.map(a => ({
-    name: a.partnerName,
+    name: a.name, // Changed from partnerName to name
     role: a.partnerType || 'Partner',
     scores: a.domainScores.reduce((acc, ds) => ({ ...acc, [ds.domain]: ds.score }), {})
   }));
@@ -206,86 +218,90 @@ export default function ProjectDetail() {
           </nav>
 
           {/* Header Card */}
-          <div className="bg-white rounded-xl border shadow-sm p-6">
-            <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-6">
-              <div className="flex-1">
-                <div className="flex items-center gap-3 mb-2">
-                  <h1 className="text-2xl font-semibold text-gray-900">{project.name}</h1>
-                  <Badge variant={project.status === 'ACTIVE' ? 'default' : 'secondary'}>{project.status}</Badge>
-                </div>
-                <p className="text-gray-500 mb-4 max-w-2xl">{project.description}</p>
-                <div className="flex flex-wrap gap-2">
-                  <Badge variant="outline" className="bg-gray-50">{project.type.replace(/_/g, ' ')}</Badge>
-                  <Badge variant="outline" className="bg-gray-50">{project.sector}</Badge>
-                  <Badge variant="outline" className="bg-gray-50">{project.region}</Badge>
-                </div>
-              </div>
+          <div className="bg-white rounded-xl border shadow-sm p-6 space-y-6">
 
-              <div className="flex flex-wrap gap-2">
-                <TooltipProvider>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <Button variant="outline" onClick={() => setShowTeamInviteModal(true)}>
-                        <UserPlus className="w-4 h-4 mr-2" />
-                        Team
+            {/* 1. Actions Level */}
+            <div className="flex flex-wrap items-center justify-end gap-2 pb-6 border-b">
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button variant="outline" onClick={() => setShowTeamInviteModal(true)}>
+                      <UserPlus className="w-4 h-4 mr-2" />
+                      Team
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>Invite a team member</TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Link href={`/assessments/new?projectId=${project.id}`}>
+                      <Button className="bg-green-600 hover:bg-green-700">
+                        <Plus className="w-4 h-4 mr-2" />
+                        New Assessment
                       </Button>
-                    </TooltipTrigger>
-                    <TooltipContent>Invite a team member</TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
+                    </Link>
+                  </TooltipTrigger>
+                  <TooltipContent>Create a new assessment for this project</TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
 
-                <TooltipProvider>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <Link href={`/assessments/new?projectId=${project.id}`}>
-                        <Button className="bg-green-600 hover:bg-green-700">
-                          <Plus className="w-4 h-4 mr-2" />
-                          New Assessment
-                        </Button>
-                      </Link>
-                    </TooltipTrigger>
-                    <TooltipContent>Create a new assessment for this project</TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
-
-                <TooltipProvider>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <Link href={`/assessments/new?projectId=${project.id}`}>
-                        <Button className="bg-blue-600 hover:bg-blue-700">
-                          <Plus className="w-4 h-4 mr-2" />
-                          Invite Partner
-                        </Button>
-                      </Link>
-                    </TooltipTrigger>
-                    <TooltipContent>Create assessment and invite partner</TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
-
-                <TooltipProvider>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <Button
-                        variant="outline"
-                        disabled={completedAssessments.length < 2}
-                        onClick={() => setShowCompareModal(true)}
-                      >
-                        <BarChart3 className="w-4 h-4 mr-2" />
-                        Compare
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Link href={`/assessments/new?projectId=${project.id}`}>
+                      <Button className="bg-blue-600 hover:bg-blue-700">
+                        <Plus className="w-4 h-4 mr-2" />
+                        Invite Partner
                       </Button>
-                    </TooltipTrigger>
-                    <TooltipContent>Compare partner scores</TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
+                    </Link>
+                  </TooltipTrigger>
+                  <TooltipContent>Create assessment and invite partner</TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
 
-                <Button variant="ghost" size="icon">
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant="outline"
+                      disabled={completedAssessments.length < 2}
+                      onClick={() => setShowCompareModal(true)}
+                    >
+                      <BarChart3 className="w-4 h-4 mr-2" />
+                      Compare
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>Compare partner scores</TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+
+              <div className="ml-2">
+                <Button variant="ghost" size="icon" onClick={() => setShowEditModal(true)}>
                   <MoreHorizontal className="w-4 h-4" />
                 </Button>
               </div>
             </div>
 
-            {/* Quick Stats */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6 pt-6 border-t">
+            {/* 2. Project Info Level */}
+            <div className="flex flex-col gap-4 pb-6 border-b">
+              <div className="flex items-center gap-3">
+                <h1 className="text-2xl font-semibold text-gray-900">{project.name}</h1>
+                <Badge variant={project.status === 'ACTIVE' ? 'default' : 'secondary'}>{project.status}</Badge>
+                <EntityIdDisplay entityId={project.id} label="Project ID" />
+              </div>
+              <p className="text-gray-500 max-w-4xl">{project.description}</p>
+              <div className="flex flex-wrap gap-2">
+                {project.type && <Badge variant="outline" className="bg-gray-50">{project.type.replace(/_/g, ' ')}</Badge>}
+                {project.sector && <Badge variant="outline" className="bg-gray-50">{project.sector}</Badge>}
+                {project.region && <Badge variant="outline" className="bg-gray-50">{project.region}</Badge>}
+              </div>
+            </div>
+
+            {/* 3. Stats Level */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-blue-100 rounded-lg">
                   <Users className="w-4 h-4 text-blue-600" />
@@ -404,6 +420,14 @@ export default function ProjectDetail() {
           />
         )}
 
+        {showEditModal && (
+          <EditProjectModal
+            project={project}
+            open={showEditModal}
+            onOpenChange={setShowEditModal}
+          />
+        )}
+
         <ConfirmDialog
           open={removeConfirmOpen}
           onOpenChange={setRemoveConfirmOpen}
@@ -477,117 +501,62 @@ export default function ProjectDetail() {
               </TabsList>
 
               <TabsContent value="assessments" className="space-y-4">
-                {project.assessments?.map((assessment) => {
-                  const avgScore =
-                    assessment.domainScores.length > 0
-                      ? Math.round(
-                        assessment.domainScores.reduce((sum, ds) => sum + ds.score, 0) / assessment.domainScores.length
-                      )
-                      : 0;
-
-                  return (
-                    <Card key={assessment.id} className="hover:shadow-md transition-shadow">
-                      <CardContent className="p-6">
-                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                          <div className="flex-1">
-                            <div className="flex items-center gap-3 mb-2">
-                              <h3 className="text-lg font-semibold">{assessment.partnerType}</h3>
-                              <Badge variant={assessment.status === 'COMPLETED' ? 'default' : 'secondary'}>
-                                {assessment.status.replace('_', ' ')}
-                              </Badge>
-                            </div>
-
-                            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                              <Users className="w-4 h-4" />
-                              <span>{assessment.partnerName || 'No Partner Assigned'}</span>
-                            </div>
-
-                            {assessment.status === 'COMPLETED' && assessment.domainScores.length > 0 && (
-                              <div className="flex flex-wrap gap-2 mt-3">
-                                {assessment.domainScores.slice(0, 3).map((score) => (
-                                  <TooltipProvider key={score.domain}>
-                                    <Tooltip>
-                                      <TooltipTrigger asChild>
-                                        <div className="px-2 py-1 bg-muted rounded text-xs cursor-help">
-                                          {score.domain.slice(0, 3)} {score.score}%
-                                        </div>
-                                      </TooltipTrigger>
-                                      <TooltipContent>
-                                        <p>{score.domain}: {score.score}%</p>
-                                      </TooltipContent>
-                                    </Tooltip>
-                                  </TooltipProvider>
-                                ))}
-                                {assessment.domainScores.length > 3 && (
-                                  <div className="px-2 py-1 bg-muted rounded text-xs text-muted-foreground">
-                                    +{assessment.domainScores.length - 3} more
-                                  </div>
-                                )}
+                <Card>
+                  <CardContent className="p-0">
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead>Assessment Name</TableHead>
+                          <TableHead>No. of Partners</TableHead>
+                          <TableHead>Completion</TableHead>
+                          <TableHead className="text-right">Actions</TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        {project.assessments?.map((assessment) => (
+                          <TableRow key={assessment.id}>
+                            <TableCell className="font-medium">
+                              {assessment.name}
+                            </TableCell>
+                            <TableCell>
+                              <div className="flex items-center gap-2">
+                                <Users className="w-4 h-4 text-muted-foreground" />
+                                <span>{assessment.partnerCount}</span>
                               </div>
-                            )}
-                          </div>
-
-                          <div className="flex items-center gap-4">
-                            {assessment.status === 'COMPLETED' && (
-                              <div className="text-right">
-                                <div className="flex items-center gap-2">
-                                  <TrendingUp className="w-4 h-4 text-green-600" />
-                                  <span className="text-2xl font-bold text-green-600">{avgScore}%</span>
-                                </div>
-                                <p className="text-sm text-muted-foreground">Trust Score</p>
+                            </TableCell>
+                            <TableCell>
+                              <div className="flex items-center gap-2">
+                                <TrendingUp className={`w-4 h-4 ${assessment.completionPercentage === 100 ? 'text-green-600' : 'text-blue-600'}`} />
+                                <span className="font-medium">{assessment.completionPercentage}%</span>
                               </div>
-                            )}
-
-                            <Link href={`/assessments/${assessment.id}`}>
-                              <Button variant="outline" size="sm">
-                                View Details
-                              </Button>
-                            </Link>
-
-                            {assessment.status === 'PENDING' && (
-                              <TooltipProvider>
-                                <Tooltip>
-                                  <TooltipTrigger asChild>
-                                    <Button
-                                      variant="outline"
-                                      size="sm"
-                                      className="text-blue-600 hover:text-blue-700 hover:bg-blue-50"
-                                      onClick={() => resendInviteMutation.mutate(assessment.id)}
-                                      disabled={resendInviteMutation.isPending}
-                                    >
-                                      <Mail className="w-4 h-4" />
-                                    </Button>
-                                  </TooltipTrigger>
-                                  <TooltipContent>Resend invitation email</TooltipContent>
-                                </Tooltip>
-                              </TooltipProvider>
-                            )}
-
-                            <TooltipProvider>
-                              <Tooltip>
-                                <TooltipTrigger asChild>
-                                  <Button
-                                    variant="ghost"
-                                    size="sm"
-                                    className="text-red-600 hover:text-red-700 hover:bg-red-50"
-                                    onClick={() => handleRemovePartner({
-                                      id: assessment.id,
-                                      partnerName: assessment.partnerName,
-                                      status: assessment.status,
-                                    })}
-                                  >
-                                    <Trash2 className="w-4 h-4" />
+                            </TableCell>
+                            <TableCell className="text-right">
+                              <div className="flex items-center justify-end gap-2">
+                                <Link href={`/assessments/${assessment.id}`}>
+                                  <Button variant="outline" size="sm">
+                                    View
                                   </Button>
-                                </TooltipTrigger>
-                                <TooltipContent>Remove partner from assessment</TooltipContent>
-                              </Tooltip>
-                            </TooltipProvider>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  );
-                })}
+                                </Link>
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  className="h-8 w-8 p-0 text-red-600 hover:text-red-700 hover:bg-red-50"
+                                  onClick={() => handleRemovePartner({
+                                    id: assessment.id,
+                                    partnerName: assessment.name, // Using assessment name for modal
+                                    status: assessment.status,
+                                  })}
+                                >
+                                  <Trash2 className="w-4 h-4" />
+                                </Button>
+                              </div>
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </CardContent>
+                </Card>
               </TabsContent>
 
               <TabsContent value="alignment">
@@ -608,8 +577,12 @@ export default function ProjectDetail() {
 
               <TabsContent value="details">
                 <Card>
-                  <CardHeader>
+                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-6">
                     <CardTitle>Project Details</CardTitle>
+                    <Button variant="outline" size="sm" onClick={() => setShowEditModal(true)}>
+                      <Edit2 className="w-4 h-4 mr-2" />
+                      Edit
+                    </Button>
                   </CardHeader>
                   <CardContent className="space-y-8">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

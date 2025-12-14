@@ -6,7 +6,8 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 import { Button } from '@/components/ui/button';
 
 interface EntityIdDisplayProps {
-    entityType: string;
+    entityType?: string;
+    label?: string;
     entityId: string;
     showLabel?: boolean;
     size?: 'sm' | 'md';
@@ -18,6 +19,7 @@ interface EntityIdDisplayProps {
  */
 export function EntityIdDisplay({
     entityType,
+    label,
     entityId,
     showLabel = true,
     size = 'sm',
@@ -32,11 +34,12 @@ export function EntityIdDisplay({
 
     const shortId = entityId.slice(0, 8);
     const textSize = size === 'sm' ? 'text-xs' : 'text-sm';
+    const displayLabel = label || (entityType ? `${entityType} ID` : 'ID');
 
     return (
         <div className={`inline-flex items-center gap-1.5 ${textSize}`}>
             {showLabel && (
-                <span className="text-muted-foreground">{entityType} ID:</span>
+                <span className="text-muted-foreground">{displayLabel}:</span>
             )}
             <TooltipProvider>
                 <Tooltip>

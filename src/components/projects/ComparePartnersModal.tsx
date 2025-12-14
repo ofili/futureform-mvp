@@ -6,7 +6,7 @@ interface ComparePartnersModalProps {
     projectId: string;
     assessments: Array<{
         id: string;
-        partnerName: string;
+        name: string; // Changed from partnerName to match Project interface
         status: string;
         domainScores: Array<{ domain: string; score: number }>;
     }>;
@@ -33,7 +33,7 @@ export default function ComparePartnersModal({ projectId, assessments, onClose }
                                 <TableHead className="w-[200px]">Domain</TableHead>
                                 {assessments.map(partner => (
                                     <TableHead key={partner.id} className="text-center font-bold text-black dark:text-white">
-                                        {partner.partnerName}
+                                        {partner.name}
                                     </TableHead>
                                 ))}
                             </TableRow>

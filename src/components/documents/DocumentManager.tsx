@@ -45,7 +45,7 @@ export default function DocumentManager({ entityId, entityType }: DocumentManage
   const { data: documents = [], isLoading } = useQuery<Document[]>({
     queryKey: ['documents', entityType, entityId],
     queryFn: async () => {
-      const response = await fetch(`/api/v1/documents/${entityType}/${entityId}`, {
+      const response = await fetch(`/api/v1/documents?entityType=${entityType}&entityId=${entityId}`, {
         credentials: 'include'
       });
       if (!response.ok) return [];
@@ -61,7 +61,12 @@ export default function DocumentManager({ entityId, entityType }: DocumentManage
   };
 
   const uploadMutation = useMutation({
-    mutationFn: async (formData: FormData) => {
+    mutationFn: async ({ file, entityId, entityType }: { file: File; entityId: string; entityType: string }) => {
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('entityId', entityId);
+      formData.append('entityType', entityType);
+
       const response = await fetch(`/api/v1/documents/upload`, {
         method: 'POST',
         credentials: 'include',
@@ -109,13 +114,8 @@ export default function DocumentManager({ entityId, entityType }: DocumentManage
     setUploadProgress(0);
 
     for (const file of Array.from(files)) {
-      const formData = new FormData();
-      formData.append('file', file);
-      formData.append('entityId', entityId);
-      formData.append('entityType', entityType);
-
       try {
-        await uploadMutation.mutateAsync(formData);
+        await uploadMutation.mutateAsync({ file, entityId, entityType });
         setUploadProgress(prev => prev + (100 / files.length));
       } catch (error) {
         console.error('Upload failed:', error);

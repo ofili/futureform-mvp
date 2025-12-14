@@ -15,7 +15,8 @@ export const supabase = createClient(supabaseUrl, supabaseKey);
 export const STORAGE_BUCKETS = {
     EVIDENCE: 'evidence-documents',
     REPORTS: 'reports',
-    RESEARCH_CACHE: 'research-cache'
+    RESEARCH_CACHE: 'research-cache',
+    DOCUMENTS: 'project-documents'
 };
 
 export class StorageService {

@@ -3,7 +3,7 @@
 import { useQuery } from '@tanstack/react-query';
 import DashboardLayout from '@/components/layouts/DashboardLayout';
 import { PageHeader } from '@/components/shared/page-header';
-import { AssessmentsList } from '@/components/assessments/assessments-list';
+import { AssessmentsTable } from '@/components/assessments/assessments-table';
 import { AssessmentsEmptyState } from '@/components/assessments/assessments-empty-state';
 import { Button } from '@/components/ui/button';
 import { Plus, CheckCircle, Clock, AlertTriangle, TrendingUp } from 'lucide-react';
@@ -48,9 +48,11 @@ export default function AssessmentsPage() {
   };
 
   // Filter assessments
+  console.log('Assessments data:', assessments);
+
   const filteredAssessments = assessments?.filter(a =>
-    a.partnerName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    a.projectName.toLowerCase().includes(searchTerm.toLowerCase())
+    (a.partnerName || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
+    (a.projectName || '').toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -146,7 +148,7 @@ export default function AssessmentsPage() {
             <AssessmentsEmptyState />
           ) : (
             <div className="bg-white rounded-xl border shadow-sm overflow-hidden">
-              <AssessmentsList assessments={filteredAssessments} />
+              <AssessmentsTable assessments={filteredAssessments} />
             </div>
           )}
         </div>
